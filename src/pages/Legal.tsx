@@ -48,7 +48,7 @@ const Legal = () => {
                 <section className="bg-card rounded-2xl p-6 md:p-8 border border-border/50">
                   <h2 className="text-2xl font-bold mb-4 text-foreground">3. Hébergement</h2>
                   <p className="text-muted-foreground">
-                    Ce site est hébergé par Lovable (lovable.dev).
+                    Ce site est hébergé par Netlify (netlify.com).
                   </p>
                 </section>
 
@@ -69,7 +69,7 @@ const Legal = () => {
                   <p className="text-muted-foreground">
                     Images : générées par IA ou libres de droits.<br />
                     Icônes : Lucide React.<br />
-                    Design et développement : Équipe Pawrise avec Lovable.
+                    Design et développement : Équipe Pawrise.
                   </p>
                 </section>
               </div>
