@@ -150,7 +150,7 @@ const Footer = () => {
             © 2025 Pawrise. Tous droits réservés.
           </p>
           <p className="text-background/50 text-sm">
-            Projet étudiant Epitech Marseille 2025
+            Fait avec ❤️ pour nos compagnons à 4 pattes
           </p>
         </div>
       </div>
