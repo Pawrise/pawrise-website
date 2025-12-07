@@ -1,28 +1,45 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast();
 
   const navLinks = [
-    { href: "#features", label: "Fonctionnalités" },
-    { href: "#how-it-works", label: "Comment ça marche" },
-    { href: "#pricing", label: "Tarifs" },
-    { href: "#faq", label: "FAQ" },
+    { href: "/#features", label: "Fonctionnalités" },
+    { href: "/#how-it-works", label: "Comment ça marche" },
+    { href: "/#pricing", label: "Tarifs" },
+    { href: "/#faq", label: "FAQ" },
   ];
+
+  const handlePreorder = () => {
+    toast({
+      title: "🚀 Bientôt disponible !",
+      description: "Pawrise est actuellement en développement. Suivez-nous sur les réseaux sociaux pour être informé du lancement.",
+    });
+  };
+
+  const handleLogin = () => {
+    toast({
+      title: "🔐 Espace membre",
+      description: "L'espace membre sera disponible lors du lancement officiel de Pawrise.",
+    });
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-xl bg-gradient-hero flex items-center justify-center">
               <span className="text-xl">🐾</span>
             </div>
             <span className="text-xl font-bold text-foreground">Pawrise</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -39,10 +56,10 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" onClick={handleLogin}>
               Se connecter
             </Button>
-            <Button variant="hero" size="sm">
+            <Button variant="hero" size="sm" onClick={handlePreorder}>
               Précommander
             </Button>
           </div>
@@ -72,10 +89,10 @@ const Navbar = () => {
                 </a>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
-                <Button variant="ghost" className="justify-start">
+                <Button variant="ghost" className="justify-start" onClick={handleLogin}>
                   Se connecter
                 </Button>
-                <Button variant="hero">
+                <Button variant="hero" onClick={handlePreorder}>
                   Précommander
                 </Button>
               </div>

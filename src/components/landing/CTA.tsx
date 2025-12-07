@@ -1,7 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const CTA = () => {
+  const { toast } = useToast();
+
+  const handlePreorder = () => {
+    toast({
+      title: "🚀 Bientôt disponible !",
+      description: "Pawrise est actuellement en développement. Suivez-nous sur les réseaux sociaux pour être informé du lancement et bénéficier de l'offre -20% !",
+    });
+  };
+
   return (
     <section className="py-20 md:py-32">
       <div className="container mx-auto px-4">
@@ -25,7 +35,7 @@ const CTA = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button variant="heroOutline" size="xl">
+                <Button variant="heroOutline" size="xl" onClick={handlePreorder}>
                   Précommander maintenant
                   <ArrowRight className="w-5 h-5" />
                 </Button>

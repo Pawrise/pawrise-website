@@ -1,7 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const Pricing = () => {
+  const { toast } = useToast();
+
+  const handlePlanClick = (planName: string) => {
+    if (planName === "Care+") {
+      // Redirect to contact page
+      return;
+    }
+    toast({
+      title: "🚀 Bientôt disponible !",
+      description: `Le plan ${planName} sera disponible lors du lancement officiel de Pawrise.`,
+    });
+  };
+
   const plans = [
     {
       name: "Gratuit",
@@ -17,6 +32,7 @@ const Pricing = () => {
       cta: "Démarrer gratuitement",
       variant: "outline" as const,
       popular: false,
+      isContact: false,
     },
     {
       name: "Premium",
@@ -34,6 +50,7 @@ const Pricing = () => {
       cta: "Essai gratuit 14 jours",
       variant: "hero" as const,
       popular: true,
+      isContact: false,
     },
     {
       name: "Care+",
@@ -51,8 +68,16 @@ const Pricing = () => {
       cta: "Nous contacter",
       variant: "warm" as const,
       popular: false,
+      isContact: true,
     },
   ];
+
+  const handleLearnMore = () => {
+    toast({
+      title: "📦 Collier Pawrise",
+      description: "Le collier sera disponible à partir de 79€ lors du lancement. Inscrivez-vous pour être informé !",
+    });
+  };
 
   return (
     <section id="pricing" className="py-20 md:py-32 relative">
@@ -76,7 +101,7 @@ const Pricing = () => {
               key={index}
               className={`relative p-6 lg:p-8 rounded-3xl bg-card border transition-all duration-300 ${
                 plan.popular
-                  ? "border-primary shadow-glow scale-105 z-10"
+                  ? "border-primary shadow-glow md:scale-105 z-10"
                   : "border-border/50 shadow-sm hover:shadow-md"
               }`}
             >
@@ -108,18 +133,34 @@ const Pricing = () => {
                 ))}
               </ul>
 
-              <Button variant={plan.variant} className="w-full" size="lg">
-                {plan.cta}
-              </Button>
+              {plan.isContact ? (
+                <Link to="/contact">
+                  <Button variant={plan.variant} className="w-full" size="lg">
+                    {plan.cta}
+                  </Button>
+                </Link>
+              ) : (
+                <Button 
+                  variant={plan.variant} 
+                  className="w-full" 
+                  size="lg"
+                  onClick={() => handlePlanClick(plan.name)}
+                >
+                  {plan.cta}
+                </Button>
+              )}
             </div>
           ))}
         </div>
 
         <p className="text-center text-muted-foreground mt-8">
           Le collier est vendu séparément à partir de 79€.{" "}
-          <a href="#" className="text-primary hover:underline">
+          <button 
+            onClick={handleLearnMore}
+            className="text-primary hover:underline"
+          >
             En savoir plus
-          </a>
+          </button>
         </p>
       </div>
     </section>
