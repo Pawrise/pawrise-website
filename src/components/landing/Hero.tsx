@@ -1,8 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin, Heart, Stethoscope } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import heroDog from "@/assets/hero-dog.png";
 
 const Hero = () => {
+  const { toast } = useToast();
+
+  const handlePreorder = () => {
+    toast({
+      title: "🚀 Bientôt disponible !",
+      description: "Pawrise est actuellement en développement. Suivez-nous sur les réseaux sociaux pour être informé du lancement.",
+    });
+  };
+
+  const scrollToFeatures = () => {
+    document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background Effects */}
@@ -11,7 +25,7 @@ const Hero = () => {
       <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
           {/* Content */}
           <div className="text-center lg:text-left">
             {/* Badge */}
@@ -33,11 +47,11 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-              <Button variant="hero" size="lg">
+              <Button variant="hero" size="lg" onClick={handlePreorder}>
                 Précommander
                 <ArrowRight className="w-5 h-5" />
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={scrollToFeatures}>
                 Découvrir
               </Button>
             </div>
@@ -63,7 +77,7 @@ const Hero = () => {
           <div className="relative flex justify-center lg:justify-end animate-fade-up" style={{ animationDelay: "0.3s" }}>
             <div className="relative">
               {/* Main Product Visual */}
-              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl bg-gradient-hero p-1 shadow-glow animate-float">
+              <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl bg-gradient-hero p-1 shadow-glow animate-float">
                 <div className="w-full h-full rounded-3xl bg-card overflow-hidden">
                   <img 
                     src={heroDog} 
@@ -74,34 +88,34 @@ const Hero = () => {
               </div>
 
               {/* Floating Cards */}
-              <div className="absolute -top-4 -left-4 md:-left-12 p-4 rounded-2xl bg-card shadow-lg animate-fade-in" style={{ animationDelay: "0.6s" }}>
+              <div className="absolute -top-4 -left-4 md:-left-8 p-3 md:p-4 rounded-2xl bg-card shadow-lg animate-fade-in" style={{ animationDelay: "0.6s" }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                    <span className="text-green-600">✓</span>
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-green-100 flex items-center justify-center">
+                    <span className="text-green-600 text-sm md:text-base">✓</span>
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Statut</p>
-                    <p className="font-semibold text-sm">En bonne santé</p>
+                    <p className="font-semibold text-xs md:text-sm">En bonne santé</p>
                   </div>
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -right-4 md:-right-8 p-4 rounded-2xl bg-card shadow-lg animate-fade-in" style={{ animationDelay: "0.8s" }}>
+              <div className="absolute -bottom-4 -right-4 md:-right-6 p-3 md:p-4 rounded-2xl bg-card shadow-lg animate-fade-in" style={{ animationDelay: "0.8s" }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-primary" />
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary-light flex items-center justify-center">
+                    <MapPin className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                   </div>
                   <div>
                     <p className="text-xs text-muted-foreground">Position</p>
-                    <p className="font-semibold text-sm">Parc Monceau</p>
+                    <p className="font-semibold text-xs md:text-sm">Parc Monceau</p>
                   </div>
                 </div>
               </div>
 
-              <div className="absolute top-1/2 -right-4 md:-right-16 p-3 rounded-xl bg-secondary-light shadow-md animate-fade-in" style={{ animationDelay: "1s" }}>
+              <div className="absolute top-1/2 -right-4 md:-right-12 p-2 md:p-3 rounded-xl bg-secondary-light shadow-md animate-fade-in" style={{ animationDelay: "1s" }}>
                 <div className="flex items-center gap-2">
-                  <Heart className="w-5 h-5 text-secondary" />
-                  <span className="font-semibold text-secondary">82 bpm</span>
+                  <Heart className="w-4 h-4 md:w-5 md:h-5 text-secondary" />
+                  <span className="font-semibold text-secondary text-sm">82 bpm</span>
                 </div>
               </div>
             </div>
