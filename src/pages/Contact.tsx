@@ -21,7 +21,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "yassineelgherrabi@gmail.com",
+      value: "yassine.el-gherrabi@epitech.eu",
       description: "Nous répondons sous 24-48h",
     },
     {
@@ -42,7 +42,7 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const mailtoLink = `mailto:yassineelgherrabi@gmail.com?subject=${encodeURIComponent(formData.subject || "Contact Pawrise")}&body=${encodeURIComponent(
+    const mailtoLink = `mailto:yassine.elgherrabi@epitech.eu?subject=${encodeURIComponent(formData.subject || "Contact Pawrise")}&body=${encodeURIComponent(
       `Nom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
     
