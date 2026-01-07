@@ -34,7 +34,7 @@ const Footer = () => {
     },
     { 
       label: "LinkedIn", 
-      href: "https://www.linkedin.com/company/pawrise/about/", 
+      href: "https://www.linkedin.com/company/pawrise-care/about/",
       icon: "in" 
     },
     { 
