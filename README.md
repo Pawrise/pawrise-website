@@ -1,73 +1,38 @@
-# Welcome to your project
+# Pawrise Care — Site de soutenance
 
-## Project info
+Site vitrine / support de soutenance du projet **Pawrise Care** (Epitech EIP · T-ESP-800) :
+collier connecté + IA d'orientation vétérinaire non-diagnostique.
 
-**URL**: https://lovable.dev/projects/3835d1ed-2ba6-4a7a-a8a8-b57bbbc7fe88
+Construit en **Next.js 16** (App Router, TypeScript, Tailwind v4), exporté en **statique**
+(`output: 'export'`) pour un hébergement simple (Hostinger ou tout hébergeur statique).
 
-## How can I edit this code?
+## Sections
 
-There are several ways of editing your application.
+- **Vision** — problème, solution, personas, périmètre MVP, risques majeurs
+- **Architecture & Tech** — cockpit d'architecture interactif (diagramme jouable)
+- **Backlog & Features** — 11 epics / 66 user stories
+- **Pilotage** — WBS, OBS, RACI, Gantt, méthodologie, plan qualité
+- **Business & Stratégie** — proposition de valeur, marché, SWOT, PESTEL, modèle éco, budget
+- **Risques** — AMDEC, Risk Map
+- **Équipe** — organisation, matrice de compétences, justification
 
-**Use Lovable**
+Contenu basé sur les documents projet (Confluence + artefacts de planification).
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3835d1ed-2ba6-4a7a-a8a8-b57bbbc7fe88) and start prompting.
+## Développement
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-**Edit a file directly in GitHub**
+## Build statique
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm run build      # génère le dossier out/ (HTML/CSS/JS statiques)
+```
 
-**Use GitHub Codespaces**
+Le contenu de `out/` est déployable tel quel sur n'importe quel hébergeur de fichiers statiques.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Stack
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/3835d1ed-2ba6-4a7a-a8a8-b57bbbc7fe88) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · diagrammes faits maison (SVG/CSS).

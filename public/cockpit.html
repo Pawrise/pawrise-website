@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pawrise Care · Cockpit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg0:#070b16;--ink:#e8eefc;--mut:#90a4c8;--faint:#5b6f93;--line:rgba(255,255,255,.1);--panel:rgba(255,255,255,.04);
+    --cli:#2dd4bf;--edge:#38bdf8;--svc:#fb923c;--ai:#a78bfa;--data:#22d3ee;--msg:#c084fc;--ext:#fbbf24;--dev:#5eead4;--rose:#fb7185;--acc:#2dd4bf;
+    --card1:rgba(20,28,46,.96);--card2:rgba(12,18,32,.96)}
+  body.light{--bg0:#eef2f8}  /* thème clair complet : diagramme + chrome */
+  body.light #archwrap{background:radial-gradient(1100px 700px at 18% 4%,rgba(45,212,191,.12),transparent 60%),radial-gradient(1000px 700px at 92% 96%,rgba(167,139,250,.14),transparent 60%),linear-gradient(180deg,#f6f9fd,#e9eef6 60%,#f6f9fd)}
+  body.light .a-card{background:linear-gradient(160deg,#ffffff,#eef2f9);border-color:rgba(15,23,42,.14);box-shadow:0 8px 22px rgba(15,23,42,.10)}
+  body.light .a-nm{color:#0f172a}
+  body.light .a-tg{color:#475569}
+  body.light .a-ic{background:#1e293b;border-color:rgba(15,23,42,.2)}
+  body.light .a-zone,body.light .a-pzone{fill:rgba(15,23,42,.022);stroke:rgba(15,23,42,.1)}
+  body.light .a-zlabel{fill:#64748b}
+  body.light .a-pinfo{fill:#475569}
+  body.light .a-enc{fill:rgba(56,189,248,.07);stroke:rgba(2,132,199,.5)}
+  body.light .a-enclabel{fill:#0369a1}
+  body.light .a-wire.sync{stroke:rgba(16,148,108,.5)}body.light .a-wire.event{stroke:rgba(147,90,210,.5)}body.light .a-wire.ext{stroke:rgba(180,120,10,.5)}body.light .a-wire.ctrl{stroke:rgba(8,120,180,.5)}
+  body.light .a-kbar .a-card{background:linear-gradient(90deg,#efe2ff,#ffffff,#efe2ff);border-top-color:#a855f7}
+  body.light .a-kbar .a-nm{color:#0f172a}
+  body.light .a-host{background:linear-gradient(90deg,#fdecc8,#fffaf0,#fdecc8);border-color:rgba(180,120,20,.45);color:#7c5e10}
+  body.light .a-host b{color:#1f2937}
+  body.light .topbar{background:linear-gradient(180deg,rgba(244,247,251,.92),transparent)}
+  body.light .brand b{color:#0f172a}body.light .brand span{color:#475569}
+  body.light .tb{background:rgba(255,255,255,.82);color:#0f172a;border-color:rgba(15,23,42,.14)}
+  body.light .legend{background:rgba(255,255,255,.86)}body.light .legend .it{color:#475569}body.light .legend .t{color:#64748b}
+  body.light .hint{color:#64748b}
+  body.light .reopen{background:rgba(255,255,255,.9);color:#0f172a}
+  body.light .player{background:rgba(255,255,255,.94);box-shadow:0 16px 40px rgba(15,23,42,.18)}
+  body.light .player button{background:rgba(15,23,42,.05);color:#0f172a;border-color:rgba(15,23,42,.14)}
+  body.light .player .plab b{color:#0369a1}body.light .player .plab span{color:#334155}
+  body.light .player .plab .prole{background:rgba(15,23,42,.04);border-color:rgba(15,23,42,.12);color:#475569}
+  body.light .player .plab .prole b{color:#0f172a}
+  body.light .searchbox{background:#ffffff;border-color:rgba(15,23,42,.14)}
+  body.light #searchin{color:#0f172a}body.light .ovl{background:rgba(120,130,150,.4)}
+  body.light .sres{color:#334155}body.light .sres:hover,body.light .sres.sel{background:rgba(45,160,160,.16)}
+  body.light .panel,body.light .pcard{--ink:#0f172a;--mut:#475569;--faint:#7b8aa5;--line:rgba(15,23,42,.12);--panel:rgba(15,23,42,.03);--card1:#ffffff;--card2:#f6f8fc;color:#0f172a;background:linear-gradient(180deg,#fff,#f3f6fb)}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--bg0);color:var(--ink);font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif}
+  a{color:var(--acc);text-decoration:none}
+
+  /* full-screen diagram */
+  #archwrap{position:fixed;top:56px;left:0;right:0;bottom:0;z-index:1;cursor:grab;background:
+    radial-gradient(1100px 700px at 18% 4%,rgba(45,212,191,.10),transparent 60%),
+    radial-gradient(1000px 700px at 92% 96%,rgba(167,139,250,.12),transparent 60%),
+    linear-gradient(180deg,#070b16,#0a1020 60%,#070b16)}
+  #archwrap.drag{cursor:grabbing}
+  svg#archstage{width:100%;height:100%;display:block;touch-action:none}
+  svg#archstage.a-dim .a-wire,svg#archstage.a-dim .a-flow,svg#archstage.a-dim .a-dot,svg#archstage.a-dim .a-node{opacity:.09;transition:opacity .3s}
+  svg#archstage.a-dim .a-hot{opacity:1}
+  .a-zone{fill:rgba(255,255,255,.018);stroke:rgba(255,255,255,.07);stroke-width:1}
+  .a-pzone{fill:rgba(255,255,255,.018);stroke:rgba(255,255,255,.07);stroke-width:1;stroke-dasharray:5 5}
+  .a-zlabel{fill:#5b6f93;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+  .a-enc{fill:rgba(56,189,248,.045);stroke:rgba(56,189,248,.42);stroke-width:2;stroke-dasharray:11 9}
+  .a-enclabel{fill:#7fd4ff;font-size:15px;font-weight:800;letter-spacing:.12em}
+  .a-pinfo{fill:#90a4c8;font-size:12px;font-weight:600}
+  .a-wire{fill:none;stroke-width:1.6;opacity:.5}
+  .a-pki{fill:none;stroke:#fb7185;stroke-width:1.7;stroke-dasharray:3 5;opacity:.7}
+  svg#archstage.a-dim .a-pki{opacity:.09;transition:opacity .3s}
+  .a-wire.sync{stroke:rgba(52,211,153,.3)}.a-wire.event{stroke:rgba(192,132,252,.32)}.a-wire.ext{stroke:rgba(251,191,36,.3)}.a-wire.ctrl{stroke:rgba(100,210,255,.28)}
+  .a-flow{fill:none;stroke-width:2.2;stroke-linecap:round}
+  .a-flow.sync{stroke:#34d399;stroke-dasharray:2 14;animation:amarch 1.1s linear infinite}
+  .a-flow.event{stroke:#c084fc;stroke-dasharray:3 13;stroke-width:3;animation:amarch 1s linear infinite}
+  .a-flow.ext{stroke:#fbbf24;stroke-dasharray:2 16;animation:amarch 1.7s linear infinite}
+  .a-flow.ctrl{stroke:#64d2ff;stroke-dasharray:1 12;animation:amarch 1.4s linear infinite}
+  @keyframes amarch{to{stroke-dashoffset:-16}}
+  .a-flow.a-cur{stroke-width:5;filter:drop-shadow(0 0 7px currentColor);animation-duration:.5s}
+  .a-wire.a-cur{opacity:.95;stroke-width:3}
+  .a-pki.a-cur{opacity:1;stroke-width:3.2;filter:drop-shadow(0 0 6px #fb7185)}
+  .a-dot{filter:url(#aglow)}
+  .a-node{cursor:pointer}
+  .a-card{height:100%;border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;background:linear-gradient(160deg,rgba(20,28,46,.94),rgba(12,18,32,.94));border:1px solid rgba(255,255,255,.1);border-left:3px solid var(--ac,#64748b);box-shadow:0 10px 26px rgba(0,0,0,.45);position:relative}
+  .a-node:hover .a-card{box-shadow:0 14px 34px rgba(0,0,0,.6),0 0 0 1px var(--ac)}
+  .a-node.a-pulse .a-card{box-shadow:0 0 0 2px var(--ac),0 0 26px color-mix(in srgb,var(--ac) 70%,transparent)}
+  .a-card .h{display:flex;align-items:center;gap:8px}
+  .a-ic{width:25px;height:25px;border-radius:7px;flex:0 0 auto;display:grid;place-items:center;background:#0e1626;border:1px solid rgba(255,255,255,.16);overflow:hidden}
+  .a-ic img,.a-ic svg{width:16px;height:16px;display:block}.a-ic .a-mono{font-size:10px;font-weight:800;color:#fff}
+  .a-nm{font-size:12.5px;font-weight:700;line-height:1.1;color:#e8eefc}
+  .a-tg{font-size:9.8px;color:#90a4c8;font-weight:500;line-height:1.2}
+  .a-kbar .a-card{flex-direction:row;align-items:center;justify-content:center;gap:10px;border-left:none;border-top:3px solid #c084fc;background:linear-gradient(90deg,rgba(45,29,66,.94),rgba(20,28,46,.94),rgba(45,29,66,.94))}
+  .a-kbar .a-nm{font-size:13.5px}
+  .a-host{height:100%;display:flex;align-items:center;gap:13px;border-radius:13px;padding:0 20px;background:linear-gradient(90deg,rgba(60,38,12,.92),rgba(20,28,46,.92),rgba(60,38,12,.92));border:1px solid rgba(251,191,36,.45);border-left:4px solid var(--ac);color:#fde6b8;font-size:13.5px}
+  .a-host b{color:#fff;font-weight:800}
+
+  /* top bar */
+  .topbar{position:fixed;z-index:30;top:0;left:0;right:0;display:flex;align-items:center;gap:10px;padding:13px 18px;
+    background:linear-gradient(180deg,rgba(7,11,22,.82),transparent);backdrop-filter:blur(4px)}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand .logo{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:21px;background:linear-gradient(145deg,rgba(45,212,191,.3),rgba(167,139,250,.3));border:1px solid rgba(255,255,255,.18)}
+  .brand b{font-size:15px;font-weight:800;letter-spacing:-.01em;color:#fff} .brand span{display:block;font-size:10.5px;color:#90a4c8}
+  .topbar .sp{flex:1}
+  .tb{height:38px;padding:0 14px;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(10,16,30,.66);color:#e8eefc;border-radius:11px;cursor:pointer;font-size:13px;font-weight:700;backdrop-filter:blur(8px)}
+  .tb:hover{border-color:var(--acc)} .tb.on{border-color:var(--acc);background:rgba(45,212,191,.14);color:#7fe9d6}
+  .tb.icon{padding:0 11px}
+
+  /* legend */
+  .legend{position:fixed;z-index:20;left:18px;bottom:18px;display:flex;flex-direction:column;gap:6px;background:rgba(10,16,30,.66);border:1px solid var(--line);border-radius:13px;padding:11px 13px;backdrop-filter:blur(10px)}
+  .legend .t{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#5b6f93;font-weight:800}
+  .legend .it{display:flex;align-items:center;gap:8px;font-size:11.5px;color:#90a4c8;font-weight:600}
+  .legend .ln{width:26px;border-top:3px dotted;border-radius:2px}
+
+  /* player */
+  .player{position:fixed;z-index:31;bottom:18px;left:50%;transform:translateX(-50%) translateY(140%);transition:transform .35s cubic-bezier(.4,0,.2,1);
+    display:flex;align-items:center;gap:6px;background:rgba(10,16,30,.9);border:1px solid var(--line);border-radius:14px;padding:9px 12px;backdrop-filter:blur(12px);box-shadow:0 16px 40px rgba(0,0,0,.5);max-width:92vw}
+  .player.show{transform:translateX(-50%)}
+  .player button{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:#e8eefc;cursor:pointer;font-size:14px;flex:0 0 auto}
+  .player button:hover{border-color:var(--acc)}
+  .player .plab{padding:0 10px;min-width:0;max-width:min(640px,72vw)}
+  .player .plab b{display:block;font-size:12px;font-weight:800;color:#7fe9d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .player .plab span{font-size:12px;color:#cdd8ee;line-height:1.35;display:block}
+  .player .plab .pstep{color:#7fe9d6;font-weight:800;margin-right:6px}
+  .player .plab .proles{display:flex;align-items:stretch;gap:8px;margin-top:7px}
+  .player .plab .prole{flex:1 1 0;min-width:0;font-size:11px;line-height:1.32;color:#9fb0d0;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:8px;padding:5px 9px}
+  .player .plab .prole b{display:block;font-size:11.5px;font-weight:800;color:#e8eefc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:1px}
+  .player .plab .prarr{align-self:center;color:#7fe9d6;font-weight:800;flex:0 0 auto;font-size:15px}
+  .player .pdone b{color:#34d399}
+
+  .reopen{position:fixed;z-index:29;top:50%;right:0;transform:translateY(-50%);background:rgba(10,16,30,.86);border:1px solid var(--line);border-right:0;border-radius:11px 0 0 11px;color:#e8eefc;font-weight:700;font-size:12px;padding:11px 9px;cursor:pointer;writing-mode:vertical-rl;display:none}
+  .reopen.show{display:block}
+
+  /* panels */
+  .pscrim{position:fixed;inset:0;z-index:25;background:rgba(4,7,14,.45);backdrop-filter:blur(2px);opacity:0;visibility:hidden;transition:.25s}
+  .pscrim.show{opacity:1;visibility:visible}
+  .panel{position:fixed;z-index:26;top:0;right:0;height:100%;width:min(440px,94vw);transform:translateX(103%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+    background:linear-gradient(180deg,#0c1426,#0a0f1e);border-left:1px solid var(--line);display:flex;flex-direction:column}
+  .panel.open{transform:none;box-shadow:-30px 0 70px rgba(0,0,0,.5)}
+  .ph{display:flex;align-items:center;gap:10px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+  .ph h2{margin:0;font-size:17px;font-weight:800;flex:1}
+  .ph .x{width:32px;height:32px;border:0;border-radius:9px;cursor:pointer;background:rgba(255,255,255,.08);color:#e8eefc;font-size:16px}
+  .pb{padding:16px 20px 40px;overflow-y:auto}
+  .ndtag{font-size:12px;color:var(--mut);margin-top:2px}
+  .ndpm{font-size:13.5px;line-height:1.5;color:var(--ink);background:color-mix(in srgb,var(--acd) 13%,transparent);border:1px solid color-mix(in srgb,var(--acd) 38%,transparent);border-radius:10px;padding:10px 12px;margin-bottom:16px}
+  .ndpm span{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--acd);margin-bottom:3px}
+  .ndsec{margin-bottom:15px}
+  .ndsec h4{margin:0 0 5px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:800}
+  .ndsec p{margin:0;font-size:13px;line-height:1.5;color:var(--ink)}
+  .ndsec .tech{border-left:2px solid #34d399;padding-left:10px}.ndsec .biz{border-left:2px solid #fbbf24;padding-left:10px}
+  .jsec .jhelp{margin:-2px 0 11px;font-size:11px;color:var(--faint);font-style:italic}
+  .jgrp{margin-top:13px}
+  .jlbl{display:block;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:800;margin:0 0 7px}
+  .jflows{display:flex;flex-wrap:wrap;gap:6px}
+  .jflow{font-family:inherit;font-size:11.5px;font-weight:700;color:var(--acc);background:color-mix(in srgb,var(--acd,#2dd4bf) 14%,transparent);border:1px solid color-mix(in srgb,var(--acd,#2dd4bf) 42%,transparent);border-radius:8px;padding:6px 10px;cursor:pointer}
+  .jflow:hover{background:color-mix(in srgb,var(--acd,#2dd4bf) 26%,transparent)}
+  .jflow-p{color:#38bdf8;background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.42)}
+  .jflow-p:hover{background:rgba(56,189,248,.22)}
+  .flsep{margin:16px 0 9px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:800;border-top:1px solid var(--line);padding-top:14px}
+  .jepics{display:flex;flex-direction:column;gap:6px}
+  .jepic{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--panel)}
+  .jehead{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer}
+  .jehead:hover{background:var(--line)}
+  .jechev{font-size:10px;color:var(--mut);width:10px;flex:0 0 auto}
+  .jetitle{flex:1;min-width:0;font-size:12px;font-weight:700;color:var(--ink);line-height:1.25}
+  .jecount{font-size:9px;font-weight:800;color:var(--mut);background:var(--line);border-radius:20px;padding:2px 7px;flex:0 0 auto;white-space:nowrap}
+  .jplay{flex:0 0 auto;width:24px;height:24px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font-size:9px}
+  .jplay:hover{border-color:var(--acc);color:var(--acc)}
+  .jus{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .jus[hidden]{display:none}
+  .jusrow{display:flex;align-items:center;gap:9px;width:100%;text-align:left;font-family:inherit;background:transparent;border:0;border-bottom:1px solid var(--line);padding:7px 11px 7px 22px;cursor:pointer}
+  .jusrow:last-child{border-bottom:0}
+  .jusrow:hover{background:var(--line)}
+  .jusid{flex:0 0 auto;font-size:10px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
+  .justitle{flex:1;min-width:0;font-size:11.5px;color:var(--mut);line-height:1.3}
+  .jusplay{flex:0 0 auto;font-size:8px;color:var(--mut)}
+  .ndrisk{background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.32);color:#fda4af;border-radius:9px;padding:9px 11px;font-size:12.5px;line-height:1.45}
+  .ndrefs{display:flex;flex-wrap:wrap;gap:6px}.ndref{font-size:11px;font-weight:700;background:rgba(99,102,241,.16);color:#c7d2fe;border:1px solid rgba(99,102,241,.3);border-radius:7px;padding:3px 9px}
+  body.light .ndsec p{color:#0f172a}body.light .ndref{color:#4338ca}
+
+  /* présentation content */
+  .pcard{background:linear-gradient(160deg,var(--card1),var(--card2));border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;border-left:3px solid var(--ac,var(--acc))}
+  .pcard h3{margin:0 0 5px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .pcard p{margin:0;font-size:12.8px;color:var(--mut);line-height:1.55}
+  .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:#0e1626;border:1px solid rgba(255,255,255,.14);font-size:13px;flex:0 0 auto}
+  .eyebrow{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:18px 0 8px}
+  .eyebrow:first-child{margin-top:0}
+  .answer{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:12px;color:var(--mut)} .answer b{color:#34d399}
+  table.eco{width:100%;border-collapse:collapse;font-size:12px}
+  table.eco th,table.eco td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line)}
+  table.eco th{color:var(--faint);font-size:10px;text-transform:uppercase} table.eco td.good{color:#34d399;font-weight:700}table.eco td.bad{color:#fb7185;font-weight:700}
+  .members{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.mem{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--panel);border:1px solid var(--line)}.mem.po{color:#34d399;border-color:rgba(52,211,153,.35)}
+  code{background:var(--panel);border:1px solid var(--line);padding:1px 6px;border-radius:6px;font-size:12px;color:#7fe9d6}
+
+  /* epic/us + flows */
+  .pill{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--mut)}
+  .pill.mvp{color:#34d399;border-color:rgba(52,211,153,.4)} .pill.post{color:#fbbf24;border-color:rgba(251,191,36,.4)}
+  .ecard{border:1px solid var(--line);border-radius:13px;margin-bottom:10px;overflow:hidden;border-left:3px solid var(--ac,var(--acc));background:var(--card1)}
+  .ehead{display:flex;align-items:center;gap:10px;padding:12px 13px;cursor:pointer}
+  .ehead .n{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:12px;background:color-mix(in srgb,var(--ac) 24%,#0e1626);color:#fff;border:1px solid color-mix(in srgb,var(--ac) 40%,transparent);flex:0 0 auto}
+  .ehead .et{flex:1;min-width:0}.ehead .et .nm{font-size:13.5px;font-weight:700;line-height:1.12}.ehead .et .gl{font-size:11px;color:var(--mut)}
+  .play{flex:0 0 auto;width:34px;height:34px;border-radius:10px;border:1px solid color-mix(in srgb,var(--ac) 45%,transparent);background:color-mix(in srgb,var(--ac) 16%,transparent);color:#fff;cursor:pointer;font-size:13px}
+  .play:hover{background:color-mix(in srgb,var(--ac) 30%,transparent)}
+  .ebody{display:none;padding:0 13px 13px;border-top:1px solid var(--line)}
+  .ecard.open .ebody{display:block}
+  .us{border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-top:10px;background:rgba(255,255,255,.02)}
+  .us .ut{display:flex;align-items:center;gap:8px;margin-bottom:6px}.us .uid{font-size:11.5px;font-weight:800;color:#a78bfa;flex:1}
+  .us .uplay{width:30px;height:30px;border-radius:9px;border:1px solid rgba(167,139,250,.4);background:rgba(167,139,250,.14);color:#fff;cursor:pointer;font-size:12px}
+  .us .utitle{font-size:13px;font-weight:700;margin-bottom:5px}
+  .us .story{font-size:12.5px;color:#dbe3f3;margin:0 0 7px}.us .story .r{color:#5eead4}.us .story .b{color:#90a4c8}
+  .us .ac{font-size:11.5px;color:#aebdd8;border-top:1px dashed var(--line);padding-top:7px;line-height:1.5}.us .ac b{color:#c084fc}
+  .fcard{border:1px solid var(--line);border-radius:13px;padding:13px;margin-bottom:11px;border-left:3px solid var(--fc,var(--acc));background:var(--card1)}
+  .fcard .fh{display:flex;align-items:center;gap:10px}.fcard .fh .ft{flex:1}.fcard .fh .ft .nm{font-size:14px;font-weight:700}.fcard .fh .ft .hd{font-size:11.5px;color:var(--mut)}
+  .fsteps{margin:10px 0 0;padding-left:18px} .fsteps li{font-size:12px;color:var(--mut);margin-bottom:5px}.fsteps li b{color:var(--ink)}
+  .fsteps li .why{display:block;font-size:11px;color:var(--fc,var(--acc));margin-top:2px}
+  .efilter{display:flex;gap:7px;margin-bottom:12px}.efilter button{padding:5px 11px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--mut);font-weight:700;font-size:11.5px;cursor:pointer}.efilter button.on{color:var(--ink);border-color:var(--acc);background:rgba(45,212,191,.12)}
+  .hint{position:fixed;z-index:20;right:18px;bottom:18px;font-size:11px;color:#5b6f93;text-align:right;max-width:240px}
+  body.plat .hint{display:none}
+  body.plat .legend{bottom:66px}
+  body.plat .z-ext,body.plat .a-node[data-id="MAPS"],body.plat .a-node[data-id="MAIL"],body.plat .a-node[data-id="STRIPE"],body.plat .a-node[data-id="S3"],body.plat .a-node[data-id="AZ"],body.plat [data-edge="MOB|MAPS"],body.plat [data-edge="API|MAIL"],body.plat [data-edge="API|STRIPE"],body.plat [data-edge="API|S3"],body.plat [data-edge="AUD|S3"],body.plat [data-edge="CE|AZ"]{display:none}
+  @media(max-width:680px){.panel{width:100vw}.brand span{display:none}.legend{display:none}.player .plab b{max-width:40vw}.hint{display:none}
+    .topbar{flex-wrap:wrap;row-gap:7px;padding:8px 12px;gap:6px}.tb{height:32px;padding:0 9px;font-size:11.5px}.brand .logo{width:32px;height:32px;font-size:18px}}
+</style>
+</head>
+<body>
+  <div id="archwrap"><svg id="archstage" viewBox="0 100 1740 928" preserveAspectRatio="xMidYMid meet"></svg></div>
+
+  <div class="topbar">
+    <div class="brand"><div class="logo">🐾</div><div><b>Pawrise Care</b><span>Cockpit d'architecture</span></div></div>
+    <div class="sp"></div>
+    <button class="tb" data-panel="pPres">📖 Présentation</button>
+    <button class="tb" data-panel="pEpic">🧩 EPIC / US</button>
+    <button class="tb" data-panel="pFlow">🔀 Flows</button>
+    <button class="tb" id="tPlat">🛠️ Plateforme &amp; Ops</button>
+    <button class="tb icon" id="tSearch" title="Recherche (Ctrl+K)">🔎</button>
+    <button class="tb icon" id="tPresent" title="Mode présentation auto">▶</button>
+    <button class="tb icon" id="tExport" title="Exporter le diagramme en SVG">⤓</button>
+    <button class="tb icon" id="tTheme" title="Thème">☾</button>
+    <button class="tb icon" id="tFull" title="Plein écran">⛶</button>
+    <button class="tb icon" id="tResetTop" title="Réinitialiser la vue">↺</button>
+  </div>
+
+  <div class="legend">
+    <span class="t">Flux</span>
+    <span class="it"><span class="ln" style="border-color:#34d399"></span> Synchrone · aller-retour</span>
+    <span class="it"><span class="ln" style="border-color:#c084fc"></span> Événement · sens unique</span>
+    <span class="it"><span class="ln" style="border-color:#64d2ff"></span> Contrôle</span>
+    <span class="it"><span class="ln" style="border-color:#fbbf24"></span> Externe</span>
+  </div>
+  <div class="hint">Glissez pour déplacer · molette = zoom · cliquez un Epic/US pour rejouer son parcours</div>
+
+  <div class="player" id="player">
+    <button id="pReplay" title="Rejouer">↺</button>
+    <button id="pPrev" title="Étape précédente">‹</button>
+    <button id="pPlay" title="Pause/Lecture">⏸</button>
+    <button id="pNext" title="Étape suivante">›</button>
+    <div class="plab"><b id="ptitle">Parcours</b><span id="plabel">·</span></div>
+    <button id="pClose" title="Fermer">✕</button>
+  </div>
+
+  <button class="reopen" id="reopen">‹ Panneau</button>
+  <div class="pscrim" id="pscrim"></div>
+
+  <aside class="panel" id="pPres">
+    <div class="ph"><h2>📖 Présentation du projet</h2><button class="x" data-close>×</button></div>
+    <div class="pb">
+      <div class="eyebrow">La vision</div>
+      <div class="pcard" style="--ac:var(--acc)"><h3>🐾 Pawrise Care</h3><p>Collier connecté qui suit la santé/bien-être de l'animal en continu, l'explique au propriétaire via une IA · <b>sans jamais diagnostiquer</b> · et transmet au vétérinaire un historique structuré prêt à l'emploi. <b>43 FR · 10 epics · 52 US · 6 services.</b></p></div>
+      <div class="eyebrow">Le pourquoi</div>
+      <div class="pcard" style="--ac:var(--cli)"><h3><span class="ic">🙈</span>Propriétaire aveugle</h3><p>Aucune visibilité continue entre deux visites.</p></div>
+      <div class="pcard" style="--ac:var(--svc)"><h3><span class="ic">🩺</span>Vétérinaire sans historique</h3><p>Chronologie imprécise, données éparses, communication difficile.</p></div>
+      <div class="pcard" style="--ac:var(--ai)"><h3><span class="ic">⏰</span>Signaux faibles tardifs</h3><p>Détectés trop tard, souvent au stade critique.</p></div>
+      <div class="pcard" style="--ac:var(--rose)"><h3><span class="ic">⚖️</span>Règle d'or</h3><p>L'IA n'émet <b>jamais de diagnostic</b> (Code rural L243-1) : elle explique, oriente, et invite à consulter.</p></div>
+      <div class="eyebrow">Stratégie & kill-risks</div>
+      <div class="pcard" style="--ac:var(--rose)"><h3>⚖️ Légal</h3><p>Vide juridique télémédecine vété FR.</p><div class="answer"><b>Réponse :</b> orientation non-diagnostique + véto traitant.</div></div>
+      <div class="pcard" style="--ac:var(--rose)"><h3>💸 Réseau vété non rentable</h3><p>Intervention humaine coûteuse, non scalable.</p><div class="answer"><b>Réponse :</b> pool plafonné + filtrage IA.</div></div>
+      <div class="pcard" style="--ac:var(--rose)"><h3>🩸 Marché GPS saturé</h3><p>Tractive, PetPace, capitalisés.</p><div class="answer"><b>Réponse :</b> pivot océan-bleu vété (PDF normalisé).</div></div>
+      <div class="eyebrow">Modèle économique</div>
+      <div class="pcard" style="--ac:var(--data)"><table class="eco"><tr><th>Métrique</th><th>Opt.</th><th>Base</th><th>Pess.</th></tr><tr><td>Marge brute</td><td class="good">89%</td><td class="good">69%</td><td class="bad">21%</td></tr><tr><td>LTV:CAC</td><td class="good">22×</td><td class="good">5,4×</td><td class="bad">0,4×</td></tr><tr><td>Payback</td><td>2 m</td><td>6 m</td><td class="bad">42 m</td></tr></table><div class="answer"><b>Pool façon Spotify</b> : part fixe d'abo → coût vété plafonné par construction.</div></div>
+      <div class="eyebrow">Les acteurs</div>
+      <div class="pcard" style="--ac:var(--cli)"><h3><span class="ic">📱</span>Propriétaire</h3><p>App mobile native : bien-être, localisation, alertes, chat IA.</p></div>
+      <div class="pcard" style="--ac:var(--svc)"><h3><span class="ic">🩺</span>Vétérinaire</h3><p>Vet Portal web : historique structuré + PDF normalisé.</p></div>
+      <div class="pcard" style="--ac:var(--data)"><h3><span class="ic">⚙️</span>Système / Admin</h3><p>Comptes, provisioning colliers, RGPD, observabilité.</p></div>
+      <div class="eyebrow">Équipe & méthodo</div>
+      <div class="pcard"><h3>🤝 10 personnes · 5 pôles</h3><div class="members"><span class="mem po">Yassine · PO</span><span class="mem">Nino</span><span class="mem">Cyril</span><span class="mem">Ibrahim</span><span class="mem">Hamid</span><span class="mem">Aaditya</span><span class="mem">Elarif</span><span class="mem">Adam</span><span class="mem">Oumar</span><span class="mem">Abderrahmane</span></div><p style="margin-top:8px">Scrum adapté · monolith-first → macroservices · Jira/Confluence/GitHub/Figma.</p></div>
+      <div class="eyebrow">Par où commencer</div>
+      <div class="pcard"><h3>🚀 Par où commencer</h3><p>Socle <b>monolithe modulaire</b> d'abord (API + Care Engine), puis extraction progressive de macroservices. On démarre par l'ingestion télémétrie → moteur d'orientation, le portail vété avançant en parallèle. Documents de référence : PRD, epics, architecture, 52 stories.</p></div>
+    </div>
+  </aside>
+
+  <aside class="panel" id="pEpic">
+    <div class="ph"><h2>🧩 EPIC / US</h2><button class="x" data-close>×</button></div>
+    <div class="pb">
+      <p style="font-size:12.5px;color:var(--mut);margin:0 0 12px">Cliquez un epic pour déplier ses US. Le bouton <b>▶</b> rejoue le parcours complet sur le diagramme.</p>
+      <div class="efilter"><button class="on" data-f="all">Tous</button><button data-f="mvp">MVP</button><button data-f="post">Post-MVP</button></div>
+      <div id="epiclist"></div>
+    </div>
+  </aside>
+
+  <aside class="panel" id="pFlow">
+    <div class="ph"><h2>🔀 Flows utilisateurs</h2><button class="x" data-close>×</button></div>
+    <div class="pb"><p style="font-size:12.5px;color:var(--mut);margin:0 0 12px">Les 5 parcours de bout en bout. <b>▶ Jouer</b> rejoue le flux animé sur le diagramme, étape par étape.</p><div id="flowlist"></div></div>
+  </aside>
+
+  <aside class="panel" id="pNode">
+    <div class="ph"><span class="ic" id="ndic"></span><div style="flex:1;min-width:0"><h2 id="ndname"></h2><div class="ndtag" id="ndtag"></div></div><button class="x" data-close>×</button></div>
+    <div class="pb" id="ndbody"></div>
+  </aside>
+
+<script>
+const C={cli:'#2dd4bf',edge:'#38bdf8',svc:'#fb923c',ai:'#a78bfa',data:'#22d3ee',msg:'#c084fc',ext:'#fbbf24',dev:'#5eead4',rose:'#fb7185'};
+const NODE_NAMES={COL:'Collier',MOB:'App Mobile',VET:'Vet Portal',KR:'KrakenD',IOT:'Broker MQTT',ING:'Ingestion',API:'Core API',AUTH:'Auth OIDC',TC:'Téléconsult/Pool',CE:'Care Engine',RAG:'RAG',VEC:'pgvector',RR:'Reranker',PG:'PostgreSQL',TS:'TimescaleDB',RD:'Redis',AUD:'Audit',KAFKA:'Kafka',AZ:'Azure OpenAI',STRIPE:'Stripe',MAIL:'Email/SMS',MAPS:'Cartographie',S3:'Object Storage',BACK:'Back-office',REG:'Registry',INGRESS:'Ingress/TLS',FCM:'Notifications',K8S:'Cluster Kubernetes',HELM:'Helm',ARGO:'Argo CD',GHA:'GitHub Actions',SOPS:'SOPS',STEPCA:'step-ca',OTEL:'OpenTelemetry',PROM:'Prometheus',LOKI:'Loki',TEMPO:'Tempo',GRAF:'Grafana',HETZ:'Hetzner'};
+// Rôle « langage produit » (sans jargon) · pour comprendre chaque étape sans connaître le projet
+const PM={
+  COL:"le collier porté par l'animal (capteurs)",
+  MOB:"l'app du propriétaire",
+  VET:"l'écran du vétérinaire",
+  KR:"la porte d'entrée sécurisée de tout le système",
+  IOT:"le point d'entrée MQTT des colliers",
+  ING:"nettoie, range et historise les mesures",
+  API:"le cerveau métier (profils, abos, règles)",
+  AUTH:"identité, connexion & droits d'accès",
+  TC:"met en relation avec un vétérinaire",
+  CE:"l'IA de conseil (jamais de diagnostic)",
+  RAG:"cherche dans le savoir vétérinaire",
+  VEC:"la base vectorielle du savoir vétérinaire",
+  RR:"garde les passages les plus pertinents",
+  PG:"la base de référence (comptes, profils)",
+  TS:"l'historique des mesures dans le temps",
+  RD:"mémoire rapide (sessions, cache)",
+  AUD:"journal inaltérable (preuve, 5 ans)",
+  KAFKA:"le tapis roulant interne des évènements",
+  AZ:"le grand modèle de langage (hébergé en UE)",
+  FCM:"envoie les alertes push sur le téléphone",
+  K8S:"le chef d'orchestre des services conteneurisés",
+  HELM:"empaquette les services pour les déployer",
+  ARGO:"déploie tout seul depuis Git (GitOps)",
+  GHA:"build + tests automatiques à chaque commit",
+  SOPS:"chiffre les secrets stockés dans Git",
+  STEPCA:"fabrique les certificats des colliers (sécurité)",
+  OTEL:"collecte traces, métriques et logs partout",
+  PROM:"stocke les métriques et déclenche les alertes",
+  LOKI:"centralise tous les logs",
+  TEMPO:"suit une requête à travers les services",
+  GRAF:"les tableaux de bord pour tout visualiser",
+  HETZ:"le serveur (UE) qui héberge tout",
+  STRIPE:"encaisse les abonnements et paie les vétos",
+  MAIL:"envoie les emails/SMS (vérif, alertes)",
+  MAPS:"les fonds de carte pour la localisation",
+  S3:"stocke les fichiers (PDF, exports, audit)",
+  BACK:"l'outil interne (support, pool véto)",
+  REG:"stocke les images à déployer",
+  INGRESS:"l'entrée publique sécurisée (TLS)"
+};
+
+const PAW=(function(){
+  const SVGLOGOS={
+    langgraph:'<svg viewBox="0 0 24 24" fill="#fff"><g stroke="#fff" stroke-width="1.5"><line x1="6" y1="6" x2="18" y2="6"/><line x1="6" y1="6" x2="12" y2="18"/><line x1="18" y1="6" x2="12" y2="18"/></g><circle cx="6" cy="6" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="12" cy="18" r="2.6"/></svg>',
+    cohere:'<svg viewBox="0 0 24 24" fill="#fff"><rect x="3" y="5" width="18" height="3.6" rx="1.8"/><rect x="3" y="10.2" width="11" height="3.6" rx="1.8"/><rect x="3" y="15.4" width="15" height="3.6" rx="1.8"/></svg>',
+    krakend:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z"/><circle cx="12" cy="12" r="2.4" fill="#fff" stroke="none"/></svg>',
+    timescale:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.5V12l3.2 2" stroke-linecap="round"/></svg>',
+    microsoftazure:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M14.4 3.6 8.6 19.2H4.3l4.1-11 3.3 3.4-4 4.2h9.9z"/></svg>'};
+  const ZONES=[{x:40,y:124,w:264,h:678,l:'Clients & accès'},{x:348,y:124,w:240,h:678,l:'Edge / Gateway'},{x:632,y:124,w:548,h:380,l:'Services métier · Rust'},{x:1216,y:124,w:488,h:360,l:'Care Engine · IA'},{x:1216,y:548,w:488,h:286,l:'Données'},{x:344,y:856,w:1392,h:138,l:'Intégrations externes'}];
+  const N={
+    COL:{x:64,y:188,w:216,h:82,ac:C.dev,si:'rust',mono:'🦴',nm:'Collier',tg:'Firmware Rust',role:"Capteurs GPS, activité, température/rythme. BLE/cellulaire, buffer hors-ligne, transmission chiffrée horodatée.",tech:"Rust embarqué (no_std async) selon le MCU ; MQTT/TLS + certificat (step-ca).",biz:"Cœur produit & différenciateur ; autonomie = enjeu d'adoption.",refs:['FR1–FR7','Epic 1-2']},
+    MOB:{x:64,y:358,w:216,h:82,ac:C.cli,si:'kotlin',mono:'AM',nm:'App Mobile',tg:'Kotlin · SwiftUI',role:"App du propriétaire : bien-être, localisation & zones, alertes, chat IA, téléconsultation.",tech:"Natif pour perf/UX et accès BLE + capteurs.",biz:"Vitrine 'pro', fluidité maximale.",refs:['FR19–FR23','Epic 3-6'],risk:"Compétence iOS/SwiftUI faible (matrice) → binôme à prévoir."},
+    VET:{x:64,y:528,w:216,h:82,ac:C.cli,si:'nextdotjs',mono:'VP',nm:'Vet Portal',tg:'Next.js · Tailwind',role:"Interface vétérinaire : vue patient, timeline, résumé contextualisé, notes, PDF normalisé.",tech:"SSR React, React Query + Zustand.",biz:"Compétence équipe (Adam).",refs:['FR24–FR28','Epic 7']},
+    KR:{x:388,y:432,w:184,h:96,ac:C.edge,si:'krakend',mono:'KD',nm:'KrakenD',tg:'API Gateway',role:"Entrée unique : validation JWT en bordure, agrégation, rate-limiting.",tech:"Gateway déclarative haute perf.",biz:"Compétence directe du PO.",refs:['NFR3','NFR6']},
+    IOT:{x:388,y:252,w:184,h:82,ac:C.edge,si:null,mono:'MQ',nm:'Broker MQTT',tg:'EMQX · MQTT/TLS',role:"Point d'entrée (ingress) des colliers en MQTT (pub/sub léger). Termine TLS + authentifie chaque collier par certificat (step-ca). L'Ingestion s'y abonne directement pour consommer la télémétrie.",tech:"Broker MQTT (EMQX/Mosquitto) : QoS, sessions persistantes, buffer offline, shared subscriptions. L'Ingestion est un client MQTT ; décodage des trames côté Ingestion.",biz:"Standard IoT : pensé pour batterie + réseau cellulaire instable ; reconnexion/offline gratuits, pas de gateway maison.",refs:['FR6','FR8']},
+    ING:{x:652,y:188,w:204,h:82,ac:C.svc,si:'rust',mono:'IN',nm:'Ingestion',tg:'Rust · Time-series',role:"S'abonne au broker MQTT, normalise/déduplique/resync, écrit les séries temporelles et publie les évènements normalisés sur Kafka.",tech:"Client MQTT (shared subscriptions) ; contrat resync : séquence + idempotence + timestamp serveur.",biz:"Zéro trou d'historique.",refs:['FR5','FR8-10']},
+    API:{x:652,y:380,w:204,h:82,ac:C.svc,si:'rust',mono:'CA',nm:'Core API',tg:'Rust · SQLx',role:"Source de vérité métier : comptes, animaux, abonnements, outbox. Expose les tools du Care Engine.",tech:"Clean architecture, SQL vérifié à la compilation (SQLx).",biz:"Cœur transactionnel (tools p95 < 200 ms).",refs:['FR11-12','ADR-004']},
+    AUTH:{x:906,y:188,w:204,h:82,ac:C.svc,si:'rust',mono:'AU',nm:'Auth · OIDC',tg:'Rust · OAuth2',role:"Émetteur OIDC maison, JWT, RBAC owner/véto, consentement RGPD.",tech:"Crates oauth2/openidconnect/jsonwebtoken/argon2, PKCE, rotation JWKS.",biz:"Défi/vitrine + souveraineté.",refs:['FR29','Epic 9'],risk:"OIDC maison ≈ 4-6 mois-homme + risque sécu → revue + tests d'abus obligatoires."},
+    TC:{x:906,y:380,w:204,h:82,ac:C.svc,si:'rust',mono:'TC',nm:'Téléconsult/Pool',tg:'Rust · WS',role:"Handoff IA→véto, file de prise en charge, chat sécurisé, pool de rémunération plafonné.",tech:"Orchestration événementielle (Kafka) ; WebSocket pour le chat.",biz:"Pool 'façon Spotify' → coût vété plafonné.",refs:['FR35–FR43','Epic 10']},
+    CE:{x:1242,y:188,w:210,h:86,ac:C.ai,si:'langgraph',mono:'CE',nm:'Care Engine',tg:'Python · LangGraph',role:"Pipeline déterministe LangGraph 6 nœuds (Circuit Breaker → Query Understanding → Retrieval → LLM → Guardrail → Audit). Sortie JSON.",tech:"Pas d'agent autonome ; mémoire = backend via tool calls ; garde-fous 3 couches.",biz:"Différenciateur ; responsabilité juridique portée par le pipeline.",refs:['FR13–18','ADR-001/04/05/07'],risk:"Exception à 'Rust partout' : LangGraph impose Python."},
+    RAG:{x:1242,y:376,w:210,h:82,ac:C.ai,si:'qdrant',mono:'RG',nm:'RAG hybride',tg:'BM25 + dense + RRF',role:"Récupération hybride (BM25 + dense, fusion RRF) sur le corpus vétérinaire.",tech:"Interroge le store vectoriel (pgvector) + index BM25 ; fusion RRF.",biz:"Qualité = confiance véto.",refs:['ADR-008/009']},
+    VEC:{x:1470,y:376,w:210,h:82,ac:C.data,si:null,mono:'PV',nm:'pgvector',tg:'Vector DB · embeddings',role:"Base vectorielle : stocke les embeddings du corpus vétérinaire pour la recherche sémantique du RAG.",tech:"pgvector (extension PostgreSQL, index HNSW) → Qdrant si montée en charge (interface RAG abstraite, ADR-008).",biz:"Socle de la pertinence du chatbot d'orientation.",refs:['ADR-008','Epic 6']},
+    RR:{x:1470,y:188,w:210,h:86,ac:C.ai,si:'cohere',mono:'CO',nm:'Reranker',tg:'Cohere v3',role:"Filtre top-20 → top-5 passages envoyés au LLM.",tech:"Cohere rerank-multilingual-v3 (~100 ms).",biz:"Latence ressentie = UX chat.",refs:['ADR-003']},
+    PG:{x:1242,y:594,w:210,h:82,ac:C.data,si:'postgresql',mono:'PG',nm:'PostgreSQL',tg:'Source de vérité',role:"Référentiel métier transactionnel (comptes, animaux, abonnements).",tech:"Robuste, SQL compile-time (SQLx).",biz:"Open-source, sans licence.",refs:['ADR-004']},
+    TS:{x:1470,y:594,w:210,h:82,ac:C.data,si:'timescale',mono:'TS',nm:'TimescaleDB',tg:'Séries temporelles',role:"Télémétrie en séries temporelles + agrégats, historique long terme.",tech:"Extension PostgreSQL time-series.",biz:"Analyse comportementale performante.",refs:['FR9','FR10']},
+    RD:{x:1242,y:726,w:210,h:82,ac:C.data,si:'redis',mono:'RD',nm:'Redis',tg:'Cache',role:"Sessions, lectures chaudes, rate-limiting.",tech:"Cache mémoire faible latence.",biz:"Réduit charge DB & coûts.",refs:['NFR6']},
+    AUD:{x:1470,y:726,w:210,h:82,ac:C.data,si:null,mono:'📜',nm:'Audit',tg:'Append-only 5 ans',role:"Journal immuable des conversations IA (input, retrieval, output, décisions guardrail).",tech:"Object storage S3-compatible + Object Lock.",biz:"Défense juridique (Code rural) + base de l'eval.",refs:['ADR-010']},
+    KAFKA:{x:652,y:560,w:470,h:58,ac:C.msg,si:'apachekafka',mono:'KA',nm:'Apache Kafka',tg:"Bus d'événements",bar:true,role:"Épine dorsale événementielle : ingestion, projections, file téléconsultation, audit.",tech:"Haut débit, écosystème de connecteurs.",biz:"Référence enterprise ('WOW' assumé).",refs:['NFR6','NFR7']},
+    AZ:{x:1524,y:900,w:200,h:80,ac:C.ext,si:'microsoftazure',mono:'AZ',nm:'Azure OpenAI EU',tg:'LLM · cascade',role:"Modèle de langage (Customization + classifieurs), déployé France Central / West Europe.",tech:"Data residency EU ; interface LLMProvider abstraite (bascule Mistral/self-host).",biz:"Conformité + qualité FR ; cascade pour contenir le coût.",refs:['ADR-002']},
+    STRIPE:{x:948,y:900,w:200,h:80,ac:C.ext,si:'stripe',mono:'ST',nm:'Stripe',tg:'Paiement',role:"Paiement des abonnements et reversement du pool vétérinaire (payouts).",tech:"Stripe Billing + Connect ; webhooks signés reçus par le Core API.",biz:"Encaissement & redistribution conformes (Epic 8/10).",refs:['Epic 8','Epic 10']},
+    MAIL:{x:660,y:900,w:200,h:80,ac:C.ext,si:null,mono:'EM',nm:'Email/SMS',tg:'Transactionnel',role:"Emails/SMS transactionnels : vérification de compte, réinitialisation, alertes santé.",tech:"Provider EU (Brevo/Postmark/SES) : templates + file d'envoi.",biz:"Délivrabilité = activation & confiance.",refs:['Epic 1','Epic 5']},
+    MAPS:{x:372,y:900,w:200,h:80,ac:C.ext,si:null,mono:'MP',nm:'Cartographie',tg:'Mapbox / OSM',role:"Fonds de carte & géocodage pour la localisation et les zones de sécurité.",tech:"Mapbox ou OpenStreetMap (tuiles), rendu côté app.",biz:"Expérience de localisation.",refs:['Epic 4']},
+    S3:{x:1236,y:900,w:200,h:80,ac:C.data,si:null,mono:'S3',nm:'Object Storage',tg:'S3 / MinIO',role:"Stockage objet : PDF normalisés, exports RGPD, archivage de l'audit.",tech:"S3-compatible (MinIO self-host / Hetzner Object Storage) ; URLs signées.",biz:"Conformité + pièces justificatives.",refs:['Epic 7','Epic 9']},
+    BACK:{x:64,y:698,w:216,h:82,ac:C.cli,si:'nextdotjs',mono:'BO',nm:'Back-office',tg:'Admin · support',role:"Back-office interne : support, gestion du pool vétérinaire, modération, exploitation.",tech:"Next.js (RBAC admin) derrière la gateway.",biz:"Opérer le service & le réseau véto.",refs:['Epic 8']},
+    REG:{plat:1,x:1396,y:16,w:172,h:74,ac:C.edge,si:null,mono:'CR',nm:'Registry',tg:'Images · GHCR/Harbor',role:"Registre d'images conteneur : la CI y pousse, le cluster les tire au déploiement.",tech:"GHCR ou Harbor self-host ; scan de vulnérabilités.",biz:"Chaîne de livraison maîtrisée.",refs:['Epic 11']},
+    INGRESS:{plat:1,x:388,y:150,w:184,h:66,ac:C.edge,si:null,mono:'IX',nm:'Ingress / TLS',tg:'Traefik · cert-manager',role:"Entrée réseau du cluster + TLS public : terminaison et certificats automatiques.",tech:"Ingress controller (Traefik/nginx) + cert-manager (Let's Encrypt).",biz:"Accès public sécurisé app/web.",refs:['Epic 11']},
+    FCM:{x:388,y:616,w:184,h:82,ac:C.edge,si:'firebase',mono:'FN',nm:'Notifications',tg:'FCM / APNs',role:"Push vers l'app : alertes, signaux faibles, rappels de soins.",tech:"FCM (Android) + APNs (iOS), déclenchées par le backend.",biz:"Réactivité = engagement & sécurité perçue.",refs:['FR22','Epic 5']},
+    K8S:{plat:1,x:976,y:16,w:208,h:74,ac:C.edge,si:'kubernetes',mono:'K8',nm:'Cluster Kubernetes',tg:'kubeadm · cible de déploiement',role:"Orchestration de tous les services conteneurisés.",tech:"kubeadm = upstream standard, pédagogique (CKA) ; tout en IaC, zéro kubectl manuel.",biz:"Apprentissage + maîtrise des coûts.",refs:['Infra'],risk:"Le plus manuel : sauvegarde etcd planifiée obligatoire."},
+    HELM:{plat:1,x:552,y:16,w:192,h:74,ac:C.edge,si:'helm',mono:'HM',nm:'Helm',tg:'Packaging',role:"Templating & packaging des déploiements (un chart par environnement).",tech:"Standard de facto K8s.",biz:"Déploiements reproductibles.",refs:['Infra']},
+    ARGO:{plat:1,x:764,y:16,w:192,h:74,ac:C.edge,si:'argo',mono:'AR',nm:'Argo CD',tg:'GitOps (CD)',role:"Déploiement continu déclaratif : le repo Git est la source de vérité.",tech:"App-of-apps / ApplicationSets.",biz:"Vitrine DevOps + traçabilité.",refs:['Infra']},
+    GHA:{plat:1,x:340,y:16,w:192,h:74,ac:'#8b95a5',si:'githubactions',mono:'GH',nm:'GitHub Actions',tg:'CI',role:"Intégration continue : build, tests, images.",tech:"Cache sccache pour Rust ; CD délégué à ArgoCD.",biz:"Org GitHub Pawrise déjà en place.",refs:['Infra']},
+    STEPCA:{plat:1,x:388,y:348,w:184,h:64,ac:C.rose,si:null,mono:'🔏',nm:'step-ca',tg:'PKI · certificats colliers',role:"Autorité de certification interne : fabrique et signe les certificats des colliers, qui s'en servent pour s'authentifier en MQTT/TLS auprès du broker.",tech:"Provisioning à l'appairage, rotation, révocation (CRL/OCSP).",biz:"Sécurité de la flotte IoT : aucun faux collier ne peut injecter de données.",refs:['FR6','NFR-Sécurité']},
+    SOPS:{plat:1,x:1204,y:16,w:172,h:74,ac:C.rose,si:null,mono:'🔐',nm:'SOPS + age',tg:'Secrets',role:"Chiffrement des secrets versionnés (GitOps-friendly).",tech:"SOPS + age, jamais de secret en clair dans Git.",biz:"Conformité & sécurité.",refs:['Infra']},
+    OTEL:{plat:1,x:372,y:876,w:204,h:66,ac:C.data,si:'opentelemetry',mono:'OT',nm:'OpenTelemetry',tg:'Instrumentation',role:"Instrumentation unifiée (traces, métriques, logs).",tech:"Exporte vers Prometheus / Tempo / Loki.",biz:"Observabilité de bout en bout.",refs:['NFR7']},
+    PROM:{plat:1,x:664,y:858,w:164,h:52,ac:C.data,si:'prometheus',mono:'PR',nm:'Prometheus',tg:'Métriques',role:"Collecte et stockage des métriques + alerting.",tech:"Scraping ; règles d'alerte.",biz:"Performance & SLA.",refs:['NFR7']},
+    GRAF:{plat:1,x:932,y:888,w:204,h:66,ac:C.data,si:'grafana',mono:'GR',nm:'Grafana',tg:'Dashboards',role:"Tableaux de bord & visualisation.",tech:"Unifie métriques/logs/traces.",biz:"Pilotage opérationnel + KPIs IA.",refs:['NFR7']},
+    LOKI:{plat:1,x:664,y:912,w:164,h:52,ac:C.data,si:null,mono:'LK',nm:'Loki',tg:'Logs',role:"Agrégation des logs.",tech:"Logs structurés, requêtables par labels.",biz:"Diagnostic rapide.",refs:['NFR7']},
+    TEMPO:{plat:1,x:664,y:966,w:164,h:52,ac:C.data,si:null,mono:'TP',nm:'Tempo',tg:'Traces',role:"Tracing distribué entre services.",tech:"Corrèle les requêtes (latence).",biz:"Debug des chaînes d'appel.",refs:['NFR7']},
+    HETZ:{plat:1,x:28,y:1048,w:1684,h:46,ac:C.ext,si:'hetzner',mono:'EU',nm:'Hetzner',tg:'Hébergeur éco EU',role:"VPS/serveurs hébergeant le cluster K8s.",tech:"5-10× moins cher qu'AWS ; Scaleway/OVH possibles.",biz:"Budget ~0 + souveraineté EU/RGPD.",refs:['Infra']}};
+  const E=[['COL','IOT','event','r','l'],['MOB','KR','sync','r','l'],['VET','KR','sync','r','l'],['KR','API','sync','r','l'],['KR','TC','sync','r','l'],['KR','AUTH','ctrl','t','l'],['KR','CE','sync','t','l'],['IOT','ING','event','r','l'],['ING','TS','sync','r','l'],['ING','KAFKA','event','b','t'],['API','PG','sync','r','l'],['API','RD','sync','b','l'],['AUTH','PG','sync','r','t'],['KAFKA','TS','event','r','b'],['TC','KAFKA','event','b','t'],['CE','API','ctrl','l','t'],['CE','RAG','sync','b','t'],['RAG','VEC','sync','b','t'],['CE','RR','sync','b','t'],['CE','AUD','event','r','t'],['CE','AZ','ext','b','t'],['API','FCM','sync','l','r'],['FCM','MOB','event','l','r'],['API','TS','sync','r','l'],['BACK','KR','sync','r','l'],['MOB','MAPS','sync','b','t'],['API','MAIL','sync','b','l'],['API','STRIPE','sync','b','l'],['API','S3','sync','r','l']];
+  const A=(n,s)=>({l:{x:n.x,y:n.y+n.h/2},r:{x:n.x+n.w,y:n.y+n.h/2},t:{x:n.x+n.w/2,y:n.y},b:{x:n.x+n.w/2,y:n.y+n.h}}[s]);
+  const off=(p,s,m)=>s==='r'?{x:p.x+m,y:p.y}:s==='l'?{x:p.x-m,y:p.y}:s==='b'?{x:p.x,y:p.y+m}:{x:p.x,y:p.y-m};
+  const Dp=(a,b,sa,sb)=>{const m=Math.max(46,Math.hypot(b.x-a.x,b.y-a.y)*0.4);const c1=off(a,sa,m),c2=off(b,sb,m);return `M${a.x.toFixed(1)},${a.y.toFixed(1)} C${c1.x.toFixed(1)},${c1.y.toFixed(1)} ${c2.x.toFixed(1)},${c2.y.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`;};
+  const DC={sync:'#34d399',event:'#c084fc',ext:'#fbbf24',ctrl:'#64d2ff'};
+  let defs='<defs><filter id="aglow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>';
+  let zoneS=ZONES.map(z=>`<g class="${z.l==='Intégrations externes'?'z-ext':'azg'}"><rect class="a-zone" x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="22"/><text class="a-zlabel" x="${z.x+18}" y="${z.y+26}">${z.l}</text></g>`).join('');
+  // Plateforme désormais affichée comme de vrais composants (zone + nœuds ci-dessous).
+  let wireS='',flowS='',dotS='';
+  E.forEach(e=>{const[f,t,ty,sa,sb]=e,a=A(N[f],sa),b=A(N[t],sb),d=Dp(a,b,sa,sb),len=Math.hypot(b.x-a.x,b.y-a.y),dur=Math.min(4.4,Math.max(1.7,len/150));
+    wireS+=`<path class="a-wire ${ty}" data-edge="${f}|${t}" d="${d}"/>`;flowS+=`<path class="a-flow ${ty}" data-edge="${f}|${t}" d="${d}"/>`;
+    for(let k=0;k<2;k++)dotS+=`<circle class="a-dot" data-edge="${f}|${t}" r="${ty==='event'?3.4:2.8}" fill="${DC[ty]}"><animateMotion dur="${dur.toFixed(2)}s" begin="${(-dur*k/2).toFixed(2)}s" repeatCount="indefinite" path="${d}"/></circle>`;});
+  const lg=n=>n.si&&SVGLOGOS[n.si]?SVGLOGOS[n.si]:(n.si?`<img src="https://cdn.simpleicons.org/${n.si}/white" onerror="this.parentNode.innerHTML='<span class=&quot;a-mono&quot;>${n.mono}</span>'"/>`:`<span class="a-mono">${n.mono}</span>`);
+  let nodeS='';for(const id in N){const n=N[id];if(n.plat)continue;nodeS+=`<g class="a-node ${n.bar?'a-kbar':''}" data-id="${id}"><foreignObject x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}"><div class="a-card" xmlns="http://www.w3.org/1999/xhtml" style="--ac:${n.ac}"><div class="h"><span class="a-ic">${lg(n)}</span><span class="a-nm">${n.nm}</span></div>${n.bar?'':`<div class="a-tg">${n.tg}</div>`}</div></foreignObject></g>`;}
+  const stage=document.getElementById('archstage');
+  // ---- couche Plateforme : CI externe (haut) → Cluster K8s (enceinte) → hôte Hetzner (socle) ----
+  const ENC={x:18,y:106,w:1704,h:920};
+  const PLAT_E=[['GHA','HELM','ctrl','r','l'],['HELM','ARGO','ctrl','r','l'],['ARGO','K8S','ctrl','r','l'],['SOPS','K8S','ctrl','l','r'],['OTEL','PROM','event','r','l'],['OTEL','LOKI','event','r','l'],['OTEL','TEMPO','event','r','l'],['PROM','GRAF','sync','r','l'],['LOKI','GRAF','sync','r','l'],['TEMPO','GRAF','sync','r','l'],['REG','K8S','ctrl','l','r'],['INGRESS','KR','sync','r','l']];
+  const PADJ=PLAT_E.map(e=>[e[0],e[1]]).concat([['STEPCA','IOT'],['STEPCA','COL']]);
+  let pW='',pF='',pD='';
+  PLAT_E.forEach(e=>{const[f,t,ty,sa,sb]=e,a=A(N[f],sa),b=A(N[t],sb),d=Dp(a,b,sa,sb),len=Math.hypot(b.x-a.x,b.y-a.y),dur=Math.min(4,Math.max(1.6,len/150));
+    pW+=`<path class="a-wire ${ty}" data-edge="${f}|${t}" d="${d}"/>`;pF+=`<path class="a-flow ${ty}" data-edge="${f}|${t}" d="${d}"/>`;
+    for(let k=0;k<2;k++)pD+=`<circle class="a-dot" r="${ty==='event'?3.4:2.8}" fill="${DC[ty]}"><animateMotion dur="${dur.toFixed(2)}s" begin="${(-dur*k/2).toFixed(2)}s" repeatCount="indefinite" path="${d}"/></circle>`;});
+  const kb=A(N.K8S,'b'),dep=`M${kb.x},${kb.y} C${kb.x},${kb.y+24} 1198,160 1198,202`;
+  const ot=A(N.OTEL,'t');
+  const telP=[400,470,540,610,680,750].map(x=>`M${x},818 C${x},846 ${ot.x},${ot.y-16} ${ot.x},${ot.y}`);const telTicks='';
+  const sct=A(N.STEPCA,'t'),io=A(N.IOT,'b'),secP=`M${sct.x},${sct.y} C${sct.x},${sct.y-16} ${io.x},${io.y+16} ${io.x},${io.y}`;
+  const scl=A(N.STEPCA,'l'),co=A(N.COL,'r'),secP2=`M${scl.x},${scl.y} C${scl.x-34},${scl.y} ${co.x+34},${co.y} ${co.x},${co.y}`;
+  const secStatic=`<path class="a-pki" data-edge="STEPCA|IOT" d="${secP}"/><path class="a-pki" data-edge="STEPCA|COL" d="${secP2}"/>`;
+  pW+=`<path class="a-wire ctrl" d="${dep}"/>`+secStatic+telTicks+telP.map(d=>`<path class="a-wire event" d="${d}"/>`).join('');
+  pF+=`<path class="a-flow ctrl" d="${dep}"/>`+telP.map(d=>`<path class="a-flow event" d="${d}"/>`).join('');
+  pD+=`<circle class="a-dot" r="3.4" fill="#64d2ff"><animateMotion dur="1.8s" repeatCount="indefinite" path="${dep}"/></circle>`+telP.map((d,i)=>`<circle class="a-dot" r="2.6" fill="#c084fc"><animateMotion dur="${(1.8+i*0.22).toFixed(2)}s" repeatCount="indefinite" path="${d}"/></circle>`).join('');
+  let pN='';for(const id in N){const n=N[id];if(!n.plat||id==='HETZ')continue;pN+=`<g class="a-node" data-id="${id}"><foreignObject x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}"><div class="a-card" xmlns="http://www.w3.org/1999/xhtml" style="--ac:${n.ac}"><div class="h"><span class="a-ic">${lg(n)}</span><span class="a-nm">${n.nm}</span></div>${n.tg?`<div class="a-tg">${n.tg}</div>`:''}</div></foreignObject></g>`;}
+  const H=N.HETZ,hetzCard=`<g class="a-node" data-id="HETZ"><foreignObject x="${H.x}" y="${H.y}" width="${H.w}" height="${H.h}"><div class="a-host" xmlns="http://www.w3.org/1999/xhtml" style="--ac:${H.ac}"><span class="a-ic">${lg(H)}</span><span><b>Hôte ▸ Hetzner (EU)</b> · le cluster Kubernetes (kubeadm) tourne ici · souveraineté EU / RGPD · budget maîtrisé</span></div></foreignObject></g>`;
+  const platS=`<rect class="a-enc" x="${ENC.x}" y="${ENC.y}" width="${ENC.w}" height="${ENC.h}" rx="26"/><text class="a-zlabel" x="40" y="58">CI / GitOps · externe ▸</text><text class="a-zlabel" x="1092" y="118">▾ déploie dans le cluster</text><text class="a-zlabel" x="392" y="806">Télémétrie de tous les services ▾</text><text class="a-zlabel" x="388" y="332">Sécurité · PKI ▸</text><text class="a-zlabel" x="372" y="856">Observabilité &amp; Ops · in-cluster ▸</text>${pW}${pF}${pD}${hetzCard}${pN}`;
+  stage.innerHTML=defs+`<g id="archvp"><g>${zoneS}</g><g>${wireS}</g><g>${flowS}</g><g>${dotS}</g><g>${nodeS}</g><g id="platlayer" style="display:none">${platS}</g></g>`;
+  const vp=document.getElementById('archvp'),wrap=document.getElementById('archwrap');
+  let locked=false;
+  function setHot(id,on){if(locked)return;stage.classList.toggle('a-dim',on);
+    document.querySelectorAll('#archstage [data-edge]').forEach(el=>{const[f,t]=el.getAttribute('data-edge').split('|');el.classList.toggle('a-hot',on&&(f===id||t===id));});
+    document.querySelectorAll('#archstage .a-node').forEach(g=>{const nid=g.getAttribute('data-id');let c=nid===id;if(on&&!c)[...E,...PADJ].forEach(e=>{if((e[0]===id&&e[1]===nid)||(e[1]===id&&e[0]===nid))c=true;});g.classList.toggle('a-hot',on&&c);});}
+  const jTouch=(steps,id)=>steps.some(s=>s.f===id||s.t===id);
+  function openNode(id){const n=N[id];document.getElementById('ndic').innerHTML=lg(n);
+    document.getElementById('ndname').textContent=n.nm;document.getElementById('ndtag').textContent=n.tg;document.getElementById('pNode').style.setProperty('--acd',n.ac);
+    const flows=FLOWS.map((f,i)=>({i,nm:f.nm})).filter(o=>jTouch(FLOW_EDGES[o.i],id));
+    const pflows=PLAT_FLOWS.map((f,i)=>({i,nm:f.nm})).filter(o=>jTouch(PLAT_FLOWS[o.i].edges,id));
+    const epics=[];EPICS.forEach(e=>{const ej=EPIC_EDGES[e.num]||[];if(!jTouch(ej,id))return;const us=e.stories.filter(s=>jTouch(usJourney(s.id,e.num),id)).map(s=>({id:s.id,title:s.title}));epics.push({num:e.num,title:e.title,us});});
+    let jhtml='';
+    if(flows.length||pflows.length||epics.length){
+      jhtml='<div class="ndsec jsec"><h4>Joué dans</h4><p class="jhelp">les scénarios où ce composant intervient</p>';
+      if(flows.length)jhtml+='<div class="jgrp"><span class="jlbl">Parcours utilisateur</span><div class="jflows">'+flows.map(f=>`<button class="jflow" data-k="flow" data-i="${f.i}">▶ ${f.nm}</button>`).join('')+'</div></div>';
+      if(pflows.length)jhtml+='<div class="jgrp"><span class="jlbl">Plateforme & Ops</span><div class="jflows">'+pflows.map(f=>`<button class="jflow jflow-p" data-k="platflow" data-i="${f.i}">▶ ${f.nm}</button>`).join('')+'</div></div>';
+      if(epics.length)jhtml+='<div class="jgrp"><span class="jlbl">Backlog · epics & stories</span><div class="jepics">'+epics.map(e=>`<div class="jepic"><div class="jehead"><span class="jechev">▸</span><span class="jetitle">Epic ${e.num} · ${e.title}</span>${e.us.length?`<span class="jecount">${e.us.length} US</span>`:''}<button class="jplay" data-k="epic" data-n="${e.num}" title="Jouer l'epic">▶</button></div>${e.us.length?'<div class="jus" hidden>'+e.us.map(u=>`<button class="jusrow" data-k="us" data-id="${u.id}" data-n="${e.num}"><span class="jusid">${u.id}</span><span class="justitle">${u.title}</span><span class="jusplay">▶</span></button>`).join('')+'</div>':''}</div>`).join('')+'</div></div>';
+      jhtml+='</div>';
+    }
+    document.getElementById('ndbody').innerHTML=`${PM[id]?`<div class="ndpm"><span>En clair</span>${PM[id]}</div>`:''}<div class="ndsec"><h4>Rôle</h4><p>${n.role||'·'}</p></div><div class="ndsec"><h4>Justification technique</h4><p class="tech">${n.tech||'·'}</p></div><div class="ndsec"><h4>Justification business</h4><p class="biz">${n.biz||'·'}</p></div>${n.risk?`<div class="ndsec"><h4>Point d'attention</h4><div class="ndrisk">${n.risk}</div></div>`:''}<div class="ndsec"><h4>Références</h4><div class="ndrefs">${(n.refs||[]).map(r=>`<span class="ndref">${r}</span>`).join('')}</div></div>${jhtml}`;
+    const nb=document.getElementById('ndbody');
+    nb.querySelectorAll('.jehead').forEach(h=>h.addEventListener('click',e=>{if(e.target.closest('.jplay'))return;const us=h.parentElement.querySelector('.jus');if(!us)return;const hid=us.toggleAttribute('hidden');h.querySelector('.jechev').textContent=hid?'▸':'▾';}));
+    nb.querySelectorAll('.jflow,.jplay,.jusrow').forEach(btn=>btn.addEventListener('click',e=>{e.stopPropagation();const k=btn.dataset.k;if(k==='flow')playJourney(FLOW_EDGES[+btn.dataset.i],'Flux · '+FLOWS[+btn.dataset.i].nm);else if(k==='platflow')playJourney(PLAT_FLOWS[+btn.dataset.i].edges,'Plateforme · '+PLAT_FLOWS[+btn.dataset.i].nm);else if(k==='epic')playJourney(EPIC_EDGES[+btn.dataset.n],'Epic '+btn.dataset.n+' · '+EPICS[+btn.dataset.n-1].title);else playJourney(usJourney(btn.dataset.id,+btn.dataset.n),'US '+btn.dataset.id);}));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));document.getElementById('pNode').classList.add('open');document.getElementById('pscrim').classList.add('show');}
+  document.querySelectorAll('#archstage .a-node').forEach(g=>{const id=g.getAttribute('data-id');
+    g.addEventListener('mouseenter',()=>setHot(id,true));g.addEventListener('mouseleave',()=>{if(!locked)setHot(id,false);});
+    g.addEventListener('click',e=>{e.stopPropagation();openNode(id);});});
+  // pan/zoom
+  let vt={x:0,y:0,k:1};const apply=()=>vp.setAttribute('transform',`translate(${vt.x} ${vt.y}) scale(${vt.k})`);
+  function zoomAt(cx,cy,f){const p=stage.createSVGPoint();p.x=cx;p.y=cy;const c=p.matrixTransform(stage.getScreenCTM().inverse());const k2=Math.min(3,Math.max(.5,vt.k*f));vt.x=c.x-(c.x-vt.x)/vt.k*k2;vt.y=c.y-(c.y-vt.y)/vt.k*k2;vt.k=k2;apply();}
+  stage.addEventListener('wheel',e=>{e.preventDefault();zoomAt(e.clientX,e.clientY,e.deltaY<0?1.12:1/1.12);},{passive:false});
+  let pan=null;wrap.addEventListener('pointerdown',e=>{if(e.target.closest('.a-node'))return;pan={x:e.clientX,y:e.clientY};wrap.classList.add('drag');wrap.setPointerCapture(e.pointerId);});
+  wrap.addEventListener('pointermove',e=>{if(!pan)return;const m=stage.getScreenCTM();vt.x+=(e.clientX-pan.x)/m.a;vt.y+=(e.clientY-pan.y)/m.d;pan={x:e.clientX,y:e.clientY};apply();});
+  wrap.addEventListener('pointerup',()=>{pan=null;wrap.classList.remove('drag');});
+  function fit(){vt={x:0,y:0,k:1};apply();}
+  // ---- journey engine ----
+  const edgeEls=(f,t)=>[...document.querySelectorAll(`#archstage [data-edge="${f}|${t}"],#archstage [data-edge="${t}|${f}"]`)];
+  let jr=null,ji=0,jtimer=null,jplaying=false;
+  const pl=document.getElementById('player'),ptitle=document.getElementById('ptitle'),plabel=document.getElementById('plabel'),pPlay=document.getElementById('pPlay');
+  function clearMarks(){document.querySelectorAll('#archstage .a-hot,#archstage .a-cur,#archstage .a-pulse').forEach(x=>x.classList.remove('a-hot','a-cur','a-pulse'));}
+  function renderStep(){clearMarks();const set=new Set();
+    for(let i=0;i<=ji&&i<jr.length;i++){const{f,t}=jr[i];set.add(f);set.add(t);edgeEls(f,t).forEach(el=>el.classList.add('a-hot'));}
+    document.querySelectorAll('#archstage .a-node').forEach(g=>{if(set.has(g.getAttribute('data-id')))g.classList.add('a-hot');});
+    if(ji<jr.length){const s=jr[ji];edgeEls(s.f,s.t).forEach(el=>el.classList.add('a-cur'));[s.f,s.t].forEach(id=>{const g=document.querySelector(`#archstage .a-node[data-id="${id}"]`);g&&g.classList.add('a-pulse');});
+      const rl=id=>`<span class="prole"><b>${NODE_NAMES[id]}</b>${PM[id]?(' '+PM[id]):''}</span>`;
+      plabel.innerHTML=`<span class="pstep">Étape ${ji+1}/${jr.length}</span>${s.d?(' '+s.d):''}`+
+        `<span class="proles">${rl(s.f)}<span class="prarr">→</span>${rl(s.t)}</span>`;}
+    if(ji>=jr.length-1){pl.querySelector('.plab').classList.add('pdone');}else{pl.querySelector('.plab').classList.remove('pdone');}}
+  function sched(){clearInterval(jtimer);jtimer=setInterval(()=>{if(ji<jr.length-1){ji++;renderStep();}else{clearInterval(jtimer);jplaying=false;pPlay.textContent='▶';plabel.innerHTML=`Parcours complet · ${jr.length} étapes`;}},1500);}
+  function play(journey,label){if(!journey||!journey.length){return;}locked=true;jr=journey;ji=0;jplaying=true;stage.classList.add('a-dim');
+    ptitle.textContent=label||'Parcours';pl.classList.add('show');pPlay.textContent='⏸';renderStep();sched();}
+  function toggle(){if(!jr)return;if(jplaying){clearInterval(jtimer);jplaying=false;pPlay.textContent='▶';}else{if(ji>=jr.length-1)ji=0;jplaying=true;pPlay.textContent='⏸';renderStep();sched();}}
+  function step(d){if(!jr)return;clearInterval(jtimer);jplaying=false;pPlay.textContent='▶';ji=Math.max(0,Math.min(jr.length-1,ji+d));renderStep();}
+  function replay(){if(!jr)return;ji=0;jplaying=true;pPlay.textContent='⏸';stage.classList.add('a-dim');renderStep();sched();}
+  function reset(){clearInterval(jtimer);jtimer=null;jr=null;jplaying=false;locked=false;stage.classList.remove('a-dim');clearMarks();pl.classList.remove('show');}
+  document.getElementById('pPlay').onclick=toggle;document.getElementById('pPrev').onclick=()=>step(-1);document.getElementById('pNext').onclick=()=>step(1);
+  document.getElementById('pReplay').onclick=replay;document.getElementById('pClose').onclick=reset;
+  document.getElementById('aZin')&&0;
+  function exportSVG(){
+    const light=document.body.classList.contains('light');
+    const plat=document.body.classList.contains('plat');
+    const vb=stage.getAttribute('viewBox');const[vx,vy,vw,vh]=vb.split(' ').map(Number);
+    const padTop=58, evx=vx, evy=vy-padTop, evw=vw, evh=vh+padTop;
+    const T=light
+      ?{bg:'#f6f9fd',card:'#ffffff',cs:'rgba(15,23,42,.16)',ink:'#0f172a',mut:'#475569',zl:'#64748b',zf:'rgba(15,23,42,.022)',zs:'rgba(15,23,42,.1)',ic:'#1e293b',icink:'#ffffff'}
+      :{bg:'#0a1020',card:'#141c2e',cs:'rgba(255,255,255,.14)',ink:'#e8eefc',mut:'#90a4c8',zl:'#5b6f93',zf:'rgba(255,255,255,.02)',zs:'rgba(255,255,255,.07)',ic:'#0e1626',icink:'#ffffff'};
+    const ecol=light?{sync:'#10b981',event:'#a855f7',ext:'#d97706',ctrl:'#0ea5e9'}:{sync:'#34d399',event:'#c084fc',ext:'#fbbf24',ctrl:'#64d2ff'};
+    const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    const edge=(f,t,ty,sa,sb,stroke,w)=>{const a=A(N[f],sa),b=A(N[t],sb);return `<path d="${Dp(a,b,sa,sb)}" fill="none" stroke="${stroke||ecol[ty]||ecol.sync}" stroke-width="${w||1.8}" stroke-linecap="round" opacity="0.62"/>`;};
+    let zS='';ZONES.forEach(z=>{zS+=`<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="22" fill="${T.zf}" stroke="${T.zs}"/><text x="${z.x+18}" y="${z.y+26}" font-size="11" font-weight="800" letter-spacing="2" fill="${T.zl}">${esc(z.l.toUpperCase())}</text>`;});
+    let eS='';E.forEach(e=>{eS+=edge(e[0],e[1],e[2],e[3],e[4]);});
+    let encS='',pEdgeS='',pLabS='';
+    if(plat){
+      encS=`<rect x="${ENC.x}" y="${ENC.y}" width="${ENC.w}" height="${ENC.h}" rx="26" fill="${light?'rgba(56,189,248,.06)':'rgba(56,189,248,.045)'}" stroke="${light?'rgba(2,132,199,.5)':'rgba(56,189,248,.42)'}" stroke-width="2" stroke-dasharray="11 9"/>`;
+      PLAT_E.forEach(e=>{pEdgeS+=edge(e[0],e[1],e[2],e[3],e[4]);});
+      const kb=A(N.K8S,'b');pEdgeS+=`<path d="M${kb.x},${kb.y} C${kb.x},${kb.y+24} 1198,160 1198,202" fill="none" stroke="${ecol.ctrl}" stroke-width="1.8" opacity="0.62"/>`;
+      const ot=A(N.OTEL,'t');[400,470,540,610,680,750].forEach(x=>{pEdgeS+=`<path d="M${x},818 C${x},846 ${ot.x},${ot.y-16} ${ot.x},${ot.y}" fill="none" stroke="${ecol.event}" stroke-width="1.5" opacity="0.55"/>`;});
+      const sct=A(N.STEPCA,'t'),sio=A(N.IOT,'b');pEdgeS+=`<path d="M${sct.x},${sct.y} C${sct.x},${sct.y-16} ${sio.x},${sio.y+16} ${sio.x},${sio.y}" fill="none" stroke="#fb7185" stroke-width="1.6" stroke-dasharray="3 5" opacity="0.72"/>`;
+      const scl=A(N.STEPCA,'l'),sco=A(N.COL,'r');pEdgeS+=`<path d="M${scl.x},${scl.y} C${scl.x-34},${scl.y} ${sco.x+34},${sco.y} ${sco.x},${sco.y}" fill="none" stroke="#fb7185" stroke-width="1.6" stroke-dasharray="3 5" opacity="0.72"/>`;
+      [[40,60,'CI / GitOps · externe ▸'],[1092,118,'▾ déploie dans le cluster'],[392,806,'Télémétrie de tous les services ▾'],[388,332,'Sécurité · PKI ▸'],[372,856,'Observabilité & Ops · in-cluster ▸']].forEach(l=>pLabS+=`<text x="${l[0]}" y="${l[1]}" font-size="11" font-weight="800" letter-spacing="1.5" fill="${T.zl}">${esc(l[2])}</text>`);
+    }
+    const nodeSVG=id=>{const n=N[id];let g='<g>';
+      g+=`<rect x="${n.x}" y="${n.y}" width="${n.w}" height="${n.h}" rx="13" fill="${T.card}" stroke="${T.cs}"/>`;
+      g+=`<rect x="${n.x}" y="${n.y}" width="4" height="${n.h}" rx="2" fill="${n.ac}"/>`;
+      g+=`<rect x="${n.x+12}" y="${n.y+11}" width="25" height="25" rx="7" fill="${T.ic}"/>`;
+      g+=`<text x="${n.x+24.5}" y="${n.y+27.5}" text-anchor="middle" font-size="10" font-weight="800" fill="${T.icink}">${esc(n.mono||'')}</text>`;
+      g+=`<text x="${n.x+45}" y="${n.y+25}" font-size="12.5" font-weight="700" fill="${T.ink}">${esc(n.nm)}</text>`;
+      if(n.tg)g+=`<text x="${n.x+45}" y="${n.y+39}" font-size="9.6" fill="${T.mut}">${esc(n.tg)}</text>`;
+      return g+'</g>';};
+    let nS='';for(const id in N){const n=N[id];if(n.plat&&!plat)continue;nS+=nodeSVG(id);}
+    const title=`<text x="${evx+24}" y="${evy+38}" font-size="21" font-weight="900" fill="${T.ink}">Pawrise Care · Architecture${plat?' · Plateforme &amp; Ops':' · Produit'}</text>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${evx} ${evy} ${evw} ${evh}" width="${evw}" height="${evh}"><style>text{font-family:Inter,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}</style><rect x="${evx}" y="${evy}" width="${evw}" height="${evh}" fill="${T.bg}"/>${encS}${zS}${eS}${pEdgeS}${pLabS}${nS}${title}</svg>`;
+  }
+  return {play,reset,fit,zoomAt,wrap,openNode,exportSVG};
+})();
+
+// ---- journeys (ordered edges) ----
+const FLOW_EDGES=[
+  [{f:'MOB',t:'KR',d:"Le propriétaire s'inscrit puis se connecte ; tout passe par la gateway."},{f:'KR',t:'AUTH',d:"KrakenD délègue l'authentification au service Auth (OIDC)."},{f:'AUTH',t:'PG',d:"Le compte est créé/vérifié en base."},{f:'KR',t:'API',d:"Le propriétaire renseigne le profil de son animal."},{f:'API',t:'PG',d:"Profil animal persisté (source de vérité)."},{f:'COL',t:'IOT',d:"Appairage : le collier reçoit son certificat (step-ca) et se connecte au broker en MQTT/TLS."},{f:'API',t:'MAIL',d:"Email de vérification envoyé au propriétaire."}],
+  [{f:'COL',t:'IOT',d:"Le collier mesure activité, sommeil, position."},{f:'IOT',t:'ING',d:"Le broker délivre la télémétrie à l'Ingestion (souscription MQTT)."},{f:'ING',t:'TS',d:"Stockées en séries temporelles (historique)."},{f:'MOB',t:'KR',d:"Le propriétaire ouvre l'app (bien-être / carte)."},{f:'KR',t:'API',d:"Le Core API renvoie la synthèse du jour et la localisation."},{f:'API',t:'TS',d:"Lecture des séries temporelles (historique)."},{f:'MOB',t:'MAPS',d:"La carte (Mapbox/OSM) affiche la localisation et les zones."},{f:'KR',t:'MOB',d:"⟵ La synthèse bien-être s'affiche dans l'app, lisible d'un coup d'œil."}],
+  [{f:'MOB',t:'KR',d:"Le propriétaire pose une question dans le chat."},{f:'KR',t:'CE',d:"Routée vers le Care Engine (pipeline LangGraph)."},{f:'CE',t:'API',d:"Tool calls : profil + télémétrie de l'animal (p95 < 200 ms)."},{f:'CE',t:'RAG',d:"Recherche hybride sur le corpus vétérinaire."},{f:'RAG',t:'VEC',d:"Recherche vectorielle dans pgvector (embeddings du corpus)."},{f:'CE',t:'RR',d:"Reranker : 5 passages les plus pertinents."},{f:'CE',t:'AZ',d:"Le LLM (Azure OpenAI EU) répond, jamais de diagnostic."},{f:'KR',t:'MOB',d:"⟵ La réponse de conseil (orientation, jamais de diagnostic) revient à l'utilisateur dans le chat."},{f:'CE',t:'AUD',d:"Conversation tracée (audit 5 ans)."},{f:'KR',t:'TC',d:"En cas de doute : handoff vers la téléconsultation."}],
+  [{f:'MOB',t:'KR',d:"Le propriétaire demande / l'IA propose une mise en relation."},{f:'KR',t:'TC',d:"Handoff vers la file de téléconsultation."},{f:'TC',t:'KAFKA',d:"File de prise en charge des vétos de garde."},{f:'CE',t:'API',d:"PDF normalisé généré et joint à la demande."},{f:'CE',t:'AUD',d:"Échange tracé."},{f:'VET',t:'KR',d:"Le vétérinaire de garde prend la main (chat sécurisé)."}],
+  [{f:'VET',t:'KR',d:"Le vétérinaire ouvre le dossier patient."},{f:'KR',t:'API',d:"Le Core API fournit la vue patient et la timeline."},{f:'AUTH',t:'PG',d:"Le consentement du propriétaire est vérifié."},{f:'API',t:'TS',d:"Le Core API lit l'historique (TimescaleDB)."},{f:'CE',t:'AUD',d:"Résumé contextualisé / PDF normalisé généré et tracé."},{f:'KR',t:'VET',d:"⟵ Le dossier patient et le PDF normalisé s'affichent dans le Vet Portal."}]];
+const EPIC_EDGES={
+  1:[{f:'MOB',t:'KR',d:"Le propriétaire s'inscrit puis se connecte (via la gateway)."},{f:'KR',t:'AUTH',d:"Authentification déléguée au service Auth (OIDC)."},{f:'AUTH',t:'PG',d:"Compte créé / vérifié en base (PostgreSQL)."},{f:'KR',t:'API',d:"Saisie du profil de l'animal."},{f:'API',t:'PG',d:"Profil animal persisté (source de vérité)."},{f:'COL',t:'IOT',d:"Appairage : le collier reçoit son certificat (step-ca) et se connecte au broker en MQTT/TLS."},{f:'API',t:'RD',d:"La session est mise en cache (Redis)."},{f:'API',t:'MAIL',d:"Email de vérification / réinitialisation envoyé."}],
+  2:[{f:'COL',t:'IOT',d:"Le collier publie ses mesures en MQTT/TLS (cellulaire, chiffré, cert step-ca)."},{f:'IOT',t:'ING',d:"Le broker délivre la télémétrie à l'Ingestion (souscription MQTT)."},{f:'ING',t:'TS',d:"Décode + dédup + resync → écriture en séries temporelles."},{f:'ING',t:'KAFKA',d:"L'Ingestion publie les évènements normalisés sur Kafka (le bus)."},{f:'KAFKA',t:'TS',d:"Les consommateurs projettent les agrégats (read-models)."}],
+  3:[{f:'COL',t:'IOT',d:"Les mesures du collier arrivent…"},{f:'IOT',t:'ING',d:"…délivrées à l'Ingestion (souscription MQTT)…"},{f:'ING',t:'TS',d:"…et stockées en séries temporelles."},{f:'CE',t:'API',d:"Le Care Engine prétraite et agrège (activité, sommeil, constantes)."},{f:'MOB',t:'KR',d:"Le propriétaire ouvre l'écran bien-être."},{f:'KR',t:'API',d:"Le Core API renvoie la synthèse du jour, lisible d'un coup d'œil."},{f:'API',t:'TS',d:"Le Core API lit les séries temporelles (TimescaleDB)."},{f:'KR',t:'MOB',d:"⟵ La synthèse bien-être s'affiche dans l'app du propriétaire."}],
+  4:[{f:'COL',t:'IOT',d:"Le collier émet sa position GPS."},{f:'IOT',t:'ING',d:"Délivrée à l'Ingestion (souscription MQTT)."},{f:'ING',t:'TS',d:"Positions horodatées stockées (historique des déplacements)."},{f:'MOB',t:'KR',d:"Le propriétaire ouvre la carte / définit une zone de sécurité."},{f:'KR',t:'API',d:"Position temps réel renvoyée + alerte de sortie de zone."},{f:'API',t:'TS',d:"Lecture de l'historique des positions (TimescaleDB)."},{f:'MOB',t:'MAPS',d:"La carte (Mapbox/OSM) affiche la position et les zones."}],
+  5:[{f:'COL',t:'IOT',d:"Mesures du collier…"},{f:'IOT',t:'ING',d:"…délivrées à l'Ingestion (souscription MQTT)…"},{f:'ING',t:'TS',d:"…stockées en séries temporelles."},{f:'ING',t:'KAFKA',d:"Les évènements alimentent les analyses (Kafka)."},{f:'CE',t:'API',d:"Le moteur établit la baseline et détecte les écarts (règles vété)."},{f:'API',t:'FCM',d:"Le backend déclenche une alerte non-diagnostique."},{f:'FCM',t:'MOB',d:"Notification push (FCM/APNs) au propriétaire (+ invitation à consulter)."}],
+  6:[{f:'MOB',t:'KR',d:"Le propriétaire pose une question dans le chat."},{f:'KR',t:'CE',d:"Routée vers le Care Engine (pipeline LangGraph 6 nœuds)."},{f:'CE',t:'API',d:"Tool calls : profil + télémétrie (p95 < 200 ms)."},{f:'CE',t:'RAG',d:"Recherche hybride (BM25 + vecteurs) sur le corpus vété."},{f:'RAG',t:'VEC',d:"Recherche vectorielle dans pgvector (embeddings)."},{f:'CE',t:'RR',d:"Le reranker Cohere garde les 5 passages pertinents."},{f:'CE',t:'AZ',d:"Le LLM (Azure OpenAI EU) répond, jamais de diagnostic."},{f:'KR',t:'MOB',d:"⟵ La réponse de conseil revient au propriétaire dans le chat."},{f:'CE',t:'AUD',d:"Toute la conversation est tracée (audit 5 ans)."},{f:'KR',t:'TC',d:"En cas de doute, l'IA déclenche le handoff."}],
+  7:[{f:'VET',t:'KR',d:"Le vétérinaire ouvre le dossier patient (Vet Portal)."},{f:'KR',t:'AUTH',d:"Vérification du consentement + RBAC (accès autorisé)."},{f:'KR',t:'API',d:"Le Core API fournit la vue patient."},{f:'API',t:'TS',d:"Le Core API lit l'historique chronologique (TimescaleDB)."},{f:'CE',t:'AUD',d:"Le résumé contextualisé / PDF normalisé est généré et tracé."},{f:'API',t:'S3',d:"PDF normalisé archivé sur le stockage objet."},{f:'KR',t:'VET',d:"⟵ Le dossier patient et le PDF s'affichent dans le Vet Portal."}],
+  8:[{f:'MOB',t:'KR',d:"Le propriétaire souscrit / gère son abonnement."},{f:'KR',t:'API',d:"Le Core API traite abonnement, facturation et pool vété."},{f:'API',t:'PG',d:"Abonnements, factures et part de pool persistés."},{f:'API',t:'STRIPE',d:"Encaissement de l'abonnement + reversement du pool vété (Stripe)."},{f:'BACK',t:'KR',d:"Le back-office pilote support, abonnements et pool vété."}],
+  9:[{f:'MOB',t:'KR',d:"Le propriétaire gère son consentement, ou demande export/suppression."},{f:'KR',t:'AUTH',d:"Auth applique le consentement et le RBAC."},{f:'AUTH',t:'PG',d:"Les autorisations sont enregistrées."},{f:'API',t:'PG',d:"Export / suppression des données personnelles (droit à l'oubli)."},{f:'API',t:'S3',d:"Export des données déposé sur le stockage objet (URL signée)."},{f:'CE',t:'AUD',d:"Traçabilité : chaque alerte/analyse reste auditable (5 ans)."}],
+  10:[{f:'MOB',t:'KR',d:"Le propriétaire est en chat IA."},{f:'KR',t:'CE',d:"L'IA évalue ; en cas de doute, prépare le relais."},{f:'CE',t:'API',d:"Génération auto du PDF normalisé (contexte complet)."},{f:'KR',t:'TC',d:"Handoff : entrée dans la file de téléconsultation."},{f:'TC',t:'KAFKA',d:"File de prise en charge (vétos de garde)."},{f:'VET',t:'KR',d:"Un vétérinaire prend la main (orientation non-diagnostique)."},{f:'API',t:'PG',d:"Rémunération via le pool (part d'abo, plafonnée) calculée."},{f:'CE',t:'AUD',d:"Conversation et orientation tracées."}],11:[{f:'GHA',t:'HELM',d:"CI : build, tests, images, packaging Helm (GitHub Actions)."},{f:'HELM',t:'ARGO',d:"Le chart est livré à Argo CD."},{f:'ARGO',t:'K8S',d:"Argo CD déploie en continu sur le cluster (GitOps)."},{f:'SOPS',t:'K8S',d:"Secrets chiffrés (SOPS + age) injectés dans le cluster."},{f:'REG',t:'K8S',d:"Le cluster tire les images du registre (GHCR/Harbor)."},{f:'INGRESS',t:'KR',d:"Entrée publique : Ingress + TLS (cert-manager) devant la gateway."},{f:'OTEL',t:'PROM',d:"Télémétrie système → Prometheus (métriques)."},{f:'OTEL',t:'LOKI',d:"…Loki (logs)…"},{f:'OTEL',t:'TEMPO',d:"…Tempo (traces)."},{f:'PROM',t:'GRAF',d:"Grafana : tableaux de bord unifiés (métriques/logs/traces)."},{f:'STEPCA',t:'IOT',d:"step-ca fournit la racine de confiance au broker (mTLS)."},{f:'STEPCA',t:'COL',d:"step-ca délivre le certificat du collier."}]};
+const US_NODES={'1.1':['MOB','KR','AUTH','PG'],'1.4':['COL','IOT','AUTH','API'],'2.3':['COL','IOT','ING','TS'],'2.5':['ING','API','PG','KAFKA'],'5.4':['CE','API','FCM','MOB'],'7.4':['VET','KR','API','TS'],'6.1':['MOB','KR','CE','RAG','VEC','RR','AZ','API'],'6.3':['CE','TC','API','KR'],'7.7':['VET','KR','API','CE'],'9.2':['API','PG','TS','AUD'],'10.1':['CE','TC','API','KR'],'10.5':['TC','API','PG','KR'],'11.1':['ARGO','K8S','SOPS'],'11.2':['GHA','HELM','ARGO','K8S'],'11.3':['GHA','HELM'],'11.4':['OTEL','PROM','LOKI','TEMPO','GRAF'],'11.5':['SOPS','K8S'],'11.6':['STEPCA','IOT','COL'],'1.7':['API','MAIL'],'4.5':['MOB','MAPS'],'8.6':['API','STRIPE','PG'],'8.7':['BACK','KR','API'],'9.5':['API','S3','PG'],'11.7':['REG','K8S'],'11.8':['INGRESS','KR'],'11.9':['SOPS','K8S']};
+const EPIC_NODES={1:['MOB','KR','AUTH','API','PG','COL','IOT','MAIL'],2:['COL','IOT','ING','KAFKA','TS','PG'],3:['MOB','KR','API','ING','TS','COL','IOT'],4:['MOB','KR','API','ING','TS','COL','IOT','MAPS'],5:['CE','ING','TS','API','KR','MOB','COL','IOT','FCM'],6:['MOB','KR','CE','RAG','VEC','RR','AZ','API','AUD','TC'],7:['VET','KR','API','AUTH','PG','KAFKA','TS','CE','AUD','S3'],8:['MOB','KR','API','PG','STRIPE','BACK'],9:['MOB','KR','AUTH','API','PG','AUD','CE','S3'],10:['MOB','KR','CE','TC','KAFKA','API','AUD','VET'],11:['GHA','HELM','ARGO','K8S','SOPS','OTEL','PROM','LOKI','TEMPO','GRAF','STEPCA','IOT','COL','REG','INGRESS']};
+// US sub-journey = epic edges filtered to endpoints in US node set
+function usJourney(id,epicNum){const set=new Set(US_NODES[id]||EPIC_NODES[epicNum]||[]);const ej=EPIC_EDGES[epicNum]||[];const sub=ej.filter(s=>set.has(s.f)&&set.has(s.t));return sub.length?sub:ej;}
+
+// ---- panels ----
+let lastPanel=null;
+function openPanel(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));document.getElementById(id).classList.add('open');document.getElementById('pscrim').classList.add('show');document.getElementById('reopen').classList.remove('show');lastPanel=id;syncTabs(id);}
+function closePanels(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));document.getElementById('pscrim').classList.remove('show');syncTabs(null);}
+function syncTabs(id){document.querySelectorAll('.topbar .tb[data-panel]').forEach(b=>b.classList.toggle('on',b.dataset.panel===id));}
+document.querySelectorAll('.topbar .tb[data-panel]').forEach(b=>b.onclick=()=>{b.dataset.panel===currentOpen()?closePanels():openPanel(b.dataset.panel);});
+function currentOpen(){const o=document.querySelector('.panel.open');return o?o.id:null;}
+document.querySelectorAll('.panel [data-close]').forEach(x=>x.onclick=closePanels);
+document.getElementById('pscrim').onclick=closePanels;
+document.getElementById('reopen').onclick=()=>{if(lastPanel)openPanel(lastPanel);};
+const PLAT_NODES_SET=new Set(['K8S','HELM','ARGO','GHA','SOPS','STEPCA','OTEL','PROM','LOKI','TEMPO','GRAF','HETZ','REG','INGRESS']);
+const isPlatJourney=j=>j.some(s=>PLAT_NODES_SET.has(s.f)||PLAT_NODES_SET.has(s.t));
+function setPlatView(on){if(document.body.classList.contains('plat')!==on)document.getElementById('tPlat').click();}
+function playJourney(j,label){closePanels();setPlatView(isPlatJourney(j));PAW.fit();PAW.play(j,label);document.getElementById('reopen').classList.add('show');}
+
+// ---- flows panel ----
+const FLOWS=[{nm:'Onboarding & appairage',c:C.cli},{nm:'Suivi quotidien',c:C.ai},{nm:'Chat IA & handoff',c:C.ext},{nm:"Téléconsultation d'orientation",c:C.svc},{nm:'Vet Portal',c:C.edge}];
+const PLAT_FLOWS=[
+  {nm:'Déploiement GitOps',c:C.edge,edges:[{f:'GHA',t:'HELM',d:"GitHub Actions build, teste et package l'app via Helm."},{f:'HELM',t:'ARGO',d:"Le chart Helm est remis à Argo CD."},{f:'ARGO',t:'K8S',d:"Argo CD déploie en continu sur le cluster (source de vérité = Git)."},{f:'SOPS',t:'K8S',d:"Les secrets chiffrés (SOPS + age) sont injectés dans le cluster."}]},
+  {nm:'Observabilité',c:C.data,edges:[{f:'OTEL',t:'PROM',d:"OpenTelemetry exporte les métriques vers Prometheus."},{f:'OTEL',t:'LOKI',d:"…les logs vers Loki…"},{f:'OTEL',t:'TEMPO',d:"…les traces vers Tempo."},{f:'PROM',t:'GRAF',d:"Grafana visualise tout (métriques, logs, traces)."},{f:'LOKI',t:'GRAF',d:"Logs corrélés dans Grafana."},{f:'TEMPO',t:'GRAF',d:"Traces corrélées dans Grafana."}]}
+];
+const FLOW_STEPS=[
+  [['Inscription sécurisée',''],['Profil animal','contextualise race/âge'],['Appairage collier (MQTT/TLS)','auth forte device'],['État & batterie','']],
+  [['Écran bien-être',''],['Localisation & zones','alerte anti-spam'],["Détection d'anomalies",'baseline par animal'],['Notifications','non-diagnostiques']],
+  [['Question au chat',''],['Réponse RAG','ancrée dans des sources'],['Garde-fous anti-diagnostic','3 couches + audit'],['Handoff + PDF normalisé','fiche prête pour le véto']],
+  [['File de prise en charge',''],['Chat sécurisé véto','orientation non-diagnostique = légale'],['Orientation / routage','diagnostic = véto traitant'],['Pool de rémunération','coût plafonné']],
+  [['Accès sur consentement','RGPD'],['Timeline chronologique','priorité véto'],['Résumé contextualisé','pas de score global'],['Notes + PDF normalisé','interopérable']]];
+document.getElementById('flowlist').innerHTML=FLOWS.map((f,i)=>`<div class="fcard" style="--fc:${f.c}"><div class="fh"><div class="ft"><div class="nm">${f.nm}</div></div><button class="play" data-flow="${i}" style="--ac:${f.c}">▶</button></div><ol class="fsteps">${FLOW_STEPS[i].map(s=>`<li><b>${s[0]}</b>${s[1]?`<span class="why">↳ ${s[1]}</span>`:''}</li>`).join('')}</ol></div>`).join('')
+  +`<div class="flsep">⚙ Plateforme & Ops</div>`+PLAT_FLOWS.map((f,i)=>`<div class="fcard" style="--fc:${f.c}"><div class="fh"><div class="ft"><div class="nm">${f.nm}</div></div><button class="play" data-plat="${i}" style="--ac:${f.c}">▶</button></div><ol class="fsteps">${f.edges.map(s=>`<li><b>${NODE_NAMES[s.f]} → ${NODE_NAMES[s.t]}</b><span class="why">↳ ${s.d}</span></li>`).join('')}</ol></div>`).join('');
+document.querySelectorAll('#flowlist .play[data-flow]').forEach(b=>b.onclick=()=>playJourney(FLOW_EDGES[+b.dataset.flow],'Flux · '+FLOWS[+b.dataset.flow].nm));
+document.querySelectorAll('#flowlist .play[data-plat]').forEach(b=>b.onclick=()=>playJourney(PLAT_FLOWS[+b.dataset.plat].edges,'Plateforme · '+PLAT_FLOWS[+b.dataset.plat].nm));
+
+// ---- epic/us panel ----
+const EPICS=[{"num": 1, "title": "Onboarding, comptes & appairage du collier", "goal": "Permettre à un nouveau propriétaire de créer son compte, profiler son animal et appairer son collier, posant les fondations (identité, animal, dispositif) pour toutes les fonctionnalités suivantes.", "stories": [{"id": "1.1", "title": "Création de compte sécurisée", "role": "propriétaire d'animal", "want": "créer un compte avec email et mot de passe", "benefit": "je peux accéder à l'application en toute sécurité", "ac": "<b>Given</b> un visiteur sur l'écran d'inscription<br><b>When</b> il saisit un email valide et un mot de passe respectant la politique de sécurité<br><b>Then</b> un compte est créé, un email de vérification est envoyé<br><b>And</b> un mot de passe faible ou un email déjà utilisé déclenche un message d'erreur explicite sans créer de compte.", "post": false}, {"id": "1.2", "title": "Connexion et réinitialisation du mot de passe", "role": "propriétaire", "want": "me connecter et réinitialiser mon mot de passe", "benefit": "je récupère l'accès à mon compte en cas d'oubli", "ac": "<b>Given</b> un compte vérifié existant<br><b>When</b> l'utilisateur saisit des identifiants corrects<br><b>Then</b> il est authentifié et une session sécurisée est ouverte<br><b>And</b> une demande de réinitialisation envoie un lien à durée de vie limitée, et 5 échecs consécutifs verrouillent temporairement la connexion.", "post": false}, {"id": "1.3", "title": "Création du profil animal", "role": "propriétaire", "want": "renseigner le profil de mon animal (espèce, race, âge, poids, sexe)", "benefit": "les analyses et recommandations soient contextualisées", "ac": "<b>Given</b> un propriétaire connecté sans animal enregistré<br><b>When</b> il complète le formulaire de profil animal<br><b>Then</b> l'animal est créé et associé à son compte<br><b>And</b> les champs obligatoires manquants bloquent l'enregistrement avec indication claire, et un compte peut gérer plusieurs animaux.", "post": false}, {"id": "1.4", "title": "Appairage guidé du collier", "role": "propriétaire", "want": "appairer mon collier à l'application via un parcours guidé", "benefit": "mon animal commence à être suivi", "ac": "<b>Given</b> un propriétaire avec un profil animal et un collier à proximité<br><b>When</b> il suit le parcours d'appairage (scan/identifiant + activation sécurisée)<br><b>Then</b> le collier est lié à l'animal et confirme la connexion (état « connecté »)<br><b>And</b> un collier déjà appairé à un autre compte ou hors de portée affiche une erreur actionnable.", "post": false}, {"id": "1.5", "title": "État et niveau de batterie du collier", "role": "propriétaire", "want": "voir l'état de connexion et le niveau de batterie de mon collier", "benefit": "je sache si le suivi est actif et quand recharger", "ac": "<b>Given</b> un collier appairé<br><b>When</b> le propriétaire ouvre l'écran du dispositif<br><b>Then</b> l'état (connecté/déconnecté), le pourcentage de batterie et la dernière synchronisation sont affichés<br><b>And</b> un niveau de batterie sous un seuil déclenche une notification de recharge.", "post": false}, {"id": "1.6", "title": "Remplacement ou désactivation d'un collier", "role": "propriétaire", "want": "remplacer ou désactiver le collier de mon animal", "benefit": "je gère la perte, la panne ou la fin d'usage du dispositif", "ac": "<b>Given</b> un animal avec un collier appairé<br><b>When</b> le propriétaire lance le remplacement ou la désactivation<br><b>Then</b> l'ancien collier est dissocié, l'historique de l'animal est conservé et le nouveau collier peut être appairé<br><b>And</b> un collier désactivé ne transmet plus de données et son statut est journalisé.", "post": false}, {"id": "1.7", "title": "Notifications transactionnelles (email/SMS)", "role": "propriétaire", "want": "recevoir les emails/SMS importants (vérification, réinitialisation, alertes santé)", "benefit": "activer mon compte et être prévenu à temps", "ac": "<b>Given</b> un évènement transactionnel (inscription, reset, alerte)<br><b>When</b> le backend le déclenche<br><b>Then</b> un email/SMS est envoyé via le provider et son statut de délivrabilité est suivi<br><b>And</b> un échec d'envoi est retenté puis tracé.", "post": false}]}, {"num": 2, "title": "Collecte, transmission & stockage fiables des données", "goal": "Garantir que les mesures du collier sont captées, transmises de façon sécurisée et fiable, puis stockées en historique exploitable · fondation de données de tout le produit.", "stories": [{"id": "2.1", "title": "Acquisition des mesures capteurs", "role": "propriétaire", "want": "que mon collier mesure régulièrement position, activité et constantes", "benefit": "le suivi de mon animal repose sur des données fiables", "ac": "<b>Given</b> un collier appairé et actif<br><b>When</b> le firmware exécute son cycle de mesure<br><b>Then</b> GPS (FR1), activité/immobilité/mouvements brusques (FR2) et température/rythme (FR3) sont échantillonnés à intervalles configurés et horodatés<br><b>And</b> un capteur défaillant est signalé sans interrompre la collecte des autres mesures.", "post": false}, {"id": "2.2", "title": "Gestion énergétique adaptative", "role": "propriétaire", "want": "que le collier adapte sa consommation", "benefit": "l'autonomie soit maximale en usage réel", "ac": "<b>Given</b> un collier en fonctionnement<br><b>When</b> l'animal est immobile ou hors zone d'intérêt prolongée<br><b>Then</b> la fréquence d'échantillonnage et de transmission est réduite selon une politique d'énergie (FR4, NFR2)<br><b>And</b> un évènement significatif (mouvement brusque) réactive un échantillonnage haute fréquence.", "post": false}, {"id": "2.3", "title": "Buffer hors-ligne et resynchronisation", "role": "propriétaire", "want": "que les données soient conservées sans perte en cas de coupure réseau", "benefit": "aucun trou n'apparaisse dans l'historique de mon animal", "ac": "<b>Given</b> un collier qui perd la connexion BLE/cellulaire<br><b>When</b> des mesures sont produites pendant la coupure<br><b>Then</b> elles sont stockées localement puis resynchronisées dans l'ordre au retour du signal (FR5, NFR1)<br><b>And</b> en cas de buffer plein, la politique de rétention documentée s'applique et l'évènement est journalisé.", "post": false}, {"id": "2.4", "title": "Transmission sécurisée et intègre", "role": "propriétaire", "want": "que les données de mon animal soient transmises de façon authentifiée et intègre", "benefit": "elles ne puissent être ni usurpées ni altérées", "ac": "<b>Given</b> un collier transmettant vers le backend<br><b>When</b> un lot de mesures est envoyé<br><b>Then</b> le collier est authentifié, le message est chiffré, horodaté et son intégrité vérifiée (FR6, NFR3)<br><b>And</b> un message dont l'intégrité ou l'authentification échoue est rejeté et un réessai automatique est déclenché (NFR6).", "post": false}, {"id": "2.5", "title": "Ingestion et normalisation backend", "role": "système", "want": "ingérer, normaliser, filtrer et dédupliquer les données reçues", "benefit": "les données stockées soient propres et cohérentes", "ac": "<b>Given</b> des lots de mesures reçus par l'API d'ingestion<br><b>When</b> le backend les traite<br><b>Then</b> les doublons, retards et incohérences sont gérés et les données normalisées (FR8)<br><b>And</b> les données rejetées sont journalisées avec leur cause pour observabilité.", "post": false}, {"id": "2.6", "title": "Stockage en séries temporelles et agrégats", "role": "système", "want": "stocker les mesures en séries temporelles avec agrégats", "benefit": "l'historique long terme et les affichages soient performants", "ac": "<b>Given</b> des données normalisées<br><b>When</b> elles sont persistées<br><b>Then</b> elles sont enregistrées en séries temporelles avec historique long terme (FR9) et des agrégats (jour/semaine) sont générés (FR10)<br><b>And</b> une requête d'historique sur une plage donnée répond dans les budgets de performance définis (NFR6).", "post": false}]}, {"num": 3, "title": "Suivi bien-être & activité (App)", "goal": "Offrir au propriétaire une vue synthétique et lisible de l'état de son animal, alimentée par les données traitées.", "stories": [{"id": "3.1", "title": "Prétraitement des données pour l'affichage", "role": "système", "want": "nettoyer et fenêtrer les données capteurs", "benefit": "les indicateurs présentés soient fiables", "ac": "<b>Given</b> des séries temporelles brutes d'un animal<br><b>When</b> le moteur exécute le prétraitement<br><b>Then</b> le bruit et les valeurs aberrantes sont écartés et les données regroupées en fenêtres temporelles cohérentes (FR13)<br><b>And</b> une fenêtre avec trop de données manquantes est marquée « incomplète » plutôt que calculée à tort.", "post": false}, {"id": "3.2", "title": "API de lecture pour l'app propriétaire", "role": "application mobile", "want": "récupérer les indicateurs d'un animal via une API dédiée", "benefit": "l'écran bien-être s'alimente de façon sécurisée", "ac": "<b>Given</b> un propriétaire authentifié et propriétaire de l'animal<br><b>When</b> l'app appelle l'API bien-être<br><b>Then</b> elle reçoit activité, sommeil et constantes agrégés, limités à ses propres animaux (FR11, contrôle d'accès)<br><b>And</b> une tentative d'accès à un animal non possédé est refusée (403).", "post": false}, {"id": "3.3", "title": "Écran bien-être", "role": "propriétaire", "want": "consulter un écran bien-être synthétique", "benefit": "je comprenne d'un coup d'œil l'état de mon animal", "ac": "<b>Given</b> un animal avec des données disponibles<br><b>When</b> le propriétaire ouvre l'écran bien-être<br><b>Then</b> activité, sommeil et constantes du jour sont présentés de façon simple et lisible (FR19, NFR9)<br><b>And</b> en l'absence de données récentes, un état vide explicite est affiché plutôt qu'un écran erroné.", "post": false}, {"id": "3.4", "title": "Tendances historiques d'activité et de sommeil", "role": "propriétaire", "want": "visualiser l'évolution de l'activité et du sommeil sur la durée", "benefit": "je repère les changements de rythme de mon animal", "ac": "<b>Given</b> un animal avec un historique suffisant<br><b>When</b> le propriétaire sélectionne une période (jour/semaine/mois)<br><b>Then</b> des courbes de tendance d'activité et de sommeil s'affichent à partir des agrégats<br><b>And</b> les périodes sans données sont visuellement distinguées.", "post": false}]}, {"num": 4, "title": "Localisation & zones de sécurité (App)", "goal": "Permettre au propriétaire de localiser son animal et d'être alerté en cas de sortie de zone.", "stories": [{"id": "4.1", "title": "Position GPS en temps réel", "role": "propriétaire", "want": "voir la position actuelle de mon animal sur une carte", "benefit": "je sache où il se trouve", "ac": "<b>Given</b> un collier actif transmettant le GPS<br><b>When</b> le propriétaire ouvre l'écran de localisation<br><b>Then</b> la dernière position connue et son horodatage sont affichés sur une carte (FR20)<br><b>And</b> si la position date de plus d'un seuil défini, une indication « position non récente » est montrée.", "post": false}, {"id": "4.2", "title": "Historique des déplacements", "role": "propriétaire", "want": "consulter l'historique des déplacements de mon animal", "benefit": "je comprenne ses trajets et habitudes", "ac": "<b>Given</b> un animal avec un historique de positions<br><b>When</b> le propriétaire sélectionne une période<br><b>Then</b> le trajet correspondant est tracé sur la carte (FR20)<br><b>And</b> une période sans donnée affiche un message explicite.", "post": false}, {"id": "4.3", "title": "Définition de zones de sécurité", "role": "propriétaire", "want": "définir une ou plusieurs zones de sécurité", "benefit": "je délimite les espaces sûrs pour mon animal", "ac": "<b>Given</b> un propriétaire sur la carte<br><b>When</b> il crée une zone (centre + rayon ou polygone) et l'enregistre<br><b>Then</b> la zone est persistée et associée à l'animal (FR21)<br><b>And</b> une zone invalide (rayon nul/chevauchement non géré) est refusée avec explication.", "post": false}, {"id": "4.4", "title": "Alerte de sortie de zone", "role": "propriétaire", "want": "être alerté si mon animal sort d'une zone de sécurité", "benefit": "je réagisse rapidement en cas de fugue", "ac": "<b>Given</b> un animal avec au moins une zone de sécurité active<br><b>When</b> une position détecte le franchissement de la limite de zone<br><b>Then</b> une notification est envoyée au propriétaire avec la position et l'heure (FR21, FR22)<br><b>And</b> des franchissements répétés ne génèrent pas de spam (regroupement/anti-rebond).", "post": false}, {"id": "4.5", "title": "Cartographie & rendu de la carte", "role": "propriétaire", "want": "voir mon animal et mes zones sur une carte claire", "benefit": "comprendre sa localisation d'un coup d'œil", "ac": "<b>Given</b> une position connue<br><b>When</b> j'ouvre l'écran carte<br><b>Then</b> la position et les zones de sécurité s'affichent sur un fond de carte (Mapbox/OSM)<br><b>And</b> la carte reste lisible avec la dernière position connue même hors-ligne.", "post": false}]}, {"num": 5, "title": "Détection d'anomalies & alertes santé", "goal": "Établir un comportement normal par animal, détecter les écarts, appliquer des règles vétérinaires contextualisées et notifier le propriétaire · sans diagnostiquer.", "stories": [{"id": "5.1", "title": "Modèle de comportement normal par animal", "role": "système", "want": "établir une baseline de comportement propre à chaque animal", "benefit": "les anomalies soient détectées par rapport à sa propre normalité", "ac": "<b>Given</b> un historique suffisant pour un animal<br><b>When</b> le moteur calcule la baseline d'activité/sommeil<br><b>Then</b> un profil de comportement normal est stocké et mis à jour dans le temps (FR14)<br><b>And</b> tant que l'historique est insuffisant, l'animal est marqué « apprentissage en cours » et aucune anomalie n'est levée à tort.", "post": false}, {"id": "5.2", "title": "Détection d'anomalies d'activité et de sommeil", "role": "propriétaire", "want": "que le système détecte les écarts de comportement de mon animal", "benefit": "je sois informé d'un changement potentiellement important", "ac": "<b>Given</b> un animal avec une baseline établie<br><b>When</b> les mesures s'écartent significativement de la normale (inactivité prolongée, agitation, troubles du sommeil)<br><b>Then</b> une anomalie est enregistrée avec son contexte et son niveau (FR14)<br><b>And</b> une anomalie isolée non confirmée n'escalade pas immédiatement (seuil/persistance).", "post": false}, {"id": "5.3", "title": "Règles vétérinaires contextualisées", "role": "système", "want": "appliquer des règles vétérinaires validées contextualisées par race/âge/historique", "benefit": "les alertes soient pertinentes et non génériques", "ac": "<b>Given</b> une anomalie détectée et le profil de l'animal<br><b>When</b> le moteur applique l'expert system<br><b>Then</b> la pertinence est contextualisée par race, âge et historique (FR15) et l'écart est qualifié (vigilance/action)<br><b>And</b> aucune sortie n'est formulée comme un diagnostic (NFR5).", "post": false}, {"id": "5.4", "title": "Notifications et alertes au propriétaire", "role": "propriétaire", "want": "recevoir des notifications en cas de signal faible ou comportement anormal", "benefit": "je puisse agir ou consulter un vétérinaire", "ac": "<b>Given</b> une anomalie qualifiée nécessitant l'attention du propriétaire<br><b>When</b> le système émet l'alerte<br><b>Then</b> une notification claire et non-diagnostique est envoyée, avec invitation à consulter en cas de doute (FR22, NFR5)<br><b>And</b> les préférences de notification du propriétaire (canaux, silence) sont respectées.", "post": false}, {"id": "5.5", "title": "Rappels de soins", "role": "propriétaire", "want": "recevoir des rappels de soins réguliers (vaccins, traitements)", "benefit": "je n'oublie pas les échéances de santé de mon animal", "ac": "<b>Given</b> un animal avec des échéances de soins configurées<br><b>When</b> une échéance approche<br><b>Then</b> un rappel est envoyé au propriétaire (FR22)<br><b>And</b> un rappel traité (fait/reporté) met à jour l'échéance et n'est plus répété.", "post": false}]}, {"num": 6, "title": "Assistant IA conversationnel & escalade", "goal": "Fournir au propriétaire un chat IA (RAG) qui explique les données sans diagnostiquer et l'oriente/escalade vers un vétérinaire en cas de doute.", "stories": [{"id": "6.1", "title": "Chat IA contextualisé (RAG)", "role": "propriétaire", "want": "poser des questions sur l'état de mon animal à un assistant IA", "benefit": "j'obtienne des explications compréhensibles basées sur ses données", "ac": "<b>Given</b> un propriétaire authentifié avec un animal suivi<br><b>When</b> il pose une question dans le chat<br><b>Then</b> l'assistant répond à partir des données de l'animal et d'une base de connaissances vétérinaire via RAG (FR16)<br><b>And</b> chaque réponse reste explicative et non-diagnostique, et cite/qualifie la nature des informations (NFR5).", "post": false}, {"id": "6.2", "title": "Garde-fous anti-diagnostic", "role": "responsable produit", "want": "que l'IA n'émette jamais de diagnostic médical", "benefit": "le produit respecte ses contraintes éthiques et réglementaires", "ac": "<b>Given</b> une question induisant une demande de diagnostic ou de traitement<br><b>When</b> l'assistant formule sa réponse<br><b>Then</b> il refuse de diagnostiquer, explique sa limite et recommande une consultation (FR17, NFR5)<br><b>And</b> ce comportement est vérifié par un jeu de tests d'invites sensibles.", "post": false}, {"id": "6.3", "title": "Déclenchement du handoff vers un vétérinaire", "role": "propriétaire", "want": "que l'IA déclenche un relais vers un vétérinaire en cas de doute", "benefit": "je bénéficie d'un avis professionnel sans repartir de zéro", "ac": "<b>Given</b> une situation à risque détectée par l'IA ou demandée par l'utilisateur<br><b>When</b> le handoff est déclenché<br><b>Then</b> le relais vers le parcours de téléconsultation (Epic 10) est amorcé en passant le contexte de l'animal (FR17, FR23, FR36)<br><b>And</b> si aucun vétérinaire n'est disponible, une alternative (prise de contact différée) est proposée.", "post": false}, {"id": "6.4", "title": "Préparation d'un résumé pour consultation", "role": "propriétaire", "want": "générer un résumé synthétique de l'état de mon animal", "benefit": "je le partage lors d'une consultation", "ac": "<b>Given</b> un animal avec des données et éventuelles anomalies<br><b>When</b> le propriétaire demande un résumé<br><b>Then</b> un récapitulatif synthétique et lisible est généré (FR17→FR18)<br><b>And</b> le résumé indique explicitement qu'il ne constitue pas un diagnostic.", "post": false}]}, {"num": 7, "title": "Vet Portal · consultation vétérinaire augmentée", "goal": "Donner au vétérinaire partenaire un accès structuré et contextualisé à l'historique de l'animal, des outils d'annotation et d'export · strictement séparé de l'app propriétaire.", "stories": [{"id": "7.1", "title": "Onboarding du vétérinaire partenaire", "role": "vétérinaire", "want": "créer un compte partenaire vérifié", "benefit": "j'accède au Vet Portal de façon sécurisée", "ac": "<b>Given</b> un vétérinaire invité/candidat<br><b>When</b> il complète l'onboarding (identité professionnelle, vérification)<br><b>Then</b> un compte vétérinaire est créé avec un rôle distinct du propriétaire (FR34, contrôle d'accès)<br><b>And</b> un compte non vérifié n'accède à aucune donnée patient.", "post": false}, {"id": "7.2", "title": "Accès patient autorisé", "role": "vétérinaire", "want": "accéder au dossier d'un animal avec l'autorisation du propriétaire", "benefit": "je respecte la confidentialité tout en consultant les données utiles", "ac": "<b>Given</b> un vétérinaire authentifié et un propriétaire ayant accordé l'accès<br><b>When</b> le vétérinaire ouvre le dossier de l'animal<br><b>Then</b> il accède aux données autorisées via l'API vet dédiée (FR11, FR24)<br><b>And</b> sans consentement valide, l'accès est refusé et journalisé (NFR4).", "post": false}, {"id": "7.3", "title": "Vue patient synthétique", "role": "vétérinaire", "want": "une vue patient regroupant les informations médicales essentielles", "benefit": "je gagne du temps en consultation", "ac": "<b>Given</b> un dossier animal accessible<br><b>When</b> le vétérinaire ouvre la vue patient<br><b>Then</b> profil, constantes clés et tendances importantes sont regroupés (FR24)<br><b>And</b> aucun « score global de santé » n'est présenté (décision produit).", "post": false}, {"id": "7.4", "title": "Historique chronologique structuré", "role": "vétérinaire", "want": "consulter un historique chronologique des données et évènements", "benefit": "je reconstitue précisément l'évolution de l'animal", "ac": "<b>Given</b> un dossier animal avec historique<br><b>When</b> le vétérinaire ouvre la timeline<br><b>Then</b> données capteurs, anomalies et soins sont présentés en chronologie lisible (FR25)<br><b>And</b> la timeline est filtrable par période et par type d'évènement.", "post": false}, {"id": "7.5", "title": "Résumé contextualisé et accès aux données brutes", "role": "vétérinaire", "want": "un résumé contextualisé non-diagnostique et l'accès aux données brutes", "benefit": "j'interprète moi-même cliniquement les informations", "ac": "<b>Given</b> un dossier animal<br><b>When</b> le vétérinaire consulte le résumé<br><b>Then</b> un résumé contextualisé (race/âge/historique) explicitement non-diagnostique est affiché, avec accès aux données brutes sous-jacentes (FR26, NFR5)<br><b>And</b> chaque élément de synthèse est traçable jusqu'à sa donnée source.", "post": false}, {"id": "7.6", "title": "Alertes, rapport et notes professionnelles", "role": "vétérinaire", "want": "consulter les alertes, compléter le rapport et ajouter des notes", "benefit": "j'enrichisse le dossier de mon expertise", "ac": "<b>Given</b> un dossier animal avec alertes générées<br><b>When</b> le vétérinaire les consulte et annote<br><b>Then</b> il peut compléter le rapport automatique et ajouter des notes horodatées attribuées à son compte (FR27)<br><b>And</b> les notes sont conservées dans l'historique et visibles lors des consultations suivantes.", "post": false}, {"id": "7.7", "title": "Rapport PDF normalisé et suivi dans le temps", "role": "vétérinaire", "want": "générer/télécharger un rapport PDF **normalisé** et suivre l'évolution", "benefit": "je conserve une trace exploitable, lisible quel que soit mon logiciel", "ac": "<b>Given</b> un dossier animal consulté<br><b>When</b> le vétérinaire demande le rapport<br><b>Then</b> un PDF <b>normalisé/standardisé</b>, structuré en chronologie médicale, est généré dans le même format que celui du handoff (FR18, FR28, FR35)<br><b>And</b> l'évolution entre deux rapports/consultations est consultable.", "post": false}]}, {"num": 8, "title": "Abonnement, facturation & support", "goal": "Gérer la relation commerciale et l'assistance, de façon transparente et sécurisée.", "stories": [{"id": "8.1", "title": "Souscription d'un abonnement", "role": "propriétaire", "want": "souscrire à un abonnement", "benefit": "j'accède aux fonctionnalités du service", "ac": "<b>Given</b> un propriétaire connecté sans abonnement actif<br><b>When</b> il choisit une offre et paie<br><b>Then</b> l'abonnement est activé et le paiement traité de façon sécurisée (FR31, NFR3)<br><b>And</b> un paiement échoué n'active pas l'abonnement et affiche un message clair.", "post": false}, {"id": "8.2", "title": "Consultation des factures et du statut", "role": "propriétaire", "want": "consulter mes factures et le statut de mon abonnement", "benefit": "je suive mes paiements", "ac": "<b>Given</b> un propriétaire avec un historique de facturation<br><b>When</b> il ouvre l'espace facturation<br><b>Then</b> statut d'abonnement et factures téléchargeables sont affichés (FR31)<br><b>And</b> seules ses propres données de facturation lui sont accessibles.", "post": false}, {"id": "8.3", "title": "Gestion / résiliation de l'abonnement", "role": "propriétaire", "want": "modifier ou résilier mon abonnement", "benefit": "je garde le contrôle de mon engagement", "ac": "<b>Given</b> un abonnement actif<br><b>When</b> le propriétaire change d'offre ou résilie<br><b>Then</b> le changement prend effet selon les règles définies et est confirmé (FR31)<br><b>And</b> les conséquences (date de fin, accès) sont expliquées avant validation.", "post": false}, {"id": "8.4", "title": "Support client et FAQ", "role": "propriétaire", "want": "contacter le support et consulter une FAQ", "benefit": "je résolve mes problèmes rapidement", "ac": "<b>Given</b> un propriétaire connecté<br><b>When</b> il ouvre le support<br><b>Then</b> il accède à une FAQ et à un canal de contact (FR32)<br><b>And</b> une demande envoyée reçoit un accusé de réception avec référence de suivi.", "post": false}, {"id": "8.5", "title": "Offre d'abonnement finançant le pool vétérinaire", "role": "propriétaire", "want": "une offre d'abonnement claire incluant l'accès à la téléconsultation d'orientation", "benefit": "je comprenne ce qui est inclus et comment le vétérinaire est financé", "ac": "<b>Given</b> les offres d'abonnement<br><b>When</b> le propriétaire souscrit<br><b>Then</b> l'offre précise l'inclusion de la <b>téléconsultation d'orientation</b> (dans la limite du fair-use) et qu'une <b>part de l'abonnement alimente le pool vétérinaire</b> (FR41, FR31)<br><b>And</b> les éventuels add-ons (au-delà du fair-use, visio post-MVP) sont présentés de façon transparente avant paiement.", "post": false}, {"id": "8.6", "title": "Paiement, facturation & reversement (Stripe)", "role": "propriétaire", "want": "payer mon abonnement et recevoir mes factures de façon sécurisée", "benefit": "accéder au service sans friction tout en finançant le pool vété", "ac": "<b>Given</b> un abonnement choisi<br><b>When</b> le paiement est confirmé par Stripe (webhook signé)<br><b>Then</b> l'abonnement est activé, la facture émise et la part du pool vété provisionnée<br><b>And</b> un échec ou une contestation de paiement met l'abonnement dans l'état adéquat sans perte de données.", "post": false}, {"id": "8.7", "title": "Back-office d'administration & support", "role": "équipe support/ops", "want": "un back-office pour gérer abonnements, pool vété, modération et support", "benefit": "exploiter le service et le réseau vétérinaire au quotidien", "ac": "<b>Given</b> un agent authentifié (RBAC admin)<br><b>When</b> il accède au back-office<br><b>Then</b> il peut consulter/gérer abonnements, pool vété et tickets support, avec traçabilité<br><b>And</b> aucune action sensible n'est possible sans le rôle requis.", "post": false}]}, {"num": 9, "title": "Conformité, sécurité & confidentialité (RGPD)", "goal": "Donner au propriétaire la maîtrise de ses données et garantir sécurité et traçabilité · exigences transverses rendues actionnables.", "stories": [{"id": "9.1", "title": "Consentement et gestion des autorisations", "role": "propriétaire", "want": "gérer mon consentement et les accès accordés (ex. vétérinaire)", "benefit": "je contrôle qui voit les données de mon animal", "ac": "<b>Given</b> un propriétaire connecté<br><b>When</b> il consulte/modifie ses consentements et autorisations d'accès<br><b>Then</b> les choix sont enregistrés, appliqués immédiatement et journalisés (NFR4)<br><b>And</b> retirer un accès vétérinaire coupe immédiatement sa visibilité sur le dossier.", "post": false}, {"id": "9.2", "title": "Export de mes données", "role": "propriétaire", "want": "exporter l'ensemble des données me concernant et concernant mon animal", "benefit": "j'exerce mon droit à la portabilité", "ac": "<b>Given</b> un propriétaire connecté<br><b>When</b> il demande un export de données<br><b>Then</b> un export structuré et complet lui est fourni (NFR4)<br><b>And</b> l'export est livré via un canal sécurisé et expire après un délai défini.", "post": false}, {"id": "9.3", "title": "Suppression de compte et droit à l'oubli", "role": "propriétaire", "want": "supprimer mon compte et mes données", "benefit": "j'exerce mon droit à l'effacement", "ac": "<b>Given</b> un propriétaire connecté<br><b>When</b> il demande la suppression<br><b>Then</b> ses données personnelles sont supprimées/anonymisées selon la politique de rétention, après confirmation (NFR4)<br><b>And</b> les obligations légales de conservation (le cas échéant) sont respectées et expliquées.", "post": false}, {"id": "9.4", "title": "Traçabilité des alertes et analyses", "role": "responsable conformité", "want": "une traçabilité claire des alertes et analyses", "benefit": "chaque sortie du système soit auditable", "ac": "<b>Given</b> des alertes/analyses produites par le système<br><b>When</b> un audit est réalisé<br><b>Then</b> l'origine, l'horodatage et le contexte de chaque alerte/analyse sont consultables (NFR4, NFR5)<br><b>And</b> aucune sortie ne peut être présentée comme un diagnostic médical.", "post": false}, {"id": "9.5", "title": "Stockage & export sécurisé des fichiers (Object Storage)", "role": "propriétaire", "want": "que mes exports RGPD et documents (PDF) soient stockés et accessibles de façon sécurisée", "benefit": "récupérer mes données et pièces en confiance", "ac": "<b>Given</b> une demande d'export ou un PDF généré<br><b>When</b> le fichier est produit<br><b>Then</b> il est déposé sur le stockage objet (S3-compatible) et accessible via une URL signée à durée limitée<br><b>And</b> un fichier expiré ou supprimé n'est plus accessible.", "post": false}]}, {"num": 10, "title": "Téléconsultation d'orientation & triage vétérinaire", "goal": "Transformer le handoff de l'IA en mise en relation avec un **vétérinaire de garde partenaire** qui fait de l'**orientation non-diagnostique** (conforme à l'exigence d'examen préalable), avec un **PDF normalisé auto-généré** comme fil conducteur, une **rémunération par pool plafonné** (part d'abonnement, façon Spotify) et des **garde-fous anti-abus**. Le diagnostic est routé vers le **vétérinaire traitant** (examen physique).", "stories": [{"id": "10.1", "title": "Génération automatique du PDF normalisé au handoff", "role": "vétérinaire", "want": "recevoir automatiquement une fiche normalisée du contexte de l'animal", "benefit": "je n'aie pas à lire l'historique de l'app ni à connaître Pawrise", "ac": "<b>Given</b> un handoff déclenché par l'IA (Story 6.3)<br><b>When</b> le relais vers un vétérinaire est créé<br><b>Then</b> un <b>PDF normalisé</b> (profil + chronologie + anomalies + résumé non-diagnostique) est <b>généré automatiquement</b> et attaché à la demande (FR36, FR35)<br><b>And</b> le format est identique à celui produit par le Vet Portal (Story 7.7), indépendant de tout logiciel métier.", "post": false}, {"id": "10.2", "title": "Format de PDF normalisé standardisé", "role": "responsable produit", "want": "un format de rapport normalisé unique", "benefit": "tout vétérinaire puisse le lire sans intégration logicielle dédiée", "ac": "<b>Given</b> les données d'un animal<br><b>When</b> un rapport est généré (au handoff ou depuis le Vet Portal)<br><b>Then</b> il respecte un <b>gabarit normalisé</b> stable (sections, chronologie, mentions légales/non-diagnostic) (FR35)<br><b>And</b> chaque élément reste traçable jusqu'à sa donnée source.", "post": false}, {"id": "10.3", "title": "Handoff → file de prise en charge et téléconsultation d'orientation par chat", "role": "propriétaire", "want": "être pris en charge par un vétérinaire de garde via un chat sécurisé", "benefit": "j'obtienne une orientation humaine rapide après le handoff de l'IA", "ac": "<b>Given</b> un handoff déclenché par l'IA (Story 6.3)<br><b>When</b> la demande entre dans la <b>file de prise en charge</b> des vétérinaires de garde disponibles<br><b>Then</b> un vétérinaire <b>prend la main</b> et un canal de <b>chat chiffré</b> s'ouvre (mobile ou web), le PDF normalisé lui étant accessible (FR37, FR40, NFR3)<br><b>And</b> l'échange reste <b>non-diagnostique (orientation)</b>, respecte le consentement (Epic 9) et est journalisé ; si aucun vétérinaire n'est disponible, une prise de contact différée est proposée.", "post": false}, {"id": "10.4", "title": "Proposition d'examen physique & routage vers le vétérinaire traitant", "role": "vétérinaire de garde", "want": "proposer un examen physique ou router le dossier vers le vétérinaire traitant", "benefit": "le diagnostic se fasse dans un cadre légal (relation établie)", "ac": "<b>Given</b> une orientation où un examen clinique est requis<br><b>When</b> le vétérinaire de garde conclut la téléconsultation<br><b>Then</b> il peut <b>proposer une venue en centre</b> (le sien ou les urgences) et/ou <b>router le PDF normalisé vers le vétérinaire traitant</b> de l'animal (FR39, FR43)<br><b>And</b> la proposition est tracée ; *(la prise de RDV/booking intégrée est Post-MVP)*.", "post": true}, {"id": "10.5", "title": "Pool de rémunération vétérinaire (part d'abonnement, plafonné)", "role": "responsable produit", "want": "rémunérer les vétérinaires via un pool alimenté par une part d'abonnement", "benefit": "le coût vétérinaire soit plafonné et qu'aucun utilisateur ne coûte plus que son abonnement", "ac": "<b>Given</b> des téléconsultations d'orientation réalisées sur une période<br><b>When</b> la rémunération est calculée<br><b>Then</b> elle est prélevée sur un <b>pool = part fixe (%) du revenu d'abonnement</b> et <b>distribuée au prorata de l'activité, pondérée par la réactivité et la qualité</b> (FR41)<br><b>And</b> le coût vétérinaire total reste <b>borné au % défini du revenu</b> (aucun dépassement par utilisateur) ; la part « réactivité » accélère le service sans ouvrir la marge.", "post": false}, {"id": "10.6", "title": "Garde-fous anti-abus & fair-use", "role": "responsable produit", "want": "limiter les abus d'escalade", "benefit": "le service reste soutenable et de qualité", "ac": "<b>Given</b> un utilisateur sollicitant des orientations vétérinaires<br><b>When</b> l'IA filtre avant escalade et que le quota fair-use par période est suivi<br><b>Then</b> seules les situations pertinentes escaladent, et au-delà du <b>quota fair-use</b> l'accès passe en <b>file basse priorité</b> ou en <b>add-on</b> (FR42)<br><b>And</b> les seuils sont configurables et les dépassements journalisés.", "post": false}, {"id": "10.7", "title": "Appel/visio sécurisé", "role": "propriétaire", "want": "passer un appel/visio sécurisé avec le vétérinaire", "benefit": "il puisse mieux évaluer la situation quand le chat ne suffit pas", "ac": "<b>Given</b> une orientation par chat jugée insuffisante<br><b>When</b> le vétérinaire ou le propriétaire propose un appel/visio<br><b>Then</b> un <b>système d'appel/visio sécurisé complet</b> est établi entre les deux parties (FR38, NFR3)<br><b>And</b> *(Post-MVP)* · hors périmètre du MVP, planifié après validation terrain.", "post": true}]}, {"num": 11, "title": "Plateforme, livraison & observabilité (Ops)", "goal": "Industrialiser le socle technique · cluster Kubernetes en IaC, livraison GitOps, intégration continue, observabilité, secrets et PKI · pour déployer en continu, de façon reproductible, sûre et observable.", "stories": [{"id": "11.1", "title": "Provisionnement du cluster Kubernetes", "role": "équipe plateforme", "want": "provisionner le cluster Kubernetes via de l'IaC (kubeadm + Terraform/Ansible)", "benefit": "disposer d'un socle reproductible et versionné sans action manuelle", "ac": "<b>Given</b> un dépôt d'infrastructure-as-code<br><b>When</b> on applique la configuration<br><b>Then</b> le cluster kubeadm est créé sur Hetzner avec sauvegarde etcd planifiée<br><b>And</b> aucune modification manuelle (kubectl apply) n'est nécessaire.", "post": false}, {"id": "11.2", "title": "Livraison continue GitOps", "role": "équipe plateforme", "want": "déployer les services via Helm et Argo CD (GitOps)", "benefit": "que chaque changement fusionné se déploie automatiquement et que le cluster reflète l'état décrit dans Git", "ac": "<b>Given</b> un chart Helm versionné<br><b>When</b> une release est promue sur la branche d'environnement<br><b>Then</b> Argo CD synchronise le cluster sur cet état (app-of-apps)<br><b>And</b> un rollback se fait en revenant à la révision Git précédente.", "post": false}, {"id": "11.3", "title": "Intégration continue", "role": "développeur", "want": "que chaque commit déclenche build, tests et publication d'images via GitHub Actions", "benefit": "détecter les régressions tôt et produire des artefacts prêts à déployer", "ac": "<b>Given</b> une pull request<br><b>When</b> la CI s'exécute<br><b>Then</b> build + tests + lint + image conteneur sont produits (cache sccache pour Rust)<br><b>And</b> un échec de la CI bloque la fusion.", "post": false}, {"id": "11.4", "title": "Observabilité de bout en bout", "role": "équipe ops", "want": "collecter métriques, logs et traces via OpenTelemetry (Prometheus / Loki / Tempo / Grafana)", "benefit": "diagnostiquer rapidement les incidents et suivre les SLA", "ac": "<b>Given</b> des services instrumentés OpenTelemetry<br><b>When</b> une requête traverse le système<br><b>Then</b> métriques, logs et traces sont corrélés et visualisables dans Grafana<br><b>And</b> des alertes se déclenchent au dépassement de seuil (NFR7).", "post": false}, {"id": "11.5", "title": "Gestion des secrets", "role": "équipe plateforme", "want": "chiffrer les secrets versionnés avec SOPS + age", "benefit": "ne jamais exposer de secret en clair tout en restant GitOps-friendly", "ac": "<b>Given</b> un secret applicatif<br><b>When</b> il est commité dans le dépôt GitOps<br><b>Then</b> il est chiffré (SOPS + age) et n'est déchiffré que dans le cluster<br><b>And</b> aucun secret en clair n'apparaît jamais dans Git.", "post": false}, {"id": "11.6", "title": "PKI interne des colliers", "role": "équipe sécurité", "want": "émettre, renouveler et révoquer les certificats des colliers via step-ca", "benefit": "garantir l'authentification mutuelle (mTLS) de toute la flotte IoT", "ac": "<b>Given</b> un collier à appairer<br><b>When</b> il s'enrôle auprès de la PKI<br><b>Then</b> step-ca lui délivre un certificat et le broker MQTT fait confiance à la racine<br><b>And</b> un collier perdu ou volé voit son certificat révoqué (CRL/OCSP).", "post": true}, {"id": "11.7", "title": "Registre d'images conteneur", "role": "équipe plateforme", "want": "pousser et tirer les images depuis un registre", "benefit": "déployer des artefacts fiables et scannés", "ac": "<b>Given</b> une image produite par la CI<br><b>When</b> elle est poussée au registre<br><b>Then</b> elle est scannée (vulnérabilités) et disponible pour le cluster<br><b>And</b> le déploiement échoue si l'image attendue est absente.", "post": false}, {"id": "11.8", "title": "Ingress & TLS public", "role": "équipe plateforme", "want": "exposer les services via un ingress avec TLS public automatique", "benefit": "offrir un accès public sécurisé sans gestion manuelle des certificats", "ac": "<b>Given</b> un service à exposer<br><b>When</b> l'ingress est configuré<br><b>Then</b> le trafic public est routé en HTTPS avec certificat valide (cert-manager/Let's Encrypt), renouvelé automatiquement<br><b>And</b> le mTLS des colliers (step-ca) reste indépendant.", "post": false}, {"id": "11.9", "title": "Sauvegarde & restauration des données", "role": "équipe ops", "want": "sauvegarder et pouvoir restaurer PostgreSQL/TimescaleDB (PITR) et etcd", "benefit": "garantir la résilience et la non-perte des données de santé", "ac": "<b>Given</b> des sauvegardes planifiées<br><b>When</b> un incident survient<br><b>Then</b> une restauration point-in-time est possible dans l'objectif RPO/RTO défini<br><b>And</b> les restaurations sont testées périodiquement.", "post": false}]}];
+const ECOL=[C.cli,C.svc,C.ai,C.edge,C.data,C.ext,C.msg,C.dev,C.rose,'#a78bfa'];
+const elist=document.getElementById('epiclist');
+function renderEpics(filter){elist.innerHTML=EPICS.map((e,i)=>{const post=e.stories.some(s=>s.post),mvp=e.stories.some(s=>!s.post);
+  if(filter==='mvp'&&!mvp)return'';if(filter==='post'&&!post)return'';
+  const stories=e.stories.map(s=>`<div class="us"><div class="ut"><span class="uid">${s.id} ${s.post?'<span class="pill post">Post</span>':'<span class="pill mvp">MVP</span>'}</span><button class="uplay" data-epic="${e.num}" data-us="${s.id}" title="Rejouer ce sous-parcours">▶</button></div><div class="utitle">${s.title}</div><p class="story"><span class="r">En tant que</span> ${s.role}, je veux ${s.want}, <span class="b">afin de ${s.benefit}</span></p>${s.ac?`<div class="ac">${s.ac}</div>`:''}</div>`).join('');
+  return `<div class="ecard" style="--ac:${ECOL[i%ECOL.length]}" data-i="${i}"><div class="ehead"><span class="n">${e.num}</span><div class="et"><div class="nm">${e.title}</div><div class="gl">${e.stories.length} stories</div></div><button class="play" data-epic="${e.num}" title="Rejouer le parcours de l'epic">▶</button></div><div class="ebody">${stories}</div></div>`;}).join('');
+  bindEpics();}
+function bindEpics(){
+  document.querySelectorAll('.ecard .ehead').forEach(h=>h.onclick=e=>{if(e.target.closest('.play'))return;h.parentElement.classList.toggle('open');});
+  document.querySelectorAll('.ecard .ehead .play').forEach(b=>b.onclick=e=>{e.stopPropagation();const n=+b.dataset.epic;playJourney(EPIC_EDGES[n],'Epic '+n+' · '+EPICS[n-1].title);});
+  document.querySelectorAll('.uplay').forEach(b=>b.onclick=e=>{e.stopPropagation();const n=+b.dataset.epic,id=b.dataset.us;playJourney(usJourney(id,n),'US '+id);});
+}
+document.querySelectorAll('.efilter button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.efilter button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderEpics(b.dataset.f);});
+renderEpics('all');
+
+// ---- top controls ----
+document.getElementById('tTheme').onclick=function(){document.body.classList.toggle('light');this.textContent=document.body.classList.contains('light')?'☀':'☾';};
+document.getElementById('tFull').onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();};
+document.getElementById('tResetTop').onclick=()=>{PAW.reset();PAW.fit();};
+let platOn=false;document.getElementById('tPlat').onclick=function(){platOn=!platOn;document.getElementById('platlayer').style.display=platOn?'block':'none';document.getElementById('archstage').setAttribute('viewBox',platOn?'0 0 1740 1112':'0 100 1740 928');PAW.fit();this.classList.toggle('on',platOn);document.body.classList.toggle('plat',platOn);};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePanels();PAW.reset();}});
+</script>
+
+<style>
+  .ovl{position:fixed;inset:0;z-index:80;background:rgba(4,7,14,.62);backdrop-filter:blur(4px);display:none;align-items:flex-start;justify-content:center}
+  .ovl.show{display:flex}
+  .searchbox{margin-top:11vh;width:min(640px,92vw);background:#0c1426;border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:hidden}
+  .searchbox input{width:100%;border:0;background:transparent;color:#e8eefc;font-size:16px;padding:18px 20px;outline:none;border-bottom:1px solid rgba(255,255,255,.1);font-family:inherit}
+  .searchres{max-height:52vh;overflow:auto;padding:6px}
+  .sres{display:flex;align-items:center;gap:11px;padding:9px 13px;border-radius:10px;cursor:pointer;font-size:13.5px;color:#dbe3f3}
+  .sres:hover,.sres.sel{background:rgba(45,212,191,.16)}
+  .sres .k{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#06121a;background:#2dd4bf;border-radius:6px;padding:2px 7px;flex:0 0 auto}
+  .sres .k.e{background:#a78bfa}.sres .k.u{background:#c084fc}.sres .k.f{background:#fbbf24}
+  .presentstop{position:fixed;z-index:82;top:14px;left:50%;transform:translateX(-50%);display:none;background:rgba(244,63,94,.92);color:#fff;border:0;border-radius:11px;padding:10px 18px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+  .presentstop.show{display:block}
+  body.presenting .topbar,body.presenting .reopen{opacity:.18;pointer-events:none}
+  @media print{.topbar,.legend,.hint,.player,.reopen,.scrim,.drawer,.ovl,.presentstop,#prog{display:none!important}#archwrap{position:static!important;top:0!important;height:auto!important}svg#archstage{height:760px}body{overflow:visible}}
+</style>
+<div class="ovl" id="searchwrap"><div class="searchbox" onclick="event.stopPropagation()">
+  <input id="searchin" placeholder="Rechercher : composant · epic · user story · flux…" autocomplete="off" spellcheck="false">
+  <div class="searchres" id="searchres"></div>
+</div></div>
+<button class="presentstop" id="presentstop">⏹ Quitter la présentation</button>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  // index : composants + epics + US + flows
+  const idx=[];
+  Object.keys(NODE_NAMES).forEach(id=>idx.push({k:'Composant',cls:'',label:NODE_NAMES[id],act:()=>{PAW.openNode(id);hash('node-'+id);}}));
+  EPICS.forEach(e=>{ idx.push({k:'Epic',cls:'e',label:'Epic '+e.num+' · '+e.title,act:()=>{playJourney(EPIC_EDGES[e.num],'Epic '+e.num+' · '+e.title);hash('epic-'+e.num);}});
+    e.stories.forEach(s=>idx.push({k:'US',cls:'u',label:s.id+' · '+s.title,act:()=>{playJourney(usJourney(s.id,e.num),'US '+s.id);hash('us-'+s.id);}})); });
+  FLOWS.forEach((f,i)=>idx.push({k:'Flux',cls:'f',label:f.nm,act:()=>{playJourney(FLOW_EDGES[i],'Flux · '+f.nm);hash('flow-'+i);}}));
+  const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  let results=[],sel=0;
+  function render(q){const nq=norm(q);results=(!q?idx:idx.filter(r=>norm(r.label).includes(nq))).slice(0,40);sel=0;
+    $('searchres').innerHTML=results.length?results.map((r,i)=>`<div class="sres${i===0?' sel':''}" data-i="${i}"><span class="k ${r.cls}">${r.k}</span>${r.label}</div>`).join(''):'<div class="sres" style="color:#90a4c8">Aucun résultat</div>';
+    [...$('searchres').querySelectorAll('.sres[data-i]')].forEach(el=>el.onclick=()=>pick(+el.dataset.i));}
+  function mark(){const c=$('searchres').querySelectorAll('.sres[data-i]');c.forEach((el,i)=>el.classList.toggle('sel',i===sel));c[sel]&&c[sel].scrollIntoView({block:'nearest'});}
+  function pick(i){const r=results[i];if(!r)return;closeSearch();r.act();}
+  function openSearch(){$('searchwrap').classList.add('show');$('searchin').value='';render('');setTimeout(()=>$('searchin').focus(),30);}
+  function closeSearch(){$('searchwrap').classList.remove('show');}
+  $('searchin').addEventListener('input',e=>render(e.target.value));
+  $('searchin').addEventListener('keydown',e=>{if(e.key==='ArrowDown'){sel=Math.min(results.length-1,sel+1);mark();e.preventDefault();}else if(e.key==='ArrowUp'){sel=Math.max(0,sel-1);mark();e.preventDefault();}else if(e.key==='Enter'){pick(sel);}});
+  $('searchwrap').addEventListener('click',closeSearch);
+  $('tSearch').onclick=openSearch;
+  addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch();}else if(e.key==='Escape')closeSearch();});
+  // liens partageables
+  function hash(h){try{history.replaceState(null,'','#'+h);}catch(_){}}
+  function applyHash(){const h=decodeURIComponent((location.hash||'').replace(/^#/,''));if(!h)return;
+    if(h.startsWith('node-'))PAW.openNode(h.slice(5));
+    else if(h.startsWith('epic-')){const n=+h.slice(5);if(EPICS[n-1])playJourney(EPIC_EDGES[n],'Epic '+n+' · '+EPICS[n-1].title);}
+    else if(h.startsWith('us-')){const id=h.slice(3),n=+id.split('.')[0];if(EPIC_EDGES[n])playJourney(usJourney(id,n),'US '+id);}
+    else if(h.startsWith('flow-')){const i=+h.slice(5);if(FLOWS[i])playJourney(FLOW_EDGES[i],'Flux · '+FLOWS[i].nm);}
+    else if(h==='platform')$('tPlat').click();
+    else if(h==='pres')openPanel('pPres');else if(h==='epics')openPanel('pEpic');else if(h==='flows')openPanel('pFlow');}
+  setTimeout(applyHash,450);
+  // export / impression
+  $('tExport').onclick=()=>{
+    const svg=PAW.exportSVG();
+    const blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'});
+    const u=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=u;a.download='pawrise-architecture'+(document.body.classList.contains('plat')?'-plateforme':'-produit')+(document.body.classList.contains('light')?'-clair':'-sombre')+'.svg';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(u),2000);
+  };
+  // mode présentation auto
+  let tour=null;
+  const steps=[ ()=>openPanel('pPres'),
+    ()=>{closePanels();playJourney(FLOW_EDGES[0],'Flux · '+FLOWS[0].nm);},
+    ()=>playJourney(FLOW_EDGES[2],'Flux · '+FLOWS[2].nm),
+    ()=>playJourney(FLOW_EDGES[3],'Flux · '+FLOWS[3].nm),
+    ()=>playJourney(FLOW_EDGES[4],'Flux · '+FLOWS[4].nm),
+    ()=>{PAW.reset();if(!document.body.classList.contains('plat'))$('tPlat').click();} ];
+  const dwell=[7000,9500,12500,9500,8500,7000];
+  function present(){let i=0;document.body.classList.add('presenting');$('presentstop').classList.add('show');
+    const run=()=>{ if(i>=steps.length){stop();return;} steps[i](); const d=dwell[i]||7000; i++; tour=setTimeout(run,d); }; run();}
+  function stop(){ if(tour)clearTimeout(tour); tour=null; document.body.classList.remove('presenting'); $('presentstop').classList.remove('show'); closePanels(); PAW.reset(); if(document.body.classList.contains('plat'))$('tPlat').click(); }
+  $('tPresent').onclick=present; $('presentstop').onclick=stop;
+})();
+</script>
+</body>
+</html>
