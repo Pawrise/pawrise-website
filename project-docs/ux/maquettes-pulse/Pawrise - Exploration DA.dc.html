@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Albert+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#e7e5df;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  @keyframes pw-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.82);}}
+</style>
+</helmet>
+
+<div style="width:max-content;min-width:100%;min-height:100vh;box-sizing:border-box;padding:56px 48px 96px;background:#e7e5df;font-family:'Hanken Grotesk',sans-serif;">
+  <div style="width:1460px;max-width:1460px;">
+
+    <!-- ============ BOARD HEADER ============ -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:14px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#8a857c;">Pawrise Care — Exploration Direction Artistique</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:#a39e94;">v1 · 3 directions · ancrage app mobile</div>
+    </div>
+    <h1 style="margin:0 0 16px;font-size:46px;line-height:1.04;letter-spacing:-0.02em;font-weight:800;color:#23211c;max-width:1040px;">Trois langages possibles pour une marque qui rassure&nbsp;: observer, contextualiser, orienter — sans jamais alarmer.</h1>
+    <p style="margin:0 0 26px;font-size:17px;line-height:1.6;color:#5f5a51;max-width:720px;">Collier connecté + IA d'orientation santé non-diagnostique, reliant les propriétaires à un réseau de vétérinaires. Chaque direction ci-dessous est un système complet (logo, palette, typo, composants, écran), pensé pour réduire l'anxiété et décliner sur app, Vet Portal, back-office et vitrine.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:48px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6f6a61;background:#fff;border:1px solid #d9d4ca;border-radius:100px;padding:7px 14px;">App mobile propriétaire</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6f6a61;background:#fff;border:1px solid #d9d4ca;border-radius:100px;padding:7px 14px;">Vet Portal web</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6f6a61;background:#fff;border:1px solid #d9d4ca;border-radius:100px;padding:7px 14px;">Back-office admin</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.04em;color:#6f6a61;background:#fff;border:1px solid #d9d4ca;border-radius:100px;padding:7px 14px;">Site vitrine</span>
+    </div>
+
+    <!-- ============ SECTION: PRINCIPES ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:6px;">01 — Principes de conception</div>
+    <h2 style="margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:-0.01em;color:#23211c;">Ce qui ne change pas d'une direction à l'autre</h2>
+    <p style="margin:0 0 22px;font-size:15px;line-height:1.55;color:#6f6a61;max-width:680px;">Les invariants tirés de la recherche santé/UX. La DA habille ces règles ; elle ne les contredit jamais.</p>
+    <div style="display:flex;gap:16px;margin-bottom:56px;">
+      <div style="flex:1;background:#fff;border-radius:12px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#b0a9a0;margin-bottom:14px;">01</div>
+        <div style="font-size:16px;font-weight:700;color:#23211c;margin-bottom:7px;">Rassurer par défaut</div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:#6f6a61;">L'état « tout va bien » est le repos visuel. Calme, espace, ton chaleureux — pas de chiffres anxiogènes ni de jauges rouges en accueil.</p>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9a948a;border-top:1px solid #ece8e0;padding-top:10px;">78% préfèrent une app santé calme & pro</div>
+      </div>
+      <div style="flex:1;background:#fff;border-radius:12px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#b0a9a0;margin-bottom:14px;">02</div>
+        <div style="font-size:16px;font-weight:700;color:#23211c;margin-bottom:7px;">Le rouge = sécurité, jamais santé</div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:#6f6a61;">Réservé aux vrais incidents (sortie de zone). Le sur-usage du rouge désensibilise et fait paniquer. Les états santé restent ambrés/chauds.</p>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9a948a;border-top:1px solid #ece8e0;padding-top:10px;">alert fatigue → red reserved</div>
+      </div>
+      <div style="flex:1;background:#fff;border-radius:12px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#b0a9a0;margin-bottom:14px;">03</div>
+        <div style="font-size:16px;font-weight:700;color:#23211c;margin-bottom:7px;">Jamais la couleur seule</div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:#6f6a61;">Chaque état bien-être = couleur + icône + texte. ~8% des hommes ne distinguent pas le vert du rouge ; le sens doit survivre sans la teinte.</p>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9a948a;border-top:1px solid #ece8e0;padding-top:10px;">double encoding · daltonisme</div>
+      </div>
+      <div style="flex:1;background:#fff;border-radius:12px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#b0a9a0;margin-bottom:14px;">04</div>
+        <div style="font-size:16px;font-weight:700;color:#23211c;margin-bottom:7px;">Bleu & vert, sens appris</div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:#6f6a61;">Le bleu signale la confiance médicale ; le vert, la santé et la nature qui apaise. Chaque direction choisit son dosage de ces deux ancres.</p>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9a948a;border-top:1px solid #ece8e0;padding-top:10px;">trust-blue · healing-green</div>
+      </div>
+      <div style="flex:1;background:#fff;border-radius:12px;padding:22px 20px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#b0a9a0;margin-bottom:14px;">05</div>
+        <div style="font-size:16px;font-weight:700;color:#23211c;margin-bottom:7px;">Accessible, sans condition</div>
+        <p style="margin:0 0 12px;font-size:13.5px;line-height:1.5;color:#6f6a61;">Contraste AA 4.5:1, cibles tactiles ≥ 44px, dynamic type. Une marque qui rassure est d'abord une marque lisible par tous.</p>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9a948a;border-top:1px solid #ece8e0;padding-top:10px;">WCAG AA · 44px · dynamic type</div>
+      </div>
+    </div>
+
+    <!-- ============ SECTION: ARCHITECTURE & NAVIGATION ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:6px;">02 — Architecture & navigation</div>
+    <h2 style="margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:-0.01em;color:#23211c;">La structure qui porte la réassurance</h2>
+    <p style="margin:0 0 22px;font-size:15px;line-height:1.55;color:#6f6a61;max-width:680px;">Avant la couleur : où va l'utilisateur, et comment l'anxiété devient du contrôle serein. Un seul modèle mental, décliné sur les quatre surfaces.</p>
+
+    <!-- reassurance loop -->
+    <div style="background:#fff;border-radius:14px;padding:26px 28px;box-shadow:0 1px 3px rgba(0,0,0,0.06);margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:700;color:#23211c;margin-bottom:18px;letter-spacing:0.01em;">La boucle de réassurance — le parcours santé de bout en bout</div>
+      <div style="display:flex;align-items:stretch;gap:0;">
+        <div style="flex:1;padding-right:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a948a;margin-bottom:8px;">01 · Passif</div>
+          <div style="font-size:15px;font-weight:700;color:#23211c;margin-bottom:5px;">Observer</div>
+          <p style="margin:0;font-size:13px;line-height:1.5;color:#6f6a61;">Le collier mesure en continu — activité, sommeil, position. Aucune action demandée au propriétaire.</p>
+        </div>
+        <div style="width:1px;background:#ece8e0;"></div>
+        <div style="flex:1;padding:0 22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a948a;margin-bottom:8px;">02 · IA</div>
+          <div style="font-size:15px;font-weight:700;color:#23211c;margin-bottom:5px;">Contextualiser</div>
+          <p style="margin:0;font-size:13px;line-height:1.5;color:#6f6a61;">L'écart est lu selon l'âge, la race, l'historique. « Normal pour Pixel » plutôt qu'un seuil brut.</p>
+        </div>
+        <div style="width:1px;background:#ece8e0;"></div>
+        <div style="flex:1;padding:0 22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a948a;margin-bottom:8px;">03 · IA</div>
+          <div style="font-size:15px;font-weight:700;color:#23211c;margin-bottom:5px;">Orienter</div>
+          <p style="margin:0;font-size:13px;line-height:1.5;color:#6f6a61;">Une recommandation d'action, jamais un diagnostic. « À surveiller » + le bon geste, au bon moment.</p>
+        </div>
+        <div style="width:1px;background:#ece8e0;"></div>
+        <div style="flex:1;padding-left:22px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a948a;margin-bottom:8px;">04 · Humain</div>
+          <div style="font-size:15px;font-weight:700;color:#23211c;margin-bottom:5px;">Mettre en relation</div>
+          <p style="margin:0;font-size:13px;line-height:1.5;color:#6f6a61;">Handoff vers un vétérinaire partenaire avec le contexte déjà transmis, file d'attente visible.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;margin-bottom:56px;">
+      <!-- app nav -->
+      <div style="flex:1;background:#fff;border-radius:14px;padding:24px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-size:13px;font-weight:700;color:#23211c;margin-bottom:6px;">Navigation app — 5 onglets, pas plus</div>
+        <p style="margin:0 0 18px;font-size:12.5px;line-height:1.5;color:#8a857c;">Une tab-bar persistante. L'IA est un onglet de premier rang : l'aide est toujours à un geste, ce qui désamorce l'anxiété.</p>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f1ede6;"><div style="width:30px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#b0a9a0;">01</div><div style="font-size:14px;font-weight:600;color:#23211c;width:96px;">Accueil</div><div style="font-size:12.5px;color:#6f6a61;">État bien-être & synthèse du jour</div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f1ede6;"><div style="width:30px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#b0a9a0;">02</div><div style="font-size:14px;font-weight:600;color:#23211c;width:96px;">Santé</div><div style="font-size:12.5px;color:#6f6a61;">Courbes activité · sommeil · tendances</div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f1ede6;"><div style="width:30px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#b0a9a0;">03</div><div style="font-size:14px;font-weight:600;color:#23211c;width:96px;">Carte</div><div style="font-size:12.5px;color:#6f6a61;">Position & zone de sécurité</div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f1ede6;"><div style="width:30px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#b0a9a0;">04</div><div style="font-size:14px;font-weight:600;color:#23211c;width:96px;">Assistant IA</div><div style="font-size:12.5px;color:#6f6a61;">Orientation & mise en relation vét</div></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:11px 0;"><div style="width:30px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#b0a9a0;">05</div><div style="font-size:14px;font-weight:600;color:#23211c;width:96px;">Profil</div><div style="font-size:12.5px;color:#6f6a61;">Animal, collier, rapports PDF</div></div>
+        </div>
+      </div>
+      <!-- multi-surface -->
+      <div style="flex:1;background:#fff;border-radius:14px;padding:24px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-size:13px;font-weight:700;color:#23211c;margin-bottom:6px;">Cohérence multi-surface</div>
+        <p style="margin:0 0 18px;font-size:12.5px;line-height:1.5;color:#8a857c;">Mêmes tokens, densité adaptée. L'émotion domine côté grand public ; la rigueur, côté pro.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="border:1px solid #ece8e0;border-radius:10px;padding:13px 15px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;"><span style="font-size:13.5px;font-weight:700;color:#23211c;">App mobile</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a948a;">friendly · clair</span></div><div style="font-size:12px;color:#6f6a61;">Émotionnel, aéré, rassurant. Le cœur de la marque.</div></div>
+          <div style="border:1px solid #ece8e0;border-radius:10px;padding:13px 15px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;"><span style="font-size:13.5px;font-weight:700;color:#23211c;">Vet Portal</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a948a;">dense · clinique</span></div><div style="font-size:12px;color:#6f6a61;">Sidebar, timeline médicale, données fiables. Humain mais sobre.</div></div>
+          <div style="border:1px solid #ece8e0;border-radius:10px;padding:13px 15px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;"><span style="font-size:13.5px;font-weight:700;color:#23211c;">Back-office</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a948a;">utilitaire · data</span></div><div style="font-size:12px;color:#6f6a61;">Tableaux, lisibilité maximale, neutralité.</div></div>
+          <div style="border:1px solid #ece8e0;border-radius:10px;padding:13px 15px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;"><span style="font-size:13.5px;font-weight:700;color:#23211c;">Site vitrine</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a948a;">marketing · émotion</span></div><div style="font-size:12px;color:#6f6a61;">Conversion, récit humain-animal, preuve sociale.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SECTION: DIRECTIONS ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:6px;">03 — Trois directions à comparer</div>
+    <h2 style="margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:-0.01em;color:#23211c;">Même écran d'accueil, trois personnalités</h2>
+    <p style="margin:0 0 30px;font-size:15px;line-height:1.55;color:#6f6a61;max-width:680px;">Chaque colonne applique son système au même moment-clé : l'accueil, où le propriétaire vérifie d'un coup d'œil que tout va bien.</p>
+
+    <div style="display:flex;gap:40px;align-items:flex-start;">
+
+      <!-- ============================================================ -->
+      <!-- DIRECTION 01 — SAUGE -->
+      <!-- ============================================================ -->
+      <div style="flex:none;width:460px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8a857c;">Direction 01</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">warm · organic</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08),0 14px 40px rgba(0,0,0,0.05);">
+
+          <!-- header band -->
+          <div style="background:#F4F1EA;padding:30px 28px 26px;border-bottom:1px solid #e9e3d6;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+              <div style="position:relative;width:38px;height:38px;">
+                <div style="position:absolute;left:7px;top:13px;width:24px;height:20px;background:#6E8B6A;border-radius:13px 13px 12px 12px;"></div>
+                <div style="position:absolute;left:8px;top:2px;width:8px;height:11px;background:#6E8B6A;border-radius:50%;"></div>
+                <div style="position:absolute;left:18px;top:0px;width:8px;height:11px;background:#6E8B6A;border-radius:50%;"></div>
+                <div style="position:absolute;left:28px;top:3px;width:7px;height:10px;background:#C97B5A;border-radius:50%;"></div>
+              </div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-size:23px;font-weight:800;letter-spacing:-0.02em;color:#2A2722;">Pawrise<span style="color:#6E8B6A;"> Care</span></div>
+            </div>
+            <div style="font-family:'Hanken Grotesk',sans-serif;font-size:15px;font-weight:600;color:#2A2722;margin-bottom:3px;">« Sauge » — doux & rassurant</div>
+            <div style="font-size:13px;line-height:1.5;color:#6F695E;">Crème chaude, vert sauge, accent terracotta. La nature qui apaise. Pensé app-first, profondément humain.</div>
+          </div>
+
+          <!-- palette -->
+          <div style="padding:22px 28px;border-bottom:1px solid #f1ede6;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a39e94;margin-bottom:12px;">Palette</div>
+            <div style="display:flex;gap:8px;">
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#6E8B6A;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a948a;margin-top:5px;">Sauge</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#4F6B4C;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a948a;margin-top:5px;">Forêt</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#C97B5A;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a948a;margin-top:5px;">Terracotta</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#F4F1EA;border:1px solid #e4ddcd;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a948a;margin-top:5px;">Crème</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#2A2722;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a948a;margin-top:5px;">Encre</div></div>
+            </div>
+          </div>
+
+          <!-- type -->
+          <div style="padding:22px 28px;border-bottom:1px solid #f1ede6;display:flex;align-items:flex-end;gap:18px;">
+            <div style="font-family:'Hanken Grotesk',sans-serif;font-size:54px;font-weight:800;line-height:0.9;color:#2A2722;">Aa</div>
+            <div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:700;color:#2A2722;">Hanken Grotesk</div>
+              <div style="font-size:12px;color:#8a857c;margin-bottom:6px;">Sans humaniste, ronde, chaleureuse</div>
+              <div style="font-family:'Hanken Grotesk',sans-serif;font-size:12.5px;color:#6F695E;">800 titres · 600 sous-titres · 400 texte</div>
+            </div>
+          </div>
+
+          <!-- phone -->
+          <div style="padding:30px 28px;background:#EFEBE1;display:flex;justify-content:center;">
+            <div style="width:286px;background:#F4F1EA;border-radius:34px;padding:9px;box-shadow:0 10px 30px rgba(42,39,34,0.16);">
+              <div style="background:#F4F1EA;border-radius:26px;overflow:hidden;">
+                <!-- status bar -->
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 20px 6px;font-family:'Hanken Grotesk',sans-serif;">
+                  <span style="font-size:12px;font-weight:700;color:#2A2722;">9:41</span>
+                  <span style="display:flex;gap:4px;align-items:center;"><span style="width:15px;height:9px;border:1.4px solid #2A2722;border-radius:2px;display:inline-block;opacity:.75;"></span></span>
+                </div>
+                <!-- top bar -->
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 20px 14px;">
+                  <div><div style="font-size:12px;color:#8c8579;">Bonjour Camille</div><div style="font-size:18px;font-weight:800;color:#2A2722;letter-spacing:-0.01em;">Pixel va bien 🌿</div></div>
+                  <div style="width:38px;height:38px;border-radius:50%;background:repeating-linear-gradient(45deg,#e0d8c6,#e0d8c6 4px,#ead9c2 4px,#ead9c2 8px);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.1);"></div>
+                </div>
+                <!-- hero card -->
+                <div style="margin:0 16px;background:#fff;border-radius:22px;padding:20px;box-shadow:0 4px 16px rgba(42,39,34,0.06);">
+                  <div style="display:flex;align-items:center;gap:13px;margin-bottom:16px;">
+                    <div style="width:54px;height:54px;border-radius:50%;background:repeating-linear-gradient(45deg,#dfe6d6,#dfe6d6 5px,#e9efe1 5px,#e9efe1 10px);flex:none;"></div>
+                    <div><div style="font-size:16px;font-weight:800;color:#2A2722;">Pixel</div><div style="font-size:12px;color:#8c8579;">Chat européen · 4 ans</div></div>
+                  </div>
+                  <div style="display:inline-flex;align-items:center;gap:7px;background:#E4ECDD;border-radius:100px;padding:8px 14px;margin-bottom:12px;">
+                    <span style="width:9px;height:9px;border-radius:50%;background:#5C7D58;display:inline-block;animation:pw-pulse 2.4s ease-in-out infinite;"></span>
+                    <span style="font-size:13px;font-weight:700;color:#3E5A3A;">Tout va bien</span>
+                  </div>
+                  <div style="font-size:12.5px;line-height:1.5;color:#6F695E;">Activité et sommeil dans la norme pour son âge. Dernière synthèse IA il y a 2 h.</div>
+                </div>
+                <!-- metrics -->
+                <div style="display:flex;gap:9px;padding:16px;">
+                  <div style="flex:1;background:#fff;border-radius:16px;padding:13px 12px;"><div style="font-size:10.5px;color:#8c8579;margin-bottom:6px;">Activité</div><div style="font-size:17px;font-weight:800;color:#2A2722;">68<span style="font-size:10px;font-weight:600;color:#8c8579;">%</span></div><div style="height:4px;border-radius:3px;background:#ece6da;margin-top:7px;overflow:hidden;"><div style="width:68%;height:100%;background:#6E8B6A;"></div></div></div>
+                  <div style="flex:1;background:#fff;border-radius:16px;padding:13px 12px;"><div style="font-size:10.5px;color:#8c8579;margin-bottom:6px;">Sommeil</div><div style="font-size:17px;font-weight:800;color:#2A2722;">12<span style="font-size:10px;font-weight:600;color:#8c8579;">h</span></div><div style="height:4px;border-radius:3px;background:#ece6da;margin-top:7px;overflow:hidden;"><div style="width:80%;height:100%;background:#6E8B6A;"></div></div></div>
+                  <div style="flex:1;background:#fff;border-radius:16px;padding:13px 12px;"><div style="font-size:10.5px;color:#8c8579;margin-bottom:6px;">Sorties</div><div style="font-size:17px;font-weight:800;color:#2A2722;">4</div><div style="height:4px;border-radius:3px;background:#ece6da;margin-top:7px;overflow:hidden;"><div style="width:50%;height:100%;background:#6E8B6A;"></div></div></div>
+                </div>
+                <!-- ai prompt -->
+                <div style="margin:0 16px 16px;background:#2A2722;border-radius:18px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+                  <div><div style="font-size:13px;font-weight:700;color:#fff;">Demander à l'assistant</div><div style="font-size:11px;color:#b8b1a3;">Orientation, pas diagnostic</div></div>
+                  <div style="width:30px;height:30px;border-radius:50%;background:#6E8B6A;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;">›</div>
+                </div>
+                <!-- tab bar -->
+                <div style="display:flex;justify-content:space-around;align-items:center;padding:11px 14px 16px;background:#FBF9F4;border-top:1px solid #ece6da;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6E8B6A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span style="font-size:9px;color:#6E8B6A;font-weight:700;">Accueil</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#b0a99b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg><span style="font-size:9px;color:#b0a99b;">Santé</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#b0a99b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span style="font-size:9px;color:#b0a99b;">Carte</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#b0a99b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.5 7.1L4 20l1.4-5A8 8 0 1 1 21 11.5z"/></svg><span style="font-size:9px;color:#b0a99b;">IA</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#b0a99b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span style="font-size:9px;color:#b0a99b;">Profil</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- components -->
+          <div style="padding:24px 28px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a39e94;margin-bottom:14px;">Échelle bien-être · non-alarmiste</div>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:22px;">
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#E4ECDD;border-radius:100px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3E5A3A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-size:13.5px;font-weight:700;color:#3E5A3A;">Bon — tout va bien</span></div>
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#F3E6C9;border-radius:100px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A5A1E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg><span style="font-size:13.5px;font-weight:700;color:#7A5A1E;">À surveiller</span></div>
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#F2DCC9;border-radius:100px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A4B2A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6"/><path d="M6 12l6-6 6 6"/></svg><span style="font-size:13.5px;font-weight:700;color:#8A4B2A;">Consulter — sans urgence</span></div>
+            </div>
+
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a39e94;margin-bottom:12px;">Carte d'alerte contextualisée</div>
+            <div style="background:#FBF6EC;border:1px solid #ecdcc0;border-radius:16px;padding:16px;margin-bottom:22px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="width:8px;height:8px;border-radius:50%;background:#C97B5A;"></span><span style="font-size:13px;font-weight:700;color:#8A4B2A;">À surveiller · activité en baisse</span></div>
+              <div style="font-size:12.5px;line-height:1.5;color:#6F695E;margin-bottom:13px;">Pixel bouge 22% moins que d'habitude depuis 2 jours. Fréquent chez un chat de 4 ans en été — à confirmer.</div>
+              <div style="display:flex;gap:8px;"><div style="background:#2A2722;color:#fff;font-size:12px;font-weight:700;border-radius:100px;padding:8px 15px;">Demander à l'IA</div><div style="background:#fff;border:1px solid #e2dccf;color:#2A2722;font-size:12px;font-weight:600;border-radius:100px;padding:8px 15px;">Plus tard</div></div>
+            </div>
+
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a39e94;margin-bottom:12px;">Bulle de chat IA</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="align-self:flex-end;background:#6E8B6A;color:#fff;font-size:13px;border-radius:16px 16px 4px 16px;padding:10px 14px;max-width:80%;">Pixel dort plus que d'habitude, c'est grave ?</div>
+              <div style="align-self:flex-start;background:#fff;border:1px solid #ece6da;color:#2A2722;font-size:13px;line-height:1.5;border-radius:16px 16px 16px 4px;padding:10px 14px;max-width:88%;">Souvent bénin en cas de chaleur. Je peux préparer une mise en relation vétérinaire si tu veux en avoir le cœur net.<div style="margin-top:8px;font-size:10px;color:#9a948a;display:flex;align-items:center;gap:5px;"><span style="width:5px;height:5px;border-radius:50%;background:#C97B5A;"></span>Orientation, pas un diagnostic</div></div>
+            </div>
+          </div>
+
+          <!-- rationale -->
+          <div style="padding:20px 28px 26px;background:#F4F1EA;border-top:1px solid #e9e3d6;">
+            <div style="font-size:13px;font-weight:700;color:#2A2722;margin-bottom:7px;">Pourquoi ça marche</div>
+            <p style="margin:0;font-size:12.5px;line-height:1.55;color:#6F695E;">Le vert et le végétal sont associés à la santé, la guérison et la réduction de l'anxiété. La chaleur du crème et du terracotta porte le lien humain-animal. Risque : se démarquer peu d'un univers « wellness » déjà chargé.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- DIRECTION 02 — CLINIQUE CLAIR -->
+      <!-- ============================================================ -->
+      <div style="flex:none;width:460px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8a857c;">Direction 02</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">trust · clinical</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08),0 14px 40px rgba(0,0,0,0.05);">
+
+          <!-- header band -->
+          <div style="background:#F2F5F8;padding:30px 28px 26px;border-bottom:1px solid #e2e8ee;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+              <div style="width:38px;height:38px;border-radius:11px;background:#2F6DB5;display:flex;align-items:center;justify-content:center;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2 6 4-13 2 7h6"/></svg>
+              </div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:23px;font-weight:800;letter-spacing:-0.02em;color:#1B2733;">Pawrise<span style="color:#2F6DB5;"> Care</span></div>
+            </div>
+            <div style="font-family:'Public Sans',sans-serif;font-size:15px;font-weight:700;color:#1B2733;margin-bottom:3px;">« Clinique Clair » — confiance & crédibilité</div>
+            <div style="font-size:13px;line-height:1.5;color:#5A6B7B;">Bleu confiance médical, vert santé distinct, neutres frais. Pont naturel vers le Vet Portal.</div>
+          </div>
+
+          <!-- palette -->
+          <div style="padding:22px 28px;border-bottom:1px solid #eef1f4;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#9aa6b2;margin-bottom:12px;">Palette</div>
+            <div style="display:flex;gap:8px;">
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#2F6DB5;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9aa6b2;margin-top:5px;">Confiance</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#245899;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9aa6b2;margin-top:5px;">Marine</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#3C9C7A;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9aa6b2;margin-top:5px;">Santé</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#F2F5F8;border:1px solid #dde4ea;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9aa6b2;margin-top:5px;">Brume</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#1B2733;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9aa6b2;margin-top:5px;">Ardoise</div></div>
+            </div>
+          </div>
+
+          <!-- type -->
+          <div style="padding:22px 28px;border-bottom:1px solid #eef1f4;display:flex;align-items:flex-end;gap:18px;">
+            <div style="font-family:'Public Sans',sans-serif;font-size:54px;font-weight:800;line-height:0.9;color:#1B2733;">Aa</div>
+            <div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:14px;font-weight:700;color:#1B2733;">Public Sans</div>
+              <div style="font-size:12px;color:#8a96a2;margin-bottom:6px;">Grotesque neutre, lisibilité maximale</div>
+              <div style="font-family:'Public Sans',sans-serif;font-size:12.5px;color:#5A6B7B;">800 titres · 600 labels · 400 texte</div>
+            </div>
+          </div>
+
+          <!-- phone -->
+          <div style="padding:30px 28px;background:#E7ECF1;display:flex;justify-content:center;">
+            <div style="width:286px;background:#fff;border-radius:34px;padding:9px;box-shadow:0 10px 30px rgba(27,39,51,0.16);">
+              <div style="background:#F2F5F8;border-radius:26px;overflow:hidden;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 20px 6px;font-family:'Public Sans',sans-serif;">
+                  <span style="font-size:12px;font-weight:700;color:#1B2733;">9:41</span>
+                  <span style="width:15px;height:9px;border:1.4px solid #1B2733;border-radius:2px;display:inline-block;opacity:.7;"></span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 20px 14px;">
+                  <div><div style="font-size:12px;color:#7e8b97;">Bonjour Camille</div><div style="font-size:18px;font-weight:800;color:#1B2733;letter-spacing:-0.01em;">Tableau de Pixel</div></div>
+                  <div style="width:38px;height:38px;border-radius:11px;background:repeating-linear-gradient(45deg,#d3dde6,#d3dde6 4px,#dde6ee 4px,#dde6ee 8px);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.1);"></div>
+                </div>
+                <div style="margin:0 16px;background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 16px rgba(27,39,51,0.06);">
+                  <div style="display:flex;align-items:center;gap:13px;margin-bottom:16px;">
+                    <div style="width:54px;height:54px;border-radius:13px;background:repeating-linear-gradient(45deg,#d8e4dd,#d8e4dd 5px,#e3ede7 5px,#e3ede7 10px);flex:none;"></div>
+                    <div><div style="font-size:16px;font-weight:800;color:#1B2733;">Pixel</div><div style="font-size:12px;color:#7e8b97;">Chat européen · 4 ans</div></div>
+                  </div>
+                  <div style="display:inline-flex;align-items:center;gap:7px;background:#DCEFE7;border-radius:8px;padding:8px 13px;margin-bottom:12px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1F6B52" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+                    <span style="font-size:13px;font-weight:700;color:#1F6B52;">Bon — tout va bien</span>
+                  </div>
+                  <div style="font-size:12.5px;line-height:1.5;color:#5A6B7B;">Constantes stables sur 7 jours. Prochaine synthèse automatique ce soir.</div>
+                </div>
+                <div style="display:flex;gap:9px;padding:16px;">
+                  <div style="flex:1;background:#fff;border-radius:12px;padding:13px 12px;"><div style="font-size:10.5px;color:#7e8b97;margin-bottom:6px;">Activité</div><div style="font-size:17px;font-weight:800;color:#1B2733;">68<span style="font-size:10px;font-weight:600;color:#7e8b97;">%</span></div><div style="height:4px;border-radius:3px;background:#e7edf2;margin-top:7px;overflow:hidden;"><div style="width:68%;height:100%;background:#2F6DB5;"></div></div></div>
+                  <div style="flex:1;background:#fff;border-radius:12px;padding:13px 12px;"><div style="font-size:10.5px;color:#7e8b97;margin-bottom:6px;">Sommeil</div><div style="font-size:17px;font-weight:800;color:#1B2733;">12<span style="font-size:10px;font-weight:600;color:#7e8b97;">h</span></div><div style="height:4px;border-radius:3px;background:#e7edf2;margin-top:7px;overflow:hidden;"><div style="width:80%;height:100%;background:#2F6DB5;"></div></div></div>
+                  <div style="flex:1;background:#fff;border-radius:12px;padding:13px 12px;"><div style="font-size:10.5px;color:#7e8b97;margin-bottom:6px;">Sorties</div><div style="font-size:17px;font-weight:800;color:#1B2733;">4</div><div style="height:4px;border-radius:3px;background:#e7edf2;margin-top:7px;overflow:hidden;"><div style="width:50%;height:100%;background:#2F6DB5;"></div></div></div>
+                </div>
+                <div style="margin:0 16px 16px;background:#fff;border:1px solid #e2e8ee;border-radius:14px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+                  <div><div style="font-size:13px;font-weight:700;color:#1B2733;">Assistant santé</div><div style="font-size:11px;color:#8a96a2;">Orientation, pas diagnostic</div></div>
+                  <div style="width:30px;height:30px;border-radius:9px;background:#2F6DB5;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;">›</div>
+                </div>
+                <div style="display:flex;justify-content:space-around;align-items:center;padding:11px 14px 16px;background:#fff;border-top:1px solid #eef1f4;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#2F6DB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span style="font-size:9px;color:#2F6DB5;font-weight:700;">Accueil</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#9aa6b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg><span style="font-size:9px;color:#9aa6b2;">Santé</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#9aa6b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span style="font-size:9px;color:#9aa6b2;">Carte</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#9aa6b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.5 7.1L4 20l1.4-5A8 8 0 1 1 21 11.5z"/></svg><span style="font-size:9px;color:#9aa6b2;">IA</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#9aa6b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span style="font-size:9px;color:#9aa6b2;">Profil</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- components -->
+          <div style="padding:24px 28px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#9aa6b2;margin-bottom:14px;">Échelle bien-être · non-alarmiste</div>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:22px;">
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#DCEFE7;border-radius:8px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1F6B52" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-size:13.5px;font-weight:700;color:#1F6B52;">Bon — tout va bien</span></div>
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#FBEFD3;border-radius:8px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A6412" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg><span style="font-size:13.5px;font-weight:700;color:#8A6412;">À surveiller</span></div>
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#FAE1D6;border-radius:8px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9A4A28" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6"/><path d="M6 12l6-6 6 6"/></svg><span style="font-size:13.5px;font-weight:700;color:#9A4A28;">Consulter — sans urgence</span></div>
+            </div>
+
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#9aa6b2;margin-bottom:12px;">Carte d'alerte contextualisée</div>
+            <div style="background:#FFFBF4;border:1px solid #f0e2c4;border-radius:12px;padding:16px;margin-bottom:22px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="width:8px;height:8px;border-radius:50%;background:#D6A12A;"></span><span style="font-size:13px;font-weight:700;color:#8A6412;">À surveiller · activité en baisse</span></div>
+              <div style="font-size:12.5px;line-height:1.5;color:#5A6B7B;margin-bottom:13px;">Pixel bouge 22% moins que d'habitude depuis 2 jours. Fréquent chez un chat de 4 ans en été — à confirmer.</div>
+              <div style="display:flex;gap:8px;"><div style="background:#2F6DB5;color:#fff;font-size:12px;font-weight:700;border-radius:8px;padding:8px 15px;">Demander à l'IA</div><div style="background:#fff;border:1px solid #dde4ea;color:#1B2733;font-size:12px;font-weight:600;border-radius:8px;padding:8px 15px;">Plus tard</div></div>
+            </div>
+
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#9aa6b2;margin-bottom:12px;">Bulle de chat IA</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="align-self:flex-end;background:#2F6DB5;color:#fff;font-size:13px;border-radius:14px 14px 4px 14px;padding:10px 14px;max-width:80%;">Pixel dort plus que d'habitude, c'est grave ?</div>
+              <div style="align-self:flex-start;background:#fff;border:1px solid #e6ebf0;color:#1B2733;font-size:13px;line-height:1.5;border-radius:14px 14px 14px 4px;padding:10px 14px;max-width:88%;">Souvent bénin en cas de chaleur. Je peux préparer une mise en relation vétérinaire si tu veux en avoir le cœur net.<div style="margin-top:8px;font-size:10px;color:#8a96a2;display:flex;align-items:center;gap:5px;"><span style="width:5px;height:5px;border-radius:50%;background:#2F6DB5;"></span>Orientation, pas un diagnostic</div></div>
+            </div>
+          </div>
+
+          <!-- rationale -->
+          <div style="padding:20px 28px 26px;background:#F2F5F8;border-top:1px solid #e2e8ee;">
+            <div style="font-size:13px;font-weight:700;color:#1B2733;margin-bottom:7px;">Pourquoi ça marche</div>
+            <p style="margin:0;font-size:12.5px;line-height:1.55;color:#5A6B7B;">Le bleu est la couleur apprise de la confiance médicale — il crédibilise instantanément côté vét. Vert distinct pour la santé, jamais confondu avec le bleu de marque. Risque : commun dans la santé numérique, à singulariser par la typo et le geste.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- DIRECTION 03 — PULSE -->
+      <!-- ============================================================ -->
+      <div style="flex:none;width:460px;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#8a857c;">Direction 03</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">distinctive · evolved</div>
+        </div>
+        <div style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08),0 14px 40px rgba(0,0,0,0.05);">
+
+          <!-- header band -->
+          <div style="background:#15212B;padding:30px 28px 26px;border-bottom:1px solid #15212B;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;">
+              <div style="position:relative;width:38px;height:38px;display:flex;align-items:center;justify-content:center;">
+                <div style="width:34px;height:34px;border-radius:50%;border:3px solid #1FB6A6;"></div>
+                <div style="position:absolute;width:13px;height:13px;border-radius:50%;background:#7C6BD6;"></div>
+              </div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:23px;font-weight:800;letter-spacing:-0.02em;color:#fff;">Pawrise<span style="color:#1FB6A6;"> Care</span></div>
+            </div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:3px;">« Pulse » — moderne & distinctif</div>
+            <div style="font-size:13px;line-height:1.5;color:#9fb0bd;">Teal vivant + violet, hérités de la soutenance mais portés en clair. Mémorable, tech-friendly, propre.</div>
+          </div>
+
+          <!-- palette -->
+          <div style="padding:22px 28px;border-bottom:1px solid #f0eef2;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a59fae;margin-bottom:12px;">Palette</div>
+            <div style="display:flex;gap:8px;">
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#1FB6A6;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#a59fae;margin-top:5px;">Teal</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#12998C;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#a59fae;margin-top:5px;">Profond</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#7C6BD6;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#a59fae;margin-top:5px;">Violet</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#15212B;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#a59fae;margin-top:5px;">Nuit</div></div>
+              <div style="flex:1;"><div style="height:46px;border-radius:7px;background:#F1F0F3;border:1px solid #e0dee4;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#a59fae;margin-top:5px;">Galet</div></div>
+            </div>
+          </div>
+
+          <!-- type -->
+          <div style="padding:22px 28px;border-bottom:1px solid #f0eef2;display:flex;align-items:flex-end;gap:18px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:54px;font-weight:800;line-height:0.9;color:#1A1A22;">Aa</div>
+            <div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;color:#1A1A22;">Bricolage Grotesque</div>
+              <div style="font-size:12px;color:#9a94a2;margin-bottom:6px;">+ Albert Sans · titres expressifs, texte net</div>
+              <div style="font-family:'Albert Sans',sans-serif;font-size:12.5px;color:#6B6B78;">Display titres · Albert Sans 400 texte</div>
+            </div>
+          </div>
+
+          <!-- phone -->
+          <div style="padding:30px 28px;background:#E6E4EA;display:flex;justify-content:center;">
+            <div style="width:286px;background:#15212B;border-radius:34px;padding:9px;box-shadow:0 10px 30px rgba(21,33,43,0.22);">
+              <div style="background:#15212B;border-radius:26px;overflow:hidden;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 20px 6px;font-family:'Albert Sans',sans-serif;">
+                  <span style="font-size:12px;font-weight:700;color:#fff;">9:41</span>
+                  <span style="width:15px;height:9px;border:1.4px solid #fff;border-radius:2px;display:inline-block;opacity:.6;"></span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 20px 14px;">
+                  <div><div style="font-size:12px;color:#8b9aa6;">Bonjour Camille</div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.01em;">Pixel · en forme</div></div>
+                  <div style="width:38px;height:38px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);border:2px solid #2a3a47;"></div>
+                </div>
+                <div style="margin:0 16px;background:linear-gradient(150deg,#12998C,#1FB6A6);border-radius:20px;padding:20px;box-shadow:0 8px 24px rgba(31,182,166,0.25);">
+                  <div style="display:flex;align-items:center;gap:13px;margin-bottom:16px;">
+                    <div style="width:54px;height:54px;border-radius:50%;background:repeating-linear-gradient(45deg,rgba(255,255,255,.25),rgba(255,255,255,.25) 5px,rgba(255,255,255,.4) 5px,rgba(255,255,255,.4) 10px);flex:none;border:2px solid rgba(255,255,255,.5);"></div>
+                    <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#fff;">Pixel</div><div style="font-size:12px;color:#d6f3ee;">Chat européen · 4 ans</div></div>
+                  </div>
+                  <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.22);border-radius:100px;padding:8px 14px;margin-bottom:12px;">
+                    <span style="width:9px;height:9px;border-radius:50%;background:#fff;display:inline-block;animation:pw-pulse 2.4s ease-in-out infinite;"></span>
+                    <span style="font-size:13px;font-weight:700;color:#fff;">Tout va bien</span>
+                  </div>
+                  <div style="font-size:12.5px;line-height:1.5;color:#eafaf7;">Rythme stable sur 7 jours. Synthèse IA prête.</div>
+                </div>
+                <div style="display:flex;gap:9px;padding:16px;">
+                  <div style="flex:1;background:#1d2c38;border-radius:14px;padding:13px 12px;"><div style="font-size:10.5px;color:#8b9aa6;margin-bottom:6px;">Activité</div><div style="font-size:17px;font-weight:800;color:#fff;">68<span style="font-size:10px;font-weight:600;color:#8b9aa6;">%</span></div><div style="height:4px;border-radius:3px;background:#2c3d49;margin-top:7px;overflow:hidden;"><div style="width:68%;height:100%;background:#1FB6A6;"></div></div></div>
+                  <div style="flex:1;background:#1d2c38;border-radius:14px;padding:13px 12px;"><div style="font-size:10.5px;color:#8b9aa6;margin-bottom:6px;">Sommeil</div><div style="font-size:17px;font-weight:800;color:#fff;">12<span style="font-size:10px;font-weight:600;color:#8b9aa6;">h</span></div><div style="height:4px;border-radius:3px;background:#2c3d49;margin-top:7px;overflow:hidden;"><div style="width:80%;height:100%;background:#7C6BD6;"></div></div></div>
+                  <div style="flex:1;background:#1d2c38;border-radius:14px;padding:13px 12px;"><div style="font-size:10.5px;color:#8b9aa6;margin-bottom:6px;">Sorties</div><div style="font-size:17px;font-weight:800;color:#fff;">4</div><div style="height:4px;border-radius:3px;background:#2c3d49;margin-top:7px;overflow:hidden;"><div style="width:50%;height:100%;background:#1FB6A6;"></div></div></div>
+                </div>
+                <div style="margin:0 16px 16px;background:#7C6BD6;border-radius:16px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+                  <div><div style="font-size:13px;font-weight:700;color:#fff;">Demander à l'IA</div><div style="font-size:11px;color:#e4ddfa;">Orientation, pas diagnostic</div></div>
+                  <div style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;">›</div>
+                </div>
+                <div style="display:flex;justify-content:space-around;align-items:center;padding:11px 14px 16px;background:#111a22;border-top:1px solid #233140;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1FB6A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span style="font-size:9px;color:#1FB6A6;font-weight:700;">Accueil</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6b7a86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg><span style="font-size:9px;color:#6b7a86;">Santé</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6b7a86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span style="font-size:9px;color:#6b7a86;">Carte</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6b7a86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.5 7.1L4 20l1.4-5A8 8 0 1 1 21 11.5z"/></svg><span style="font-size:9px;color:#6b7a86;">IA</span></div>
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#6b7a86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span style="font-size:9px;color:#6b7a86;">Profil</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- components -->
+          <div style="padding:24px 28px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a59fae;margin-bottom:14px;">Échelle bien-être · non-alarmiste</div>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:22px;">
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#D6F0EA;border-radius:100px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0E7468" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-size:13.5px;font-weight:700;color:#0E7468;">Bon — tout va bien</span></div>
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#EFE7CF;border-radius:100px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A6320" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg><span style="font-size:13.5px;font-weight:700;color:#7A6320;">À surveiller</span></div>
+              <div style="display:inline-flex;align-items:center;gap:9px;background:#F3DFD2;border-radius:100px;padding:9px 15px;width:fit-content;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9A4E2C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6"/><path d="M6 12l6-6 6 6"/></svg><span style="font-size:13.5px;font-weight:700;color:#9A4E2C;">Consulter — sans urgence</span></div>
+            </div>
+
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a59fae;margin-bottom:12px;">Carte d'alerte contextualisée</div>
+            <div style="background:#15212B;border-radius:16px;padding:16px;margin-bottom:22px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="width:8px;height:8px;border-radius:50%;background:#E0B85C;"></span><span style="font-size:13px;font-weight:700;color:#F0D89B;">À surveiller · activité en baisse</span></div>
+              <div style="font-size:12.5px;line-height:1.5;color:#aebcc7;margin-bottom:13px;">Pixel bouge 22% moins que d'habitude depuis 2 jours. Fréquent chez un chat de 4 ans en été — à confirmer.</div>
+              <div style="display:flex;gap:8px;"><div style="background:#1FB6A6;color:#08221f;font-size:12px;font-weight:700;border-radius:100px;padding:8px 15px;">Demander à l'IA</div><div style="background:transparent;border:1px solid #33444f;color:#cfdae2;font-size:12px;font-weight:600;border-radius:100px;padding:8px 15px;">Plus tard</div></div>
+            </div>
+
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a59fae;margin-bottom:12px;">Bulle de chat IA</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="align-self:flex-end;background:#1FB6A6;color:#08221f;font-size:13px;font-weight:500;border-radius:16px 16px 4px 16px;padding:10px 14px;max-width:80%;">Pixel dort plus que d'habitude, c'est grave ?</div>
+              <div style="align-self:flex-start;background:#15212B;color:#e7eef3;font-size:13px;line-height:1.5;border-radius:16px 16px 16px 4px;padding:10px 14px;max-width:88%;">Souvent bénin en cas de chaleur. Je peux préparer une mise en relation vétérinaire si tu veux en avoir le cœur net.<div style="margin-top:8px;font-size:10px;color:#8b9aa6;display:flex;align-items:center;gap:5px;"><span style="width:5px;height:5px;border-radius:50%;background:#7C6BD6;"></span>Orientation, pas un diagnostic</div></div>
+            </div>
+          </div>
+
+          <!-- rationale -->
+          <div style="padding:20px 28px 26px;background:#F1F0F3;border-top:1px solid #e6e3ea;">
+            <div style="font-size:13px;font-weight:700;color:#1A1A22;margin-bottom:7px;">Pourquoi ça marche</div>
+            <p style="margin:0;font-size:12.5px;line-height:1.55;color:#6B6B78;">Le teal se démarque d'un secteur santé saturé de bleu — forte mémorisation de marque. Continuité avec la soutenance existante. Risque : le sombre et le contraste fort doivent être maniés avec soin pour rester « calme » et non « gadget tech ».</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============ RECOMMENDATION ============ -->
+    <div style="margin-top:56px;background:#23211c;border-radius:16px;padding:34px 36px;color:#fff;max-width:1460px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#a8a294;margin-bottom:12px;">04 — Recommandation pour trancher</div>
+      <div style="display:flex;gap:40px;align-items:flex-start;">
+        <div style="flex:1.3;">
+          <h2 style="margin:0 0 14px;font-size:24px;font-weight:800;letter-spacing:-0.01em;">Mon conseil : « Sauge » pour l'âme, « Clinique Clair » pour la preuve.</h2>
+          <p style="margin:0 0 14px;font-size:14px;line-height:1.6;color:#cfc9bd;">La tension du produit est là : il faut <strong style="color:#fff;">apaiser le propriétaire</strong> (chaleur, nature) <strong style="color:#fff;">et crédibiliser le vétérinaire</strong> (rigueur, bleu médical). « Sauge » gagne sur l'émotion grand public ; « Clinique Clair » gagne sur la confiance pro et le pont vers le Vet Portal.</p>
+          <p style="margin:0;font-size:14px;line-height:1.6;color:#cfc9bd;">Piste forte : <strong style="color:#fff;">prendre « Sauge » comme base de marque</strong> et lui emprunter le bleu confiance de « Clinique Clair » comme couleur fonctionnelle du Vet Portal. « Pulse » reste la carte à jouer si la priorité devient la différenciation et la continuité avec la soutenance.</p>
+        </div>
+        <div style="flex:1;background:#2f2c26;border-radius:12px;padding:22px 24px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a8a294;margin-bottom:14px;">Prochaines étapes</div>
+          <div style="display:flex;flex-direction:column;gap:13px;">
+            <div style="display:flex;gap:12px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8c8579;">01</span><span style="font-size:13.5px;line-height:1.45;color:#e9e4d9;">Tu choisis une direction (ou un croisement Sauge × Clinique).</span></div>
+            <div style="display:flex;gap:12px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8c8579;">02</span><span style="font-size:13.5px;line-height:1.45;color:#e9e4d9;">Je formalise la DA retenue en <strong style="color:#fff;">DESIGN.md</strong> (tokens + sections complètes).</span></div>
+            <div style="display:flex;gap:12px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8c8579;">03</span><span style="font-size:13.5px;line-height:1.45;color:#e9e4d9;">Je produis le <strong style="color:#fff;">kit de composants complet</strong> puis les ~50 écrans des 4 surfaces.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

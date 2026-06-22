@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Albert+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#0f161d;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+</style>
+</helmet>
+
+<div style="width:max-content;min-width:100%;min-height:100vh;box-sizing:border-box;padding:56px 56px 96px;background:radial-gradient(1300px 680px at 28% -5%, #1d2f3c 0%, #141e26 58%, #0f161d 100%);font-family:'Albert Sans',sans-serif;">
+  <div style="width:1200px;">
+
+    <!-- BOARD HEADER -->
+    <div style="margin-bottom:40px;max-width:860px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#6f8a9b;margin-bottom:14px;">Pawrise Care — Surface 2 : Vet Portal · 1/2 — Dossier patient</div>
+      <h1 style="margin:0 0 14px;font-family:'Bricolage Grotesque',sans-serif;font-size:42px;line-height:1.05;letter-spacing:-0.02em;font-weight:800;color:#F4F7F9;">L'outil assiste la consultation. Il ne diagnostique pas à la place du vétérinaire.</h1>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:#9fb0bd;">Desktop-first, dense mais humain. Le contexte arrive prêt à l'emploi depuis le handoff de l'app. Priorité à la chronologie et aux données contextualisées — <strong style="color:#cfdae2;">pas de score de santé global</strong>.</p>
+    </div>
+
+    <!-- ============ 01 · LOGIN / ONBOARDING VÉT ============ -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">01 · Login & vérification vétérinaire</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7c93a3;">US 7.1</span></div>
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.34);margin-bottom:48px;display:flex;height:560px;">
+      <!-- left brand -->
+      <div style="width:46%;background:linear-gradient(160deg,#15212B 0%,#1d3540 100%);padding:44px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:11px;"><div style="position:relative;width:32px;height:32px;display:flex;align-items:center;justify-content:center;"><div style="width:28px;height:28px;border-radius:50%;border:3px solid #1FB6A6;"></div><div style="position:absolute;width:10px;height:10px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:#fff;">Pawrise <span style="color:#1FB6A6;">Pro</span></span></div>
+        <div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.12;letter-spacing:-0.01em;margin-bottom:14px;">Le contexte du patient, prêt avant la consultation.</div>
+          <div style="font-size:14px;line-height:1.6;color:#9fb0bd;">Dossiers structurés, données contextualisées, rapport normalisé. Vous gardez la décision médicale.</div>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#5e7686;">Réseau vétérinaire partenaire · accès sécurisé</div>
+      </div>
+      <!-- right form -->
+      <div style="flex:1;padding:48px 56px;display:flex;flex-direction:column;justify-content:center;background:#EDF2F0;">
+        <div style="max-width:380px;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:800;color:#15212B;margin-bottom:6px;">Connexion professionnelle</div>
+          <div style="font-size:13.5px;color:#6B6B78;margin-bottom:26px;">Réservé aux vétérinaires vérifiés (inscription à l'Ordre).</div>
+          <label style="display:block;font-size:12.5px;font-weight:600;color:#15212B;margin-bottom:7px;">Email professionnel</label>
+          <input value="dr.martin@clinique-lilas.fr" readonly style="font-family:inherit;width:100%;font-size:14px;color:#15212B;background:#fff;border:1.5px solid #e0dde4;border-radius:8px;padding:12px 14px;outline:none;margin-bottom:16px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;color:#15212B;margin-bottom:7px;">N° d'inscription à l'Ordre</label>
+          <div style="display:flex;align-items:center;gap:9px;background:#fff;border:1.5px solid #12998C;border-radius:8px;padding:12px 14px;margin-bottom:8px;box-shadow:0 0 0 3px rgba(18,153,140,0.14);"><span style="font-size:14px;color:#15212B;flex:1;">FR-VET-20381</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E7468" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
+          <div style="font-size:11.5px;color:#0E7468;margin-bottom:24px;display:flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0E7468" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Vérifié auprès de l'Ordre des vétérinaires</div>
+          <button style="font-family:inherit;border:none;cursor:pointer;width:100%;background:#12998C;color:#fff;font-size:15px;font-weight:700;border-radius:8px;padding:14px;">Accéder au portail</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 02 · FILE DE PRISE EN CHARGE ============ -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">02 · File de prise en charge</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:2px 6px;">P0 · US 10.3</span></div>
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.34);margin-bottom:48px;display:flex;height:620px;">
+      <!-- SIDEBAR -->
+      <div style="width:228px;background:#15212B;padding:22px 16px;display:flex;flex-direction:column;flex:none;">
+        <div style="display:flex;align-items:center;gap:9px;padding:0 8px 26px;"><div style="position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center;"><div style="width:23px;height:23px;border-radius:50%;border:2.5px solid #1FB6A6;"></div><div style="position:absolute;width:9px;height:9px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#fff;">Pawrise Pro</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;background:#1FB6A6;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#08221f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span style="font-size:13.5px;font-weight:700;color:#08221f;">File de prise en charge</span><span style="margin-left:auto;background:#08221f;color:#4FD6C5;font-size:11px;font-weight:700;border-radius:999px;padding:1px 7px;">3</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="18" cy="9" r="2"/></svg><span style="font-size:13.5px;color:#8B9AA6;">Patients</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.5 21a1.8 1.8 0 0 1-3 0"/></svg><span style="font-size:13.5px;color:#8B9AA6;">Notifications</span></div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding:11px 10px;border-top:1px solid #243341;"><div style="width:34px;height:34px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div style="flex:1;"><div style="font-size:12.5px;font-weight:700;color:#fff;">Dr. Martin</div><div style="font-size:10.5px;color:#8B9AA6;">Clinique des Lilas</div></div></div>
+      </div>
+      <!-- MAIN -->
+      <div style="flex:1;background:#EDF2F0;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;background:#fff;border-bottom:1px solid #e6e3ea;"><div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:#15212B;">File de prise en charge</div><div style="font-size:12.5px;color:#9a949f;">3 demandes d'orientation en attente</div></div><div style="display:flex;align-items:center;gap:9px;background:#EDF2F0;border-radius:8px;padding:9px 13px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a949f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><span style="font-size:13px;color:#9a949f;">Rechercher…</span></div></div>
+        <div style="flex:1;overflow:hidden;padding:22px 28px;">
+          <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 0.9fr auto;gap:14px;padding:0 16px 12px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9a949f;text-transform:uppercase;letter-spacing:0.05em;">
+            <span>Patient</span><span>Motif</span><span>Statut</span><span>Attente</span><span></span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 0.9fr auto;gap:14px;align-items:center;background:#fff;border-radius:12px;padding:15px 16px;box-shadow:0 1px 3px rgba(21,33,43,0.05);border-left:3px solid #D6A12A;">
+              <div style="display:flex;align-items:center;gap:11px;"><div style="width:38px;height:38px;border-radius:50%;background:repeating-linear-gradient(45deg,#dfe6d6,#dfe6d6 4px,#e9efe1 4px,#e9efe1 8px);flex:none;"></div><div><div style="font-size:13.5px;font-weight:700;color:#15212B;">Pixel</div><div style="font-size:11px;color:#9a949f;">Chat européen · 4 ans</div></div></div>
+              <div style="font-size:13px;color:#3a362f;">Baisse d'activité</div>
+              <div><span style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#7A6320;background:#EFE7CF;border-radius:999px;padding:4px 10px;">À orienter</span></div>
+              <div style="font-size:12.5px;font-weight:600;color:#7A6320;">4 min</div>
+              <button style="font-family:inherit;border:none;cursor:pointer;background:#12998C;color:#fff;font-size:12.5px;font-weight:700;border-radius:8px;padding:9px 16px;">Prendre en charge</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 0.9fr auto;gap:14px;align-items:center;background:#fff;border-radius:12px;padding:15px 16px;box-shadow:0 1px 3px rgba(21,33,43,0.05);">
+              <div style="display:flex;align-items:center;gap:11px;"><div style="width:38px;height:38px;border-radius:50%;background:repeating-linear-gradient(45deg,#d8e4dd,#d8e4dd 4px,#e3ede7 4px,#e3ede7 8px);flex:none;"></div><div><div style="font-size:13.5px;font-weight:700;color:#15212B;">Mochi</div><div style="font-size:11px;color:#9a949f;">Shiba · 6 ans</div></div></div>
+              <div style="font-size:13px;color:#3a362f;">Sommeil irrégulier</div>
+              <div><span style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#6B6B78;background:#EDEBF0;border-radius:999px;padding:4px 10px;">En attente</span></div>
+              <div style="font-size:12.5px;color:#9a949f;">11 min</div>
+              <button style="font-family:inherit;cursor:pointer;background:#fff;border:1px solid #e0dde4;color:#15212B;font-size:12.5px;font-weight:700;border-radius:8px;padding:9px 16px;">Prendre en charge</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 0.9fr auto;gap:14px;align-items:center;background:#fff;border-radius:12px;padding:15px 16px;box-shadow:0 1px 3px rgba(21,33,43,0.05);">
+              <div style="display:flex;align-items:center;gap:11px;"><div style="width:38px;height:38px;border-radius:50%;background:repeating-linear-gradient(45deg,#e4ddd2,#e4ddd2 4px,#ece6dc 4px,#ece6dc 8px);flex:none;"></div><div><div style="font-size:13.5px;font-weight:700;color:#15212B;">Nala</div><div style="font-size:11px;color:#9a949f;">Maine Coon · 2 ans</div></div></div>
+              <div style="font-size:13px;color:#3a362f;">Question alimentation</div>
+              <div><span style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#6B6B78;background:#EDEBF0;border-radius:999px;padding:4px 10px;">En attente</span></div>
+              <div style="font-size:12.5px;color:#9a949f;">18 min</div>
+              <button style="font-family:inherit;cursor:pointer;background:#fff;border:1px solid #e0dde4;color:#15212B;font-size:12.5px;font-weight:700;border-radius:8px;padding:9px 16px;">Prendre en charge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 03 · ACCÈS PATIENT AUTORISÉ ============ -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">03 · Accès patient autorisé</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7c93a3;">US 7.2</span></div>
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.34);margin-bottom:48px;display:flex;height:480px;">
+      <div style="width:228px;background:#15212B;flex:none;"></div>
+      <div style="flex:1;background:#EDF2F0;display:flex;align-items:center;justify-content:center;padding:40px;">
+        <div style="background:#fff;border-radius:18px;padding:36px;box-shadow:0 4px 16px rgba(21,33,43,0.08);max-width:440px;text-align:center;">
+          <div style="width:58px;height:58px;border-radius:16px;background:#EAE6F7;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6C5BC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:#15212B;margin-bottom:8px;">Accès au dossier de Pixel</div>
+          <div style="font-size:13.5px;line-height:1.6;color:#6B6B78;margin-bottom:22px;">La propriétaire <strong style="color:#15212B;">Camille D.</strong> a autorisé le partage du contexte et des données récentes pour cette consultation d'orientation.</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:8px;background:#D6F0EA;border-radius:10px;padding:11px;margin-bottom:22px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0E7468" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-size:12.5px;font-weight:600;color:#0E7468;">Consentement accordé · 22 juin 09:32</span></div>
+          <button style="font-family:inherit;border:none;cursor:pointer;width:100%;background:#12998C;color:#fff;font-size:14.5px;font-weight:700;border-radius:8px;padding:13px;">Ouvrir le dossier</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 04 · VUE PATIENT SYNTHÉTIQUE ============ -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">04 · Vue patient synthétique</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:2px 6px;">P0 · US 7.3 · pas de score global</span></div>
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.34);margin-bottom:48px;display:flex;height:660px;">
+      <div style="width:228px;background:#15212B;padding:22px 16px;display:flex;flex-direction:column;flex:none;">
+        <div style="display:flex;align-items:center;gap:9px;padding:0 8px 26px;"><div style="position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center;"><div style="width:23px;height:23px;border-radius:50%;border:2.5px solid #1FB6A6;"></div><div style="position:absolute;width:9px;height:9px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#fff;">Pawrise Pro</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span style="font-size:13.5px;color:#8B9AA6;">File de prise en charge</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;background:#1FB6A6;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#08221f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="18" cy="9" r="2"/></svg><span style="font-size:13.5px;font-weight:700;color:#08221f;">Patients</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span style="font-size:13.5px;color:#8B9AA6;">Notifications</span></div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding:11px 10px;border-top:1px solid #243341;"><div style="width:34px;height:34px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div style="flex:1;"><div style="font-size:12.5px;font-weight:700;color:#fff;">Dr. Martin</div><div style="font-size:10.5px;color:#8B9AA6;">Clinique des Lilas</div></div></div>
+      </div>
+      <div style="flex:1;background:#EDF2F0;display:flex;flex-direction:column;overflow:hidden;">
+        <!-- patient header -->
+        <div style="background:#fff;border-bottom:1px solid #e6e3ea;padding:20px 28px 0;">
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+            <div style="width:56px;height:56px;border-radius:50%;background:repeating-linear-gradient(45deg,#dfe6d6,#dfe6d6 5px,#e9efe1 5px,#e9efe1 10px);flex:none;"></div>
+            <div style="flex:1;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:#15212B;">Pixel</div><div style="font-size:13px;color:#6B6B78;">Chat européen · femelle stérilisée · 4 ans · 4,2 kg</div></div>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:999px;padding:6px 12px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0E7468" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Accès autorisé</span>
+          </div>
+          <div style="display:flex;gap:26px;">
+            <div style="padding-bottom:12px;border-bottom:2.5px solid #12998C;font-size:13px;font-weight:700;color:#12998C;">Vue synthétique</div>
+            <div style="padding-bottom:12px;font-size:13px;font-weight:600;color:#9a949f;">Timeline</div>
+            <div style="padding-bottom:12px;font-size:13px;font-weight:600;color:#9a949f;">Données brutes</div>
+            <div style="padding-bottom:12px;font-size:13px;font-weight:600;color:#9a949f;">Rapport</div>
+          </div>
+        </div>
+        <!-- content -->
+        <div style="flex:1;overflow:hidden;padding:22px 28px;display:flex;gap:18px;">
+          <div style="flex:1.5;display:flex;flex-direction:column;gap:16px;">
+            <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(21,33,43,0.05);">
+              <div style="font-size:11px;font-weight:600;color:#9a949f;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Motif de l'orientation</div>
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><span style="display:inline-flex;align-items:center;gap:7px;background:#EFE7CF;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;color:#7A6320;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A6320" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>À surveiller</span></div>
+              <div style="font-size:14px;line-height:1.6;color:#3a362f;">Baisse d'activité de <strong>22%</strong> sur 2 jours, sommeil stable. Contextualisé : fréquent chez un chat de 4 ans en été. Aucun autre signe rapporté par la propriétaire.</div>
+            </div>
+            <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(21,33,43,0.05);">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;"><span style="font-size:13px;font-weight:700;color:#15212B;">Constantes · 7 jours vs normale</span><span style="font-size:11.5px;color:#9a949f;">collier · synchro 2 min</span></div>
+              <div style="display:flex;gap:14px;">
+                <div style="flex:1;"><div style="font-size:11px;color:#9a949f;margin-bottom:6px;">Activité</div><svg width="100%" height="46" viewBox="0 0 140 46" preserveAspectRatio="none"><rect x="0" y="12" width="140" height="18" fill="#EAF6F3"></rect><polyline points="0,18 30,16 60,20 90,26 120,30 140,30" fill="none" stroke="#12998C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></div>
+                <div style="flex:1;"><div style="font-size:11px;color:#9a949f;margin-bottom:6px;">Sommeil</div><svg width="100%" height="46" viewBox="0 0 140 46" preserveAspectRatio="none"><rect x="0" y="14" width="140" height="16" fill="#EEEAF8"></rect><polyline points="0,26 30,24 60,22 90,20 120,18 140,18" fill="none" stroke="#6C5BC9" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></div>
+              </div>
+            </div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:16px;">
+            <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(21,33,43,0.05);">
+              <div style="font-size:11px;font-weight:600;color:#9a949f;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Antécédents</div>
+              <div style="display:flex;flex-direction:column;gap:9px;">
+                <div style="font-size:13px;color:#3a362f;display:flex;gap:8px;"><span style="color:#9a949f;">·</span>Stérilisation — 2023</div>
+                <div style="font-size:13px;color:#3a362f;display:flex;gap:8px;"><span style="color:#9a949f;">·</span>Vaccins à jour</div>
+                <div style="font-size:13px;color:#3a362f;display:flex;gap:8px;"><span style="color:#9a949f;">·</span>Aucune allergie connue</div>
+              </div>
+            </div>
+            <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(21,33,43,0.05);">
+              <div style="font-size:11px;font-weight:600;color:#9a949f;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Raccourcis</div>
+              <div style="display:flex;flex-direction:column;gap:9px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:#EDF2F0;border-radius:10px;"><span style="font-size:13px;color:#15212B;">Voir la timeline</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6B78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:#EDF2F0;border-radius:10px;"><span style="font-size:13px;color:#15212B;">Données brutes</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6B78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+              </div>
+            </div>
+            <button style="font-family:inherit;border:none;cursor:pointer;width:100%;background:#12998C;color:#fff;font-size:14px;font-weight:700;border-radius:10px;padding:13px;margin-top:auto;">Rédiger le rapport</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 05 · TIMELINE ============ -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">05 · Timeline chronologique structurée</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:2px 6px;">P0 · US 7.4</span></div>
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.34);margin-bottom:20px;display:flex;height:660px;">
+      <div style="width:228px;background:#15212B;flex:none;padding:22px 16px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;gap:9px;padding:0 8px 26px;"><div style="position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center;"><div style="width:23px;height:23px;border-radius:50%;border:2.5px solid #1FB6A6;"></div><div style="position:absolute;width:9px;height:9px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#fff;">Pawrise Pro</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span style="font-size:13.5px;color:#8B9AA6;">File de prise en charge</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;background:#1FB6A6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#08221f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="18" cy="9" r="2"/></svg><span style="font-size:13.5px;font-weight:700;color:#08221f;">Patients</span></div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding:11px 10px;border-top:1px solid #243341;"><div style="width:34px;height:34px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div style="flex:1;"><div style="font-size:12.5px;font-weight:700;color:#fff;">Dr. Martin</div><div style="font-size:10.5px;color:#8B9AA6;">Clinique des Lilas</div></div></div>
+      </div>
+      <div style="flex:1;background:#EDF2F0;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:#fff;border-bottom:1px solid #e6e3ea;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:13px;"><div style="width:40px;height:40px;border-radius:50%;background:repeating-linear-gradient(45deg,#dfe6d6,#dfe6d6 4px,#e9efe1 4px,#e9efe1 8px);"></div><div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;color:#15212B;">Pixel · Timeline</div><div style="font-size:12px;color:#9a949f;">Événements structurés</div></div></div>
+          <div style="display:flex;gap:7px;"><span style="font-size:11.5px;font-weight:600;color:#08221f;background:#12998C;border-radius:999px;padding:6px 12px;">Tout</span><span style="font-size:11.5px;font-weight:600;color:#6B6B78;background:#fff;border:1px solid #e0dde4;border-radius:999px;padding:6px 12px;">Mesures</span><span style="font-size:11.5px;font-weight:600;color:#6B6B78;background:#fff;border:1px solid #e0dde4;border-radius:999px;padding:6px 12px;">Alertes</span><span style="font-size:11.5px;font-weight:600;color:#6B6B78;background:#fff;border:1px solid #e0dde4;border-radius:999px;padding:6px 12px;">Échanges</span></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:24px 32px;">
+          <div style="position:relative;padding-left:30px;">
+            <div style="position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:#dfe3e1;"></div>
+            <div style="position:relative;margin-bottom:20px;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:#EFE7CF;border:3px solid #fff;box-shadow:0 0 0 1px #e3d3ab;"></span><div style="display:flex;align-items:center;gap:10px;margin-bottom:3px;"><span style="font-size:13.5px;font-weight:700;color:#15212B;">Alerte — baisse d'activité</span><span style="font-size:11.5px;font-weight:600;color:#7A6320;background:#EFE7CF;border-radius:999px;padding:2px 9px;">À surveiller</span></div><div style="font-size:12.5px;color:#6B6B78;">22 juin · 07:40 — détectée par le collier, −22% vs moyenne</div></div>
+            <div style="position:relative;margin-bottom:20px;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:#EAE6F7;border:3px solid #fff;box-shadow:0 0 0 1px #d9d0f0;"></span><div style="font-size:13.5px;font-weight:700;color:#15212B;margin-bottom:3px;">Échange IA → mise en relation</div><div style="font-size:12.5px;color:#6B6B78;">22 juin · 09:28 — la propriétaire a demandé un avis vétérinaire</div></div>
+            <div style="position:relative;margin-bottom:20px;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:#D6F0EA;border:3px solid #fff;box-shadow:0 0 0 1px #b9e3d8;"></span><div style="font-size:13.5px;font-weight:700;color:#15212B;margin-bottom:3px;">Consentement accordé</div><div style="font-size:12.5px;color:#6B6B78;">22 juin · 09:32 — partage du contexte autorisé</div></div>
+            <div style="position:relative;margin-bottom:20px;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:#EAF1F7;border:3px solid #fff;box-shadow:0 0 0 1px #cfe0ee;"></span><div style="font-size:13.5px;font-weight:700;color:#15212B;margin-bottom:3px;">Mesures hebdomadaires synchronisées</div><div style="font-size:12.5px;color:#6B6B78;">15–22 juin — activité, sommeil, sorties</div></div>
+            <div style="position:relative;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:#eceaf0;border:3px solid #fff;box-shadow:0 0 0 1px #ddd9e3;"></span><div style="font-size:13.5px;font-weight:700;color:#15212B;margin-bottom:3px;">Bilan annuel — clinique traitante</div><div style="font-size:12.5px;color:#6B6B78;">14 mars · RAS, poids stable</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7c93a3;margin-bottom:64px;">Suite → Vet Portal 2/2 : Données brutes · Alertes & notes pro · Rapport PDF normalisé · Téléconsultation côté vét.</div>
+
+    <!-- ===================== MODE SOMBRE ===================== -->
+    <div style="display:flex;align-items:center;gap:11px;margin:0 0 24px;"><span style="width:13px;height:13px;border-radius:50%;background:#11191F;border:1px solid #3a4a57;"></span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:#EEF3F6;font-weight:600;">Mode sombre</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7c93a3;">mêmes écrans, tokens basculés</span></div>
+
+    <!-- D01 · LOGIN (DARK) -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">01 · Login & vérification vétérinaire</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7c93a3;">US 7.1</span></div>
+    <div style="background:#11191F;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.5);border:1px solid #243341;margin-bottom:48px;display:flex;height:560px;">
+      <div style="width:46%;background:linear-gradient(160deg,#0c131a 0%,#16313a 100%);padding:44px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:11px;"><div style="position:relative;width:32px;height:32px;display:flex;align-items:center;justify-content:center;"><div style="width:28px;height:28px;border-radius:50%;border:3px solid #1FB6A6;"></div><div style="position:absolute;width:10px;height:10px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:#fff;">Pawrise <span style="color:#1FB6A6;">Pro</span></span></div>
+        <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:30px;font-weight:800;color:#fff;line-height:1.12;letter-spacing:-0.01em;margin-bottom:14px;">Le contexte du patient, prêt avant la consultation.</div><div style="font-size:14px;line-height:1.6;color:#9fb0bd;">Dossiers structurés, données contextualisées, rapport normalisé. Vous gardez la décision médicale.</div></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#5e7686;">Réseau vétérinaire partenaire · accès sécurisé</div>
+      </div>
+      <div style="flex:1;padding:48px 56px;display:flex;flex-direction:column;justify-content:center;background:#11191F;">
+        <div style="max-width:380px;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:800;color:#EEF3F6;margin-bottom:6px;">Connexion professionnelle</div>
+          <div style="font-size:13.5px;color:#8B9AA6;margin-bottom:26px;">Réservé aux vétérinaires vérifiés (inscription à l'Ordre).</div>
+          <label style="display:block;font-size:12.5px;font-weight:600;color:#EEF3F6;margin-bottom:7px;">Email professionnel</label>
+          <input value="dr.martin@clinique-lilas.fr" readonly style="font-family:inherit;width:100%;font-size:14px;color:#EEF3F6;background:#1B2A35;border:1.5px solid #2c3d49;border-radius:8px;padding:12px 14px;outline:none;margin-bottom:16px;">
+          <label style="display:block;font-size:12.5px;font-weight:600;color:#EEF3F6;margin-bottom:7px;">N° d'inscription à l'Ordre</label>
+          <div style="display:flex;align-items:center;gap:9px;background:#1B2A35;border:1.5px solid #1FB6A6;border-radius:8px;padding:12px 14px;margin-bottom:8px;box-shadow:0 0 0 3px rgba(31,182,166,0.18);"><span style="font-size:14px;color:#EEF3F6;flex:1;">FR-VET-20381</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4FD6C5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
+          <div style="font-size:11.5px;color:#4FD6C5;margin-bottom:24px;display:flex;align-items:center;gap:6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4FD6C5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Vérifié auprès de l'Ordre des vétérinaires</div>
+          <button style="font-family:inherit;border:none;cursor:pointer;width:100%;background:#1FB6A6;color:#08221F;font-size:15px;font-weight:700;border-radius:8px;padding:14px;">Accéder au portail</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- D02 · FILE (DARK) -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">02 · File de prise en charge</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#4FD6C5;background:rgba(31,182,166,0.16);border-radius:4px;padding:2px 6px;">P0 · US 10.3</span></div>
+    <div style="background:#11191F;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.5);border:1px solid #243341;margin-bottom:48px;display:flex;height:620px;">
+      <div style="width:228px;background:#0c131a;padding:22px 16px;display:flex;flex-direction:column;flex:none;">
+        <div style="display:flex;align-items:center;gap:9px;padding:0 8px 26px;"><div style="position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center;"><div style="width:23px;height:23px;border-radius:50%;border:2.5px solid #1FB6A6;"></div><div style="position:absolute;width:9px;height:9px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#fff;">Pawrise Pro</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;background:#1FB6A6;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#08221f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span style="font-size:13.5px;font-weight:700;color:#08221f;">File de prise en charge</span><span style="margin-left:auto;background:#08221f;color:#4FD6C5;font-size:11px;font-weight:700;border-radius:999px;padding:1px 7px;">3</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="18" cy="9" r="2"/></svg><span style="font-size:13.5px;color:#8B9AA6;">Patients</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.5 21a1.8 1.8 0 0 1-3 0"/></svg><span style="font-size:13.5px;color:#8B9AA6;">Notifications</span></div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding:11px 10px;border-top:1px solid #243341;"><div style="width:34px;height:34px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div style="flex:1;"><div style="font-size:12.5px;font-weight:700;color:#fff;">Dr. Martin</div><div style="font-size:10.5px;color:#8B9AA6;">Clinique des Lilas</div></div></div>
+      </div>
+      <div style="flex:1;background:#11191F;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 28px;background:#16222C;border-bottom:1px solid #243341;"><div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:#EEF3F6;">File de prise en charge</div><div style="font-size:12.5px;color:#6B7A86;">3 demandes d'orientation en attente</div></div><div style="display:flex;align-items:center;gap:9px;background:#1B2A35;border:1px solid #2c3d49;border-radius:8px;padding:9px 13px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7A86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><span style="font-size:13px;color:#6B7A86;">Rechercher…</span></div></div>
+        <div style="flex:1;overflow:hidden;padding:22px 28px;">
+          <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 0.9fr auto;gap:14px;padding:0 16px 12px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#6B7A86;text-transform:uppercase;letter-spacing:0.05em;"><span>Patient</span><span>Motif</span><span>Statut</span><span>Attente</span><span></span></div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 0.9fr auto;gap:14px;align-items:center;background:#1B2A35;border:1px solid #243341;border-radius:12px;padding:15px 16px;border-left:3px solid #E0B85C;">
+              <div style="display:flex;align-items:center;gap:11px;"><div style="width:38px;height:38px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div><div style="font-size:13.5px;font-weight:700;color:#EEF3F6;">Pixel</div><div style="font-size:11px;color:#6B7A86;">Chat européen · 4 ans</div></div></div>
+              <div style="font-size:13px;color:#cfdae2;">Baisse d'activité</div>
+              <div><span style="font-size:11.5px;font-weight:600;color:#E6C575;background:rgba(224,184,92,0.16);border-radius:999px;padding:4px 10px;">À orienter</span></div>
+              <div style="font-size:12.5px;font-weight:600;color:#E6C575;">4 min</div>
+              <button style="font-family:inherit;border:none;cursor:pointer;background:#1FB6A6;color:#08221F;font-size:12.5px;font-weight:700;border-radius:8px;padding:9px 16px;">Prendre en charge</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 0.9fr auto;gap:14px;align-items:center;background:#1B2A35;border:1px solid #243341;border-radius:12px;padding:15px 16px;">
+              <div style="display:flex;align-items:center;gap:11px;"><div style="width:38px;height:38px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div><div style="font-size:13.5px;font-weight:700;color:#EEF3F6;">Mochi</div><div style="font-size:11px;color:#6B7A86;">Shiba · 6 ans</div></div></div>
+              <div style="font-size:13px;color:#cfdae2;">Sommeil irrégulier</div>
+              <div><span style="font-size:11.5px;font-weight:600;color:#8B9AA6;background:#243341;border-radius:999px;padding:4px 10px;">En attente</span></div>
+              <div style="font-size:12.5px;color:#6B7A86;">11 min</div>
+              <button style="font-family:inherit;cursor:pointer;background:#1B2A35;border:1px solid #2c3d49;color:#EEF3F6;font-size:12.5px;font-weight:700;border-radius:8px;padding:9px 16px;">Prendre en charge</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1.6fr 1.4fr 1fr 0.9fr auto;gap:14px;align-items:center;background:#1B2A35;border:1px solid #243341;border-radius:12px;padding:15px 16px;">
+              <div style="display:flex;align-items:center;gap:11px;"><div style="width:38px;height:38px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div><div style="font-size:13.5px;font-weight:700;color:#EEF3F6;">Nala</div><div style="font-size:11px;color:#6B7A86;">Maine Coon · 2 ans</div></div></div>
+              <div style="font-size:13px;color:#cfdae2;">Question alimentation</div>
+              <div><span style="font-size:11.5px;font-weight:600;color:#8B9AA6;background:#243341;border-radius:999px;padding:4px 10px;">En attente</span></div>
+              <div style="font-size:12.5px;color:#6B7A86;">18 min</div>
+              <button style="font-family:inherit;cursor:pointer;background:#1B2A35;border:1px solid #2c3d49;color:#EEF3F6;font-size:12.5px;font-weight:700;border-radius:8px;padding:9px 16px;">Prendre en charge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D03 · ACCÈS PATIENT (DARK) -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">03 · Accès patient autorisé</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#7c93a3;">US 7.2</span></div>
+    <div style="background:#11191F;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.5);border:1px solid #243341;margin-bottom:48px;display:flex;height:480px;">
+      <div style="width:228px;background:#0c131a;flex:none;"></div>
+      <div style="flex:1;background:#11191F;display:flex;align-items:center;justify-content:center;padding:40px;">
+        <div style="background:#1B2A35;border:1px solid #243341;border-radius:18px;padding:36px;max-width:440px;text-align:center;">
+          <div style="width:58px;height:58px;border-radius:16px;background:rgba(124,107,214,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9d8fe6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:#EEF3F6;margin-bottom:8px;">Accès au dossier de Pixel</div>
+          <div style="font-size:13.5px;line-height:1.6;color:#8B9AA6;margin-bottom:22px;">La propriétaire <strong style="color:#EEF3F6;">Camille D.</strong> a autorisé le partage du contexte et des données récentes pour cette consultation d'orientation.</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(31,182,166,0.16);border-radius:10px;padding:11px;margin-bottom:22px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4FD6C5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-size:12.5px;font-weight:600;color:#4FD6C5;">Consentement accordé · 22 juin 09:32</span></div>
+          <button style="font-family:inherit;border:none;cursor:pointer;width:100%;background:#1FB6A6;color:#08221F;font-size:14.5px;font-weight:700;border-radius:8px;padding:13px;">Ouvrir le dossier</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- D04 · VUE SYNTHÉTIQUE (DARK) -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">04 · Vue patient synthétique</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#4FD6C5;background:rgba(31,182,166,0.16);border-radius:4px;padding:2px 6px;">P0 · US 7.3 · pas de score global</span></div>
+    <div style="background:#11191F;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.5);border:1px solid #243341;margin-bottom:48px;display:flex;height:660px;">
+      <div style="width:228px;background:#0c131a;padding:22px 16px;display:flex;flex-direction:column;flex:none;">
+        <div style="display:flex;align-items:center;gap:9px;padding:0 8px 26px;"><div style="position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center;"><div style="width:23px;height:23px;border-radius:50%;border:2.5px solid #1FB6A6;"></div><div style="position:absolute;width:9px;height:9px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#fff;">Pawrise Pro</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span style="font-size:13.5px;color:#8B9AA6;">File de prise en charge</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;background:#1FB6A6;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#08221f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="18" cy="9" r="2"/></svg><span style="font-size:13.5px;font-weight:700;color:#08221f;">Patients</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span style="font-size:13.5px;color:#8B9AA6;">Notifications</span></div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding:11px 10px;border-top:1px solid #243341;"><div style="width:34px;height:34px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div style="flex:1;"><div style="font-size:12.5px;font-weight:700;color:#fff;">Dr. Martin</div><div style="font-size:10.5px;color:#8B9AA6;">Clinique des Lilas</div></div></div>
+      </div>
+      <div style="flex:1;background:#11191F;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:#16222C;border-bottom:1px solid #243341;padding:20px 28px 0;">
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+            <div style="width:56px;height:56px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 5px,#33444f 5px,#33444f 10px);flex:none;"></div>
+            <div style="flex:1;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:#EEF3F6;">Pixel</div><div style="font-size:13px;color:#8B9AA6;">Chat européen · femelle stérilisée · 4 ans · 4,2 kg</div></div>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#4FD6C5;background:rgba(31,182,166,0.16);border-radius:999px;padding:6px 12px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4FD6C5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Accès autorisé</span>
+          </div>
+          <div style="display:flex;gap:26px;"><div style="padding-bottom:12px;border-bottom:2.5px solid #1FB6A6;font-size:13px;font-weight:700;color:#4FD6C5;">Vue synthétique</div><div style="padding-bottom:12px;font-size:13px;font-weight:600;color:#8B9AA6;">Timeline</div><div style="padding-bottom:12px;font-size:13px;font-weight:600;color:#8B9AA6;">Données brutes</div><div style="padding-bottom:12px;font-size:13px;font-weight:600;color:#8B9AA6;">Rapport</div></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:22px 28px;display:flex;gap:18px;">
+          <div style="flex:1.5;display:flex;flex-direction:column;gap:16px;">
+            <div style="background:#1B2A35;border:1px solid #243341;border-radius:14px;padding:18px;">
+              <div style="font-size:11px;font-weight:600;color:#8B9AA6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Motif de l'orientation</div>
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><span style="display:inline-flex;align-items:center;gap:7px;background:rgba(224,184,92,0.16);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;color:#E6C575;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E6C575" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>À surveiller</span></div>
+              <div style="font-size:14px;line-height:1.6;color:#cfdae2;">Baisse d'activité de <strong style="color:#EEF3F6;">22%</strong> sur 2 jours, sommeil stable. Contextualisé : fréquent chez un chat de 4 ans en été. Aucun autre signe rapporté par la propriétaire.</div>
+            </div>
+            <div style="background:#1B2A35;border:1px solid #243341;border-radius:14px;padding:18px;">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;"><span style="font-size:13px;font-weight:700;color:#EEF3F6;">Constantes · 7 jours vs normale</span><span style="font-size:11.5px;color:#6B7A86;">collier · synchro 2 min</span></div>
+              <div style="display:flex;gap:14px;">
+                <div style="flex:1;"><div style="font-size:11px;color:#8B9AA6;margin-bottom:6px;">Activité</div><svg width="100%" height="46" viewBox="0 0 140 46" preserveAspectRatio="none"><rect x="0" y="12" width="140" height="18" fill="rgba(31,182,166,0.12)"></rect><polyline points="0,18 30,16 60,20 90,26 120,30 140,30" fill="none" stroke="#1FB6A6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></div>
+                <div style="flex:1;"><div style="font-size:11px;color:#8B9AA6;margin-bottom:6px;">Sommeil</div><svg width="100%" height="46" viewBox="0 0 140 46" preserveAspectRatio="none"><rect x="0" y="14" width="140" height="16" fill="rgba(124,107,214,0.2)"></rect><polyline points="0,26 30,24 60,22 90,20 120,18 140,18" fill="none" stroke="#9d8fe6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></polyline></svg></div>
+              </div>
+            </div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:16px;">
+            <div style="background:#1B2A35;border:1px solid #243341;border-radius:14px;padding:18px;">
+              <div style="font-size:11px;font-weight:600;color:#8B9AA6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Antécédents</div>
+              <div style="display:flex;flex-direction:column;gap:9px;">
+                <div style="font-size:13px;color:#cfdae2;display:flex;gap:8px;"><span style="color:#6B7A86;">·</span>Stérilisation — 2023</div>
+                <div style="font-size:13px;color:#cfdae2;display:flex;gap:8px;"><span style="color:#6B7A86;">·</span>Vaccins à jour</div>
+                <div style="font-size:13px;color:#cfdae2;display:flex;gap:8px;"><span style="color:#6B7A86;">·</span>Aucune allergie connue</div>
+              </div>
+            </div>
+            <div style="background:#1B2A35;border:1px solid #243341;border-radius:14px;padding:18px;">
+              <div style="font-size:11px;font-weight:600;color:#8B9AA6;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Raccourcis</div>
+              <div style="display:flex;flex-direction:column;gap:9px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:#16222C;border-radius:10px;"><span style="font-size:13px;color:#EEF3F6;">Voir la timeline</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:#16222C;border-radius:10px;"><span style="font-size:13px;color:#EEF3F6;">Données brutes</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+              </div>
+            </div>
+            <button style="font-family:inherit;border:none;cursor:pointer;width:100%;background:#1FB6A6;color:#08221F;font-size:14px;font-weight:700;border-radius:10px;padding:13px;margin-top:auto;">Rédiger le rapport</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D05 · TIMELINE (DARK) -->
+    <div style="margin-bottom:18px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.06em;color:#EEF3F6;">05 · Timeline chronologique structurée</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#4FD6C5;background:rgba(31,182,166,0.16);border-radius:4px;padding:2px 6px;">P0 · US 7.4</span></div>
+    <div style="background:#11191F;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.5);border:1px solid #243341;margin-bottom:20px;display:flex;height:660px;">
+      <div style="width:228px;background:#0c131a;flex:none;padding:22px 16px;display:flex;flex-direction:column;">
+        <div style="display:flex;align-items:center;gap:9px;padding:0 8px 26px;"><div style="position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center;"><div style="width:23px;height:23px;border-radius:50%;border:2.5px solid #1FB6A6;"></div><div style="position:absolute;width:9px;height:9px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#fff;">Pawrise Pro</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;margin-bottom:4px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span style="font-size:13.5px;color:#8B9AA6;">File de prise en charge</span></div>
+        <div style="display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;background:#1FB6A6;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#08221f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="18" cy="9" r="2"/></svg><span style="font-size:13.5px;font-weight:700;color:#08221f;">Patients</span></div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:10px;padding:11px 10px;border-top:1px solid #243341;"><div style="width:34px;height:34px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div style="flex:1;"><div style="font-size:12.5px;font-weight:700;color:#fff;">Dr. Martin</div><div style="font-size:10.5px;color:#8B9AA6;">Clinique des Lilas</div></div></div>
+      </div>
+      <div style="flex:1;background:#11191F;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:#16222C;border-bottom:1px solid #243341;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:13px;"><div style="width:40px;height:40px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);"></div><div><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;color:#EEF3F6;">Pixel · Timeline</div><div style="font-size:12px;color:#6B7A86;">Événements structurés</div></div></div>
+          <div style="display:flex;gap:7px;"><span style="font-size:11.5px;font-weight:600;color:#08221f;background:#1FB6A6;border-radius:999px;padding:6px 12px;">Tout</span><span style="font-size:11.5px;font-weight:600;color:#8B9AA6;background:#1B2A35;border:1px solid #2c3d49;border-radius:999px;padding:6px 12px;">Mesures</span><span style="font-size:11.5px;font-weight:600;color:#8B9AA6;background:#1B2A35;border:1px solid #2c3d49;border-radius:999px;padding:6px 12px;">Alertes</span><span style="font-size:11.5px;font-weight:600;color:#8B9AA6;background:#1B2A35;border:1px solid #2c3d49;border-radius:999px;padding:6px 12px;">Échanges</span></div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:24px 32px;">
+          <div style="position:relative;padding-left:30px;">
+            <div style="position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:#243341;"></div>
+            <div style="position:relative;margin-bottom:20px;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:rgba(224,184,92,0.3);border:3px solid #11191F;box-shadow:0 0 0 1px #5a4a25;"></span><div style="display:flex;align-items:center;gap:10px;margin-bottom:3px;"><span style="font-size:13.5px;font-weight:700;color:#EEF3F6;">Alerte — baisse d'activité</span><span style="font-size:11.5px;font-weight:600;color:#E6C575;background:rgba(224,184,92,0.16);border-radius:999px;padding:2px 9px;">À surveiller</span></div><div style="font-size:12.5px;color:#8B9AA6;">22 juin · 07:40 — détectée par le collier, −22% vs moyenne</div></div>
+            <div style="position:relative;margin-bottom:20px;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:rgba(124,107,214,0.35);border:3px solid #11191F;box-shadow:0 0 0 1px #4a3f6e;"></span><div style="font-size:13.5px;font-weight:700;color:#EEF3F6;margin-bottom:3px;">Échange IA → mise en relation</div><div style="font-size:12.5px;color:#8B9AA6;">22 juin · 09:28 — la propriétaire a demandé un avis vétérinaire</div></div>
+            <div style="position:relative;margin-bottom:20px;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:rgba(31,182,166,0.35);border:3px solid #11191F;box-shadow:0 0 0 1px #1d5a52;"></span><div style="font-size:13.5px;font-weight:700;color:#EEF3F6;margin-bottom:3px;">Consentement accordé</div><div style="font-size:12.5px;color:#8B9AA6;">22 juin · 09:32 — partage du contexte autorisé</div></div>
+            <div style="position:relative;margin-bottom:20px;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:#243341;border:3px solid #11191F;box-shadow:0 0 0 1px #2c3d49;"></span><div style="font-size:13.5px;font-weight:700;color:#EEF3F6;margin-bottom:3px;">Mesures hebdomadaires synchronisées</div><div style="font-size:12.5px;color:#8B9AA6;">15–22 juin — activité, sommeil, sorties</div></div>
+            <div style="position:relative;"><span style="position:absolute;left:-30px;top:2px;width:16px;height:16px;border-radius:50%;background:#243341;border:3px solid #11191F;box-shadow:0 0 0 1px #2c3d49;"></span><div style="font-size:13.5px;font-weight:700;color:#EEF3F6;margin-bottom:3px;">Bilan annuel — clinique traitante</div><div style="font-size:12.5px;color:#8B9AA6;">14 mars · RAS, poids stable</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

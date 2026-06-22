@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Albert+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#e7e5df;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+</style>
+</helmet>
+
+<div style="width:max-content;min-width:100%;min-height:100vh;box-sizing:border-box;padding:56px 48px 96px;background:#e7e5df;font-family:'Albert Sans',sans-serif;">
+  <div style="width:1280px;max-width:1280px;">
+
+    <!-- HEADER -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#8a857c;margin-bottom:14px;">Pawrise Care — Plan UX · Surface 1 : App mobile propriétaire</div>
+    <h1 style="margin:0 0 16px;font-family:'Bricolage Grotesque',sans-serif;font-size:44px;line-height:1.05;letter-spacing:-0.02em;font-weight:800;color:#15212B;max-width:1000px;">26 écrans, une seule colonne vertébrale : la boucle de réassurance.</h1>
+    <p style="margin:0 0 26px;font-size:16px;line-height:1.6;color:#5f5a51;max-width:740px;">Inventaire tracé aux user stories, priorisé, et séquencé en lots de production. Mode clair par défaut, IA d'orientation non-diagnostique, sémantique santé non-alarmiste — le rouge réservé à la sécurité réelle (sortie de zone).</p>
+
+    <!-- LEGEND -->
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:48px;align-items:center;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:5px;padding:4px 9px;">P0 · socle + flux héros</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:#5B4BB0;background:#E8E4F7;border-radius:5px;padding:4px 9px;">P1 · santé & carte</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:5px;padding:4px 9px;">P2 · compte, abo, RGPD</span>
+      <span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a948a;">US x.y = user story tracée</span>
+    </div>
+
+    <!-- ============ 01 — NAV MODEL ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:14px;">01 — Modèle de navigation</div>
+    <div style="display:flex;gap:18px;margin-bottom:56px;align-items:stretch;">
+      <!-- pre-auth stack -->
+      <div style="flex:1.1;background:#fff;border-radius:14px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-size:14px;font-weight:800;color:#15212B;margin-bottom:4px;font-family:'Bricolage Grotesque',sans-serif;">Pré-auth — stack</div>
+        <p style="margin:0 0 16px;font-size:12.5px;line-height:1.5;color:#6B6B78;">Un chemin linéaire jusqu'à la première valeur : un collier appairé et un animal suivi.</p>
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:8px;padding:6px 11px;">Welcome</span>
+          <span style="color:#bdbac2;">→</span>
+          <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:8px;padding:6px 11px;">Inscription</span>
+          <span style="color:#bdbac2;">→</span>
+          <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:8px;padding:6px 11px;">Profil animal</span>
+          <span style="color:#bdbac2;">→</span>
+          <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:8px;padding:6px 11px;">Appairage</span>
+          <span style="color:#bdbac2;">→</span>
+          <span style="font-size:12px;font-weight:700;color:#0E7468;background:#D6F0EA;border-radius:8px;padding:6px 11px;">App</span>
+        </div>
+      </div>
+      <!-- tab bar -->
+      <div style="flex:1;background:#15212B;border-radius:14px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:4px;font-family:'Bricolage Grotesque',sans-serif;">Tab-bar — 5 onglets</div>
+        <p style="margin:0 0 16px;font-size:12.5px;line-height:1.5;color:#9fb0bd;">Navigation au pouce, persistante. Chaque onglet empile ses écrans de détail.</p>
+        <div style="display:flex;justify-content:space-between;gap:6px;">
+          <div style="flex:1;text-align:center;"><div style="width:38px;height:38px;margin:0 auto 7px;border-radius:11px;background:#1FB6A6;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#08221f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div style="font-size:10px;color:#fff;font-weight:600;">Bien-être</div></div>
+          <div style="flex:1;text-align:center;"><div style="width:38px;height:38px;margin:0 auto 7px;border-radius:11px;background:#1b2a35;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div style="font-size:10px;color:#8B9AA6;">Carte</div></div>
+          <div style="flex:1;text-align:center;"><div style="width:38px;height:38px;margin:0 auto 7px;border-radius:11px;background:#1b2a35;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.5 21a1.8 1.8 0 0 1-3 0"/></svg></div><div style="font-size:10px;color:#8B9AA6;">Alertes</div></div>
+          <div style="flex:1;text-align:center;"><div style="width:38px;height:38px;margin:0 auto 7px;border-radius:11px;background:#1b2a35;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.5 7.1L4 20l1.4-5A8 8 0 1 1 21 11.5z"/></svg></div><div style="font-size:10px;color:#8B9AA6;">Chat IA</div></div>
+          <div style="flex:1;text-align:center;"><div style="width:38px;height:38px;margin:0 auto 7px;border-radius:11px;background:#1b2a35;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></div><div style="font-size:10px;color:#8B9AA6;">Profil</div></div>
+        </div>
+      </div>
+      <!-- modals -->
+      <div style="flex:0.85;background:#fff;border-radius:14px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-size:14px;font-weight:800;color:#15212B;margin-bottom:4px;font-family:'Bricolage Grotesque',sans-serif;">Modales — 1 niveau</div>
+        <p style="margin:0 0 14px;font-size:12.5px;line-height:1.5;color:#6B6B78;">Actions ponctuelles, par-dessus le contexte.</p>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div style="font-size:12.5px;color:#3a362f;">· Appairage collier</div>
+          <div style="font-size:12.5px;color:#3a362f;">· Création / édition de zone</div>
+          <div style="font-size:12.5px;color:#3a362f;">· Souscription abonnement</div>
+          <div style="font-size:12.5px;color:#3a362f;">· Mise en relation véto</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 02 — INVENTORY ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:6px;">02 — Inventaire d'écrans · 26</div>
+    <h2 style="margin:0 0 22px;font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:700;color:#15212B;">Groupés par section de navigation, tracés aux US</h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:30px;">
+
+      <!-- Onboarding -->
+      <div style="background:#fff;border-radius:14px;padding:22px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;color:#15212B;">Onboarding</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">6</span></div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">01</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Welcome / Splash</div><div style="font-size:11px;color:#9a949f;">Pitch + CTA</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">02</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Inscription <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a949f;">US 1.1</span></div><div style="font-size:11px;color:#9a949f;">Email/mdp, CGU</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">03</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Connexion + reset <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a949f;">US 1.2</span></div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">04</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Profil animal <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a949f;">US 1.3</span></div><div style="font-size:11px;color:#9a949f;">Photo, race, âge, antécédents</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">05</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Appairage collier <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:1px 5px;">P0</span></div><div style="font-size:11px;color:#9a949f;">Assistant BLE · US 1.4</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">06</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Mon dispositif <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a949f;">US 1.5/1.6</span></div><div style="font-size:11px;color:#9a949f;">Batterie, signal, remplacer</div></div></div>
+        </div>
+      </div>
+
+      <!-- Bien-être -->
+      <div style="background:#fff;border-radius:14px;padding:22px;box-shadow:0 1px 3px rgba(0,0,0,0.06);border-top:3px solid #12998C;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;color:#15212B;">Onglet Bien-être</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">2</span></div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">07</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Dashboard bien-être <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:1px 5px;">P0</span></div><div style="font-size:11px;color:#9a949f;">Status-pill, activité, sommeil · US 3.3</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">08</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Tendances historiques <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#5B4BB0;background:#E8E4F7;border-radius:4px;padding:1px 5px;">P1</span></div><div style="font-size:11px;color:#9a949f;">Courbes vs « normale » · US 3.4</div></div></div>
+        </div>
+        <div style="height:1px;background:#f0eef2;margin:18px 0;"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;color:#15212B;">Onglet Carte</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">3</span></div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">09</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Carte GPS temps réel <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#5B4BB0;background:#E8E4F7;border-radius:4px;padding:1px 5px;">P1</span></div><div style="font-size:11px;color:#9a949f;">US 4.1/4.5</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">10</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Historique déplacements <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a949f;">US 4.2</span></div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">11</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Zones de sécurité <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#9a949f;">US 4.3/4.4</span></div><div style="font-size:11px;color:#9a949f;">Éditeur rayon + alertes</div></div></div>
+        </div>
+      </div>
+
+      <!-- Alertes -->
+      <div style="background:#fff;border-radius:14px;padding:22px;box-shadow:0 1px 3px rgba(0,0,0,0.06);border-top:3px solid #C98A4B;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;color:#15212B;">Onglet Alertes</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">3</span></div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">12</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Centre d'alertes <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:1px 5px;">P0</span></div><div style="font-size:11px;color:#9a949f;">Prévention/santé/rappels · US 5.4</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">13</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Détail d'une alerte <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:1px 5px;">P0</span></div><div style="font-size:11px;color:#9a949f;">Contextualisation + CTA IA · US 5.2/5.3</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">14</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Rappels de soins <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#5B4BB0;background:#E8E4F7;border-radius:4px;padding:1px 5px;">P1</span></div><div style="font-size:11px;color:#9a949f;">Vaccins, traitements · US 5.5</div></div></div>
+        </div>
+        <div style="height:1px;background:#f0eef2;margin:18px 0;"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;color:#15212B;">Onglet Chat IA</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">4</span></div>
+        <div style="display:flex;flex-direction:column;gap:11px;">
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">15</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Chat IA <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:1px 5px;">P0</span></div><div style="font-size:11px;color:#9a949f;">Badge non-diagnostic · US 6.1/6.2</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">16</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Mise en relation véto <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:1px 5px;">P0</span></div><div style="font-size:11px;color:#9a949f;">Récap + consentement · US 6.3/10.3</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">17</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Téléconsultation <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:1px 5px;">P0</span></div><div style="font-size:11px;color:#9a949f;">Chat sécurisé + file · US 10.3/10.4</div></div></div>
+          <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">18</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Résumé / PDF normalisé <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:4px;padding:1px 5px;">P0</span></div><div style="font-size:11px;color:#9a949f;">US 6.4/10.1</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profil row -->
+    <div style="background:#fff;border-radius:14px;padding:22px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);border-top:3px solid #6C5BC9;margin-bottom:56px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:800;color:#15212B;">Onglet Profil — compte · abonnement · RGPD</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a39e94;">8</span></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px 24px;">
+        <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">19</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Abonnement <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:4px;padding:1px 5px;">P2</span></div><div style="font-size:11px;color:#9a949f;">Pool véto, Stripe · US 8.1/8.5</div></div></div>
+        <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">20</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Factures & statut <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:4px;padding:1px 5px;">P2</span></div><div style="font-size:11px;color:#9a949f;">US 8.2</div></div></div>
+        <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">21</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Gestion / résiliation <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:4px;padding:1px 5px;">P2</span></div><div style="font-size:11px;color:#9a949f;">US 8.3</div></div></div>
+        <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">22</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Support & FAQ <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:4px;padding:1px 5px;">P2</span></div><div style="font-size:11px;color:#9a949f;">US 8.4</div></div></div>
+        <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">23</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Réglages <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:4px;padding:1px 5px;">P2</span></div><div style="font-size:11px;color:#9a949f;">Compte, notifications</div></div></div>
+        <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">24</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Consentements & confidentialité <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:4px;padding:1px 5px;">P2</span></div><div style="font-size:11px;color:#9a949f;">US 9.1</div></div></div>
+        <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">25</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Export de mes données <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:4px;padding:1px 5px;">P2</span></div><div style="font-size:11px;color:#9a949f;">US 9.2</div></div></div>
+        <div style="display:flex;gap:10px;align-items:baseline;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:16px;flex:none;">26</span><div><div style="font-size:13.5px;font-weight:600;color:#15212B;">Suppression de compte <span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#8a6412;background:#F3EBD3;border-radius:4px;padding:1px 5px;">P2</span></div><div style="font-size:11px;color:#9a949f;">Double confirmation · US 9.3</div></div></div>
+      </div>
+    </div>
+
+    <!-- ============ 03 — FLOWS ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:14px;">03 — Parcours critiques</div>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:56px;">
+      <!-- hero flow -->
+      <div style="background:#15212B;border-radius:14px;padding:22px 26px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:#08221f;background:#1FB6A6;border-radius:5px;padding:3px 9px;">FLUX HÉROS</span><span style="font-size:14px;font-weight:700;color:#fff;font-family:'Bricolage Grotesque',sans-serif;">Léa — baisse d'activité → réassurance complète</span></div>
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:12.5px;font-weight:600;color:#fff;background:#243341;border-radius:8px;padding:8px 13px;">Alerte (12)</span><span style="color:#4a5a67;">→</span>
+          <span style="font-size:12.5px;font-weight:600;color:#fff;background:#243341;border-radius:8px;padding:8px 13px;">Détail alerte (13)</span><span style="color:#4a5a67;">→</span>
+          <span style="font-size:12.5px;font-weight:600;color:#08221f;background:#1FB6A6;border-radius:8px;padding:8px 13px;">Chat IA (15)</span><span style="color:#4a5a67;">→</span>
+          <span style="font-size:12.5px;font-weight:600;color:#fff;background:#6C5BC9;border-radius:8px;padding:8px 13px;">Mise en relation (16)</span><span style="color:#4a5a67;">→</span>
+          <span style="font-size:12.5px;font-weight:600;color:#fff;background:#243341;border-radius:8px;padding:8px 13px;">Téléconsult (17)</span><span style="color:#4a5a67;">→</span>
+          <span style="font-size:12.5px;font-weight:600;color:#fff;background:#243341;border-radius:8px;padding:8px 13px;">Résumé / PDF (18)</span>
+        </div>
+      </div>
+      <!-- secondary flows -->
+      <div style="display:flex;gap:14px;">
+        <div style="flex:1;background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+          <div style="font-size:13.5px;font-weight:700;color:#15212B;margin-bottom:14px;font-family:'Bricolage Grotesque',sans-serif;">Onboarding → 1ʳᵉ valeur</div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:7px;">
+            <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:7px;padding:6px 11px;">Inscription</span><span style="color:#bdbac2;">→</span>
+            <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:7px;padding:6px 11px;">Profil</span><span style="color:#bdbac2;">→</span>
+            <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:7px;padding:6px 11px;">Appairage</span><span style="color:#bdbac2;">→</span>
+            <span style="font-size:12px;font-weight:700;color:#0E7468;background:#D6F0EA;border-radius:7px;padding:6px 11px;">Bien-être</span>
+          </div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+          <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px;"><span style="width:9px;height:9px;border-radius:50%;background:#C4463B;"></span><span style="font-size:13.5px;font-weight:700;color:#15212B;font-family:'Bricolage Grotesque',sans-serif;">Sortie de zone — le seul rouge</span></div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:7px;">
+            <span style="font-size:12px;font-weight:700;color:#fff;background:#C4463B;border-radius:7px;padding:6px 11px;">Alerte sécurité</span><span style="color:#bdbac2;">→</span>
+            <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:7px;padding:6px 11px;">Carte temps réel (09)</span>
+          </div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+          <div style="font-size:13.5px;font-weight:700;color:#15212B;margin-bottom:14px;font-family:'Bricolage Grotesque',sans-serif;">Abonnement (pool véto)</div>
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:7px;">
+            <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:7px;padding:6px 11px;">Profil</span><span style="color:#bdbac2;">→</span>
+            <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:7px;padding:6px 11px;">Abonnement (19)</span><span style="color:#bdbac2;">→</span>
+            <span style="font-size:12px;font-weight:600;color:#15212B;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:7px;padding:6px 11px;">Paiement</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 04 — TRANSVERSE + COMPONENTS ============ -->
+    <div style="display:flex;gap:18px;margin-bottom:56px;">
+      <div style="flex:1;background:#fff;border-radius:14px;padding:24px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8a857c;margin-bottom:14px;">04 — États transverses (chaque écran)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Vide — « pas encore de données »</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Chargement — skeleton</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Hors-ligne — « dernière synchro » · US 2.3</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Erreur réseau — retry</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Succès — confirmation brève</span>
+        </div>
+      </div>
+      <div style="flex:1;background:#fff;border-radius:14px;padding:24px 26px;box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8a857c;margin-bottom:14px;">Composants produit à figer dans le kit</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="font-size:12.5px;color:#0E7468;background:#D6F0EA;border-radius:8px;padding:8px 13px;">Status-pill bien-être</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Carte d'alerte contextualisée</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Bulle chat IA (badge non-diagnostic)</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Carte mise en relation</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Carte rapport PDF</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Cartes graphiques (courbes)</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Assistant d'appairage</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Éditeur de zone</span>
+          <span style="font-size:12.5px;color:#3a362f;background:#F1F0F3;border-radius:8px;padding:8px 13px;">Carte d'abonnement</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 05 — ROADMAP ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:14px;">05 — Feuille de route de production</div>
+    <div style="background:#23211c;border-radius:16px;padding:30px 34px;">
+      <div style="display:flex;gap:28px;">
+        <div style="flex:1;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c8579;margin-bottom:10px;">LOT 0 — fondations</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;font-family:'Bricolage Grotesque',sans-serif;">DESIGN.md + kit</div>
+          <p style="margin:0;font-size:12.5px;line-height:1.55;color:#cfc9bd;">Tokens clair/sombre, typo, composants produit. Le socle réutilisé partout.</p>
+        </div>
+        <div style="flex:1;border-left:1px solid #3a362f;padding-left:28px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c8579;margin-bottom:10px;">LOT 1 — P0 socle</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;font-family:'Bricolage Grotesque',sans-serif;">Onboarding + Dashboard</div>
+          <p style="margin:0;font-size:12.5px;line-height:1.55;color:#cfc9bd;">Écrans 01–07 : entrer dans l'app et voir « tout va bien ». La première impression.</p>
+        </div>
+        <div style="flex:1;border-left:1px solid #3a362f;padding-left:28px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c8579;margin-bottom:10px;">LOT 2 — P0 flux héros</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;font-family:'Bricolage Grotesque',sans-serif;">Boucle de réassurance</div>
+          <p style="margin:0;font-size:12.5px;line-height:1.55;color:#cfc9bd;">Écrans 12–18 : alerte → IA → véto → PDF. Le cœur du produit.</p>
+        </div>
+        <div style="flex:1;border-left:1px solid #3a362f;padding-left:28px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8c8579;margin-bottom:10px;">LOT 3–4 — P1 / P2</div>
+          <div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;font-family:'Bricolage Grotesque',sans-serif;">Santé/Carte, puis Compte</div>
+          <p style="margin:0;font-size:12.5px;line-height:1.55;color:#cfc9bd;">Tendances, carte, zones (08–11, 14) puis abo & RGPD (19–26) + états transverses.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

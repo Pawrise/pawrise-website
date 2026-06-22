@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Albert+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#e7e5df;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  @keyframes pw-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.8);}}
+  @keyframes pw-shimmer{0%{background-position:-280px 0;}100%{background-position:280px 0;}}
+</style>
+</helmet>
+
+<div style="width:max-content;min-width:100%;min-height:100vh;box-sizing:border-box;padding:56px 48px 96px;background:#e7e5df;font-family:'Albert Sans',sans-serif;">
+  <div style="width:1280px;max-width:1280px;">
+
+    <!-- HEADER -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#8a857c;margin-bottom:14px;">Pawrise Care — Kit de composants · Direction « Pulse » · mode clair</div>
+    <h1 style="margin:0 0 16px;font-family:'Bricolage Grotesque',sans-serif;font-size:44px;line-height:1.05;letter-spacing:-0.02em;font-weight:800;color:#15212B;max-width:920px;">Le socle réutilisé sur les 51 écrans. Un composant, une règle, partout pareil.</h1>
+    <p style="margin:0 0 48px;font-size:16px;line-height:1.6;color:#5f5a51;max-width:720px;">Tokens, contrôles, cartes produit et états — tels que définis dans <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#0E7468;">DESIGN.md</span>. Variantes sombres dérivées des mêmes tokens sémantiques.</p>
+
+    <!-- ============ FONDATIONS ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">01 — Fondations</div>
+    <div style="display:flex;gap:18px;margin-bottom:24px;">
+      <!-- colors -->
+      <div style="flex:1.5;background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#9a949f;margin-bottom:16px;">Couleurs · clair</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+          <div><div style="height:52px;border-radius:9px;background:#12998C;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">primary</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#12998C</div></div>
+          <div><div style="height:52px;border-radius:9px;background:#0E7468;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">primary-strong</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#0E7468</div></div>
+          <div><div style="height:52px;border-radius:9px;background:#6C5BC9;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">secondary</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#6C5BC9</div></div>
+          <div><div style="height:52px;border-radius:9px;background:#15212B;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">text</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#15212B</div></div>
+          <div><div style="height:52px;border-radius:9px;background:#D6F0EA;border:1px solid #e6e3ea;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">good</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#D6F0EA</div></div>
+          <div><div style="height:52px;border-radius:9px;background:#EFE7CF;border:1px solid #e6e3ea;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">watch</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#EFE7CF</div></div>
+          <div><div style="height:52px;border-radius:9px;background:#F3DFD2;border:1px solid #e6e3ea;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">consult</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#F3DFD2</div></div>
+          <div><div style="height:52px;border-radius:9px;background:#C4463B;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">security ⚠</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#C4463B</div></div>
+          <div><div style="height:52px;border-radius:9px;background:#F1F0F3;border:1px solid #e6e3ea;"></div><div style="font-size:11px;font-weight:600;color:#15212B;margin-top:7px;">bg</div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;">#F1F0F3</div></div>
+        </div>
+      </div>
+      <!-- radius + elevation -->
+      <div style="flex:1;background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#9a949f;margin-bottom:16px;">Rayons & élévation</div>
+        <div style="display:flex;gap:10px;margin-bottom:22px;">
+          <div style="text-align:center;"><div style="width:46px;height:46px;background:#F1F0F3;border:1.5px solid #cfcbd4;border-radius:6px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9a949f;margin-top:6px;">xs·6</div></div>
+          <div style="text-align:center;"><div style="width:46px;height:46px;background:#F1F0F3;border:1.5px solid #cfcbd4;border-radius:12px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9a949f;margin-top:6px;">md·12</div></div>
+          <div style="text-align:center;"><div style="width:46px;height:46px;background:#F1F0F3;border:1.5px solid #cfcbd4;border-radius:16px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9a949f;margin-top:6px;">lg·16</div></div>
+          <div style="text-align:center;"><div style="width:46px;height:46px;background:#F1F0F3;border:1.5px solid #cfcbd4;border-radius:999px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9a949f;margin-top:6px;">pill</div></div>
+        </div>
+        <div style="display:flex;gap:14px;">
+          <div style="text-align:center;"><div style="width:62px;height:46px;background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(21,33,43,0.06);"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9a949f;margin-top:8px;">e1</div></div>
+          <div style="text-align:center;"><div style="width:62px;height:46px;background:#fff;border-radius:10px;box-shadow:0 4px 16px rgba(21,33,43,0.08);"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9a949f;margin-top:8px;">e2</div></div>
+          <div style="text-align:center;"><div style="width:62px;height:46px;background:#fff;border-radius:10px;box-shadow:0 14px 40px rgba(21,33,43,0.12);"></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9a949f;margin-top:8px;">e3</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- type scale -->
+    <div style="background:#fff;border-radius:16px;padding:26px 28px;box-shadow:0 1px 3px rgba(21,33,43,0.06);margin-bottom:56px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#9a949f;margin-bottom:20px;">Échelle typographique</div>
+      <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:14px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:120px;flex:none;">display · 44/800</span><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:40px;font-weight:800;color:#15212B;letter-spacing:-0.02em;">Pixel va bien</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:14px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:120px;flex:none;">h2 · 24/700</span><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:700;color:#15212B;">Tendances de la semaine</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:14px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:120px;flex:none;">body · 14/400</span><span style="font-family:'Albert Sans',sans-serif;font-size:14px;color:#3a362f;">Activité et sommeil dans la norme pour son âge.</span></div>
+      <div style="display:flex;align-items:baseline;gap:16px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bdbac2;width:120px;flex:none;">mono-label · 11</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:#6B6B78;letter-spacing:0.1em;text-transform:uppercase;">Dernière synthèse</span></div>
+    </div>
+
+    <!-- ============ BOUTONS ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">02 — Boutons</div>
+    <div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 1px 3px rgba(21,33,43,0.06);margin-bottom:56px;">
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:22px;">
+        <button style="font-family:inherit;border:none;cursor:pointer;background:#12998C;color:#fff;font-size:14px;font-weight:700;border-radius:999px;padding:12px 22px;">Demander à l'IA</button>
+        <button style="font-family:inherit;cursor:pointer;background:#fff;border:1.5px solid #12998C;color:#0E7468;font-size:14px;font-weight:700;border-radius:999px;padding:12px 22px;">Secondaire</button>
+        <button style="font-family:inherit;border:none;cursor:pointer;background:transparent;color:#6B6B78;font-size:14px;font-weight:700;border-radius:999px;padding:12px 18px;">Ghost</button>
+        <button style="font-family:inherit;border:none;cursor:pointer;background:#C4463B;color:#fff;font-size:14px;font-weight:700;border-radius:999px;padding:12px 22px;">Sécurité</button>
+        <button style="font-family:inherit;border:none;background:#eceaf0;color:#b3aeba;font-size:14px;font-weight:700;border-radius:999px;padding:12px 22px;cursor:not-allowed;">Désactivé</button>
+      </div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+        <button style="font-family:inherit;border:none;cursor:pointer;background:#12998C;color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:8px 16px;">Small</button>
+        <button style="font-family:inherit;border:none;cursor:pointer;background:#12998C;color:#fff;font-size:14px;font-weight:700;border-radius:999px;padding:12px 22px;">Medium</button>
+        <button style="font-family:inherit;border:none;cursor:pointer;background:#12998C;color:#fff;font-size:16px;font-weight:700;border-radius:999px;padding:15px 28px;">Large</button>
+        <button style="font-family:inherit;border:none;cursor:pointer;background:#6C5BC9;color:#fff;font-size:14px;font-weight:700;border-radius:999px;padding:12px 20px;display:inline-flex;align-items:center;gap:8px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.5 7.1L4 20l1.4-5A8 8 0 1 1 21 11.5z"/></svg>Parler à un véto</button>
+        <button style="font-family:inherit;border:none;cursor:pointer;width:44px;height:44px;background:#12998C;color:#fff;border-radius:50%;font-size:18px;display:inline-flex;align-items:center;justify-content:center;">+</button>
+      </div>
+    </div>
+
+    <!-- ============ CHAMPS ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">03 — Champs de saisie</div>
+    <div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 1px 3px rgba(21,33,43,0.06);margin-bottom:56px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px 28px;">
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:#15212B;margin-bottom:7px;">Nom de l'animal</label>
+          <input value="Pixel" readonly style="font-family:inherit;width:100%;font-size:14px;color:#15212B;background:#fff;border:1.5px solid #e0dde4;border-radius:12px;padding:11px 14px;outline:none;">
+          <div style="font-size:11px;color:#9a949f;margin-top:6px;">Défaut</div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:#15212B;margin-bottom:7px;">Email</label>
+          <input value="camille@mail.com" readonly style="font-family:inherit;width:100%;font-size:14px;color:#15212B;background:#fff;border:1.5px solid #12998C;border-radius:12px;padding:11px 14px;outline:none;box-shadow:0 0 0 3px rgba(18,153,140,0.18);">
+          <div style="font-size:11px;color:#0E7468;margin-top:6px;">Focus</div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:#15212B;margin-bottom:7px;">Mot de passe</label>
+          <input value="••••" readonly style="font-family:inherit;width:100%;font-size:14px;color:#15212B;background:#fff;border:1.5px solid #C4463B;border-radius:12px;padding:11px 14px;outline:none;">
+          <div style="font-size:11px;color:#C4463B;margin-top:6px;">8 caractères minimum</div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:#15212B;margin-bottom:7px;">Recherche</label>
+          <div style="display:flex;align-items:center;gap:9px;width:100%;background:#F1F0F3;border:1.5px solid #e0dde4;border-radius:12px;padding:11px 14px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a949f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+            <span style="font-size:14px;color:#9a949f;">Rechercher un patient…</span>
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:#15212B;margin-bottom:7px;">Espèce</label>
+          <div style="display:flex;align-items:center;justify-content:space-between;width:100%;background:#fff;border:1.5px solid #e0dde4;border-radius:12px;padding:11px 14px;"><span style="font-size:14px;color:#15212B;">Chat européen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6B78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;font-weight:600;color:#15212B;margin-bottom:7px;">Note</label>
+          <div style="width:100%;height:46px;background:#fff;border:1.5px solid #e0dde4;border-radius:12px;padding:11px 14px;font-size:14px;color:#9a949f;">Antécédents, observations…</div>
+        </div>
+      </div>
+      <div style="height:1px;background:#f0eef2;margin:24px 0;"></div>
+      <div style="display:flex;gap:32px;align-items:center;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:10px;"><div style="width:44px;height:26px;border-radius:999px;background:#12998C;position:relative;"><div style="position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;"></div></div><span style="font-size:13px;color:#15212B;">Alertes activées</span></div>
+        <div style="display:flex;align-items:center;gap:10px;"><div style="width:44px;height:26px;border-radius:999px;background:#dcd9e0;position:relative;"><div style="position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;"></div></div><span style="font-size:13px;color:#6B6B78;">Mode nuit auto</span></div>
+        <div style="display:flex;align-items:center;gap:9px;"><div style="width:22px;height:22px;border-radius:7px;background:#12998C;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><span style="font-size:13px;color:#15212B;">J'accepte les CGU</span></div>
+        <div style="display:flex;align-items:center;gap:9px;"><div style="width:22px;height:22px;border-radius:50%;border:2px solid #12998C;display:flex;align-items:center;justify-content:center;"><div style="width:10px;height:10px;border-radius:50%;background:#12998C;"></div></div><span style="font-size:13px;color:#15212B;">Plan annuel</span></div>
+      </div>
+    </div>
+
+    <!-- ============ CHIPS & BADGES ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">04 — Chips & badges</div>
+    <div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 1px 3px rgba(21,33,43,0.06);margin-bottom:56px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:13px;font-weight:600;color:#08221f;background:#12998C;border-radius:999px;padding:8px 15px;">Tous</span>
+      <span style="font-size:13px;font-weight:600;color:#3a362f;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:999px;padding:8px 15px;">Prévention</span>
+      <span style="font-size:13px;font-weight:600;color:#3a362f;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:999px;padding:8px 15px;">Santé</span>
+      <span style="font-size:13px;font-weight:600;color:#3a362f;background:#F1F0F3;border:1px solid #e3e1e7;border-radius:999px;padding:8px 15px;">Rappels</span>
+      <span style="margin-left:14px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:6px;padding:4px 9px;">EN LIGNE</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:#7A6320;background:#EFE7CF;border-radius:6px;padding:4px 9px;">EN ATTENTE</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:999px;padding:5px 11px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0E7468" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Consentement accordé</span>
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#15212B;">Alertes <span style="background:#C4463B;color:#fff;font-size:11px;font-weight:700;border-radius:999px;min-width:18px;height:18px;padding:0 5px;display:inline-flex;align-items:center;justify-content:center;">3</span></span>
+    </div>
+
+    <!-- ============ STATUS-PILL ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">05 — Status-pill bien-être · composant signature</div>
+    <div style="background:#fff;border-radius:16px;padding:28px;box-shadow:0 1px 3px rgba(21,33,43,0.06);margin-bottom:56px;">
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:20px;">
+        <div style="display:inline-flex;align-items:center;gap:10px;background:#D6F0EA;border-radius:999px;padding:11px 20px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E7468" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-size:16px;font-weight:700;color:#0E7468;">Bon — tout va bien</span></div>
+        <div style="display:inline-flex;align-items:center;gap:10px;background:#EFE7CF;border-radius:999px;padding:11px 20px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A6320" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg><span style="font-size:16px;font-weight:700;color:#7A6320;">À surveiller</span></div>
+        <div style="display:inline-flex;align-items:center;gap:10px;background:#F3DFD2;border-radius:999px;padding:11px 20px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A4E2C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6"/><path d="M6 12l6-6 6 6"/></svg><span style="font-size:16px;font-weight:700;color:#9A4E2C;">Consulter — sans urgence</span></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;background:#FBF6EC;border:1px solid #ece0c6;border-radius:12px;padding:13px 16px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7A6320" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+        <span style="font-size:13px;line-height:1.5;color:#6B6B78;"><strong style="color:#15212B;">Double encodage obligatoire</strong> — chaque état combine couleur + icône + texte. Aucun rouge dans l'échelle santé : il est réservé à la sécurité réelle.</span>
+      </div>
+    </div>
+
+    <!-- ============ CARTES PRODUIT ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">06 — Cartes produit</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:18px;">
+      <!-- metric -->
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:14px;">Carte métrique</div>
+        <div style="font-size:13px;color:#6B6B78;margin-bottom:6px;">Activité du jour</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:32px;font-weight:800;color:#15212B;line-height:1;">68<span style="font-size:16px;color:#9a949f;">%</span></div>
+        <div style="height:6px;border-radius:4px;background:#eceaf0;margin-top:14px;overflow:hidden;"><div style="width:68%;height:100%;background:#12998C;"></div></div>
+        <div style="font-size:11.5px;color:#0E7468;margin-top:9px;">+ 8% vs sa moyenne</div>
+      </div>
+      <!-- alert card -->
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(21,33,43,0.06);border:1px solid #f0e6cf;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:14px;">Carte d'alerte contextualisée</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="width:9px;height:9px;border-radius:50%;background:#D6A12A;"></span><span style="font-size:14px;font-weight:700;color:#7A6320;">À surveiller · activité en baisse</span></div>
+        <div style="font-size:13px;line-height:1.5;color:#6B6B78;margin-bottom:15px;">Pixel bouge 22% moins depuis 2 jours. <strong style="color:#15212B;">Fréquent chez un chat de 4 ans en été</strong> — à confirmer.</div>
+        <div style="display:flex;gap:9px;"><button style="font-family:inherit;border:none;cursor:pointer;background:#12998C;color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;padding:9px 16px;">Demander à l'IA</button><button style="font-family:inherit;cursor:pointer;background:#fff;border:1px solid #e0dde4;color:#15212B;font-size:12.5px;font-weight:600;border-radius:999px;padding:9px 16px;">Plus tard</button></div>
+      </div>
+      <!-- chart card -->
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:14px;">Carte graphique · vs « normale »</div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;"><span style="font-size:13px;font-weight:600;color:#15212B;">Sommeil · 7 jours</span><span style="font-size:11.5px;color:#9a949f;">12h moy.</span></div>
+        <svg width="100%" height="92" viewBox="0 0 280 92" preserveAspectRatio="none">
+          <rect x="0" y="30" width="280" height="34" fill="#EAF6F3"></rect>
+          <polyline points="0,52 40,46 80,50 120,40 160,44 200,36 240,42 280,38" fill="none" stroke="#12998C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+          <circle cx="200" cy="36" r="3.5" fill="#12998C"></circle>
+        </svg>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:10px;"><span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#6B6B78;"><span style="width:14px;height:3px;border-radius:2px;background:#12998C;"></span>Pixel</span><span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#6B6B78;"><span style="width:14px;height:10px;border-radius:3px;background:#EAF6F3;"></span>Zone normale</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:56px;">
+      <!-- report card -->
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:14px;">Carte rapport PDF</div>
+        <div style="display:flex;gap:13px;align-items:center;">
+          <div style="width:46px;height:56px;border-radius:8px;background:#F1F0F3;border:1px solid #e3e1e7;display:flex;align-items:flex-end;justify-content:center;padding-bottom:7px;flex:none;"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:#6C5BC9;">PDF</span></div>
+          <div style="flex:1;"><div style="font-size:14px;font-weight:700;color:#15212B;">Rapport normalisé</div><div style="font-size:11.5px;color:#9a949f;">Généré le 22 juin · v3</div></div>
+        </div>
+        <div style="display:flex;gap:9px;margin-top:16px;"><button style="font-family:inherit;border:none;cursor:pointer;background:#6C5BC9;color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;padding:9px 16px;">Partager</button><button style="font-family:inherit;cursor:pointer;background:#fff;border:1px solid #e0dde4;color:#15212B;font-size:12.5px;font-weight:600;border-radius:999px;padding:9px 16px;">Aperçu</button></div>
+      </div>
+      <!-- handoff card -->
+      <div style="background:#15212B;border-radius:16px;padding:20px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#7c8b97;margin-bottom:14px;">Carte mise en relation</div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:13px;"><div style="width:40px;height:40px;border-radius:50%;background:repeating-linear-gradient(45deg,#2a3a47,#2a3a47 4px,#33444f 4px,#33444f 8px);flex:none;"></div><div><div style="font-size:14px;font-weight:700;color:#fff;">Dr. Martin · vét.</div><div style="font-size:11.5px;color:#9fb0bd;">Disponible · file ~ 4 min</div></div></div>
+        <div style="display:flex;align-items:center;gap:7px;background:rgba(31,182,166,0.14);border-radius:8px;padding:8px 11px;margin-bottom:14px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4FD6C5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-size:11.5px;color:#cfdae2;">Contexte & PDF partagés avec consentement</span></div>
+        <button style="font-family:inherit;border:none;cursor:pointer;width:100%;background:#1FB6A6;color:#08221f;font-size:13.5px;font-weight:700;border-radius:999px;padding:11px;">Démarrer la téléconsultation</button>
+      </div>
+      <!-- subscription card -->
+      <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 3px rgba(21,33,43,0.06);border:1.5px solid #12998C;position:relative;">
+        <span style="position:absolute;top:16px;right:16px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:#0E7468;background:#D6F0EA;border-radius:6px;padding:3px 8px;">POPULAIRE</span>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:14px;">Carte d'abonnement</div>
+        <div style="font-size:15px;font-weight:700;color:#15212B;">Pawrise+</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:30px;font-weight:800;color:#15212B;margin:4px 0 2px;">9€<span style="font-size:14px;font-weight:600;color:#9a949f;">/mois</span></div>
+        <div style="font-size:11.5px;line-height:1.5;color:#6B6B78;margin-bottom:14px;">Part fixe → <strong style="color:#0E7468;">coût véto plafonné</strong> grâce au pool partagé.</div>
+        <button style="font-family:inherit;border:none;cursor:pointer;width:100%;background:#12998C;color:#fff;font-size:13.5px;font-weight:700;border-radius:999px;padding:11px;">Choisir ce plan</button>
+      </div>
+    </div>
+
+    <!-- ============ LISTES & CHAT ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">07 — List-item, table & chat IA</div>
+    <div style="display:flex;gap:18px;margin-bottom:56px;align-items:stretch;">
+      <!-- list items (app) -->
+      <div style="flex:1;background:#fff;border-radius:16px;padding:8px 18px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+        <div style="display:flex;align-items:center;gap:13px;padding:15px 0;border-bottom:1px solid #f1eff3;"><div style="width:42px;height:42px;border-radius:50%;background:repeating-linear-gradient(45deg,#dfe6d6,#dfe6d6 5px,#e9efe1 5px,#e9efe1 10px);flex:none;"></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#15212B;">Baisse d'activité</div><div style="font-size:12px;color:#9a949f;">il y a 2h · à surveiller</div></div><span style="width:8px;height:8px;border-radius:50%;background:#D6A12A;"></span></div>
+        <div style="display:flex;align-items:center;gap:13px;padding:15px 0;border-bottom:1px solid #f1eff3;"><div style="width:42px;height:42px;border-radius:12px;background:#EAF1F7;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6C5BC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#15212B;">Rappel · vaccin annuel</div><div style="font-size:12px;color:#9a949f;">dans 12 jours</div></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9c5cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+        <div style="display:flex;align-items:center;gap:13px;padding:15px 0;"><div style="width:42px;height:42px;border-radius:12px;background:#D6F0EA;display:flex;align-items:center;justify-content:center;flex:none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7468" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#15212B;">Synthèse du jour prête</div><div style="font-size:12px;color:#9a949f;">tout est dans la norme</div></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9c5cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+      </div>
+      <!-- table row (vet/admin) + ai bubble -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+        <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:12px;">Table · file de prise en charge (Vet)</div>
+          <div style="display:grid;grid-template-columns:1.4fr 1fr 0.8fr auto;align-items:center;gap:10px;padding:8px 4px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a949f;text-transform:uppercase;letter-spacing:0.04em;border-bottom:1px solid #eee;"><span>Patient</span><span>Motif</span><span>Attente</span><span></span></div>
+          <div style="display:grid;grid-template-columns:1.4fr 1fr 0.8fr auto;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #f4f2f6;"><span style="font-size:13px;font-weight:600;color:#15212B;">Pixel · chat</span><span style="font-size:12.5px;color:#6B6B78;">Baisse activité</span><span style="font-size:12px;color:#7A6320;font-weight:600;">4 min</span><button style="font-family:inherit;border:none;cursor:pointer;background:#12998C;color:#fff;font-size:11.5px;font-weight:700;border-radius:8px;padding:6px 12px;">Prendre</button></div>
+          <div style="display:grid;grid-template-columns:1.4fr 1fr 0.8fr auto;align-items:center;gap:10px;padding:12px 4px;"><span style="font-size:13px;font-weight:600;color:#15212B;">Mochi · chien</span><span style="font-size:12.5px;color:#6B6B78;">Sommeil irrég.</span><span style="font-size:12px;color:#9a949f;">11 min</span><button style="font-family:inherit;cursor:pointer;background:#fff;border:1px solid #e0dde4;color:#15212B;font-size:11.5px;font-weight:700;border-radius:8px;padding:6px 12px;">Prendre</button></div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:14px;">Bulle de chat IA</div>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div style="align-self:flex-end;background:#12998C;color:#fff;font-size:13.5px;border-radius:16px 16px 4px 16px;padding:10px 14px;max-width:78%;">Pixel dort beaucoup, c'est grave ?</div>
+            <div style="align-self:flex-start;background:#F1F0F3;color:#15212B;font-size:13.5px;line-height:1.5;border-radius:16px 16px 16px 4px;padding:11px 14px;max-width:88%;">Souvent bénin en cas de chaleur. Son sommeil est <strong>+18% sur 2 jours</strong> — je peux préparer une mise en relation vét.<div style="margin-top:9px;font-size:10px;color:#9a949f;display:flex;align-items:center;gap:5px;"><span style="width:5px;height:5px;border-radius:50%;background:#6C5BC9;"></span>Orientation, pas un diagnostic</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ NAVIGATION ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">08 — Navigation</div>
+    <div style="display:flex;gap:18px;margin-bottom:56px;align-items:stretch;">
+      <!-- tab bar -->
+      <div style="flex:1.4;background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(21,33,43,0.06);display:flex;flex-direction:column;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:18px;">Tab-bar app</div>
+        <div style="margin-top:auto;display:flex;justify-content:space-around;align-items:center;padding:12px 8px;background:#fff;border:1px solid #eceaf0;border-radius:18px;box-shadow:0 4px 16px rgba(21,33,43,0.06);">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12998C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-size:9.5px;color:#12998C;font-weight:700;">Bien-être</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a6a2ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span style="font-size:9.5px;color:#a6a2ad;">Carte</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;position:relative;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a6a2ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.5 21a1.8 1.8 0 0 1-3 0"/></svg><span style="position:absolute;top:-3px;right:4px;width:7px;height:7px;border-radius:50%;background:#C4463B;"></span><span style="font-size:9.5px;color:#a6a2ad;">Alertes</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a6a2ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.5 7.1L4 20l1.4-5A8 8 0 1 1 21 11.5z"/></svg><span style="font-size:9.5px;color:#a6a2ad;">Chat IA</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a6a2ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span style="font-size:9.5px;color:#a6a2ad;">Profil</span></div>
+        </div>
+      </div>
+      <!-- sidebar -->
+      <div style="flex:1;background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:18px;">Sidebar web (Vet / Admin)</div>
+        <div style="background:#15212B;border-radius:14px;padding:16px 12px;">
+          <div style="display:flex;align-items:center;gap:9px;padding:0 8px 16px;"><div style="position:relative;width:24px;height:24px;display:flex;align-items:center;justify-content:center;"><div style="width:22px;height:22px;border-radius:50%;border:2.5px solid #1FB6A6;"></div><div style="position:absolute;width:8px;height:8px;border-radius:50%;background:#7C6BD6;"></div></div><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:800;color:#fff;">Pawrise</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:#1FB6A6;margin-bottom:3px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#08221f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span style="font-size:13px;font-weight:700;color:#08221f;">File de prise en charge</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;margin-bottom:3px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><circle cx="18" cy="9" r="2"/></svg><span style="font-size:13px;color:#8B9AA6;">Patients</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;margin-bottom:3px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span style="font-size:13px;color:#8B9AA6;">Notifications</span></div>
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8B9AA6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><span style="font-size:13px;color:#8B9AA6;">Profil cabinet</span></div>
+        </div>
+      </div>
+      <!-- app-bar -->
+      <div style="flex:1;background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(21,33,43,0.06);display:flex;flex-direction:column;gap:14px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;">App-bar / top-bar</div>
+        <div style="display:flex;align-items:center;gap:12px;background:#F1F0F3;border-radius:12px;padding:12px 14px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15212B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg><span style="flex:1;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;color:#15212B;">Détail alerte</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15212B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #eceaf0;border-radius:12px;padding:11px 16px;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;color:#15212B;">Dr. Martin</span><div style="display:flex;align-items:center;gap:10px;"><span style="position:relative;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B6B78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg><span style="position:absolute;top:-1px;right:0;width:7px;height:7px;border-radius:50%;background:#C4463B;"></span></span><div style="width:30px;height:30px;border-radius:50%;background:repeating-linear-gradient(45deg,#d9d6e0,#d9d6e0 4px,#e6e3ec 4px,#e6e3ec 8px);"></div></div></div>
+      </div>
+    </div>
+
+    <!-- ============ AVATAR, MODALE, ÉTATS ============ -->
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#8a857c;margin-bottom:16px;">09 — Avatar, modale & états</div>
+    <div style="display:flex;gap:18px;align-items:stretch;">
+      <!-- avatars + modal -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:18px;">Avatar animal</div>
+          <div style="display:flex;align-items:center;gap:18px;">
+            <div style="width:32px;height:32px;border-radius:50%;background:repeating-linear-gradient(45deg,#dfe6d6,#dfe6d6 4px,#e9efe1 4px,#e9efe1 8px);"></div>
+            <div style="width:48px;height:48px;border-radius:50%;background:repeating-linear-gradient(45deg,#dfe6d6,#dfe6d6 5px,#e9efe1 5px,#e9efe1 10px);"></div>
+            <div style="position:relative;width:60px;height:60px;"><div style="width:60px;height:60px;border-radius:50%;background:repeating-linear-gradient(45deg,#dfe6d6,#dfe6d6 6px,#e9efe1 6px,#e9efe1 12px);border:2.5px solid #12998C;"></div><span style="position:absolute;bottom:1px;right:1px;width:15px;height:15px;border-radius:50%;background:#12998C;border:2.5px solid #fff;"></span></div>
+            <div style="width:60px;height:60px;border-radius:18px;background:repeating-linear-gradient(45deg,#d8e4dd,#d8e4dd 6px,#e3ede7 6px,#e3ede7 12px);"></div>
+          </div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:18px;">Modale · consentement au partage</div>
+          <div style="background:#F1F0F3;border-radius:16px;padding:18px;">
+            <div style="background:#fff;border-radius:18px;padding:22px;box-shadow:0 14px 40px rgba(21,33,43,0.14);max-width:340px;margin:0 auto;">
+              <div style="width:46px;height:46px;border-radius:14px;background:#EAE6F7;display:flex;align-items:center;justify-content:center;margin-bottom:14px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6C5BC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;color:#15212B;margin-bottom:7px;">Partager le contexte de Pixel ?</div>
+              <div style="font-size:13px;line-height:1.55;color:#6B6B78;margin-bottom:18px;">Le vétérinaire recevra le résumé et les données récentes — uniquement pour cette consultation.</div>
+              <div style="display:flex;gap:9px;"><button style="font-family:inherit;border:none;cursor:pointer;flex:1;background:#12998C;color:#fff;font-size:13.5px;font-weight:700;border-radius:999px;padding:12px;">J'accepte</button><button style="font-family:inherit;cursor:pointer;background:#fff;border:1px solid #e0dde4;color:#15212B;font-size:13.5px;font-weight:600;border-radius:999px;padding:12px 18px;">Annuler</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- states -->
+      <div style="flex:1;background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(21,33,43,0.06);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#9a949f;margin-bottom:18px;">États transverses</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <!-- empty -->
+          <div style="background:#F8F7FA;border-radius:14px;padding:20px;text-align:center;">
+            <div style="width:42px;height:42px;border-radius:50%;background:#eceaf0;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a6a2ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div>
+            <div style="font-size:13px;font-weight:700;color:#15212B;margin-bottom:4px;">Pas encore de données</div>
+            <div style="font-size:11.5px;line-height:1.45;color:#9a949f;">Vérifiez l'appairage du collier.</div>
+          </div>
+          <!-- loading -->
+          <div style="background:#F8F7FA;border-radius:14px;padding:20px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#bdbac2;margin-bottom:12px;">CHARGEMENT</div>
+            <div style="height:12px;border-radius:6px;margin-bottom:10px;background:linear-gradient(90deg,#eceaf0 0%,#f6f5f8 50%,#eceaf0 100%);background-size:280px 100%;animation:pw-shimmer 1.3s linear infinite;"></div>
+            <div style="height:12px;width:70%;border-radius:6px;margin-bottom:10px;background:linear-gradient(90deg,#eceaf0 0%,#f6f5f8 50%,#eceaf0 100%);background-size:280px 100%;animation:pw-shimmer 1.3s linear infinite;"></div>
+            <div style="height:12px;width:85%;border-radius:6px;background:linear-gradient(90deg,#eceaf0 0%,#f6f5f8 50%,#eceaf0 100%);background-size:280px 100%;animation:pw-shimmer 1.3s linear infinite;"></div>
+          </div>
+          <!-- offline -->
+          <div style="background:#FBF6EC;border:1px solid #f0e6cf;border-radius:14px;padding:20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#7A6320" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5a15 15 0 0 1 20 0"/><path d="M5 12a10 10 0 0 1 14 0"/><path d="M8.5 15.5a5 5 0 0 1 7 0"/><path d="M12 19h.01"/><path d="M2 2l20 20"/></svg><span style="font-size:13px;font-weight:700;color:#7A6320;">Hors-ligne</span></div>
+            <div style="font-size:11.5px;line-height:1.45;color:#6B6B78;">Dernière synchro il y a 14 min. Reconnexion auto…</div>
+          </div>
+          <!-- error -->
+          <div style="background:#FCEFEC;border:1px solid #f3d6cf;border-radius:14px;padding:20px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#C4463B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg><span style="font-size:13px;font-weight:700;color:#C4463B;">Erreur réseau</span></div>
+            <div style="font-size:11.5px;line-height:1.45;color:#6B6B78;margin-bottom:11px;">Impossible de charger les données.</div>
+            <button style="font-family:inherit;border:none;cursor:pointer;background:#15212B;color:#fff;font-size:11.5px;font-weight:700;border-radius:999px;padding:7px 14px;">Réessayer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
