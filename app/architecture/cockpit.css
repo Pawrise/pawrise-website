@@ -219,3 +219,21 @@
   .presentstop.show{display:block}
   body.presenting .topbar,body.presenting .reopen{opacity:.18;pointer-events:none}
   @media print{.topbar,.legend,.hint,.player,.reopen,.scrim,.drawer,.ovl,.presentstop,#prog{display:none!important}#archwrap{position:static!important;top:0!important;height:auto!important}svg#archstage{height:760px}body{overflow:visible}}
+
+/* ===== Intégration au site =====
+   Le cockpit vit désormais SOUS la navbar du site (64px). Son conteneur est
+   fixé sous la navbar ; ses éléments (en position:fixed à l'origine) passent en
+   position:absolute pour se positionner relativement à ce conteneur. */
+.cockpit-root{position:fixed;inset:64px 0 0 0;overflow:hidden}
+.cockpit-root .topbar,
+.cockpit-root #archwrap,
+.cockpit-root .legend,
+.cockpit-root .hint,
+.cockpit-root .player,
+.cockpit-root .reopen,
+.cockpit-root .pscrim,
+.cockpit-root .panel,
+.cockpit-root .ovl,
+.cockpit-root .presentstop{position:absolute}
+/* La marque du cockpit fait doublon avec la navbar du site -> masquée. */
+.cockpit-root .topbar .brand{display:none}

@@ -26,17 +26,8 @@ export default function CockpitClient() {
     }
 
     initCockpit();
-
-    // La marque du cockpit renvoie vers l'accueil du site (le menu global est masqué
-    // sur cette route pour conserver le rendu plein écran d'origine).
-    const brand = document.querySelector<HTMLElement>(".topbar .brand");
-    if (brand) {
-      brand.style.cursor = "pointer";
-      brand.addEventListener("click", () => {
-        window.location.href = "/";
-      });
-    }
   }, []);
 
-  return <div dangerouslySetInnerHTML={{ __html: SHELL }} />;
+  // .cockpit-root : conteneur fixé sous la navbar du site (cf. cockpit.css).
+  return <div className="cockpit-root" dangerouslySetInnerHTML={{ __html: SHELL }} />;
 }
