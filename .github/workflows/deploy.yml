@@ -1,0 +1,47 @@
+name: Vercel Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Identifiants Vercel non sensibles (le projet/org, pas le token).
+# Seul VERCEL_TOKEN est un secret GitHub.
+env:
+  VERCEL_ORG_ID: team_9Xw0poVVZSjkIAlSoPwAHjvX
+  VERCEL_PROJECT_ID: prj_QIqXxvzBdopQsX25QhKSvdia98by
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      # --- Production : push sur main ---
+      - name: Deploy production
+        if: github.ref == 'refs/heads/main'
+        run: |
+          vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+          vercel build --prod --token="$VERCEL_TOKEN"
+          vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      # --- Preview : pull requests ---
+      - name: Deploy preview
+        if: github.ref != 'refs/heads/main'
+        run: |
+          vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
+          vercel build --token="$VERCEL_TOKEN"
+          vercel deploy --prebuilt --token="$VERCEL_TOKEN"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
