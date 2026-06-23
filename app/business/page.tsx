@@ -87,6 +87,14 @@ export default function BusinessPage() {
             <p>Unit-economics en trois scénarios.</p>
           </div>
           <div className="glass ps-body">
+            <p className="ps-text" style={{ marginTop: 0 }}>
+              <b>Hypothèses</b> (modèle prévisionnel, à valider) :
+            </p>
+            <ul className="ql-list" style={{ marginBottom: 16 }}>
+              {ECON.hypotheses.map((h) => (
+                <li key={h}>{h}</li>
+              ))}
+            </ul>
             <div className="raci-scroll">
               <table className="econ-table">
                 <thead>
@@ -109,6 +117,9 @@ export default function BusinessPage() {
                 </tbody>
               </table>
             </div>
+            <p className="ps-text" style={{ fontSize: "12px", color: "var(--faint)" }}>
+              {ECON.footnote}
+            </p>
             <p className="ps-text">{ECON.model}</p>
           </div>
         </section>

@@ -16,14 +16,16 @@ export const VALUE = {
 
 /* --------------------------------------------------------- MARCHÉ ------- */
 export const MARKET = {
+  // Cadrage TAM / SAM / SOM pour éviter de confondre le marché total (tous
+  // animaux) avec le marché réellement adressable par un collier chien/chat.
   figures: [
-    { k: "75 M", v: "animaux de compagnie en France" },
-    { k: "≈ 7,5 M", v: "chiens" },
-    { k: "≈ 15 M", v: "chats" },
+    { k: "≈ 75 M", v: "TAM · animaux de compagnie en France (tous)" },
+    { k: "≈ 22,5 M", v: "SAM · chiens (7,5 M) + chats (15 M), cible du collier" },
     { k: "1 foyer / 2", v: "possède au moins un animal" },
+    { k: "Cible 3-5 ans", v: "SOM · quelques dizaines de milliers d'abonnés (early adopters)" },
   ],
   note:
-    "Marché pet tech en forte croissance, porté par le « quantified self » appliqué aux animaux. Les concurrents (Tractive Dog 6, Weenect XT, Invoxia Minitailz, Jag S2) restent centrés sur la géolocalisation ; l'interprétation santé reste un espace ouvert. Sources : FACCO, Google Trends.",
+    "Le marché total (TAM ≈ 75 M, tous animaux) inclut poissons, oiseaux et NAC : le marché réellement adressable (SAM) par un collier connecté est celui des chiens et chats, soit ≈ 22,5 M. Marché pet tech en forte croissance, porté par le « quantified self » appliqué aux animaux. Les concurrents (Tractive Dog 6, Weenect XT, Invoxia Minitailz, Jag S2) restent centrés sur la géolocalisation ; l'interprétation santé reste un espace ouvert. Sources : FACCO, Google Trends.",
 };
 
 /* ----------------------------------------------------------- SWOT ------- */
@@ -120,13 +122,26 @@ export const PESTEL: Pestel[] = [
 
 /* ------------------------------------------------- MODÈLE ÉCONOMIQUE ---- */
 export const ECON = {
-  rows: [
-    { metric: "Marge brute", opt: "89 %", base: "69 %", pess: "21 %" },
-    { metric: "LTV : CAC", opt: "22×", base: "5,4×", pess: "0,4×" },
-    { metric: "Payback", opt: "2 mois", base: "6 mois", pess: "42 mois" },
+  // Hypothèses explicites (modèle prévisionnel, à valider) : la marge porte sur
+  // l'ABONNEMENT (le hardware est vendu ~au coût). Trois scénarios pilotés par
+  // le churn (durée de vie) et le CAC.
+  hypotheses: [
+    "Abonnement : 9,90 €/mois (ordre de grandeur du marché : Tractive, Weenect).",
+    "Marge contributive sur l'abonnement (après cloud, API LLM et pool vété).",
+    "Durée de vie client = 1 / churn mensuel ; LTV = abo × durée de vie × marge.",
+    "Le collier est vendu proche de son coût (BOM ≈ 50 €) : la rentabilité vient de l'abonnement récurrent.",
   ],
+  rows: [
+    { metric: "Marge contributive (abo)", opt: "78 %", base: "69 %", pess: "35 %" },
+    { metric: "Durée de vie (churn)", opt: "≈ 48 mois", base: "≈ 30 mois", pess: "≈ 12 mois" },
+    { metric: "CAC", opt: "≈ 35 €", base: "≈ 50 €", pess: "≈ 90 €" },
+    { metric: "LTV : CAC", opt: "≈ 10×", base: "≈ 4×", pess: "≈ 0,5×" },
+    { metric: "Payback", opt: "≈ 5 mois", base: "≈ 7 mois", pess: "non atteint *" },
+  ],
+  footnote:
+    "* Scénario pessimiste : LTV:CAC < 1 → le client résilie (≈ 12 mois) avant d'avoir remboursé son coût d'acquisition. Le payback n'est donc jamais atteint — c'est précisément le scénario que le modèle doit éviter (réduire le churn et le CAC).",
   model:
-    "Abonnement avec pool façon Spotify : une part fixe de l'abonnement finance le réseau vétérinaire, ce qui plafonne le coût vété par construction et protège la marge.",
+    "Abonnement avec pool façon Spotify : une part fixe de l'abonnement finance le réseau vétérinaire, ce qui plafonne le coût vété par construction et protège la marge contributive.",
 };
 
 /* ------------------------------------------- BUDGET PRÉVISIONNEL (HW) --- */

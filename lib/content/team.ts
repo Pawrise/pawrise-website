@@ -31,11 +31,16 @@ export const APPROACH =
   "Équipe constituée autour d'un principe : chaque membre couvre un besoin réel du projet (IoT, Backend, IA, Mobile, Design, Cloud, Business) tout en étant passionné par la mission. Chacun pilote un pôle correspondant à ses forces et contribue transversalement.";
 
 export const PROFILES = [
-  { who: "Yassine · PO & Responsable IA", why: "3 ans chez Smart Tribune sur NLP/LLM/NER en production → maîtrise du Care Engine, cœur différenciant. Profil architecte." },
-  { who: "Elarif · Responsable Fullstack", why: "Fullstack complet (React/Angular/Vue, Python/Java), CI/CD chez Naval Group. En contact direct avec une vétérinaire partenaire → ancrage terrain." },
-  { who: "Ibrahim & Cyril · IoT", why: "Ibrahim évolue vers l'IoT (capteurs, LoRaWAN) en alternance ; Cyril expert électronique/firmware embarqué → jonction collier ↔ backend." },
-  { who: "Nino & Adam · IA/Data & Design", why: "Profils front/design forts (React, UI/UX) qui portent l'app propriétaire et l'expérience produit." },
-  { who: "Oumar & Abderrahmane · Cloud/DevOps", why: "Infra, conteneurisation, CI/CD, monitoring → socle de livraison et observabilité." },
+  { who: "Yassine · PO & Responsable IA", why: "3 ans chez Smart Tribune sur NLP/LLM/NER en production → maîtrise du Care Engine, cœur différenciant. Profil architecte (Rust, Python, Kafka, K8s)." },
+  { who: "Elarif · Responsable Fullstack", why: "Fullstack complet (React/Angular/Vue, Python/Java), CI/CD chez Naval Group (GitLab, SonarQube). En contact direct avec une vétérinaire partenaire → ancrage terrain." },
+  { who: "Cyril · Responsable IoT / Hardware", why: "Profil le plus expérimenté en électronique embarquée : STM32/ESP32, firmware C/C++, MQTT. Projets persos alignés (BioLink, Centaurus). A déjà résolu les problèmes du collier." },
+  { who: "Ibrahim · Responsable IoT", why: "Fullstack évoluant vers l'IoT en alternance (capteurs d'irrigation, LoRaWAN) → jonction firmware collier ↔ backend." },
+  { who: "Aaditya · Dev Backend / API", why: "Backend orienté API avec sensibilité métier : transformation des données capteurs en valeur. Rigueur et engagement long terme." },
+  { who: "Hamid · Dev Fullstack", why: "Fullstack polyvalent (TypeScript/React/Express/Python), gestion VPS et CI/CD. Curiosité embarqué → backup du pôle IoT." },
+  { who: "Nino · Responsable Data", why: "Data Engineer en alternance (ETL Python) → pipeline de données pour le moteur IA. Connaît une étudiante vétérinaire (validation données)." },
+  { who: "Adam · Responsable Design & Market", why: "Double profil dev fullstack + designer/commercial. 3 ans de freelance (acquisition client), maîtrise Figma → du wireframe au code (refonte CapFiEurope v2)." },
+  { who: "Oumar · Responsable Cloud & DevOps", why: "Infrastructure et déploiement : pipelines CI/CD, dev mobile Android. Garant du cycle de livraison (test, déploiement, monitoring)." },
+  { who: "Abderrahmane · Cloud & DevOps (renfort)", why: "MSc Pro Cloud Epitech (même socle qu'Oumar, Azure). Backend Django/Node, UML/architecture. Évite le point de défaillance unique sur le pôle le plus exposé à la montée en charge." },
 ];
 
 export const GAPS = [

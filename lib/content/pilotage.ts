@@ -101,11 +101,32 @@ export type Pole = { name: string; accent: string; members: string[]; scope: str
 export const PO = { name: "Yassine El Gherrabi", role: "Product Owner" };
 
 export const OBS: Pole[] = [
-  { name: "Fullstack / Backend", accent: "var(--svc)", members: ["Hamid", "Aaditya"], scope: "API, ingestion, BDD, auth, Vet Portal" },
+  { name: "Backend / API", accent: "var(--svc)", members: ["Hamid", "Aaditya", "Elarif"], scope: "API, ingestion, BDD, auth, Vet Portal" },
   { name: "IoT / Hardware", accent: "var(--edge)", members: ["Cyril", "Ibrahim"], scope: "Firmware, capteurs, simulateur, collier" },
   { name: "IA / Data", accent: "var(--ai)", members: ["Nino", "Yassine"], scope: "Care Engine, RAG, POCs, modèle de données" },
-  { name: "Design / Market", accent: "var(--cli)", members: ["Adam", "Elarif"], scope: "UX/UI, app mobile, positionnement" },
+  { name: "Design / Market", accent: "var(--cli)", members: ["Adam"], scope: "UX/UI, identité, positionnement, marché" },
   { name: "Cloud / DevOps", accent: "var(--data)", members: ["Oumar", "Abderrahmane"], scope: "Cloud, CI/CD, monitoring, sécurité" },
+];
+
+// Yassine est Product Owner ET contributeur du pôle IA/Data (double casquette
+// assumée) ; Elarif est rattaché Backend mais intervient en transverse Mobile,
+// CI/CD et lien vétérinaire. Le détail nominatif par domaine figure dans COVERAGE.
+export const PO_NOTE =
+  "Yassine cumule le rôle de Product Owner et de contributeur IA/Data. Le détail des responsabilités nominatives par domaine (avec backups) est précisé dans la table de couverture ci-dessous.";
+
+// Table de couverture nominative : qui est responsable de quoi, et le backup
+// qui assure la continuité. Source : Justification & Compétences (Confluence).
+export type Coverage = { domain: string; leads: string; backup: string };
+export const COVERAGE: Coverage[] = [
+  { domain: "Product Ownership", leads: "Yassine", backup: "—" },
+  { domain: "IoT / Hardware", leads: "Cyril, Ibrahim", backup: "Hamid (support)" },
+  { domain: "Backend / API", leads: "Hamid, Aaditya, Elarif", backup: "Yassine" },
+  { domain: "IA / Data", leads: "Nino, Yassine", backup: "—" },
+  { domain: "Mobile / Frontend", leads: "Elarif, Adam", backup: "Hamid, Aaditya" },
+  { domain: "Design / UX", leads: "Adam", backup: "—" },
+  { domain: "Market / Business", leads: "Adam, Elarif", backup: "—" },
+  { domain: "Cloud / DevOps", leads: "Oumar, Abderrahmane", backup: "Elarif (CI/CD)" },
+  { domain: "Réseau vétérinaire", leads: "Elarif, Nino", backup: "—" },
 ];
 
 /* --------------------------------------------------------------- RACI ---- */
@@ -113,7 +134,7 @@ export const OBS: Pole[] = [
 export type Raci = "R" | "A" | "C" | "I" | "";
 export const RACI_POLES = ["Pilotage (PO)", "Fullstack", "IoT", "Design/Mobile", "IA/Data", "Cloud/Ops"];
 export const RACI_ROWS: { activite: string; cells: Raci[] }[] = [
-  { activite: "Cadrage & specifications", cells: ["A", "C", "C", "C", "C", "C"] },
+  { activite: "Cadrage & spécifications", cells: ["R", "C", "C", "C", "C", "C"] },
   { activite: "API & ingestion données", cells: ["A", "R", "C", "I", "C", "C"] },
   { activite: "Collier & firmware", cells: ["A", "C", "R", "I", "C", "I"] },
   { activite: "Application mobile", cells: ["A", "C", "I", "R", "C", "I"] },
@@ -154,7 +175,7 @@ export const MILESTONES: { idx: number; label: string }[] = [
 /* ------------------------------------------------- MÉTHODO & QUALITÉ ---- */
 export const METHODO = {
   intro:
-    "Pawrise Care adopte une méthodologie Scrum adaptée : agilité itérative et incrémentale, tenant compte des contraintes académiques de l'équipe (9 personnes, projet sur 20 mois).",
+    "Pawrise Care adopte une méthodologie Scrum adaptée : agilité itérative et incrémentale, tenant compte des contraintes académiques de l'équipe (10 personnes, projet sur 20 mois).",
   rituels: [
     { t: "Sprint", d: "Cycles courts de 2 semaines, livraison continue de valeur." },
     { t: "Daily / point d'équipe", d: "Synchronisation rapide, levée des blocages." },
@@ -165,9 +186,152 @@ export const METHODO = {
   outils: "Jira (backlog, sprints, estimation story points) · Confluence (docs) · GitHub (code, PR, CI) · Figma (design).",
 };
 
+// Justification du choix méthodologique vs alternatives (critère proj_methodology).
+export const METHODO_JUSTIF = {
+  choix: "Scrum adapté (agile itératif)",
+  pourquoi:
+    "Le périmètre évolue avec les apprentissages (POCs IA, faisabilité hardware, retours du vétérinaire partenaire) : on ne peut pas tout figer en amont. Scrum permet de livrer par incréments, de réorienter à chaque sprint et d'absorber l'incertitude technique sans replanifier tout le projet.",
+  alternatives: [
+    {
+      nom: "Waterfall / cycle en V",
+      verdict: "Écarté",
+      raison:
+        "Suppose un cahier des charges figé en amont. Incompatible avec l'incertitude R&D (IA, capteurs) et les retours terrain itératifs.",
+    },
+    {
+      nom: "Kanban pur (flux continu)",
+      verdict: "Partiellement intégré",
+      raison:
+        "Excellent pour un flux continu, mais sans cadence ni engagement de sprint il offre peu de prévisibilité pour une équipe de 10 et une soutenance jalonnée. On en retient le tableau visuel et la limite de WIP.",
+    },
+  ],
+  adaptation:
+    "« Adapté » car l'équipe est étudiante : Scrum Master tournant (montée en compétence de tous), sprints alignés sur le calendrier académique, et un PO unique garant de la priorisation.",
+};
+
+// Estimation : Planning Poker sur échelle de Fibonacci (page Confluence Story Points).
+export const STORY_POINTS = {
+  intro:
+    "Les tickets Jira sont estimés en story points (effort global : complexité, volume, incertitude, dépendances) — pas en heures. L'estimation se fait en équipe par Planning Poker pour aligner la compréhension.",
+  echelle: [
+    { pts: "1", ex: "Très simple, très clair (ex. créer un canal, changer un paramètre Jira)." },
+    { pts: "2", ex: "Simple avec un peu de vérification (ex. configurer un repo GitHub)." },
+    { pts: "3", ex: "Travail normal + mini-livrable (ex. produire le WBS, une matrice RACI)." },
+    { pts: "5", ex: "Gros ticket, coordination, risque moyen (ex. benchmark hardware)." },
+    { pts: "8", ex: "Complexe / flou / long (ex. étude de marché complète, gros état de l'art)." },
+  ],
+  regle: "Au-delà de 13 points, le ticket est découpé. Les points restent stables pendant le sprint.",
+};
+
+/* ----------------------------------------- ROADMAP DÉTAILLÉE (3 phases) -- */
+// Source : page Confluence « Planning & Roadmap ». Complète la frise Gantt.
+export type Phase = {
+  nom: string;
+  periode: string;
+  objectif: string;
+  lignes: { quoi: string; qui: string; quand?: string }[];
+};
+export const PHASES: Phase[] = [
+  {
+    nom: "Phase 1 — Conception",
+    periode: "Déc 2025 → Juin 2026",
+    objectif: "Préparer tous les livrables pour la keynote.",
+    lignes: [
+      { quoi: "Cadrage : WBS, OBS, RACI, SWOT, PESTEL, AMDEC, Risk Map", qui: "Toute l'équipe" },
+      { quoi: "Organisation : méthodologie, Quality Plan, outils", qui: "Yassine" },
+      { quoi: "Technique : benchmarks, architecture, specs", qui: "Pôles tech" },
+      { quoi: "Marché : étude, positionnement, personas", qui: "Adam, Elarif" },
+      { quoi: "POCs : simulateur collier, RAG / Chat IA", qui: "Nino, Yassine, Cyril" },
+    ],
+  },
+  {
+    nom: "Phase 2 — Développement",
+    periode: "Juil 2026 → Avr 2027",
+    objectif: "Développer tous les composants en parallèle.",
+    lignes: [
+      { quoi: "Infrastructure : Cloud, CI/CD, monitoring", qui: "Oumar, Abderrahmane", quand: "Juil → Sept 2026" },
+      { quoi: "Backend : API, BDD, Auth, Ingestion", qui: "Hamid, Aaditya, Elarif", quand: "Juil 2026 → Jan 2027" },
+      { quoi: "Collier IoT : simulateur puis hardware", qui: "Cyril, Ibrahim", quand: "Juil 2026 → Avr 2027" },
+      { quoi: "App Mobile : Auth, Dashboard, GPS, Chat IA", qui: "Adam, Elarif", quand: "Juil 2026 → Mai 2027" },
+      { quoi: "Moteur IA + Data : POCs puis intégration", qui: "Nino, Yassine", quand: "Juil 2026 → Avr 2027" },
+      { quoi: "Portail Véto : dashboard, escalade, rapports", qui: "Hamid, Aaditya, Elarif", quand: "Fév → Mai 2027" },
+    ],
+  },
+  {
+    nom: "Phase 3 — Intégration",
+    periode: "Mai → Juil 2027",
+    objectif: "Assembler, tester, stabiliser.",
+    lignes: [
+      { quoi: "Tests E2E : tous les composants connectés", qui: "Toute l'équipe", quand: "Mai 2027" },
+      { quoi: "Beta interne : tests utilisateurs", qui: "Toute l'équipe", quand: "Mai → Juin 2027" },
+      { quoi: "Documentation : doc technique, guide utilisateur", qui: "Toute l'équipe", quand: "Juil 2027" },
+    ],
+  },
+];
+
+// Preuve d'adoption de l'outil de gestion (instantané du board Jira projet SCRUM).
+export const JIRA = {
+  url: "https://pawrise.atlassian.net",
+  intro:
+    "Le projet est piloté sur un board Jira (projet SCRUM) adopté par les 10 membres : backlog, sprints, estimation en story points et assignation nominative des tâches. Confluence héberge la documentation, GitHub le code et les PR.",
+  stats: [
+    { k: "100+", v: "tickets (epics, tâches, sous-tâches)" },
+    { k: "19", v: "epics suivis" },
+    { k: "10 / 10", v: "membres avec tickets assignés" },
+    { k: "4", v: "statuts de flux (à faire → en cours → revue → terminé)" },
+  ],
+  workflow: ["À faire", "En cours", "Revue en cours", "Terminé"],
+};
+
+/* ----------------------------------------------------- PLAN QUALITÉ ----- */
+// Conservé pour compat ; résumé des principes de test agile.
 export const QUALITY = [
   "Tests écrits en parallèle ou avant le code (TDD quand possible).",
   "Chaque sprint inclut rédaction, exécution et validation des tests.",
   "La Definition of Done d'une User Story inclut obligatoirement ses tests.",
   "Les tests automatisés s'exécutent à chaque Pull Request via la CI.",
+];
+
+// Plan qualité détaillé (critère team_practices). Stratégie de tests par couche,
+// conventions, Git workflow, CI/CD et onboarding — adapté à la stack réelle.
+export const TEST_STRATEGY: { couche: string; outils: string; cible: string }[] = [
+  { couche: "Firmware collier (Rust no_std)", outils: "tests unitaires embarqués + simulateur de capteurs", cible: "Logique de collecte/encodage validée hors matériel via le simulateur." },
+  { couche: "Services backend (Rust)", outils: "tests unitaires (cargo test) + tests d'intégration API", cible: "Logique métier et endpoints couverts ; tests d'abus obligatoires sur l'auth." },
+  { couche: "Moteur IA / Care Engine (Python)", outils: "pytest + jeux d'évaluation RAG + garde-fous anti-diagnostic", cible: "Non-régression des réponses et déclenchement systématique de l'escalade en cas de doute." },
+  { couche: "App mobile (Kotlin / SwiftUI)", outils: "tests unitaires natifs + tests d'UI critiques", cible: "Parcours d'onboarding, appairage et alertes vérifiés." },
+  { couche: "Bout en bout (E2E)", outils: "scénarios end-to-end en phase d'intégration", cible: "Collier → backend → IA → app/portail validés ensemble (phase 3)." },
+];
+
+export const CODE_CONVENTIONS = [
+  "Linting/formatage automatiques par langage : rustfmt + clippy (Rust), ruff/black (Python), ktlint (Kotlin), ESLint + Prettier (TS/Next).",
+  "Nommage cohérent par langage (snake_case Rust/Python, camelCase Kotlin/TS) et noms descriptifs.",
+  "Toute fonctionnalité passe par une Pull Request relue par au moins un pair avant merge.",
+  "Pas de secret en clair dans le code : variables d'environnement + secrets chiffrés (SOPS).",
+];
+
+export const GIT_WORKFLOW = {
+  intro:
+    "Règles Git officielles du projet : travail collaboratif structuré, traçabilité complète et livraisons fiables. Branche stable protégée, le travail se fait sur des branches dédiées fusionnées par Pull Request relue.",
+  branches: [
+    { n: "main", d: "Branche stable et déployable. Protégée : merge uniquement via PR validée." },
+    { n: "develop", d: "Intégration continue des fonctionnalités avant stabilisation." },
+    { n: "feat/<scope>", d: "Une fonctionnalité = une branche, rattachée à un ticket Jira (ex. feat/SCRUM-42-appairage)." },
+    { n: "fix/<scope>", d: "Correction de bug isolée et traçable." },
+  ],
+  commits: "Messages de commit conventionnels (feat:, fix:, docs:, chore:…) référençant la clé du ticket Jira pour la traçabilité.",
+  pr: "Chaque PR : description claire, lien Jira, CI verte (lint + tests) et revue d'au moins un pair avant merge.",
+};
+
+export const CICD = [
+  "À chaque Pull Request : lint + tests automatiques via GitHub Actions (merge bloqué si rouge).",
+  "Build et publication d'images conteneurisées (Docker) versionnées.",
+  "Déploiement GitOps : Helm + Argo CD synchronisent le cluster Kubernetes depuis Git (source de vérité).",
+  "Secrets chiffrés (SOPS + age) injectés dans le cluster ; observabilité OpenTelemetry → Prometheus/Loki/Tempo → Grafana.",
+];
+
+export const ONBOARDING = [
+  "Accès : dépôt GitHub, projet Jira (SCRUM) et espace Confluence (PC) donnés dès l'arrivée.",
+  "Lecture d'entrée : ce plan qualité, le Git Workflow et l'architecture globale (cockpit).",
+  "Mise en route locale : clone du repo, installation des dépendances, lancement en local (README de chaque service).",
+  "Première contribution : prendre un ticket « bonne première tâche » dans Jira, ouvrir une PR en suivant les conventions.",
 ];

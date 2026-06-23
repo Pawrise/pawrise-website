@@ -27,7 +27,10 @@ export default function EpicGrid() {
             </div>
             <h4>{e.title}</h4>
             <p>{e.desc}</p>
-            <span className="epic-us">{e.us} US</span>
+            <div className="epic-foot">
+              <span className="epic-us">{e.us} US</span>
+              <span className="epic-fr">{e.fr}</span>
+            </div>
           </div>
         ))}
       </div>

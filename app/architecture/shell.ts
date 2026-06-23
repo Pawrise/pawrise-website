@@ -41,7 +41,7 @@ export const SHELL = `
     <div class="ph"><h2>📖 Présentation du projet</h2><button class="x" data-close>×</button></div>
     <div class="pb">
       <div class="eyebrow">La vision</div>
-      <div class="pcard" style="--ac:var(--acc)"><h3>🐾 Pawrise Care</h3><p>Collier connecté qui suit la santé/bien-être de l'animal en continu, l'explique au propriétaire via une IA · <b>sans jamais diagnostiquer</b> · et transmet au vétérinaire un historique structuré prêt à l'emploi. <b>43 FR · 10 epics · 52 US · 6 services.</b></p></div>
+      <div class="pcard" style="--ac:var(--acc)"><h3>🐾 Pawrise Care</h3><p>Collier connecté qui suit la santé/bien-être de l'animal en continu, l'explique au propriétaire via une IA · <b>sans jamais diagnostiquer</b> · et transmet au vétérinaire un historique structuré prêt à l'emploi. <b>43 FR · 11 epics · 66 US (dont 52 MVP) · 6 services.</b></p></div>
       <div class="eyebrow">Le pourquoi</div>
       <div class="pcard" style="--ac:var(--cli)"><h3><span class="ic">🙈</span>Propriétaire aveugle</h3><p>Aucune visibilité continue entre deux visites.</p></div>
       <div class="pcard" style="--ac:var(--svc)"><h3><span class="ic">🩺</span>Vétérinaire sans historique</h3><p>Chronologie imprécise, données éparses, communication difficile.</p></div>
@@ -60,7 +60,7 @@ export const SHELL = `
       <div class="eyebrow">Équipe & méthodo</div>
       <div class="pcard"><h3>🤝 10 personnes · 5 pôles</h3><div class="members"><span class="mem po">Yassine · PO</span><span class="mem">Nino</span><span class="mem">Cyril</span><span class="mem">Ibrahim</span><span class="mem">Hamid</span><span class="mem">Aaditya</span><span class="mem">Elarif</span><span class="mem">Adam</span><span class="mem">Oumar</span><span class="mem">Abderrahmane</span></div><p style="margin-top:8px">Scrum adapté · monolith-first → macroservices · Jira/Confluence/GitHub/Figma.</p></div>
       <div class="eyebrow">Par où commencer</div>
-      <div class="pcard"><h3>🚀 Par où commencer</h3><p>Socle <b>monolithe modulaire</b> d'abord (API + Care Engine), puis extraction progressive de macroservices. On démarre par l'ingestion télémétrie → moteur d'orientation, le portail vété avançant en parallèle. Documents de référence : PRD, epics, architecture, 52 stories.</p></div>
+      <div class="pcard"><h3>🚀 Par où commencer</h3><p>Socle <b>monolithe modulaire</b> d'abord (API + Care Engine), puis extraction progressive de macroservices. On démarre par l'ingestion télémétrie → moteur d'orientation, le portail vété avançant en parallèle. Documents de référence : PRD, epics, architecture, 66 stories.</p></div>
     </div>
   </aside>
 
