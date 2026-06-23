@@ -104,7 +104,7 @@ export const OBS: Pole[] = [
   { name: "Backend / API", accent: "var(--svc)", members: ["Hamid", "Aaditya", "Elarif"], scope: "API, ingestion, BDD, auth, Vet Portal" },
   { name: "IoT / Hardware", accent: "var(--edge)", members: ["Cyril", "Ibrahim"], scope: "Firmware, capteurs, simulateur, collier" },
   { name: "IA / Data", accent: "var(--ai)", members: ["Nino", "Yassine"], scope: "Care Engine, RAG, POCs, modèle de données" },
-  { name: "Design / Market", accent: "var(--cli)", members: ["Adam"], scope: "UX/UI, identité, positionnement, marché" },
+  { name: "Design / Mobile", accent: "var(--cli)", members: ["Adam"], scope: "UX/UI, app mobile, identité, positionnement & marché" },
   { name: "Cloud / DevOps", accent: "var(--data)", members: ["Oumar", "Abderrahmane"], scope: "Cloud, CI/CD, monitoring, sécurité" },
 ];
 
@@ -112,7 +112,7 @@ export const OBS: Pole[] = [
 // assumée) ; Elarif est rattaché Backend mais intervient en transverse Mobile,
 // CI/CD et lien vétérinaire. Le détail nominatif par domaine figure dans COVERAGE.
 export const PO_NOTE =
-  "Yassine cumule le rôle de Product Owner et de contributeur IA/Data. Le détail des responsabilités nominatives par domaine (avec backups) est précisé dans la table de couverture ci-dessous.";
+  "Yassine cumule le rôle de Product Owner et de contributeur IA/Data ; Elarif est rattaché au pôle Backend mais intervient en transverse sur le Mobile, le marché, la CI/CD et le lien vétérinaire. Le détail des responsabilités nominatives par domaine (avec backups) est précisé dans la table de couverture ci-dessous.";
 
 // Table de couverture nominative : qui est responsable de quoi, et le backup
 // qui assure la continuité. Source : Justification & Compétences (Confluence).
@@ -276,7 +276,7 @@ export const JIRA = {
     "Le projet est piloté sur un board Jira (projet SCRUM) adopté par les 10 membres : backlog, sprints, estimation en story points et assignation nominative des tâches. Confluence héberge la documentation, GitHub le code et les PR.",
   stats: [
     { k: "100+", v: "tickets (epics, tâches, sous-tâches)" },
-    { k: "19", v: "epics suivis" },
+    { k: "19", v: "epics Jira (suivi, ≥ 11 epics produit)" },
     { k: "10 / 10", v: "membres avec tickets assignés" },
     { k: "4", v: "statuts de flux (à faire → en cours → revue → terminé)" },
   ],
