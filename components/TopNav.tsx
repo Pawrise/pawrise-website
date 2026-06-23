@@ -6,6 +6,9 @@ import { SECTIONS } from "@/lib/sections";
 
 export default function TopNav() {
   const path = usePathname();
+  // Le cockpit d'architecture est plein écran avec sa propre barre : on masque
+  // le menu global sur cette route pour éviter le double en-tête.
+  if (path === "/architecture" || path === "/architecture/") return null;
   return (
     <header className="topnav">
       <div className="wrap nav-inner">
