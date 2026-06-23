@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2dd4bf"/>
+      <stop offset="0.55" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#pg)"/>
+  <g fill="#ffffff">
+    <!-- coussinets (orteils) -->
+    <ellipse cx="18" cy="29" rx="5" ry="6.5"/>
+    <ellipse cx="27.5" cy="22" rx="5.3" ry="7"/>
+    <ellipse cx="38" cy="22" rx="5.3" ry="7"/>
+    <ellipse cx="47" cy="29" rx="5" ry="6.5"/>
+    <!-- coussinet central -->
+    <path d="M32 32c7.5 0 13.5 5.4 13.5 11.7 0 4.7-3.9 7.8-9 7.8-2.2 0-3.3-.7-4.5-.7s-2.3.7-4.5.7c-5.1 0-9-3.1-9-7.8C18.5 37.4 24.5 32 32 32Z"/>
+  </g>
+</svg>
