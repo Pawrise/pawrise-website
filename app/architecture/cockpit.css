@@ -244,3 +244,20 @@ body.cockpit-active{overflow:hidden}
 .cockpit-root .presentstop{position:absolute}
 /* La marque du cockpit fait doublon avec la navbar du site -> masquée. */
 .cockpit-root .topbar .brand{display:none}
+
+/* ============================================================
+   Refonte DA — cohérence totale avec le site
+   - fond transparent => on hérite du fond + grain du site
+   - barre d'outils SANS bandeau (boutons flottants)
+   - drawer au-dessus de la barre d'outils + sous la navbar du site
+   ============================================================ */
+.cockpit-root{inset:0!important}
+#archwrap{background:transparent!important}
+.cockpit-root #archwrap{top:0}
+/* barre d'outils = boutons flottants, aucun fond dédié */
+.topbar{background:none!important;backdrop-filter:none!important}
+.cockpit-root .topbar{top:60px}
+/* drawer (détail cellule) : passe au-dessus de la barre d'outils, sous la navbar site */
+.pscrim{z-index:35}
+.panel{z-index:36}
+.cockpit-root .panel{top:60px;height:calc(100% - 60px)}
