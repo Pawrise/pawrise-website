@@ -312,3 +312,26 @@ body.cockpit-active{overflow:hidden}
 .tb.on{background:rgba(211,252,114,.16) !important;border-color:rgba(211,252,114,.6) !important;color:#d3fc72 !important}
 .legend,.player{background:rgba(255,255,255,.06) !important;border:1px solid rgba(255,255,255,.4) !important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .player button{background:rgba(255,255,255,.08) !important;border:1px solid rgba(255,255,255,.3) !important;color:#f4f6ff !important}
+
+/* ============================================================
+   CORRECTIF : on garde les cartes blanches (DA) MAIS on rétablit
+   le code couleur d'origine — liseré de catégorie des nœuds + flux
+   identiques à la légende (lisibilité + cohérence avec l'échelle).
+   ============================================================ */
+.a-card{border-left:3px solid var(--ac,#64748b) !important}
+.a-kbar .a-card{border-left:1px solid rgba(255,255,255,.4) !important;border-top:3px solid #c084fc !important}
+.a-host{border-left:4px solid #fbbf24 !important}
+/* flux animés = couleurs de la légende (shell.ts) */
+.a-flow.sync{stroke:#34d399}
+.a-flow.event{stroke:#c084fc}
+.a-flow.ctrl{stroke:#64d2ff}
+.a-flow.ext{stroke:#fbbf24}
+/* fils statiques = mêmes teintes, discrets */
+.a-wire{opacity:.5}
+.a-wire.sync{stroke:rgba(52,211,153,.38)}
+.a-wire.event{stroke:rgba(192,132,252,.4)}
+.a-wire.ctrl{stroke:rgba(100,210,255,.36)}
+.a-wire.ext{stroke:rgba(251,191,36,.38)}
+/* encadrés/labels neutres (pas de lime forcé qui faussait la lecture) */
+.a-enc{fill:rgba(56,189,248,.05) !important;stroke:rgba(56,189,248,.42) !important}
+.a-enclabel{fill:#7fd4ff !important}

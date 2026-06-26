@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 
 // Effets globaux (toutes pages) : révélation au scroll des blocs + spotlight lime
 // au survol des petites cartes. Aucune édition par page nécessaire.
-const REVEAL_SEL =
-  ".panel-sect, .block, .epic, .swot-q, .pestel-c, .obs-pole, .persona, .kill, .prof, .gap, .feat-lot, .bk-stat, .mkt-fig, .cb-kpi";
+// On ne révèle QUE les sections (statiques). Révéler les cartes internes cassait
+// les contenus dynamiques (filtres, WBS) qui apparaissent sans être observés.
+const REVEAL_SEL = ".panel-sect";
 const SPOT_SEL = ".block, .epic, .swot-q, .pestel-c, .persona, .kill, .prof";
 
 export default function PageFX() {
