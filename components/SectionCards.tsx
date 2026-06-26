@@ -28,12 +28,18 @@ export default function SectionCards() {
     gridRef.current?.querySelectorAll<HTMLElement>(".card").forEach((c) => c.style.setProperty("--glow", "0"));
   };
 
+  // Pavage bento propre : 1 grande (2×2) + 1 large (2×1) + 6 normales = 12 cellules (3 rangées de 4).
+  const SPAN: Record<string, string> = {
+    "assistant-ia": "cell-big",
+    architecture: "cell-wide",
+  };
+
   return (
     <section ref={gridRef} className="wrap grid magic-grid" onMouseMove={onMove} onMouseLeave={onLeave}>
       {SECTIONS.map((s, i) => (
         <motion.div
           key={s.slug}
-          className="grid-cell"
+          className={`grid-cell ${SPAN[s.slug] || ""}`}
           initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}

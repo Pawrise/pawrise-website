@@ -19,8 +19,10 @@ export default function SiteNav() {
     <StaggeredMenu
       items={items}
       position="right"
-      colors={["#01aabb", "#37338f"]}
+      colors={["#0d2b34", "#1a1750"]}
       accentColor="#d3fc72"
+      menuButtonColor="#ffffff"
+      openMenuButtonColor="#ffffff"
       activeLink={active}
       onNavigate={(l: string) => router.push(l)}
       footer={
