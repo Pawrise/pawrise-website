@@ -4,6 +4,7 @@ import ShinyText from "@/components/ShinyText";
 import StarBorder from "@/components/StarBorder";
 import BlurText from "@/components/fx/BlurText";
 import SectionCards from "@/components/SectionCards";
+import HeroStats from "@/components/HeroStats";
 
 export default function Home() {
   return (
@@ -39,6 +40,7 @@ export default function Home() {
         </div>
       </section>
 
+      <HeroStats />
       <SectionCards />
 
       <footer className="footer">
