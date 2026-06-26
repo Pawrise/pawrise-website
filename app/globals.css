@@ -674,10 +674,10 @@ a{color:inherit;text-decoration:none}
 
 /* ===== Home : bandeau stats + chip bento ===== */
 .hero-stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 auto 30px;padding:0 24px}
-.hstat{padding:18px 18px;text-align:left}
-.hstat b{display:block;font-size:clamp(28px,4vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1;
-  background:linear-gradient(100deg,var(--lime),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hstat span{display:block;margin-top:6px;font-size:12.5px;color:var(--mut);font-weight:600}
+.hstat{position:relative;padding:18px 18px;text-align:left;border-top:2px solid rgba(211,252,114,.5);overflow:hidden}
+.hstat::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 0% 0%,rgba(211,252,114,.13),transparent 55%)}
+.hstat b{position:relative;display:block;font-size:clamp(28px,4vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1;color:var(--lime);text-shadow:0 0 26px rgba(211,252,114,.45)}
+.hstat span{position:relative;display:block;margin-top:6px;font-size:12.5px;color:var(--mut);font-weight:600}
 @media(max-width:720px){.hero-stats{grid-template-columns:1fr 1fr}}
 .tile-hl{display:inline-block;align-self:flex-start;margin-top:12px;font-size:11px;font-weight:800;letter-spacing:.02em;
   color:var(--lime);background:rgba(211,252,114,.10);border:1px solid rgba(211,252,114,.32);padding:5px 11px;border-radius:999px}
