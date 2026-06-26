@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AmdecTable from "@/components/diagrams/AmdecTable";
+import PageHeader from "@/components/PageHeader";
 import RiskMap from "@/components/diagrams/RiskMap";
 
 export const metadata: Metadata = {
@@ -10,15 +11,18 @@ export const metadata: Metadata = {
 export default function RisquesPage() {
   return (
     <main>
-      <header className="shead">
-        <span className="ctag" style={{ color: "var(--rose)" }}>Maîtrise des risques</span>
-        <h1>Risques</h1>
-        <p>
-          Deux analyses complémentaires : l&apos;AMDEC cible les défaillances techniques du
-          produit (collier, transmission, IA, escalade) ; la Risk Map cartographie les risques
-          de conduite du projet.
-        </p>
-      </header>
+      <PageHeader
+        tag="Maîtrise des risques"
+        color="var(--rose)"
+        title="Risques"
+        desc={
+          <>
+            Deux analyses complémentaires : l&apos;AMDEC cible les défaillances techniques du
+            produit (collier, transmission, IA, escalade) ; la Risk Map cartographie les risques
+            de conduite du projet.
+          </>
+        }
+      />
 
       <div className="wrap sect-stack">
         <section className="panel-sect">

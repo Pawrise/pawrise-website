@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import Backdrop from "@/components/Backdrop";
 import Loader from "@/components/Loader";
+import PageFX from "@/components/PageFX";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="fr" className={inter.variable}>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: "try{document.documentElement.classList.add('js-reveal')}catch(e){}" }} />
         <Loader />
         <Backdrop />
         <SiteNav />
+        <PageFX />
         {children}
       </body>
     </html>

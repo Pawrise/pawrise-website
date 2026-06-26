@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { VISION } from "@/lib/content/vision";
+import PageHeader from "@/components/PageHeader";
 
 export const metadata: Metadata = {
   title: "Vision · Pawrise Care",
@@ -9,11 +10,7 @@ export const metadata: Metadata = {
 export default function VisionPage() {
   return (
     <main>
-      <header className="shead">
-        <span className="ctag" style={{ color: "var(--cli)" }}>Vision produit</span>
-        <h1>Vision</h1>
-        <p>{VISION.resume}</p>
-      </header>
+      <PageHeader tag="Vision produit" color="var(--cli)" title="Vision" desc={VISION.resume} />
 
       <div className="wrap sect-stack">
         <section className="panel-sect">

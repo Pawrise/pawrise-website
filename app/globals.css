@@ -683,3 +683,21 @@ a{color:inherit;text-decoration:none}
   color:var(--lime);background:rgba(211,252,114,.10);border:1px solid rgba(211,252,114,.32);padding:5px 11px;border-radius:999px}
 .grid.magic-grid .card .more{margin-top:14px}
 .grid.magic-grid .cell-big .tile-hl,.grid.magic-grid .cell-wide .tile-hl{margin-top:auto}
+
+/* ===== Révélations au scroll (global, anti-flash via .js-reveal) ===== */
+.js-reveal .panel-sect,.js-reveal .block,.js-reveal .epic,.js-reveal .swot-q,.js-reveal .pestel-c,
+.js-reveal .obs-pole,.js-reveal .persona,.js-reveal .kill,.js-reveal .prof,.js-reveal .gap,
+.js-reveal .feat-lot,.js-reveal .bk-stat,.js-reveal .mkt-fig,.js-reveal .cb-kpi{
+  opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s cubic-bezier(.4,0,.2,1)}
+.js-reveal .panel-sect.in,.js-reveal .block.in,.js-reveal .epic.in,.js-reveal .swot-q.in,.js-reveal .pestel-c.in,
+.js-reveal .obs-pole.in,.js-reveal .persona.in,.js-reveal .kill.in,.js-reveal .prof.in,.js-reveal .gap.in,
+.js-reveal .feat-lot.in,.js-reveal .bk-stat.in,.js-reveal .mkt-fig.in,.js-reveal .cb-kpi.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js-reveal [class]{opacity:1!important;transform:none!important}}
+
+/* ===== Spotlight lime au survol des petites cartes internes ===== */
+.spot{position:relative;overflow:hidden}
+.spot::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;z-index:0;
+  background:radial-gradient(200px 200px at var(--mx,50%) var(--my,50%),rgba(211,252,114,.15),transparent 60%)}
+.spot:hover::before{opacity:1}
+.spot:hover{border-color:rgba(211,252,114,.4)}
+.spot>*{position:relative;z-index:1}

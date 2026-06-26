@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import EpicGrid from "@/components/diagrams/EpicGrid";
+import PageHeader from "@/components/PageHeader";
 import FeatureMap from "@/components/diagrams/FeatureMap";
 import { BACKLOG_STATS, FR_GROUPS, NFR_LIST, AC_EXAMPLE } from "@/lib/content/backlog";
+import CountUp from "@/components/fx/CountUp";
 
 export const metadata: Metadata = {
   title: "Backlog & Features · Pawrise Care",
@@ -11,16 +13,19 @@ export const metadata: Metadata = {
 export default function BacklogPage() {
   return (
     <main>
-      <header className="shead">
-        <span className="ctag" style={{ color: "var(--edge)" }}>Backlog produit</span>
-        <h1>Backlog &amp; Features</h1>
-        <p>
-          Le produit est découpé en {BACKLOG_STATS.epics} epics et {BACKLOG_STATS.us} user
-          stories, dont {BACKLOG_STATS.mvp} dans le périmètre MVP. Chaque epic regroupe les
-          fonctionnalités d&apos;un même domaine et couvre des exigences fonctionnelles (FR) et
-          non-fonctionnelles (NFR) précises.
-        </p>
-      </header>
+      <PageHeader
+        tag="Backlog produit"
+        color="var(--edge)"
+        title="Backlog & Features"
+        desc={
+          <>
+            Le produit est découpé en {BACKLOG_STATS.epics} epics et {BACKLOG_STATS.us} user
+            stories, dont {BACKLOG_STATS.mvp} dans le périmètre MVP. Chaque epic regroupe les
+            fonctionnalités d&apos;un même domaine et couvre des exigences fonctionnelles (FR) et
+            non-fonctionnelles (NFR) précises.
+          </>
+        }
+      />
 
       <div className="wrap sect-stack">
         {/* Epics */}
@@ -30,9 +35,9 @@ export default function BacklogPage() {
             <p>Les {BACKLOG_STATS.epics} epics, leur volume de user stories et les exigences couvertes.</p>
           </div>
           <div className="bk-stats">
-            <div className="bk-stat"><b>{BACKLOG_STATS.epics}</b><span>epics</span></div>
-            <div className="bk-stat"><b>{BACKLOG_STATS.us}</b><span>user stories</span></div>
-            <div className="bk-stat"><b>{BACKLOG_STATS.mvp}</b><span>US dans le MVP</span></div>
+            <div className="bk-stat"><b><CountUp to={BACKLOG_STATS.epics} /></b><span>epics</span></div>
+            <div className="bk-stat"><b><CountUp to={BACKLOG_STATS.us} /></b><span>user stories</span></div>
+            <div className="bk-stat"><b><CountUp to={BACKLOG_STATS.mvp} /></b><span>US dans le MVP</span></div>
             <div className="bk-stat"><b>43 / 10</b><span>FR / NFR</span></div>
           </div>
           <EpicGrid />

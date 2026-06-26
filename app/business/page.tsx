@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SwotMatrix from "@/components/diagrams/SwotMatrix";
+import PageHeader from "@/components/PageHeader";
 import PestelGrid from "@/components/diagrams/PestelGrid";
 import { VALUE, MARKET, ECON, BOM, BOM_TOTAL, BOM_OPTIONS, BUDGET_NOTE } from "@/lib/content/business";
 
@@ -11,16 +12,17 @@ export const metadata: Metadata = {
 export default function BusinessPage() {
   return (
     <main>
-      <header className="shead">
-        <span className="ctag" style={{ color: "var(--ext)" }}>
-          Business & Stratégie
-        </span>
-        <h1>Business &amp; Stratégie</h1>
-        <p>
-          Pourquoi Pawrise Care a sa place sur le marché : proposition de valeur,
-          analyse du marché, SWOT, PESTEL, modèle économique et budget prévisionnel.
-        </p>
-      </header>
+      <PageHeader
+        tag="Business & Stratégie"
+        color="var(--ext)"
+        title="Business & Stratégie"
+        desc={
+          <>
+            Pourquoi Pawrise Care a sa place sur le marché : proposition de valeur,
+            analyse du marché, SWOT, PESTEL, modèle économique et budget prévisionnel.
+          </>
+        }
+      />
 
       <div className="wrap sect-stack">
         {/* Proposition de valeur */}

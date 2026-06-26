@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ChatbotPipeline from "@/components/diagrams/ChatbotPipeline";
+import PageHeader from "@/components/PageHeader";
 import {
   CHATBOT_INTRO,
   PIPELINE,
@@ -20,11 +21,7 @@ export const metadata: Metadata = {
 export default function AssistantIAPage() {
   return (
     <main>
-      <header className="shead">
-        <span className="ctag" style={{ color: "var(--ai)" }}>Care Engine</span>
-        <h1>Assistant IA</h1>
-        <p>{CHATBOT_INTRO.pitch}</p>
-      </header>
+      <PageHeader tag="Care Engine" color="var(--ai)" title="Assistant IA" desc={CHATBOT_INTRO.pitch} />
 
       <div className="wrap sect-stack">
         {/* Règle d'or */}

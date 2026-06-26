@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import WbsTree from "@/components/diagrams/WbsTree";
+import PageHeader from "@/components/PageHeader";
 import OrgChart from "@/components/diagrams/OrgChart";
 import RaciMatrix from "@/components/diagrams/RaciMatrix";
 import Gantt from "@/components/diagrams/Gantt";
@@ -27,17 +28,18 @@ export const metadata: Metadata = {
 export default function PilotagePage() {
   return (
     <main>
-      <header className="shead">
-        <span className="ctag" style={{ color: "var(--svc)" }}>
-          Gestion de projet
-        </span>
-        <h1>Pilotage</h1>
-        <p>
-          Comment l&apos;équipe découpe, organise et planifie le travail : structure de
-          découpage (WBS), organisation (OBS), responsabilités (RACI), méthodologie,
-          plan qualité et planning sur 20 mois.
-        </p>
-      </header>
+      <PageHeader
+        tag="Gestion de projet"
+        color="var(--svc)"
+        title="Pilotage"
+        desc={
+          <>
+            Comment l&apos;équipe découpe, organise et planifie le travail : structure de
+            découpage (WBS), organisation (OBS), responsabilités (RACI), méthodologie,
+            plan qualité et planning sur 20 mois.
+          </>
+        }
+      />
 
       <div className="wrap sect-stack">
         {/* WBS */}

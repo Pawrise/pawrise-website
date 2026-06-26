@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import OrgChart from "@/components/diagrams/OrgChart";
+import PageHeader from "@/components/PageHeader";
 import CompetencyHeatmap from "@/components/diagrams/CompetencyHeatmap";
 import { APPROACH, PROFILES, GAPS, TEAM_STATS } from "@/lib/content/team";
 
@@ -11,11 +12,7 @@ export const metadata: Metadata = {
 export default function EquipePage() {
   return (
     <main>
-      <header className="shead">
-        <span className="ctag" style={{ color: "var(--ai)" }}>L&apos;équipe</span>
-        <h1>Équipe</h1>
-        <p>{APPROACH}</p>
-      </header>
+      <PageHeader tag="L'équipe" color="var(--ai)" title="Équipe" desc={APPROACH} />
 
       <div className="wrap sect-stack">
         <section className="panel-sect">
