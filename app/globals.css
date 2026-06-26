@@ -709,3 +709,28 @@ a{color:inherit;text-decoration:none}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='nt'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23nt)'/%3E%3C/svg%3E");
   background-size:240px 240px}
 .sm-toggle>*{position:relative;z-index:1}
+
+/* ===== Bouton Menu = exactement le glassmorphism des cards ===== */
+.sm-toggle{
+  border-radius:14px !important;
+  padding:10px 16px !important;
+  border:1px solid rgba(255,255,255,.4) !important;
+  background:
+    radial-gradient(125% 100% at 50% 50%, rgba(255,255,255,0) 38%, rgba(255,255,255,.06) 70%, rgba(255,255,255,.18) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)) !important;
+  -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 rgba(255,255,255,.26) inset, 0 16px 40px rgba(0,0,0,.3) !important;
+}
+.sm-toggle:hover{border-color:rgba(211,252,114,.55) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.3) inset, 0 0 0 1px rgba(211,252,114,.4), 0 16px 40px rgba(0,0,0,.35) !important}
+
+/* ===== Bouton Menu : glass plus DOUX (comme les cards, moins blanc) ===== */
+.sm-toggle{
+  border:1px solid rgba(255,255,255,.22) !important;
+  background:
+    radial-gradient(140% 130% at 50% 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,.045) 74%, rgba(255,255,255,.11) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.16) inset, 0 14px 34px rgba(0,0,0,.26) !important;
+}
+.sm-toggle:hover{border-color:rgba(211,252,114,.5) !important}
+.sm-toggle::after{opacity:.4 !important}
