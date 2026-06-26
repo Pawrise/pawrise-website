@@ -88,7 +88,7 @@ a{color:inherit;text-decoration:none}
 .grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fill,minmax(264px,1fr));gap:18px;padding-bottom:90px}
 /* Cartes uniformes blanches (DA deck) : accent lime discret, pas d'arc-en-ciel */
 .card{position:relative;padding:22px 20px 18px;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s}
-.card:hover{transform:translateY(-4px);border-color:rgba(211,252,114,.55);box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.card:hover{border-color:rgba(211,252,114,.45)}
 .card .card-acc{display:none}
 .card .ctag{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lime)}
 .card h3{margin:6px 0 8px;font-size:18px;font-weight:800;color:#fff}
@@ -486,8 +486,10 @@ a{color:inherit;text-decoration:none}
 .bd-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,34,.12),transparent 22%,transparent 70%,rgba(10,9,34,.32))}
 
 /* ===== React Bits — StarBorder (bouton à bordure animée) ===== */
-.star-border{position:relative;display:inline-block;overflow:hidden;border-radius:14px;border:0;background:transparent;cursor:pointer}
-.star-border .sb-inner{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(100deg,var(--lime),var(--emerald));color:#0a0f10;font-weight:800;font-size:14px;padding:13px 22px;border-radius:13px}
+.star-border{position:relative;display:inline-block;overflow:hidden;border-radius:14px;border:0;background:transparent;cursor:pointer;transition:transform .18s}
+.star-border:hover{transform:translateY(-2px)}
+.star-border .sb-inner{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));color:#fff;font-weight:800;font-size:14px;padding:13px 24px;border-radius:13px;border:1px solid rgba(211,252,114,.55);backdrop-filter:blur(10px);transition:border-color .2s,box-shadow .2s,background .2s}
+.star-border:hover .sb-inner{border-color:var(--lime);background:linear-gradient(180deg,rgba(211,252,114,.18),rgba(255,255,255,.05));box-shadow:0 0 28px rgba(211,252,114,.4)}
 .star-border .sb-top,.star-border .sb-bottom{position:absolute;width:300%;height:50%;opacity:.7;border-radius:50%;animation:sb-move linear infinite}
 .star-border .sb-bottom{bottom:-12px;right:-250%;animation-name:sb-move-b}
 .star-border .sb-top{top:-12px;left:-250%;animation-name:sb-move-t}
@@ -525,3 +527,72 @@ a{color:inherit;text-decoration:none}
 .card.spotlight::before{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .3s;pointer-events:none;
   background:radial-gradient(240px 240px at var(--mx,50%) var(--my,50%),rgba(211,252,114,.18),transparent 60%)}
 .card.spotlight:hover::before{opacity:1}
+
+/* ============================ NAVBARS À TESTER ============================ */
+.nav-gooey .nav-inner,.nav-dock-brand .nav-inner{align-items:center}
+
+/* ---- GooeyNav (React Bits) thémé DA ---- */
+.gooey-nav-container{--color-1:#d3fc72;--color-2:#01aabb;--color-3:#ffffff;--color-4:#7b76e6;position:relative}
+.gooey-nav-container nav{display:flex;position:relative;transform:translate3d(0,0,0.01px)}
+.gooey-nav-container nav ul{display:flex;gap:.6em;list-style:none;padding:0 .4em;margin:0;position:relative;z-index:3;color:#fff}
+.gooey-nav-container nav ul li{border-radius:100vw;position:relative;cursor:pointer;transition:background-color .3s,color .3s,box-shadow .3s;color:var(--mut)}
+.gooey-nav-container nav ul li a{display:inline-block;padding:.5em .9em;font-size:13px;font-weight:700}
+.gooey-nav-container nav ul li::after{content:"";position:absolute;inset:0;border-radius:11px;background:var(--lime);opacity:0;transform:scale(0);transition:all .3s;z-index:-1}
+.gooey-nav-container nav ul li.active{color:#0a1226}
+.gooey-nav-container nav ul li.active::after{opacity:1;transform:scale(1)}
+.gooey-nav-container .effect{position:absolute;left:0;top:0;width:0;height:0;opacity:1;pointer-events:none;display:grid;place-items:center;z-index:1}
+.gooey-nav-container .effect.text{color:#fff;font-size:13px;font-weight:700;transition:color .3s}
+.gooey-nav-container .effect.text.active{color:#0a1226}
+.gooey-nav-container .effect.filter{filter:blur(7px) contrast(100) blur(0);mix-blend-mode:lighten}
+.gooey-nav-container .effect.filter::before{content:"";position:absolute;inset:-75px;z-index:-2;background:black}
+.gooey-nav-container .effect.filter::after{content:"";position:absolute;inset:0;background:var(--lime);transform:scale(0);opacity:0;z-index:-1;border-radius:100vw}
+.gooey-nav-container .effect.active::after{animation:pill .3s ease both}
+@keyframes pill{to{transform:scale(1);opacity:1}}
+.particle,.point{display:block;opacity:0;width:20px;height:20px;border-radius:100%;transform-origin:center}
+.particle{--time:5s;position:absolute;top:calc(50% - 8px);left:calc(50% - 8px);animation:particle calc(var(--time)) ease 1 -350ms}
+.point{background:var(--color);opacity:1;animation:point calc(var(--time)) ease 1 -350ms}
+@keyframes particle{0%{transform:rotate(0deg) translate(var(--start-x),var(--start-y));opacity:1;animation-timing-function:cubic-bezier(.55,0,1,.45)}70%{transform:rotate(calc(var(--rotate)*.5)) translate(calc(var(--end-x)*1.2),calc(var(--end-y)*1.2));opacity:1;animation-timing-function:ease}85%{transform:rotate(calc(var(--rotate)*.66)) translate(var(--end-x),var(--end-y));opacity:1}100%{transform:rotate(calc(var(--rotate)*1.2)) translate(calc(var(--end-x)*.5),calc(var(--end-y)*.5));opacity:1}}
+@keyframes point{0%{transform:scale(0);opacity:0;animation-timing-function:cubic-bezier(.55,0,1,.45)}25%{transform:scale(calc(var(--scale)*.25))}38%{opacity:1}65%{transform:scale(var(--scale));opacity:1;animation-timing-function:ease}85%{transform:scale(var(--scale));opacity:1}100%{transform:scale(0);opacity:0}}
+@media(max-width:980px){.gooey-nav-container nav ul{flex-wrap:wrap;gap:.2em}}
+
+/* ---- Dock (React Bits) thémé DA, flottant en bas ---- */
+.dock-fixed{position:fixed;left:0;right:0;bottom:14px;z-index:55;display:flex;justify-content:center;pointer-events:none}
+.dock-fixed .dock-outer{pointer-events:auto}
+.dock-outer{margin:0 .5rem;display:flex;max-width:100%;align-items:center}
+.dock-panel{position:relative;display:flex;align-items:flex-end;width:fit-content;gap:1rem;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(16px);box-shadow:0 16px 50px rgba(0,0,0,.45);padding:0 .6rem .6rem}
+.dock-item{position:relative;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);cursor:pointer;outline:none}
+.dock-item:hover{border-color:var(--lime)}
+.dock-icon{display:flex;align-items:center;justify-content:center}
+.dock-ico-txt{font-size:13px;font-weight:800;color:var(--lime)}
+.dock-label{position:absolute;top:-1.7rem;left:50%;width:fit-content;white-space:pre;border-radius:8px;border:1px solid rgba(255,255,255,.18);background:rgba(10,9,34,.9);padding:.15rem .55rem;font-size:.72rem;color:#fff;transform:translateX(-50%)}
+.nav-dock-brand{background:linear-gradient(180deg,rgba(8,8,30,.55),transparent)}
+
+/* ---- StaggeredMenu (React Bits) thémé DA (panel sombre, texte clair) ---- */
+.staggered-menu-wrapper{position:relative;width:100%;height:0;z-index:40;pointer-events:none}
+.staggered-menu-wrapper.fixed-wrapper{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:40;overflow:hidden}
+.staggered-menu-header{position:absolute;top:0;left:0;width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:transparent;pointer-events:none;z-index:20}
+.staggered-menu-header>*{pointer-events:auto}
+.sm-logo{display:flex;align-items:center;user-select:none}
+.sm-logo-img{display:block;height:30px;width:auto}
+.sm-toggle{position:relative;display:inline-flex;align-items:center;gap:.4rem;background:transparent;border:none;cursor:pointer;color:#fff;font-weight:700;line-height:1}
+.sm-toggle-textWrap{position:relative;display:inline-block;height:1em;overflow:hidden;white-space:nowrap}
+.sm-toggle-textInner{display:flex;flex-direction:column;line-height:1}
+.sm-toggle-line{display:block;height:1em;line-height:1;font-size:14px}
+.sm-icon{position:relative;width:16px;height:16px;flex:0 0 16px;display:inline-flex;align-items:center;justify-content:center}
+.sm-icon-line{position:absolute;left:50%;top:50%;width:100%;height:2px;background:currentColor;border-radius:2px;transform:translate(-50%,-50%)}
+.sm-prelayers{position:absolute;top:0;right:0;bottom:0;width:clamp(280px,40vw,460px);pointer-events:none;z-index:5}
+.sm-prelayer{position:absolute;top:0;right:0;height:100%;width:100%}
+.staggered-menu-panel{position:absolute;top:0;right:0;width:clamp(280px,40vw,460px);height:100%;background:linear-gradient(180deg,#0c0b2e,#10103e);backdrop-filter:blur(12px);display:flex;flex-direction:column;padding:6em 2em 2em;overflow-y:auto;z-index:10;pointer-events:auto}
+.sm-panel-inner{flex:1;display:flex;flex-direction:column;gap:1.25rem}
+.sm-panel-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.4rem}
+.sm-panel-itemWrap{position:relative;overflow:hidden;line-height:1}
+.sm-panel-item{position:relative;color:#fff;font-weight:800;font-size:clamp(1.8rem,4vw,3rem);cursor:pointer;line-height:1.05;letter-spacing:-1px;text-decoration:none;display:inline-block;padding-right:1.4em}
+.sm-panel-itemLabel{display:inline-block;will-change:transform;transform-origin:50% 100%}
+.sm-panel-item:hover{color:var(--lime)}
+.sm-panel-list[data-numbering]{counter-reset:smItem}
+.sm-panel-list[data-numbering] .sm-panel-item::after{counter-increment:smItem;content:counter(smItem,decimal-leading-zero);position:absolute;top:.1em;right:.6em;font-size:16px;font-weight:600;color:var(--lime);opacity:var(--sm-num-opacity,0)}
+
+/* ---- Sélecteur de test (provisoire) ---- */
+.nav-switcher{position:fixed;left:14px;bottom:14px;z-index:90;display:flex;align-items:center;gap:6px;background:rgba(10,9,34,.8);border:1px solid var(--line);border-radius:12px;padding:7px 10px;backdrop-filter:blur(12px);font-size:12px;color:var(--mut)}
+.nav-switcher button{font-size:12px;font-weight:700;color:var(--mut);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 10px;cursor:pointer}
+.nav-switcher button.on{color:#0a1226;background:var(--lime);border-color:transparent}

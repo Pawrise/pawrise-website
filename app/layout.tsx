@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import TopNav from "@/components/TopNav";
+import NavSwitcher from "@/components/NavSwitcher";
 import Backdrop from "@/components/Backdrop";
 
 const inter = Inter({
@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="fr" className={inter.variable}>
       <body>
         <Backdrop />
-        <TopNav />
+        <NavSwitcher />
         {children}
       </body>
     </html>
