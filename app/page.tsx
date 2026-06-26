@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { SECTIONS } from "@/lib/sections";
+import Logo from "@/components/Logo";
+import HeroCoil from "@/components/HeroCoil";
 
 export default function Home() {
   return (
     <main>
-      <section className="hero wrap">
+      <section className="hero wrap hero-wrap">
+        <div className="hero-coil-wrap"><HeroCoil /></div>
         <div className="hero-kicker">
-          <span className="hero-id"><span className="star">✳</span> T-ESP-800</span>
+          <span className="hero-id"><Logo size={22} /> T-ESP-800</span>
           <span className="hero-date">Epitech · EIP · <b>soutenance</b></span>
         </div>
         <h1 className="wordmark">

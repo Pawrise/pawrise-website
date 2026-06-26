@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SECTIONS } from "@/lib/sections";
+import Logo from "@/components/Logo";
 
 export default function TopNav() {
   const path = usePathname();
@@ -10,7 +11,7 @@ export default function TopNav() {
     <header className="topnav">
       <div className="wrap nav-inner">
         <Link href="/" className="brand">
-          <span className="logo">🐾</span>
+          <span className="logo"><Logo size={24} /></span>
           <span>
             <b>Pawrise Care</b>
             <small>Collier connecté · santé animale</small>
