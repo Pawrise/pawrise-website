@@ -521,12 +521,19 @@ a{color:inherit;text-decoration:none}
 }
 @media(min-width:921px){ .nav-overlay{display:none} }
 
-/* ===== Cartes : grille animée + spotlight au survol ===== */
+/* ===== Cartes : grille animée + MagicBento (spotlight + halo de bordure) ===== */
 .grid-cell{display:flex}
 .grid-cell>.card{width:100%}
-.card.spotlight::before{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .3s;pointer-events:none;
-  background:radial-gradient(240px 240px at var(--mx,50%) var(--my,50%),rgba(211,252,114,.18),transparent 60%)}
-.card.spotlight:hover::before{opacity:1}
+/* spotlight intérieur, intensité par proximité (--glow) */
+.card.magic::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
+  opacity:calc(var(--glow,0)*.9);transition:opacity .25s;
+  background:radial-gradient(220px 220px at var(--mx,50%) var(--my,50%),rgba(211,252,114,.20),transparent 60%)}
+/* halo de bordure lime qui suit le curseur (masque bord uniquement) */
+.card.magic::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;padding:1.5px;
+  opacity:var(--glow,0);transition:opacity .25s;
+  background:radial-gradient(200px 200px at var(--mx,50%) var(--my,50%),var(--lime),transparent 62%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.card.magic>*{position:relative;z-index:2}
 
 /* ============================ NAVBARS À TESTER ============================ */
 .nav-gooey .nav-inner,.nav-dock-brand .nav-inner{align-items:center}
@@ -613,3 +620,9 @@ a{color:inherit;text-decoration:none}
 .sm-footer-in{display:flex;flex-direction:column;gap:3px}
 .sm-footer-tag{font-size:12.5px;font-weight:800;color:var(--lime)}
 .sm-footer-sub{font-size:12px;color:var(--mut)}
+
+/* ===== Loader (1er chargement) ===== */
+.loader{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  background:radial-gradient(900px 700px at 50% 40%,rgba(1,170,187,.14),transparent 60%),#0a0922}
+.loader-word{font-size:18px;font-weight:900;letter-spacing:.18em;color:#fff}
+.loader-word span{color:var(--lime)}

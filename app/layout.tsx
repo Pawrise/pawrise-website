@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import Backdrop from "@/components/Backdrop";
+import Loader from "@/components/Loader";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={inter.variable}>
       <body>
+        <Loader />
         <Backdrop />
         <SiteNav />
         {children}

@@ -5,28 +5,31 @@ import { motion } from "motion/react";
 import { useRef } from "react";
 import { SECTIONS } from "@/lib/sections";
 
-function Card({ slug, tag, title, desc }: { slug: string; tag: string; title: string; desc: string }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const onMove = (e: React.MouseEvent) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
-  return (
-    <Link ref={ref} href={`/${slug}`} className="card glass spotlight" onMouseMove={onMove}>
-      <span className="ctag">{tag}</span>
-      <h3>{title}</h3>
-      <p>{desc}</p>
-      <span className="more">Explorer →</span>
-    </Link>
-  );
-}
-
+// Effet MagicBento (React Bits) : halo de bordure + spotlight lime qui suivent
+// le curseur sur toute la grille (intensité par proximité de chaque carte).
 export default function SectionCards() {
+  const gridRef = useRef<HTMLElement>(null);
+
+  const onMove = (e: React.MouseEvent) => {
+    const cards = gridRef.current?.querySelectorAll<HTMLElement>(".card");
+    if (!cards) return;
+    cards.forEach((card) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      card.style.setProperty("--my", `${e.clientY - r.top}px`);
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+      const prox = Math.max(0, 1 - dist / 360);
+      card.style.setProperty("--glow", prox.toFixed(3));
+    });
+  };
+  const onLeave = () => {
+    gridRef.current?.querySelectorAll<HTMLElement>(".card").forEach((c) => c.style.setProperty("--glow", "0"));
+  };
+
   return (
-    <section className="wrap grid">
+    <section ref={gridRef} className="wrap grid magic-grid" onMouseMove={onMove} onMouseLeave={onLeave}>
       {SECTIONS.map((s, i) => (
         <motion.div
           key={s.slug}
@@ -36,7 +39,12 @@ export default function SectionCards() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: (i % 4) * 0.06, ease: [0.4, 0, 0.2, 1] }}
         >
-          <Card slug={s.slug} tag={s.tag} title={s.title} desc={s.desc} />
+          <Link href={`/${s.slug}`} className="card glass magic">
+            <span className="ctag">{s.tag}</span>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+            <span className="more">Explorer →</span>
+          </Link>
         </motion.div>
       ))}
     </section>
