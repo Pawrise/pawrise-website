@@ -6,7 +6,7 @@
   --ink:#f4f6ff; --mut:#aab2dd; --faint:#737bb0;
   --line:rgba(255,255,255,.13); --panel:rgba(255,255,255,.05);
   /* Cartes : glassmorphisme blanc semi-transparent (texture DA) */
-  --card1:rgba(255,255,255,.11); --card2:rgba(255,255,255,.045);
+  --card1:rgba(255,255,255,.16); --card2:rgba(255,255,255,.055);
   /* Charte officielle : 3 couleurs */
   --lime:#d3fc72; --teal:#01aabb; --indigo:#37338f;
   --indigo-lt:#7b76e6; /* tint clair de l'indigo, lisible en accent sur fond sombre */
@@ -30,21 +30,22 @@ body{
   margin:0; color:var(--ink); min-height:100vh;
   font-family:var(--font-inter),Inter,-apple-system,Segoe UI,Roboto,sans-serif;
   background:
-    radial-gradient(1200px 780px at 8% -10%, rgba(1,170,187,.20), transparent 58%),
-    radial-gradient(1100px 760px at 98% 4%, rgba(211,252,114,.12), transparent 56%),
-    radial-gradient(900px 620px at 60% 108%, rgba(55,51,143,.40), transparent 62%),
-    linear-gradient(180deg,#0b0a26,#161349 50%,#0b0a26);
+    radial-gradient(1100px 820px at 10% 6%, rgba(1,170,187,.42), transparent 55%),
+    radial-gradient(1000px 760px at 90% 10%, rgba(211,252,114,.30), transparent 52%),
+    radial-gradient(1300px 980px at 72% 104%, rgba(1,170,187,.40), transparent 60%),
+    radial-gradient(900px 720px at 22% 98%, rgba(211,252,114,.22), transparent 58%),
+    linear-gradient(165deg,#0c0b2e,#15123f 45%,#0c0b2e);
   background-attachment:fixed;
 }
 /* Grain / bruit (texture DA) — overlay fixe, ne capte pas les clics */
 body::after{
-  content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.82;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:220px 220px; mix-blend-mode:overlay;
+  content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:1;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:240px 240px; mix-blend-mode:overlay;
 }
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.glass{background:linear-gradient(160deg,var(--card1),var(--card2));border:1px solid var(--line);backdrop-filter:blur(14px);border-radius:18px;box-shadow:0 1px 0 rgba(255,255,255,.06) inset}
+.glass{background:linear-gradient(155deg,var(--card1),var(--card2));border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(16px);border-radius:18px;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 20px 50px rgba(0,0,0,.28)}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:999px;border:1px solid var(--line);color:var(--lime);background:rgba(211,252,114,.08)}
 .grad{background:linear-gradient(100deg,var(--lime),var(--emerald) 50%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
 
@@ -437,11 +438,11 @@ a{color:inherit;text-decoration:none}
 
 /* ===== Fond animé (aurora DA) — derrière le contenu, sous le grain ===== */
 .backdrop{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.aurora-blob{position:absolute;border-radius:50%;filter:blur(140px);opacity:.3;will-change:transform}
-.aurora-blob.b1{width:46vw;height:46vw;left:-8vw;top:-10vw;background:radial-gradient(circle,rgba(1,170,187,.9),transparent 62%);animation:drift1 22s ease-in-out infinite}
-.aurora-blob.b2{width:42vw;height:42vw;right:-6vw;top:-4vw;background:radial-gradient(circle,rgba(1,170,187,.7),transparent 62%);animation:drift2 26s ease-in-out infinite}
-.aurora-blob.b3{width:40vw;height:40vw;left:30vw;bottom:-16vw;background:radial-gradient(circle,rgba(55,51,143,.85),transparent 62%);animation:drift3 30s ease-in-out infinite}
-.aurora-blob.b4{width:24vw;height:24vw;right:14vw;bottom:2vw;background:radial-gradient(circle,rgba(211,252,114,.5),transparent 60%);animation:drift1 24s ease-in-out infinite reverse}
+.aurora-blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.6;will-change:transform}
+.aurora-blob.b1{width:50vw;height:50vw;left:-10vw;top:-12vw;background:radial-gradient(circle,rgba(1,170,187,1),transparent 60%);animation:drift1 22s ease-in-out infinite}
+.aurora-blob.b2{width:44vw;height:44vw;right:-8vw;top:-6vw;background:radial-gradient(circle,rgba(211,252,114,.95),transparent 60%);animation:drift2 26s ease-in-out infinite}
+.aurora-blob.b3{width:48vw;height:48vw;left:34vw;bottom:-20vw;background:radial-gradient(circle,rgba(1,170,187,.95),transparent 60%);animation:drift3 30s ease-in-out infinite}
+.aurora-blob.b4{width:34vw;height:34vw;right:8vw;bottom:-6vw;background:radial-gradient(circle,rgba(211,252,114,.85),transparent 58%);animation:drift1 24s ease-in-out infinite reverse}
 @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,5vw) scale(1.12)}}
 @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5vw,7vw) scale(1.08)}}
 @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(4vw,-6vw) scale(1.15)}}
