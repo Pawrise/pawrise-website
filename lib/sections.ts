@@ -36,6 +36,19 @@ export const SECTIONS: Section[] = [
     ],
   },
   {
+    slug: "assistant-ia",
+    title: "Assistant IA",
+    tag: "Le différenciateur",
+    desc: "Le Care Engine : assistant conversationnel non-diagnostique, pipeline LangGraph 6 nœuds, garde-fous 3 couches et handoff vétérinaire structuré.",
+    accent: "#a78bfa",
+    blocks: [
+      { title: "Pipeline 6 nœuds", desc: "LangGraph déterministe et borné, chaque étape testable." },
+      { title: "Garde-fous 3 couches", desc: "Pré-LLM, contrainte de raisonnement, post-LLM. Jamais de diagnostic." },
+      { title: "RAG hybride", desc: "BM25 + dense + reranker sur corpus vétérinaire validé." },
+      { title: "Handoff vétérinaire", desc: "Dossier pré-consultation structuré (PDF + JSON) vers le Vet Portal." },
+    ],
+  },
+  {
     slug: "backlog",
     title: "Backlog & Features",
     tag: "Le quoi",
