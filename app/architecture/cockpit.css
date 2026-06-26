@@ -261,3 +261,54 @@ body.cockpit-active{overflow:hidden}
 .pscrim{z-index:35}
 .panel{z-index:36}
 .cockpit-root .panel{top:60px;height:calc(100% - 60px)}
+
+/* ============================================================
+   DA EXACTE DU SITE — cartes blanches glassmorphism + lime
+   (remplace les cartes bleu foncé + le diagramme "trop coloré")
+   ============================================================ */
+/* Nœuds = même glass que .glass du site (bords blancs -> centre transparent) */
+.a-card{
+  background:
+    radial-gradient(125% 100% at 50% 50%, rgba(255,255,255,.03) 30%, rgba(255,255,255,.09) 72%, rgba(255,255,255,.22) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035)) !important;
+  border:1px solid rgba(255,255,255,.4) !important;
+  border-left:1px solid rgba(255,255,255,.4) !important;
+  -webkit-backdrop-filter:blur(13px); backdrop-filter:blur(13px);
+  box-shadow:0 1px 0 rgba(255,255,255,.26) inset, 0 16px 40px rgba(0,0,0,.3) !important;
+}
+.a-node:hover .a-card{border-color:rgba(211,252,114,.6) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.3) inset, 0 0 0 1px rgba(211,252,114,.5), 0 18px 46px rgba(0,0,0,.4) !important}
+.a-node.a-pulse .a-card{box-shadow:0 0 0 2px #d3fc72, 0 0 26px rgba(211,252,114,.5) !important}
+.a-ic{background:rgba(255,255,255,.12) !important;border:1px solid rgba(255,255,255,.32) !important}
+.a-ic .a-mono{color:#f4f6ff !important}
+.a-nm{color:#f4f6ff !important}
+.a-tg{color:#aab2dd !important}
+/* Kafka + host : même glass, accent lime discret (plus de violet/orange) */
+.a-kbar .a-card{border-left:1px solid rgba(255,255,255,.4) !important;border-top:2px solid rgba(211,252,114,.6) !important;
+  background:
+    radial-gradient(125% 100% at 50% 50%, rgba(255,255,255,.04) 30%, rgba(255,255,255,.10) 72%, rgba(255,255,255,.24) 100%),
+    linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04)) !important}
+.a-host{color:#f4f6ff !important;border:1px solid rgba(255,255,255,.4) !important;border-left:3px solid rgba(211,252,114,.6) !important;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035)) !important}
+.a-host b{color:#fff !important}
+/* Flux : sobres, lime dominant (moins "arc-en-ciel") */
+.a-flow.sync{stroke:#d3fc72}
+.a-flow.event{stroke:#01aabb}
+.a-flow.ctrl{stroke:#7b76e6}
+.a-flow.ext{stroke:#aab2dd}
+.a-wire{opacity:.32}
+.a-wire.sync{stroke:rgba(211,252,114,.30)}
+.a-wire.event{stroke:rgba(1,170,187,.26)}
+.a-wire.ctrl{stroke:rgba(123,118,230,.24)}
+.a-wire.ext{stroke:rgba(170,178,221,.22)}
+/* zones / encadrés : teintes du site */
+.a-zone,.a-pzone{fill:rgba(255,255,255,.02) !important;stroke:rgba(255,255,255,.08) !important}
+.a-zlabel{fill:#737bb0 !important}
+.a-enc{fill:rgba(211,252,114,.04) !important;stroke:rgba(211,252,114,.3) !important}
+.a-enclabel{fill:#d3fc72 !important}
+.a-pinfo{fill:#aab2dd !important}
+/* chrome flottant = glass du site */
+.tb{background:rgba(255,255,255,.06) !important;border:1px solid rgba(255,255,255,.4) !important;color:#f4f6ff !important;-webkit-backdrop-filter:blur(13px);backdrop-filter:blur(13px)}
+.tb.on{background:rgba(211,252,114,.16) !important;border-color:rgba(211,252,114,.6) !important;color:#d3fc72 !important}
+.legend,.player{background:rgba(255,255,255,.06) !important;border:1px solid rgba(255,255,255,.4) !important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.player button{background:rgba(255,255,255,.08) !important;border:1px solid rgba(255,255,255,.3) !important;color:#f4f6ff !important}
