@@ -497,3 +497,31 @@ a{color:inherit;text-decoration:none}
 
 /* ShinyText : conteneur (le dégradé animé est inline via motion) */
 .shiny-tag{display:inline-block;font-size:clamp(17px,2.4vw,26px);font-weight:800;line-height:1.25}
+
+/* ===== PillNav (React Bits-style) ===== */
+.pill-links{display:flex;align-items:center;gap:2px;margin-left:auto;flex-wrap:wrap}
+.pill-link{position:relative;display:inline-flex;align-items:center;padding:8px 13px;border-radius:11px;font-size:13px;font-weight:600;color:var(--mut);transition:color .2s}
+.pill-link:hover{color:var(--ink)}
+.pill-link .pill-label{position:relative;z-index:1}
+.pill-ind{position:absolute;inset:0;border-radius:11px;background:var(--lime);z-index:0}
+.pill-link.on .pill-label{color:#0a1226;font-weight:800}
+.nav-burger{display:none;margin-left:auto;flex-direction:column;gap:5px;width:42px;height:38px;align-items:center;justify-content:center;background:var(--panel);border:1px solid var(--line);border-radius:11px;cursor:pointer}
+.nav-burger span{width:18px;height:2px;background:var(--ink);border-radius:2px;transition:.2s}
+.nav-overlay{position:fixed;inset:0;z-index:60;background:linear-gradient(180deg,rgba(8,8,30,.86),rgba(8,8,30,.92));backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center}
+.nav-overlay-links{display:flex;flex-direction:column;gap:6px;width:min(560px,90vw)}
+.nav-overlay-links a{display:flex;align-items:baseline;gap:14px;font-size:clamp(26px,6vw,42px);font-weight:900;letter-spacing:-.02em;color:#fff;padding:8px 4px;border-bottom:1px solid var(--line)}
+.nav-overlay-links a:hover{color:var(--lime)}
+.nav-overlay-links a.on{color:var(--lime)}
+.nav-overlay-links .ov-tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+@media(max-width:920px){
+  .pill-links{display:none}
+  .nav-burger{display:flex}
+}
+@media(min-width:921px){ .nav-overlay{display:none} }
+
+/* ===== Cartes : grille animée + spotlight au survol ===== */
+.grid-cell{display:flex}
+.grid-cell>.card{width:100%}
+.card.spotlight::before{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .3s;pointer-events:none;
+  background:radial-gradient(240px 240px at var(--mx,50%) var(--my,50%),rgba(211,252,114,.18),transparent 60%)}
+.card.spotlight:hover::before{opacity:1}

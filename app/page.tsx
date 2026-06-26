@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { SECTIONS } from "@/lib/sections";
 import Logo from "@/components/Logo";
 import ShinyText from "@/components/ShinyText";
 import StarBorder from "@/components/StarBorder";
+import BlurText from "@/components/fx/BlurText";
+import SectionCards from "@/components/SectionCards";
 
 export default function Home() {
   return (
@@ -13,8 +14,8 @@ export default function Home() {
           <span className="hero-date">Epitech · EIP · <b>soutenance</b></span>
         </div>
         <h1 className="wordmark">
-          PAWRISE
-          <span className="care">CARE</span>
+          <BlurText text="PAWRISE" per="char" stagger={0.06} />
+          <span className="care"><BlurText text="CARE" per="char" stagger={0.06} startDelay={0.45} /></span>
         </h1>
         <p className="hero-tag">
           <ShinyText
@@ -38,22 +39,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="wrap grid">
-        {SECTIONS.map((s) => (
-          <Link
-            key={s.slug}
-            href={`/${s.slug}`}
-            className="card glass"
-            style={{ ["--a" as string]: s.accent }}
-          >
-            <span className="card-acc" />
-            <span className="ctag">{s.tag}</span>
-            <h3>{s.title}</h3>
-            <p>{s.desc}</p>
-            <span className="more">Explorer →</span>
-          </Link>
-        ))}
-      </section>
+      <SectionCards />
 
       <footer className="footer">
         Pawrise Care · support de soutenance · {new Date().getFullYear()}
