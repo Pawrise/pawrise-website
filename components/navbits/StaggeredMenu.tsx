@@ -22,6 +22,9 @@ export const StaggeredMenu = ({
   closeOnClickAway = true,
   onMenuOpen,
   onMenuClose,
+  activeLink,
+  onNavigate,
+  footer,
 }) => {
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
@@ -180,6 +183,31 @@ export const StaggeredMenu = ({
     animateText(target);
   }, [playOpen, playClose, animateIcon, animateColor, animateText, onMenuOpen, onMenuClose]);
 
+  const closeMenu = useCallback(() => {
+    if (!openRef.current) return;
+    openRef.current = false;
+    setOpen(false);
+    onMenuClose?.();
+    playClose();
+    animateIcon(false);
+    animateColor(false);
+    animateText(false);
+  }, [playClose, animateIcon, animateColor, animateText, onMenuClose]);
+
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") closeMenu(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [closeMenu]);
+
+  const handleNav = (e, link) => {
+    if (onNavigate) {
+      e.preventDefault();
+      closeMenu();
+      onNavigate(link);
+    }
+  };
+
   return (
     <div
       className={(className ? className + " " : "") + "staggered-menu-wrapper" + (isFixed ? " fixed-wrapper" : "")}
@@ -217,12 +245,20 @@ export const StaggeredMenu = ({
           <ul className="sm-panel-list" role="list" data-numbering={displayItemNumbering || undefined}>
             {items.map((it, idx) => (
               <li className="sm-panel-itemWrap" key={it.label + idx}>
-                <a className="sm-panel-item" href={it.link} aria-label={it.ariaLabel} data-index={idx + 1}>
+                <a
+                  className={"sm-panel-item" + (activeLink === it.link ? " is-active" : "")}
+                  href={it.link}
+                  aria-label={it.ariaLabel}
+                  data-index={idx + 1}
+                  onClick={(e) => handleNav(e, it.link)}
+                >
+                  {it.tag && <span className="sm-panel-itemTag">{it.tag}</span>}
                   <span className="sm-panel-itemLabel">{it.label}</span>
                 </a>
               </li>
             ))}
           </ul>
+          {footer && <div className="sm-panel-footer">{footer}</div>}
         </div>
       </aside>
     </div>
