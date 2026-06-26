@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { SECTIONS } from "@/lib/sections";
 import Logo from "@/components/Logo";
+import ShinyText from "@/components/ShinyText";
+import StarBorder from "@/components/StarBorder";
 
 export default function Home() {
   return (
@@ -14,11 +16,19 @@ export default function Home() {
           PAWRISE
           <span className="care">CARE</span>
         </h1>
-        <p className="hero-tag">Le collier qui comprend la santé de votre animal.</p>
+        <p className="hero-tag">
+          <ShinyText
+            text="Le collier qui comprend la santé de votre animal."
+            className="shiny-tag"
+            color="#e8edff"
+            shineColor="#d3fc72"
+            speed={4}
+          />
+        </p>
         <div className="cta">
-          <Link href="/assistant-ia" className="btn primary">
+          <StarBorder href="/assistant-ia" color="#d3fc72">
             L&apos;assistant IA →
-          </Link>
+          </StarBorder>
           <Link href="/architecture" className="btn">
             L&apos;architecture
           </Link>

@@ -30,16 +30,13 @@ body{
   margin:0; color:var(--ink); min-height:100vh;
   font-family:var(--font-inter),Inter,-apple-system,Segoe UI,Roboto,sans-serif;
   background:
-    radial-gradient(1100px 820px at 10% 6%, rgba(1,170,187,.42), transparent 55%),
-    radial-gradient(1000px 760px at 90% 10%, rgba(211,252,114,.30), transparent 52%),
-    radial-gradient(1300px 980px at 72% 104%, rgba(1,170,187,.40), transparent 60%),
-    radial-gradient(900px 720px at 22% 98%, rgba(211,252,114,.22), transparent 58%),
-    linear-gradient(165deg,#0c0b2e,#15123f 45%,#0c0b2e);
-  background-attachment:fixed;
+    radial-gradient(1000px 760px at 85% 102%, rgba(211,252,114,.16), transparent 60%),
+    radial-gradient(900px 720px at 12% 4%, rgba(1,170,187,.18), transparent 58%),
+    linear-gradient(165deg,#0a0922,#0e0c34 48%,#0a0922);
 }
 /* Grain / bruit (texture DA) — overlay fixe, ne capte pas les clics */
 body::after{
-  content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:1;
+  content:""; position:fixed; inset:0; z-index:3; pointer-events:none; opacity:1;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:240px 240px; mix-blend-mode:overlay;
 }
@@ -49,9 +46,12 @@ a{color:inherit;text-decoration:none}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;border-radius:999px;border:1px solid var(--line);color:var(--lime);background:rgba(211,252,114,.08)}
 .grad{background:linear-gradient(100deg,var(--lime),var(--emerald) 50%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* topnav */
-.topnav{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(8,10,40,.85),rgba(8,10,40,.5));backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav-inner{display:flex;align-items:center;gap:18px;min-height:64px;flex-wrap:wrap}
+/* topnav — barre 2026 qui se condense en pill glass au scroll */
+.topnav{position:sticky;top:0;z-index:50;transition:padding .38s cubic-bezier(.4,0,.2,1);background:linear-gradient(180deg,rgba(8,8,30,.55),transparent)}
+.nav-inner{display:flex;align-items:center;gap:16px;min-height:62px;flex-wrap:wrap;border:1px solid transparent;border-radius:20px;transition:max-width .38s cubic-bezier(.4,0,.2,1),background .38s,border-color .38s,padding .38s,box-shadow .38s}
+.topnav.scrolled{padding:10px 0;background:transparent}
+.topnav.scrolled .nav-inner{max-width:1080px;padding:6px 10px 6px 16px;min-height:52px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.045));border-color:rgba(255,255,255,.2);box-shadow:0 14px 44px rgba(0,0,0,.4),0 1px 0 rgba(255,255,255,.18) inset;backdrop-filter:blur(18px)}
+.topnav.scrolled .brand small{opacity:0;transition:opacity .25s}
 .brand{display:flex;align-items:center;gap:11px}
 .brand .logo{width:34px;height:34px;display:grid;place-items:center}
 .brand b{display:block;font-size:15px;font-weight:800;letter-spacing:-.01em;color:#fff}
@@ -63,6 +63,9 @@ a{color:inherit;text-decoration:none}
 
 /* hero */
 .hero{padding:90px 24px 56px;max-width:1040px;position:relative;z-index:2}
+.hero::before{content:"";position:absolute;inset:30px 24% 20px -30px;z-index:-1;border-radius:30px;
+  background:radial-gradient(120% 100% at 8% 45%,rgba(7,7,26,.6),rgba(7,7,26,.28) 45%,transparent 72%)}
+@media(max-width:860px){.hero::before{inset:20px -10px 10px -20px}}
 .hero h1{font-size:clamp(38px,6vw,76px);font-weight:900;line-height:1.02;letter-spacing:-.03em;margin:18px 0 16px}
 .hero .lead{font-size:clamp(16px,2vw,20px);color:var(--mut);max-width:680px;line-height:1.55}
 .cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
@@ -465,3 +468,22 @@ a{color:inherit;text-decoration:none}
 .hero-coil-wrap{position:absolute;top:-20px;right:-30px;width:min(560px,46vw);height:min(620px,80vh);pointer-events:none;z-index:1}
 .hero-coil-wrap canvas{width:100%!important;height:100%!important}
 @media(max-width:860px){.hero-coil-wrap{opacity:.5;right:-140px;top:30px;width:340px;height:420px}}
+
+/* ===== Aurora (React Bits) + scrim de lisibilité ===== */
+.aurora-top{position:absolute;left:0;right:0;top:-20vh;height:165vh;opacity:.95;will-change:transform}
+.aurora-container{position:absolute;inset:0;width:100%;height:100%}
+.aurora-container canvas{width:100%!important;height:100%!important;display:block}
+.bd-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,34,.12),transparent 22%,transparent 70%,rgba(10,9,34,.32))}
+
+/* ===== React Bits — StarBorder (bouton à bordure animée) ===== */
+.star-border{position:relative;display:inline-block;overflow:hidden;border-radius:14px;border:0;background:transparent;cursor:pointer}
+.star-border .sb-inner{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(100deg,var(--lime),var(--emerald));color:#0a0f10;font-weight:800;font-size:14px;padding:13px 22px;border-radius:13px}
+.star-border .sb-top,.star-border .sb-bottom{position:absolute;width:300%;height:50%;opacity:.7;border-radius:50%;animation:sb-move linear infinite}
+.star-border .sb-bottom{bottom:-12px;right:-250%;animation-name:sb-move-b}
+.star-border .sb-top{top:-12px;left:-250%;animation-name:sb-move-t}
+@keyframes sb-move-b{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes sb-move-t{0%{transform:translateX(0)}100%{transform:translateX(50%)}}
+@media (prefers-reduced-motion:reduce){.star-border .sb-top,.star-border .sb-bottom{animation:none}}
+
+/* ShinyText : conteneur (le dégradé animé est inline via motion) */
+.shiny-tag{display:inline-block;font-size:clamp(17px,2.4vw,26px);font-weight:800;line-height:1.25}
