@@ -5,19 +5,21 @@ export default function Home() {
   return (
     <main>
       <section className="hero wrap">
-        <span className="chip">Epitech · EIP · T-ESP-800</span>
-        <h1>
-          Le collier qui <span className="grad">oriente</span> vers le bon soin,
-          au bon moment.
+        <div className="hero-kicker">
+          <span className="hero-id"><span className="star">✳</span> T-ESP-800</span>
+          <span className="hero-date">Epitech · EIP · <b>soutenance</b></span>
+        </div>
+        <h1 className="wordmark">
+          PAWRISE
+          <span className="care">CARE</span>
         </h1>
-        <p className="lead">
-          Pawrise Care relie capteurs de santé, IA d&apos;orientation
-          non-diagnostique et réseau vétérinaire, pour agir avant que ça
-          n&apos;empire.
-        </p>
+        <p className="hero-tag">Le collier qui comprend la santé de votre animal.</p>
         <div className="cta">
-          <Link href="/architecture" className="btn primary">
-            Voir l&apos;architecture →
+          <Link href="/assistant-ia" className="btn primary">
+            L&apos;assistant IA →
+          </Link>
+          <Link href="/architecture" className="btn">
+            L&apos;architecture
           </Link>
           <Link href="/vision" className="btn">
             La vision

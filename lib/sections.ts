@@ -14,7 +14,7 @@ export const SECTIONS: Section[] = [
     title: "Vision",
     tag: "Le pourquoi",
     desc: "Le problème détecté trop tard, la solution Pawrise et le positionnement non-négociable : orienter, jamais diagnostiquer.",
-    accent: "#2dd4bf",
+    accent: "#00f0aa",
     blocks: [
       { title: "Le problème", desc: "Les signaux de santé d'un animal passent inaperçus jusqu'à ce que ce soit grave." },
       { title: "La solution Pawrise", desc: "Collier capteurs + IA d'orientation non-diagnostique + réseau vétérinaire." },
@@ -27,7 +27,7 @@ export const SECTIONS: Section[] = [
     title: "Architecture & Tech",
     tag: "Comment c'est construit",
     desc: "Le cockpit d'architecture interactif (flux, parcours et vue Plateforme & Ops) et les choix techniques justifiés.",
-    accent: "#38bdf8",
+    accent: "#00f2c3",
     blocks: [
       { title: "Cockpit interactif", desc: "Diagramme jouable : flux, parcours, vue Plateforme & Ops." },
       { title: "Choix technologiques", desc: "Rust, MQTT, Kafka, LangGraph, K8s/GitOps, tous justifiés." },
@@ -40,7 +40,7 @@ export const SECTIONS: Section[] = [
     title: "Assistant IA",
     tag: "Le différenciateur",
     desc: "Le Care Engine : assistant conversationnel non-diagnostique, pipeline LangGraph 6 nœuds, garde-fous 3 couches et handoff vétérinaire structuré.",
-    accent: "#a78bfa",
+    accent: "#d3fc72",
     blocks: [
       { title: "Pipeline 6 nœuds", desc: "LangGraph déterministe et borné, chaque étape testable." },
       { title: "Garde-fous 3 couches", desc: "Pré-LLM, contrainte de raisonnement, post-LLM. Jamais de diagnostic." },
@@ -53,7 +53,7 @@ export const SECTIONS: Section[] = [
     title: "Backlog & Features",
     tag: "Le quoi",
     desc: "Le découpage produit : 11 epics et 66 user stories, dont 52 dans le périmètre MVP.",
-    accent: "#a78bfa",
+    accent: "#7c5cff",
     blocks: [
       { title: "11 epics", desc: "Du collier à la téléconsultation + plateforme/ops." },
       { title: "66 user stories", desc: "Critères d'acceptation Given/When/Then." },
@@ -66,7 +66,7 @@ export const SECTIONS: Section[] = [
     title: "Pilotage",
     tag: "Gestion de projet",
     desc: "WBS, OBS, RACI, Gantt, méthodologie et plan qualité : l'organisation du travail sur 20 mois.",
-    accent: "#fb923c",
+    accent: "#38bdf8",
     blocks: [
       { title: "WBS", desc: "Décomposition hiérarchique orientée livrables (diagramme)." },
       { title: "OBS", desc: "Organigramme : responsabilités par tâche (diagramme)." },
@@ -81,7 +81,7 @@ export const SECTIONS: Section[] = [
     title: "Business & Stratégie",
     tag: "Le marché",
     desc: "Positionnement océan bleu, SWOT, PESTEL, modèle économique et budget prévisionnel du collier.",
-    accent: "#fbbf24",
+    accent: "#01d134",
     blocks: [
       { title: "SWOT", desc: "Forces · Faiblesses · Opportunités · Menaces." },
       { title: "PESTEL", desc: "Politique · Éco · Social · Tech · Environnement · Légal." },
@@ -96,7 +96,7 @@ export const SECTIONS: Section[] = [
     title: "Risques",
     tag: "Maîtrise",
     desc: "AMDEC sur le produit (IPR = G×O×D) et Risk Map projet (probabilité × impact).",
-    accent: "#fb7185",
+    accent: "#ff6b8b",
     blocks: [
       { title: "Risk Map", desc: "Matrice probabilité × impact." },
       { title: "AMDEC", desc: "Modes de défaillance, effets, criticité (S×O×D)." },
@@ -108,7 +108,7 @@ export const SECTIONS: Section[] = [
     title: "Équipe",
     tag: "Les 10",
     desc: "Organisation en 5 pôles, matrice de compétences et justification de l'équipe.",
-    accent: "#22d3ee",
+    accent: "#2ee6c0",
     blocks: [
       { title: "Organisation (OBS)", desc: "Qui fait quoi, ressources allouées par tâche." },
       { title: "Matrice de compétences", desc: "Compétences nécessaires pour piloter, développer, livrer." },
