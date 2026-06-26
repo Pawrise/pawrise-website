@@ -734,3 +734,17 @@ a{color:inherit;text-decoration:none}
 }
 .sm-toggle:hover{border-color:rgba(211,252,114,.5) !important}
 .sm-toggle::after{opacity:.4 !important}
+
+/* ===== Bouton Menu : aspect IDENTIQUE aux cards (verre sombre + liseré discret) =====
+   Base indigo translucide pour ne pas capter l'aurora claire derrière -> rend le
+   même "dark glass" que les cards posées sur le fond sombre. */
+.sm-toggle{
+  border:1px solid rgba(255,255,255,.15) !important;
+  background:
+    radial-gradient(150% 150% at 50% 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,.03) 80%, rgba(255,255,255,.07) 100%),
+    linear-gradient(180deg, rgba(22,20,66,.52), rgba(12,11,42,.6)) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.1) inset, 0 14px 32px rgba(0,0,0,.32) !important;
+  color:#f4f6ff !important;
+}
+.sm-toggle:hover{border-color:rgba(211,252,114,.45) !important}
+.sm-toggle::after{opacity:.34 !important}
