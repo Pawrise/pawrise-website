@@ -748,3 +748,12 @@ a{color:inherit;text-decoration:none}
 }
 .sm-toggle:hover{border-color:rgba(211,252,114,.45) !important}
 .sm-toggle::after{opacity:.34 !important}
+
+/* ===== Scrim flou derrière le menu ouvert ===== */
+.sm-scrim{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0;
+  background:rgba(8,7,30,0);
+  -webkit-backdrop-filter:blur(0px);backdrop-filter:blur(0px);
+  transition:opacity .45s ease, background .45s ease, backdrop-filter .45s ease, -webkit-backdrop-filter .45s ease}
+.staggered-menu-wrapper[data-open] .sm-scrim{opacity:1;pointer-events:auto;
+  background:rgba(8,7,30,.3);
+  -webkit-backdrop-filter:blur(13px) saturate(1.05);backdrop-filter:blur(13px) saturate(1.05)}

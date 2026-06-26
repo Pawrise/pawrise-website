@@ -215,6 +215,7 @@ export const StaggeredMenu = ({
       data-position={position}
       data-open={open || undefined}
     >
+      <div className="sm-scrim" aria-hidden="true" onClick={closeMenu} />
       <div ref={preLayersRef} className="sm-prelayers" aria-hidden="true">
         {(() => {
           const raw = colors && colors.length ? colors.slice(0, 4) : ["#1e1e22", "#35353c"];
