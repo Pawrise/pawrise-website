@@ -214,7 +214,7 @@ export default function PilotagePage() {
         <section className="panel-sect">
           <div className="ps-head">
             <h2>Plan qualité</h2>
-            <p>Stratégie de tests par couche, conventions de code, workflow Git, CI/CD et onboarding — pour faciliter l&apos;intégration de nouveaux développeurs.</p>
+            <p>Stratégie de tests par couche, conventions de code, workflow Git, CI/CD et onboarding, pour faciliter l&apos;intégration de nouveaux développeurs.</p>
           </div>
 
           <div className="glass ps-body">
@@ -252,7 +252,7 @@ export default function PilotagePage() {
               <p className="ps-text" style={{ marginTop: 0 }}>{GIT_WORKFLOW.intro}</p>
               <ul className="ql-list">
                 {GIT_WORKFLOW.branches.map((b) => (
-                  <li key={b.n}><b>{b.n}</b> — {b.d}</li>
+                  <li key={b.n}><b>{b.n}</b> : {b.d}</li>
                 ))}
               </ul>
               <p className="ps-text" style={{ fontSize: 12 }}><b>Commits :</b> {GIT_WORKFLOW.commits}</p>

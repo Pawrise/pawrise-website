@@ -24,7 +24,7 @@ export const BACKLOG_STATS = {
 };
 
 /* ----------------------------------------------- EXIGENCES (FR / NFR) ---- */
-// Inventaire résumé — détail complet dans le PRD (§4/§5) et project-docs.
+// Inventaire résumé. Détail complet dans le PRD (§4/§5) et project-docs.
 export const FR_GROUPS = [
   { g: "Collier & collecte", refs: "FR1–FR7", d: "GPS, activité, température/rythme, collecte temps réel, buffer hors-ligne, transmission sécurisée, batterie." },
   { g: "Backend & données", refs: "FR8–FR12", d: "Ingestion/normalisation, séries temporelles, agrégats, APIs app/vet, comptes & règles." },
@@ -43,7 +43,7 @@ export const NFR_LIST = [
 
 // Exemple concret du format des 66 critères d'acceptation (Given/When/Then).
 export const AC_EXAMPLE = {
-  story: "Story 1.1 — Création de compte sécurisée",
+  story: "Story 1.1 · Création de compte sécurisée",
   asA: "En tant que propriétaire d'animal,",
   iWant: "je veux créer un compte avec email et mot de passe,",
   soThat: "afin d'accéder à l'application en toute sécurité.",

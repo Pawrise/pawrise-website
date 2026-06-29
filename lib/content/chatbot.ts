@@ -23,7 +23,7 @@ export const PIPELINE: Node[] = [
 
 // Garde-fous en 3 couches (défense en profondeur).
 export const GUARDRAILS = [
-  { c: "Couche 1 · pré-LLM", t: "Circuit Breaker", d: "Classifier d'intention. Tout ce qui n'est pas « clean » est dérouté vers une Safe Response ou une escalade — sans atteindre le LLM principal." },
+  { c: "Couche 1 · pré-LLM", t: "Circuit Breaker", d: "Classifier d'intention. Tout ce qui n'est pas « clean » est dérouté vers une Safe Response ou une escalade, sans atteindre le LLM principal." },
   { c: "Couche 2 · raisonnement", t: "Contrainte", d: "System prompt strict + whitelist de tools + obligation de citer le corpus pour tout claim médical." },
   { c: "Couche 3 · post-LLM", t: "Guardrail", d: "Détection « diagnostic-like », contrôle d'ancrage sur les sources, et déclenchement forcé de l'escalade selon des règles explicites." },
 ];
@@ -37,7 +37,7 @@ export const SCOPE_DO = [
   "Audit complet de chaque conversation (rétention 5 ans)",
 ];
 export const SCOPE_DONT = [
-  "Diagnostic médical explicite (réservé aux vétérinaires — Code rural L243-1)",
+  "Diagnostic médical explicite (réservé aux vétérinaires, Code rural L243-1)",
   "Prescription, posologie, recommandation médicamenteuse",
   "Gestion d'urgences vitales (toujours rediriger vers un urgentiste 24h/24)",
   "Conseils de dressage / comportement (hors thèse produit)",

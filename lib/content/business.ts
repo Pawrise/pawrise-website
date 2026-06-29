@@ -90,10 +90,10 @@ export const SWOT: SwotQuad[] = [
 // Ce qu'on FAIT du SWOT : croiser forces/faiblesses avec opportunités/menaces.
 export type Confront = { key: string; title: string; tone: "pos" | "neg"; text: string };
 export const CONFRONTATION: Confront[] = [
-  { key: "SO", title: "Offensif · Forces × Opportunités", tone: "pos", text: "Capitaliser sur le pont IA et vétérinaire et sur les données longitudinales pour capter un marché en croissance et nouer des partenariats avec les assurances." },
-  { key: "ST", title: "Défensif · Forces × Menaces", tone: "pos", text: "Le moat (interprétation, accompagnement vétérinaire et conformité non-diagnostique) protège de la simple copie et d'un durcissement réglementaire." },
-  { key: "WO", title: "Rattrapage · Faiblesses × Opportunités", tone: "neg", text: "Combler le manque de données via les cabinets et les assureurs, et financer le matériel par l'abonnement et les partenariats." },
-  { key: "WT", title: "Vigilance · Faiblesses × Menaces", tone: "neg", text: "Réduire la dépendance aux fournisseurs (capteurs, LLM) et prouver la rentabilité avant que la concurrence ou la réglementation ne se durcissent." },
+  { key: "SO", title: "Offensif · Forces × Opportunités", tone: "pos", text: "Viser les assureurs animaliers : notre suivi continu et le dossier vétérinaire réduisent leurs sinistres, et nos données de santé nourrissent leur tarification. On gagne à la fois un canal de distribution et un revenu B2B, sur un marché de l'assurance qui décolle." },
+  { key: "ST", title: "Défensif · Forces × Menaces", tone: "pos", text: "Ne pas livrer la guerre des capteurs, déjà gagnée par Tractive et Invoxia avec plus de moyens. On se protège sur l'orientation accompagnée et le réseau vétérinaire : un pur acteur hardware ne peut pas le copier sans nouer lui aussi des partenariats vétérinaires longs à construire." },
+  { key: "WO", title: "Rattrapage · Faiblesses × Opportunités", tone: "neg", text: "Transformer le démarrage à froid en boucle de données : les premiers cabinets et assureurs partenaires apportent des cas réels et du co-financement, ce qui fiabilise l'IA et le matériel bien plus vite qu'en avançant seuls." },
+  { key: "WT", title: "Vigilance · Faiblesses × Menaces", tone: "neg", text: "Sécuriser les points faibles avant de grandir : garder le LLM derrière une couche d'abstraction (changer de fournisseur si besoin), documenter les garde-fous pour encaisser un durcissement réglementaire sans tout refaire, et prouver la rentabilité sur un petit périmètre avant de produire le collier en volume." },
 ];
 
 /* ---------------------------------------------------------- PESTEL ------ */

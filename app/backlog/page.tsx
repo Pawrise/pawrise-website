@@ -48,7 +48,7 @@ export default function BacklogPage() {
           <div className="ps-head">
             <h2>Fonctions attendues par lot (WBS)</h2>
             <p>
-              Pour chaque composant du WBS, ce que la solution doit <b>accomplir</b> — la
+              Pour chaque composant du WBS, ce que la solution doit <b>accomplir</b> : la
               description des features attendues pour faciliter l&apos;implémentation. Cliquez un lot.
             </p>
           </div>

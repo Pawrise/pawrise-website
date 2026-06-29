@@ -118,15 +118,15 @@ export const PO_NOTE =
 // qui assure la continuité. Source : Justification & Compétences (Confluence).
 export type Coverage = { domain: string; leads: string; backup: string };
 export const COVERAGE: Coverage[] = [
-  { domain: "Product Ownership", leads: "Yassine", backup: "—" },
+  { domain: "Product Ownership", leads: "Yassine", backup: "À définir" },
   { domain: "IoT / Hardware", leads: "Cyril, Ibrahim", backup: "Hamid (support)" },
   { domain: "Backend / API", leads: "Hamid, Aaditya, Elarif", backup: "Yassine" },
-  { domain: "IA / Data", leads: "Nino, Yassine", backup: "—" },
+  { domain: "IA / Data", leads: "Nino, Yassine", backup: "À définir" },
   { domain: "Mobile / Frontend", leads: "Elarif, Adam", backup: "Hamid, Aaditya" },
-  { domain: "Design / UX", leads: "Adam", backup: "—" },
-  { domain: "Market / Business", leads: "Adam, Elarif", backup: "—" },
+  { domain: "Design / UX", leads: "Adam", backup: "À définir" },
+  { domain: "Market / Business", leads: "Adam, Elarif", backup: "À définir" },
   { domain: "Cloud / DevOps", leads: "Oumar, Abderrahmane", backup: "Elarif (CI/CD)" },
-  { domain: "Réseau vétérinaire", leads: "Elarif, Nino", backup: "—" },
+  { domain: "Réseau vétérinaire", leads: "Elarif, Nino", backup: "À définir" },
 ];
 
 /* --------------------------------------------------------------- RACI ---- */
@@ -212,7 +212,7 @@ export const METHODO_JUSTIF = {
 // Estimation : Planning Poker sur échelle de Fibonacci (page Confluence Story Points).
 export const STORY_POINTS = {
   intro:
-    "Les tickets Jira sont estimés en story points (effort global : complexité, volume, incertitude, dépendances) — pas en heures. L'estimation se fait en équipe par Planning Poker pour aligner la compréhension.",
+    "Les tickets Jira sont estimés en story points (effort global : complexité, volume, incertitude, dépendances), pas en heures. L'estimation se fait en équipe par Planning Poker pour aligner la compréhension.",
   echelle: [
     { pts: "1", ex: "Très simple, très clair (ex. créer un canal, changer un paramètre Jira)." },
     { pts: "2", ex: "Simple avec un peu de vérification (ex. configurer un repo GitHub)." },
@@ -233,7 +233,7 @@ export type Phase = {
 };
 export const PHASES: Phase[] = [
   {
-    nom: "Phase 1 — Conception",
+    nom: "Phase 1 · Conception",
     periode: "Déc 2025 → Juin 2026",
     objectif: "Préparer tous les livrables pour la keynote.",
     lignes: [
@@ -245,7 +245,7 @@ export const PHASES: Phase[] = [
     ],
   },
   {
-    nom: "Phase 2 — Développement",
+    nom: "Phase 2 · Développement",
     periode: "Juil 2026 → Avr 2027",
     objectif: "Développer tous les composants en parallèle.",
     lignes: [
@@ -258,7 +258,7 @@ export const PHASES: Phase[] = [
     ],
   },
   {
-    nom: "Phase 3 — Intégration",
+    nom: "Phase 3 · Intégration",
     periode: "Mai → Juil 2027",
     objectif: "Assembler, tester, stabiliser.",
     lignes: [
@@ -293,7 +293,7 @@ export const QUALITY = [
 ];
 
 // Plan qualité détaillé (critère team_practices). Stratégie de tests par couche,
-// conventions, Git workflow, CI/CD et onboarding — adapté à la stack réelle.
+// conventions, Git workflow, CI/CD et onboarding, adapté à la stack réelle.
 export const TEST_STRATEGY: { couche: string; outils: string; cible: string }[] = [
   { couche: "Firmware collier (Rust no_std)", outils: "tests unitaires embarqués + simulateur de capteurs", cible: "Logique de collecte/encodage validée hors matériel via le simulateur." },
   { couche: "Services backend (Rust)", outils: "tests unitaires (cargo test) + tests d'intégration API", cible: "Logique métier et endpoints couverts ; tests d'abus obligatoires sur l'auth." },

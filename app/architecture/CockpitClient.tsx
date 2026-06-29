@@ -50,7 +50,7 @@ export default function CockpitClient() {
           <span className="cmob-ic">🗺️</span>
           <h2>L&apos;architecture, en grand</h2>
           <p>
-            Cette section est une <b>carte interactive</b> — on y explore les briques du
+            Cette section est une <b>carte interactive</b> : on y explore les briques du
             produit, les flux de données et les parcours, en zoomant et en cliquant. Pensée
             pour les grands écrans, elle se découvre bien mieux sur un <b>ordinateur</b>.
           </p>

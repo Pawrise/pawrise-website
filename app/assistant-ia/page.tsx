@@ -80,7 +80,7 @@ export default function AssistantIAPage() {
         <section className="panel-sect">
           <div className="ps-head">
             <h2>Périmètre</h2>
-            <p>Ce que l&apos;assistant fait — et ce qu&apos;il ne fait jamais, par design.</p>
+            <p>Ce que l&apos;assistant fait, et ce qu&apos;il ne fait jamais, par design.</p>
           </div>
           <div className="ps-grid2">
             <div className="glass ps-body">
