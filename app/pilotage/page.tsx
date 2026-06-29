@@ -9,6 +9,8 @@ import {
   METHODO_JUSTIF,
   STORY_POINTS,
   QUALITY,
+  DEFINITION_OF_DONE,
+  QUALITY_GOLDEN,
   TEST_STRATEGY,
   CODE_CONVENTIONS,
   GIT_WORKFLOW,
@@ -282,9 +284,19 @@ export default function PilotagePage() {
                 </tbody>
               </table>
             </div>
+            <p className="ql-golden">{QUALITY_GOLDEN}</p>
           </div>
 
           <div className="ps-grid2" style={{ marginTop: 16 }}>
+            <div className="glass ps-body">
+              <h3 className="ps-sub">Definition of Done</h3>
+              <p className="ps-text" style={{ marginTop: 0 }}>
+                Conditions qu&apos;une User Story doit toutes remplir pour être considérée comme terminée.
+              </p>
+              <ul className="ql-list dod-list">
+                {DEFINITION_OF_DONE.map((d) => <li key={d}>{d}</li>)}
+              </ul>
+            </div>
             <div className="glass ps-body">
               <h3 className="ps-sub">Conventions de code</h3>
               <ul className="ql-list">

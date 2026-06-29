@@ -256,6 +256,10 @@ a{color:inherit;text-decoration:none}
 .meth-rit span{font-size:11.5px;color:var(--mut);line-height:1.4}
 .ql-list{margin:0;padding-left:18px}
 .ql-list li{font-size:13px;color:var(--mut);line-height:1.5;margin:9px 0}
+.dod-list{list-style:none;padding-left:0}
+.dod-list li{position:relative;padding-left:24px}
+.dod-list li::before{content:"✓";position:absolute;left:0;top:0;color:var(--lime);font-weight:900}
+.ql-golden{margin:14px 0 0;padding:13px 16px;border-radius:12px;font-size:12.5px;line-height:1.55;color:var(--ink);background:rgba(211,252,114,.08);border:1px solid rgba(211,252,114,.32)}
 @media(max-width:600px){.meth-rituals{grid-template-columns:1fr}}
 
 /* ===== Business ===== */

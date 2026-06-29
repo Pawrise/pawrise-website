@@ -383,6 +383,23 @@ export const QUALITY = [
   "Les tests automatisés s'exécutent à chaque Pull Request via la CI.",
 ];
 
+// Definition of Done : conditions qu'une User Story doit toutes remplir pour
+// être considérée comme terminée. Source : Quality Plan + Git Workflow +
+// Stratégie de tests (Confluence). Sert de garde-fou partagé par l'équipe.
+export const DEFINITION_OF_DONE = [
+  "Les critères d'acceptation de la User Story (Given/When/Then) sont tous satisfaits.",
+  "Le code est relu et approuvé par au moins un pair via une Pull Request.",
+  "Les tests de la story sont écrits et passent (unitaires et, si concernés, intégration).",
+  "La CI est verte : lint et tests automatiques réussis (le merge est bloqué sinon).",
+  "La documentation utile est à jour (README du service, doc d'API, Confluence si besoin).",
+  "Aucune régression : un bug corrigé est couvert par un test de non-régression.",
+];
+
+// Règle d'or produit : invariant éthique vérifié systématiquement par les tests
+// du Care Engine. Source : Stratégie de tests (Confluence).
+export const QUALITY_GOLDEN =
+  "Règle d'or produit : l'IA n'émet jamais de diagnostic. Les tests du Care Engine vérifient que toute situation ambiguë déclenche une orientation ou une escalade vers le vétérinaire, jamais une conclusion médicale.";
+
 // Plan qualité détaillé (critère team_practices). Stratégie de tests par couche,
 // conventions, Git workflow, CI/CD et onboarding, adapté à la stack réelle.
 export const TEST_STRATEGY: { couche: string; outils: string; cible: string }[] = [
