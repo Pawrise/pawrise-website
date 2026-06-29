@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SwotMatrix from "@/components/diagrams/SwotMatrix";
 import PageHeader from "@/components/PageHeader";
 import PestelGrid from "@/components/diagrams/PestelGrid";
-import { VALUE, MARKET, ECON, BOM, BOM_TOTAL, BOM_OPTIONS, BUDGET_NOTE, CONFRONTATION } from "@/lib/content/business";
+import { VALUE, MARKET, ECON, BOM, BOM_TOTAL, BOM_OPTIONS, BUDGET_NOTE, CONFRONTATION, PESTEL_SYNTHESE } from "@/lib/content/business";
 
 export const metadata: Metadata = {
   title: "Business & Stratégie · Pawrise Care",
@@ -99,6 +99,31 @@ export default function BusinessPage() {
             <p>Les six familles de facteurs de l&apos;environnement macro.</p>
           </div>
           <PestelGrid />
+          <div className="glass ps-body" style={{ marginTop: 16 }}>
+            <h3 className="ps-sub">Hiérarchisation des facteurs</h3>
+            <p className="ps-text" style={{ marginTop: 0 }}>
+              Les leviers les plus favorables sont économiques et socioculturels ; les deux
+              contraintes décisives sont la fiabilité de la mesure et la frontière du diagnostic.
+            </p>
+            <div className="raci-scroll">
+              <table className="cov-table pestel-rank">
+                <thead>
+                  <tr><th>Dimension</th><th>Facteur structurant</th><th>Nature</th><th>Impact</th><th>Horizon</th></tr>
+                </thead>
+                <tbody>
+                  {PESTEL_SYNTHESE.map((r) => (
+                    <tr key={r.dim + r.facteur}>
+                      <td className="cov-dom">{r.dim}</td>
+                      <td>{r.facteur}</td>
+                      <td><span className={`pr-nat ${r.nature === "Opportunité" ? "pos" : r.nature === "Vigilance" ? "mid" : "neg"}`}>{r.nature}</span></td>
+                      <td>{r.impact}</td>
+                      <td className="cov-bk">{r.horizon}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </section>
 
         {/* Modèle économique */}

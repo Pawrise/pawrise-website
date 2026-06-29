@@ -97,38 +97,54 @@ export const CONFRONTATION: Confront[] = [
 ];
 
 /* ---------------------------------------------------------- PESTEL ------ */
+// Analyse de l'environnement macro. Fil conducteur : orienter, jamais diagnostiquer.
+// Le PESTEL reste macro ; la concurrence directe est traitée dans le SWOT.
 export type Pestel = { letter: string; axe: string; summary: string; key: string };
 export const PESTEL: Pestel[] = [
   {
     letter: "P", axe: "Politique",
-    summary: "Santé animale encadrée (Animal Health Law UE 2016/429, Code rural). L'UE soutient l'IA via l'AI Act.",
-    key: "Ne pas être interprété comme un acte médical.",
+    summary: "L'environnement politique est porteur : la France (France 2030, BPI) et l'UE financent l'innovation en IA et en e-santé. Le bien-être animal est devenu une priorité publique (loi du 30 novembre 2021 contre la maltraitance), et la souveraineté des données de santé monte dans le débat.",
+    key: "Un terrain favorable, à condition d'héberger les données dans le respect de la souveraineté européenne.",
   },
   {
     letter: "E", axe: "Économique",
-    summary: "75 M d'animaux en France, 1 foyer sur 2. Pet tech en croissance ; concurrents centrés sur la localisation.",
-    key: "Espace ouvert sur l'interprétation santé.",
+    summary: "Le marché animalier est large et résilient : on ne réduit pas facilement le budget d'un animal vu comme un membre de la famille. La pet tech croît, portée par le suivi connecté. Point de vigilance : le modèle repose sur un abonnement récurrent (~10 €/mois) dans un contexte de lassitude des abonnements.",
+    key: "Marché porteur, mais la maîtrise du churn et du coût d'acquisition est décisive.",
   },
   {
     letter: "S", axe: "Socioculturel",
-    summary: "L'animal est un membre de la famille ; attentes fortes de prévention et d'usages numériques.",
-    key: "Demande d'une approche proactive du bien-être.",
+    summary: "L'animal est désormais un membre à part entière de la famille : les propriétaires veulent comprendre son comportement et prévenir les problèmes plutôt que les subir. Les usages numériques (apps, objets connectés) sont entrés dans les mœurs, ce qui abaisse la barrière à l'adoption.",
+    key: "Une demande de prévention proactive qui colle exactement à notre proposition.",
   },
   {
     letter: "T", axe: "Technologique",
-    summary: "Miniaturisation des capteurs, IA/ML, cloud et télémédecine convergent.",
-    key: "Environnement technique favorable.",
+    summary: "Tout converge pour rendre le produit crédible : miniaturisation des capteurs, progrès de l'IA et du machine learning pour détecter les anomalies, cloud et apps pour restituer simplement, et montée de la télémédecine vétérinaire. Réserve importante : mesurer des constantes fiables sur un animal qui bouge, poilu et de morphologie variable, reste un vrai verrou technique.",
+    key: "Environnement technique favorable, mais la fiabilité de la mesure physiologique est le risque central à maîtriser.",
   },
   {
     letter: "E", axe: "Environnemental",
-    summary: "Impact du matériel (batterie, composants) et du numérique.",
-    key: "Durabilité, recyclage, green IT.",
+    summary: "Fabriquer un objet électronique a un impact qu'il faut limiter par l'éco-conception (matériaux non nocifs, batterie durable, réparabilité), dans un cadre réglementé : Règlement Batteries (UE) 2023/1542, directive DEEE, indice de réparabilité. Le numérique a lui aussi une empreinte, d'où des pratiques de Green IT (traitements optimisés, stockage limité au nécessaire).",
+    key: "Durabilité du matériel et sobriété numérique, autant pour la conformité que pour l'image.",
   },
   {
     letter: "L", axe: "Légal",
-    summary: "RGPD, médecine vétérinaire réservée aux vétérinaires, AI Act, sécurité produit & bien-être animal.",
-    key: "Outil d'aide à l'observation, pas de diagnostic auto.",
+    summary: "Quatre cadres structurent le produit : le RGPD (les données de l'animal restent indirectement liées au propriétaire), le Code rural (le diagnostic est réservé aux vétérinaires), l'AI Act (IA transparente, pas de décision automatisée assimilable à un diagnostic), et la sécurité produit via le règlement RSGP/GPSR (UE) 2023/988 (qui remplace l'ancienne directive depuis le 13 décembre 2024).",
+    key: "Tout repose sur la frontière orienter / diagnostiquer : on aide à observer, on ne pose jamais d'acte médical.",
   },
+];
+
+// Synthèse : hiérarchisation des facteurs les plus structurants.
+export type PestelRank = { dim: string; facteur: string; nature: "Opportunité" | "Vigilance" | "Contrainte"; impact: string; horizon: string };
+export const PESTEL_SYNTHESE: PestelRank[] = [
+  { dim: "P · Politique", facteur: "Soutien public à l'IA et à l'e-santé (France 2030, BPI)", nature: "Opportunité", impact: "Moyen", horizon: "Moyen terme" },
+  { dim: "E · Économique", facteur: "Marché large, résilient et en croissance (pet tech)", nature: "Opportunité", impact: "Fort", horizon: "Court terme" },
+  { dim: "E · Économique", facteur: "Lassitude des abonnements / disposition à payer", nature: "Vigilance", impact: "Fort", horizon: "Court terme" },
+  { dim: "S · Socioculturel", facteur: "Humanisation de l'animal + adoption du numérique", nature: "Opportunité", impact: "Fort", horizon: "Court terme" },
+  { dim: "T · Technologique", facteur: "Convergence capteurs / IA / cloud / télémédecine", nature: "Opportunité", impact: "Fort", horizon: "Moyen terme" },
+  { dim: "T · Technologique", facteur: "Fiabilité de la mesure physiologique", nature: "Contrainte", impact: "Fort", horizon: "Court terme" },
+  { dim: "E · Environnemental", facteur: "Réglementations matériel (Batteries 2023/1542, DEEE)", nature: "Contrainte", impact: "Moyen", horizon: "Moyen terme" },
+  { dim: "L · Légal", facteur: "Frontière diagnostic / non-diagnostic (Code rural, AI Act)", nature: "Contrainte", impact: "Fort", horizon: "Court terme" },
+  { dim: "L · Légal", facteur: "Conformité RGPD & sécurité produit (UE 2023/988)", nature: "Contrainte", impact: "Moyen", horizon: "Court terme" },
 ];
 
 /* ------------------------------------------------- MODÈLE ÉCONOMIQUE ---- */
