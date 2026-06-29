@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SwotMatrix from "@/components/diagrams/SwotMatrix";
 import PageHeader from "@/components/PageHeader";
 import PestelGrid from "@/components/diagrams/PestelGrid";
-import { VALUE, MARKET, ECON, BOM, BOM_TOTAL, BOM_OPTIONS, BUDGET_NOTE } from "@/lib/content/business";
+import { VALUE, MARKET, ECON, BOM, BOM_TOTAL, BOM_OPTIONS, BUDGET_NOTE, CONFRONTATION } from "@/lib/content/business";
 
 export const metadata: Metadata = {
   title: "Business & Stratégie · Pawrise Care",
@@ -71,6 +71,25 @@ export default function BusinessPage() {
             <p>Forces et faiblesses internes, opportunités et menaces externes.</p>
           </div>
           <SwotMatrix />
+        </section>
+
+        {/* Matrice de confrontation */}
+        <section className="panel-sect">
+          <div className="ps-head">
+            <h2>Matrice de confrontation</h2>
+            <p>Ce que la stratégie tire du SWOT : croiser forces et faiblesses avec opportunités et menaces.</p>
+          </div>
+          <div className="confront">
+            {CONFRONTATION.map((c) => (
+              <div className={`confront-c ${c.tone}`} key={c.key}>
+                <div className="confront-h">
+                  <span className="confront-k">{c.key}</span>
+                  <h4>{c.title}</h4>
+                </div>
+                <p>{c.text}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* PESTEL */}

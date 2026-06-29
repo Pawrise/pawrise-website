@@ -11,7 +11,10 @@ export default function SwotMatrix() {
           </div>
           <ul>
             {q.items.map((it) => (
-              <li key={it}>{it}</li>
+              <li key={it.t}>
+                <b>{it.t}</b>
+                <span>{it.d}</span>
+              </li>
             ))}
           </ul>
         </div>

@@ -223,9 +223,27 @@ a{color:inherit;text-decoration:none}
 .swot-q.pos .swot-k{background:rgba(1,170,187,.18);color:#7fe9d6}
 .swot-q.neg .swot-k{background:rgba(251,113,133,.18);color:#fda4af}
 .swot-head h4{margin:0;font-size:15px;font-weight:800}
-.swot-q ul{margin:0;padding-left:18px}
-.swot-q li{font-size:12.5px;color:var(--mut);line-height:1.45;margin:6px 0}
+.swot-q ul{margin:0;padding:0;list-style:none}
+.swot-q li{margin:0 0 11px;padding-left:14px;position:relative}
+.swot-q li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%}
+.swot-q.pos li::before{background:var(--cli)}
+.swot-q.neg li::before{background:var(--rose)}
+.swot-q li b{display:block;font-size:13px;font-weight:800;color:#fff;line-height:1.25;margin-bottom:2px}
+.swot-q li span{display:block;font-size:12px;color:var(--mut);line-height:1.5}
 @media(max-width:720px){.swot{grid-template-columns:1fr}}
+
+/* ===== Matrice de confrontation ===== */
+.confront{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.confront-c{padding:16px 16px 14px;border-radius:14px;border:1px solid var(--line);background:linear-gradient(160deg,var(--card1),var(--card2))}
+.confront-c.pos{border-top:3px solid var(--cli)}
+.confront-c.neg{border-top:3px solid var(--rose)}
+.confront-h{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.confront-k{display:grid;place-items:center;min-width:40px;height:26px;padding:0 8px;border-radius:8px;font-weight:900;font-size:12px;letter-spacing:.04em}
+.confront-c.pos .confront-k{background:rgba(1,170,187,.18);color:#7fe9d6}
+.confront-c.neg .confront-k{background:rgba(251,113,133,.18);color:#fda4af}
+.confront-h h4{margin:0;font-size:13.5px;font-weight:800;color:#fff}
+.confront-c p{margin:0;font-size:12.5px;color:var(--mut);line-height:1.5}
+@media(max-width:720px){.confront{grid-template-columns:1fr}}
 /* PESTEL */
 .pestel{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .pestel-c{position:relative;padding:16px 15px 14px}
