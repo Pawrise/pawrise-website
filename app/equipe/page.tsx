@@ -41,7 +41,10 @@ export default function EquipePage() {
           <div className="prof-grid">
             {PROFILES.map((p) => (
               <div className="prof glass" key={p.who}>
-                <b>{p.who}</b>
+                <b>
+                  {p.who}
+                  {p.founder && <span className="prof-founder">Co-fondateur</span>}
+                </b>
                 <span>{p.why}</span>
               </div>
             ))}
