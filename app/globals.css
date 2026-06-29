@@ -381,6 +381,31 @@ a{color:inherit;text-decoration:none}
 .am-ipr.lvl-high{background:rgba(251,146,60,.16)}
 .am-ipr.lvl-crit{background:rgba(251,113,133,.2)}
 .amdec-scale{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:11.5px;font-weight:700}
+/* résumé en tête */
+.amdec-summary{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-bottom:12px;font-size:13px;color:var(--mut)}
+.amdec-summary b{color:#fff;font-weight:900;font-size:15px}
+.amdec-summary .lvl-crit b{color:#fda4af}.amdec-summary .lvl-high b{color:#fdba74}
+.amdec-summary .am-sumhint{margin-left:auto;font-size:11.5px;color:var(--faint);font-style:italic}
+/* lignes cliquables */
+.amdec-row{cursor:pointer;transition:background .12s}
+.amdec-row:hover{background:rgba(255,255,255,.04)}
+.amdec-row.on{background:rgba(211,252,114,.08)}
+.amdec-row.on .am-code{color:var(--lime)}
+/* badge niveau */
+.am-badge{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.am-badge.lvl-low{background:rgba(1,170,187,.16);color:#7fe9d6}
+.am-badge.lvl-mod{background:rgba(252,211,77,.16);color:#fcd34d}
+.am-badge.lvl-high{background:rgba(251,146,60,.18);color:#fdba74}
+.am-badge.lvl-crit{background:rgba(251,113,133,.2);color:#fda4af}
+/* panneau détail */
+.amdec-detail{margin-top:14px;padding:16px 18px;animation:gd-in .25s ease}
+.amd-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.amd-head .am-code{font-family:ui-monospace,monospace;font-size:13px;font-weight:800;color:var(--lime)}
+.amd-head h4{margin:0;font-size:15px;font-weight:800;color:#fff;flex:1;min-width:160px}
+.amd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.amd-grid .gd-lbl{display:block;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:5px}
+.amd-grid p{margin:0;font-size:12.5px;color:var(--mut);line-height:1.5}
+@media(max-width:680px){.amd-grid{grid-template-columns:1fr}.amdec-summary .am-sumhint{margin-left:0;width:100%}}
 
 /* ===== Risques : Risk Map ===== */
 .rmap{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:start}

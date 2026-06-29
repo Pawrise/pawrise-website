@@ -43,3 +43,6 @@ next-env.d.ts
 # gros asset local (deck)
 PAWRISE.pdf
 *.pdf
+
+# fichiers sources docs (livrables gérés à la fin)
+*.docx

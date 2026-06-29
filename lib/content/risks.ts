@@ -3,25 +3,115 @@
 /* ---------------------------------------------------------- AMDEC -------- */
 // IPR = G (gravité) × O (occurrence) × D (détection). Plus c'est haut, plus c'est urgent.
 export type Amdec = {
-  dom: string; code: string; mode: string;
-  g: number; o: number; d: number; action: string;
+  dom: string; code: string; sous: string; mode: string;
+  cause: string; effet: string;
+  g: number; o: number; d: number; action: string; resp: string;
 };
+// Source : tableau AMDEC officiel (AMDEC_Pawrise_Care.pdf) : 14 modes, 4 domaines.
 export const AMDEC: Amdec[] = [
-  { dom: "Collier", code: "H03", mode: "Défaut d'étanchéité (IP67)", g: 7, o: 3, d: 6, action: "Tests d'immersion, validation boîtier" },
-  { dom: "Collier", code: "H04", mode: "Mesure cardio/température erronée", g: 6, o: 4, d: 5, action: "Calibration + seuils de plausibilité" },
-  { dom: "Collier", code: "H01", mode: "Décharge batterie prématurée", g: 6, o: 5, d: 3, action: "Deep sleep + alerte niveau bas" },
-  { dom: "Transmission", code: "T01", mode: "Perte de connexion prolongée", g: 5, o: 6, d: 3, action: "Buffer edge + resend" },
-  { dom: "Transmission", code: "T03", mode: "Collier non authentifié injecte des données", g: 8, o: 2, d: 5, action: "PKI step-ca, mTLS" },
-  { dom: "Moteur IA", code: "I01", mode: "Faux négatif (urgence non détectée)", g: 9, o: 3, d: 7, action: "Garde-fous d'escalade, seuils prudents" },
-  { dom: "Moteur IA", code: "I03", mode: "Hallucination / conseil hors-cadre", g: 8, o: 3, d: 6, action: "Guardrail 3 couches, RAG borné" },
-  { dom: "Moteur IA", code: "I02", mode: "Faux positif anxiogène", g: 4, o: 5, d: 4, action: "Contextualisation, message rassurant" },
-  { dom: "Escalade", code: "E01", mode: "Escalade non prise à temps", g: 8, o: 3, d: 5, action: "File de garde, SLA, relance" },
-  { dom: "Escalade", code: "E02", mode: "Contexte/PDF incomplet transmis", g: 5, o: 4, d: 4, action: "Gabarit normalisé + validation" },
+  {
+    dom: "Collier", code: "H01", sous: "Batterie", mode: "Décharge rapide / autonomie insuffisante",
+    cause: "Batterie sous-dimensionnée, firmware sans mode éco énergie, capteurs toujours actifs.",
+    effet: "Collier éteint sans prévenir : perte de données en temps réel, fausse alerte d'absence d'activité.",
+    g: 7, o: 6, d: 4, resp: "Cyril Porez (IoT)",
+    action: "Mode éco énergie, alerte push à 20 % de batterie, dimensionner la batterie pour ≥ 5 jours d'autonomie.",
+  },
+  {
+    dom: "Collier", code: "H02", sous: "Capteurs", mode: "Défaillance du capteur accéléromètre",
+    cause: "Choc physique, humidité, mauvaise soudure, composant défectueux à réception.",
+    effet: "Score d'activité figé ou nul : faux bien-être affiché, anomalie non détectée par l'IA.",
+    g: 6, o: 4, d: 5, resp: "Cyril Porez (IoT)",
+    action: "Tests de validation à réception (QA hardware), watchdog firmware si valeurs statiques > 30 min, boîtier IP67.",
+  },
+  {
+    dom: "Collier", code: "H03", sous: "Capteur température / FC", mode: "Mesures erronées (faux positifs physiologiques)",
+    cause: "Capteur mal positionné, fourrure épaisse, mouvement pendant la mesure.",
+    effet: "Alerte de fièvre ou de tachycardie infondée : anxiété du propriétaire, sursollicitation vétérinaire.",
+    g: 7, o: 7, d: 6, resp: "Nino Litim (IA) + Véto partenaire",
+    action: "Plages normales validées avec le vétérinaire, moyenne glissante (5 mesures) avant alerte, disclaimer médical.",
+  },
+  {
+    dom: "Collier", code: "H04", sous: "Communication BLE", mode: "Perte de synchronisation smartphone ↔ collier",
+    cause: "Hors portée BLE (~10 m), interférences Wi-Fi / 2.4 GHz, app tuée en arrière-plan par l'OS.",
+    effet: "Données non remontées : historique lacunaire, position GPS en retard, alertes de zone non déclenchées.",
+    g: 5, o: 7, d: 4, resp: "Cyril Porez (IoT) + Elarif Inzoudine (DevOps)",
+    action: "Cache local sur le collier (flash embarqué), sync auto à la reconnexion, notification si collier non vu > 1 h.",
+  },
+  {
+    dom: "Transmission", code: "T01", sous: "API Backend", mode: "Indisponibilité du backend (downtime)",
+    cause: "Déploiement raté, surcharge serveur, certificat SSL expiré, incident du cloud provider.",
+    effet: "App inutilisable (pas de dashboard, pas d'alertes, pas de chat IA) : perte de confiance utilisateur.",
+    g: 8, o: 4, d: 3, resp: "Elarif Inzoudine (DevOps) + Oumar Abakar (Cloud)",
+    action: "CI/CD avec rollback auto, healthcheck, monitoring uptime, SLA cloud ≥ 99,5 %, alerte si downtime > 2 min.",
+  },
+  {
+    dom: "Transmission", code: "T02", sous: "Time-series DB", mode: "Corruption ou perte de données capteurs",
+    cause: "Race condition à l'ingestion, connexion coupée en cours d'écriture, migration DB sans backup.",
+    effet: "Historique de santé incomplet : score de bien-être faussé, vétérinaire sans contexte pour orienter.",
+    g: 8, o: 3, d: 4, resp: "Yassine El Gherrabi (Backend) + Oumar Abakar (Cloud)",
+    action: "Écriture idempotente (UUID par mesure), backups quotidiens, tests d'intégrité post-migration, réplication.",
+  },
+  {
+    dom: "Transmission", code: "T03", sous: "GPS WebSocket", mode: "Latence excessive du GPS en temps réel",
+    cause: "Congestion réseau, WebSocket instable, fréquence de polling trop élevée vs batterie.",
+    effet: "Carte GPS décalée de plusieurs minutes : le propriétaire ne localise pas l'animal, zones non fiables.",
+    g: 6, o: 5, d: 5, resp: "Ibrahim Sylla / Hamid Bennacef (Full-stack)",
+    action: "Fréquence GPS adaptative (plus rapide hors zone), reconnexion auto avec back-off exponentiel.",
+  },
+  {
+    dom: "Moteur IA", code: "I01", sous: "Analyse comportementale", mode: "Faux négatif : anomalie non détectée",
+    cause: "Seuils trop permissifs, données d'entraînement insuffisantes, animal au comportement atypique.",
+    effet: "Problème de santé réel non signalé : retard de soin, aggravation de l'état de l'animal.",
+    g: 9, o: 5, d: 6, resp: "Nino Litim + Adam Lamouri (Data/IA)",
+    action: "Seuils calibrés avec le vétérinaire, baseline individuelle par animal, apprentissage de 2 semaines à l'onboarding.",
+  },
+  {
+    dom: "Moteur IA", code: "I02", sous: "Analyse comportementale", mode: "Faux positif : alerte infondée",
+    cause: "Seuils trop stricts, animal qui joue activement, capteur bruité non filtré.",
+    effet: "Alertes excessives : fatigue d'alerte, sur-consultation vétérinaire, coût supplémentaire.",
+    g: 5, o: 7, d: 5, resp: "Nino Litim + Adam Lamouri (Data/IA)",
+    action: "Fenêtre de confirmation (anomalie persistante > N min), score de confiance affiché, feedback « fausse alerte ».",
+  },
+  {
+    dom: "Moteur IA", code: "I03", sous: "Chat RAG vétérinaire", mode: "Réponse médicalement incorrecte du LLM",
+    cause: "Hallucination du LLM, corpus vétérinaire incomplet ou non validé, prompt engineering insuffisant.",
+    effet: "Conseil erroné suivi par le propriétaire : retard ou traitement inapproprié, risque juridique pour Pawrise.",
+    g: 9, o: 5, d: 5, resp: "Yassine El Gherrabi (LLM/RAG) + Véto partenaire",
+    action: "Corpus validé par le vétérinaire, disclaimer systématique, score de confiance RAG, escalade véto si confiance < seuil.",
+  },
+  {
+    dom: "Moteur IA", code: "I04", sous: "Chat RAG vétérinaire", mode: "Indisponibilité ou latence excessive du LLM",
+    cause: "Quota API dépassé, provider en maintenance, modèle self-hosted sous-dimensionné.",
+    effet: "Chat IA inaccessible : utilisateur bloqué, escalade forcée vers le vétérinaire pour des questions mineures.",
+    g: 6, o: 4, d: 3, resp: "Yassine El Gherrabi + Elarif Inzoudine",
+    action: "Circuit breaker avec message dégradé, fallback FAQ statique, monitoring du quota API, alerte budget à 80 %.",
+  },
+  {
+    dom: "Escalade", code: "E01", sous: "Déclenchement automatique", mode: "Escalade non déclenchée pour un cas urgent",
+    cause: "Critères d'escalade trop restrictifs, bug du moteur de règles, anomalie non catégorisée.",
+    effet: "Propriétaire non alerté de consulter un vrai vétérinaire : risque vital pour l'animal.",
+    g: 10, o: 4, d: 5, resp: "Yassine El Gherrabi (PO/Backend) + Véto partenaire",
+    action: "Critères revus avec le vétérinaire, tests E2E avec scénarios critiques simulés, alerte SMS en plus du push si gravité ≥ 8.",
+  },
+  {
+    dom: "Escalade", code: "E02", sous: "Portail vétérinaire", mode: "Vétérinaire partenaire indisponible",
+    cause: "Véto en consultation, nuit / week-end, résiliation du partenariat, absence non gérée par le système.",
+    effet: "Cas sérieux en attente sans prise en charge : SLA non respecté, perte de confiance.",
+    g: 8, o: 5, d: 4, resp: "Yassine El Gherrabi (PO) + Adam Lamouri (UX)",
+    action: "Pool de vétérinaires (min. 2), statut de disponibilité en temps réel, transfert auto si non répondu en 15 min, véto de garde.",
+  },
+  {
+    dom: "Escalade", code: "E03", sous: "Continuité des données", mode: "Données collier non accessibles au vétérinaire",
+    cause: "Bug d'autorisation, données non synchronisées au moment de l'escalade, portail en maintenance.",
+    effet: "Vétérinaire qui consulte sans contexte : orientation moins précise, perte de la valeur différenciatrice de Pawrise.",
+    g: 7, o: 4, d: 4, resp: "Ibrahim Sylla / Hamid Bennacef + Elarif Inzoudine",
+    action: "Export PDF auto à chaque escalade, cache des dernières 24 h accessible hors-ligne, tests d'intégration escalade → portail.",
+  },
 ];
 
 export const AMDEC_LEGEND = [
-  { k: "G · Gravité", d: "Impact si la défaillance survient (1 → 10)" },
-  { k: "O · Occurrence", d: "Probabilité d'apparition (1 → 10)" },
+  { k: "G · Gravité", d: "Impact pour l'utilisateur ou l'animal (1 → 10)" },
+  { k: "O · Occurrence", d: "Fréquence d'apparition (1 → 10)" },
   { k: "D · Détection", d: "1 = très détectable → 10 = indétectable" },
 ];
 export function ipr(a: Amdec) { return a.g * a.o * a.d; }
