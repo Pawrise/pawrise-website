@@ -151,16 +151,88 @@ export const MONTHS = [
   "Déc 25", "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep",
   "Oct", "Nov", "Déc 26", "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil 27",
 ];
-export type Bar = { label: string; team: string; start: number; end: number; accent: string };
+// Une barre peut être découpée en segments : "derisk" (simulateur / POC, on dé-risque
+// d'abord, à faible coût) puis "build" (engagement du coûteux). Le détail relie enfin
+// chaque barre à son contenu, son livrable et sa dépendance (cf. panneau au clic).
+export type Seg = { label: string; start: number; end: number; kind: "derisk" | "build" };
+export type Bar = {
+  label: string; team: string; start: number; end: number; accent: string;
+  segs?: Seg[];
+  detail: { contenu: string[]; livrable: string; depend: string };
+};
 export const GANTT: Bar[] = [
-  { label: "Conception / cadrage", team: "Toute l'équipe", start: 0, end: 6, accent: "var(--ai)" },
-  { label: "Infrastructure", team: "Oumar", start: 7, end: 9, accent: "var(--data)" },
-  { label: "Backend", team: "Hamid · Aaditya · Elarif", start: 7, end: 13, accent: "var(--svc)" },
-  { label: "Collier IoT", team: "Cyril · Ibrahim", start: 7, end: 16, accent: "var(--edge)" },
-  { label: "App Mobile", team: "Adam · Elarif", start: 7, end: 17, accent: "var(--cli)" },
-  { label: "Moteur IA + Data", team: "Nino · Yassine", start: 7, end: 16, accent: "var(--ai)" },
-  { label: "Portail Véto", team: "Hamid · Aaditya · Elarif", start: 14, end: 17, accent: "var(--svc)" },
-  { label: "Intégration & tests", team: "Toute l'équipe", start: 17, end: 19, accent: "var(--rose)" },
+  {
+    label: "Conception / cadrage", team: "Toute l'équipe", start: 0, end: 6, accent: "var(--ai)",
+    detail: {
+      contenu: ["Cadrage : WBS, OBS, RACI, SWOT, PESTEL, AMDEC, Risk Map", "Architecture, specs, benchmarks", "Étude de marché, positionnement, personas", "Design system, wireframes", "POCs : simulateur collier, RAG / Chat IA"],
+      livrable: "Tous les livrables prêts pour la keynote (juin 2026).",
+      depend: "Aucune : socle de départ pour tout le reste.",
+    },
+  },
+  {
+    label: "Infrastructure", team: "Oumar", start: 7, end: 9, accent: "var(--data)",
+    detail: {
+      contenu: ["Cloud, cluster Kubernetes", "CI/CD (GitOps)", "Monitoring / observabilité"],
+      livrable: "Socle de déploiement opérationnel (sept. 2026).",
+      depend: "Démarre dès juillet : prérequis du déploiement backend.",
+    },
+  },
+  {
+    label: "Backend", team: "Hamid · Aaditya · Elarif", start: 7, end: 13, accent: "var(--svc)",
+    detail: {
+      contenu: ["API (Rust), base de données", "Authentification (OIDC)", "Ingestion des données collier"],
+      livrable: "Backend complet et documenté (janv. 2027).",
+      depend: "Avance en parallèle ; se déploie sur l'infra dès qu'elle est prête.",
+    },
+  },
+  {
+    label: "Collier IoT", team: "Cyril · Ibrahim", start: 7, end: 16, accent: "var(--edge)",
+    segs: [
+      { label: "Simulateur", start: 7, end: 11, kind: "derisk" },
+      { label: "Hardware", start: 12, end: 16, kind: "build" },
+    ],
+    detail: {
+      contenu: ["Simulateur de capteurs (dérisque sans matériel)", "Firmware embarqué", "Carte électronique, boîtier, transmission"],
+      livrable: "Simulateur (nov. 2026) puis prototype matériel (avr. 2027).",
+      depend: "On valide tout sur simulateur avant d'engager le hardware coûteux.",
+    },
+  },
+  {
+    label: "App Mobile", team: "Adam · Elarif", start: 7, end: 17, accent: "var(--cli)",
+    detail: {
+      contenu: ["Auth, dashboard bien-être", "Carte GPS, zones de sécurité", "Chat IA, notifications"],
+      livrable: "App propriétaire complète (mai 2027).",
+      depend: "Branche les API backend au fur et à mesure de leur livraison.",
+    },
+  },
+  {
+    label: "Moteur IA + Data", team: "Nino · Yassine", start: 7, end: 16, accent: "var(--ai)",
+    segs: [
+      { label: "POCs", start: 7, end: 11, kind: "derisk" },
+      { label: "Intégration", start: 12, end: 16, kind: "build" },
+    ],
+    detail: {
+      contenu: ["POCs RAG / pipeline LangGraph (dérisque l'IA tôt)", "Garde-fous non-diagnostiques", "Intégration au backend et aux données réelles"],
+      livrable: "Care Engine intégré au MVP (avr. 2027).",
+      depend: "POCs autonomes ; l'intégration consomme les données du backend.",
+    },
+  },
+  {
+    label: "Portail Véto", team: "Hamid · Aaditya · Elarif", start: 14, end: 17, accent: "var(--svc)",
+    detail: {
+      contenu: ["Dashboard vétérinaire, timeline", "Escalade et handoff", "Rapports / PDF normalisé"],
+      livrable: "Portail vétérinaire livré (mai 2027).",
+      depend: "Seul composant vraiment dépendant : démarre en février, une fois le moteur IA et le backend assez avancés.",
+    },
+  },
+  {
+    label: "Intégration & tests", team: "Toute l'équipe", start: 17, end: 19, accent: "var(--rose)",
+    detail: {
+      contenu: ["Tests E2E (tous les composants connectés)", "Bêta interne, tests utilisateurs", "Documentation technique et guide"],
+      livrable: "Produit assemblé, testé et stabilisé (juil. 2027).",
+      depend: "Phase finale : rassemble tous les composants.",
+    },
+  },
 ];
 export const MILESTONES: { idx: number; label: string }[] = [
   { idx: 6, label: "🎤 Keynote" },
@@ -170,6 +242,22 @@ export const MILESTONES: { idx: number; label: string }[] = [
   { idx: 16, label: "MVP intégré" },
   { idx: 17, label: "Portail Véto" },
   { idx: 19, label: "🎓 Fin projet" },
+];
+
+// Pourquoi on peut paralléliser : peu de dépendances réelles entre composants.
+export const DEP_NOTE =
+  "Le parallélisme n'est pas un pari : les composants sont volontairement peu couplés. Le portail vétérinaire est le seul à vraiment dépendre des autres (il a besoin du moteur IA et du backend), c'est pourquoi il démarre plus tard, en février 2027. Tout le reste avance en parallèle dès juillet 2026, et les briques risquées (collier, IA) sont d'abord dé-risquées par un simulateur et des POCs avant d'engager le coûteux.";
+export const DEPENDENCIES: { from: string; to: string; why: string }[] = [
+  { from: "Infrastructure", to: "Backend", why: "le backend se déploie sur l'infra" },
+  { from: "Simulateur collier", to: "Moteur IA", why: "l'IA s'entraîne et se teste sur des données simulées" },
+  { from: "Backend (API)", to: "App Mobile", why: "l'app consomme les API au fil de l'eau" },
+  { from: "Moteur IA + Backend", to: "Portail Véto", why: "alertes et rapports viennent de l'IA et des données" },
+];
+export const PLANNING_RISKS: { risque: string; impact: string; mitigation: string }[] = [
+  { risque: "Retard de la keynote", impact: "Bloque le démarrage de la phase de développement", mitigation: "Prioriser les livrables réellement évalués" },
+  { risque: "Hardware complexe", impact: "Retard du collier IoT", mitigation: "Simulateur en fallback : le reste n'attend pas le matériel" },
+  { risque: "RAG plus long que prévu", impact: "Retard du moteur IA", mitigation: "Lancer les POCs très tôt (dès la phase de conception)" },
+  { risque: "Intégration tardive", impact: "Bugs découverts trop tard", mitigation: "Tests continus tout au long, pas seulement à la fin" },
 ];
 
 /* ------------------------------------------------- MÉTHODO & QUALITÉ ---- */

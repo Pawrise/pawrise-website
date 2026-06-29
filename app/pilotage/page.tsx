@@ -18,6 +18,9 @@ import {
   PO_NOTE,
   PHASES,
   JIRA,
+  DEP_NOTE,
+  DEPENDENCIES,
+  PLANNING_RISKS,
 } from "@/lib/content/pilotage";
 
 export const metadata: Metadata = {
@@ -108,6 +111,26 @@ export default function PilotagePage() {
           <div className="glass ps-body">
             <Gantt />
           </div>
+
+          {/* Pourquoi le parallélisme + dépendances */}
+          <div className="ps-grid2" style={{ marginTop: 16 }}>
+            <div className="glass ps-body">
+              <h3 className="ps-sub">Pourquoi tout démarre en parallèle ?</h3>
+              <p className="ps-text" style={{ marginTop: 0 }}>{DEP_NOTE}</p>
+            </div>
+            <div className="glass ps-body">
+              <h3 className="ps-sub">Dépendances clés</h3>
+              <ul className="dep-list">
+                {DEPENDENCIES.map((d) => (
+                  <li key={d.from + d.to}>
+                    <span className="dep-flow"><b>{d.from}</b><span className="dep-arr">→</span><b>{d.to}</b></span>
+                    <em>{d.why}</em>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
           <div className="phases">
             {PHASES.map((ph) => (
               <div className="glass ps-body phase" key={ph.nom}>
@@ -126,6 +149,27 @@ export default function PilotagePage() {
                 </ul>
               </div>
             ))}
+          </div>
+
+          {/* Risques planning */}
+          <div className="glass ps-body" style={{ marginTop: 16 }}>
+            <h3 className="ps-sub">Risques planning &amp; mitigations</h3>
+            <div className="raci-scroll">
+              <table className="cov-table">
+                <thead>
+                  <tr><th>Risque</th><th>Impact</th><th>Mitigation</th></tr>
+                </thead>
+                <tbody>
+                  {PLANNING_RISKS.map((r) => (
+                    <tr key={r.risque}>
+                      <td className="cov-dom">{r.risque}</td>
+                      <td>{r.impact}</td>
+                      <td className="cov-bk">{r.mitigation}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
 
