@@ -429,15 +429,17 @@ a{color:inherit;text-decoration:none}
 .rmap-dot:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.35)}
 .rmap-dot.on{background:var(--lime);border-color:#fff;box-shadow:0 0 0 2px rgba(211,252,114,.5)}
 .rmap-reg{display:flex;flex-direction:column;gap:5px}
-.rmap-li{display:grid;grid-template-columns:34px auto 1fr auto;align-items:center;gap:8px;padding:6px 9px;border-radius:8px;font-size:11.5px;border:1px solid var(--line);background:transparent;text-align:left;cursor:pointer;transition:border-color .15s ease,background .15s ease}
-.rmap-li:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.16)}
-.rmap-li.on{border-color:var(--lime);background:rgba(211,252,114,.07)}
+.rmap-li{display:grid;grid-template-columns:34px auto 1fr auto;align-items:center;gap:8px;padding:6px 9px;border-radius:8px;font-size:11.5px;border:1px solid var(--line);text-align:left;cursor:pointer;transition:border-color .15s ease,filter .15s ease}
 .rmap-li b{font-weight:900;font-variant-numeric:tabular-nums;color:var(--ink)}
 .rmap-li .rmap-cat{font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);background:rgba(255,255,255,.05);border:1px solid var(--line);padding:2px 6px;border-radius:999px;white-space:nowrap}
 .rmap-li .rmap-lbl{color:var(--mut);line-height:1.35}
 .rmap-li em{font-style:normal;font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
-.rmap-li.z-crit{border-color:rgba(251,113,133,.4)}
-.rmap-li.z-high{border-color:rgba(251,146,60,.35)}
+.rmap-li.z-low{background:rgba(1,170,187,.12)}
+.rmap-li.z-mod{background:rgba(252,211,77,.14)}
+.rmap-li.z-high{background:rgba(251,146,60,.18);border-color:rgba(251,146,60,.35)}
+.rmap-li.z-crit{background:rgba(251,113,133,.22);border-color:rgba(251,113,133,.4)}
+.rmap-li:hover{filter:brightness(1.3);border-color:rgba(255,255,255,.22)}
+.rmap-li.on{border-color:var(--lime);box-shadow:0 0 0 1px var(--lime)}
 .rmap-detail{grid-column:1 / -1;padding:16px 18px;animation:gd-in .25s ease}
 .rmd-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .rmd-head .rmap-id{font-weight:900;font-size:13px;color:var(--lime);font-variant-numeric:tabular-nums}
