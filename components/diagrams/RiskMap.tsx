@@ -1,5 +1,11 @@
 import { RISKS, riskZone, PROBA, IMPACT } from "@/lib/content/risks";
 
+const score = (r: { p: number; i: number }) => r.p * r.i;
+const REG = [...RISKS].sort((a, b) => score(b) - score(a));
+const nCrit = REG.filter((r) => riskZone(score(r)) === "crit").length;
+const nHigh = REG.filter((r) => riskZone(score(r)) === "high").length;
+const nMod = REG.filter((r) => riskZone(score(r)) === "mod").length;
+
 export default function RiskMap() {
   // grille 5x5 : lignes = Probabilité (5 en haut → 1 en bas), colonnes = Impact (1→5)
   const rows = [5, 4, 3, 2, 1];
@@ -7,6 +13,12 @@ export default function RiskMap() {
   const at = (p: number, i: number) => RISKS.filter((r) => r.p === p && r.i === i);
   return (
     <div className="rmap">
+      <div className="rmap-summary">
+        <span><b>{REG.length}</b> risques</span>
+        <span className="zt-crit"><b>{nCrit}</b> critiques</span>
+        <span className="zt-high"><b>{nHigh}</b> élevés</span>
+        <span className="zt-mod"><b>{nMod}</b> modérés</span>
+      </div>
       <div className="rmap-grid-wrap">
         <div className="rmap-yaxis">Probabilité →</div>
         <div className="rmap-grid">
@@ -18,7 +30,7 @@ export default function RiskMap() {
                 return (
                   <div className={`rmap-cell z-${z}`} key={i}>
                     {at(p, i).map((r) => (
-                      <span className="rmap-dot" key={r.id} title={r.label}>
+                      <span className="rmap-dot" key={r.id} title={`${r.label} (${r.p}×${r.i}=${r.p * r.i})`}>
                         {r.id}
                       </span>
                     ))}
@@ -36,11 +48,12 @@ export default function RiskMap() {
         </div>
       </div>
       <div className="rmap-reg">
-        {RISKS.map((r) => (
-          <div className={`rmap-li z-${riskZone(r.p * r.i)}`} key={r.id}>
+        {REG.map((r) => (
+          <div className={`rmap-li z-${riskZone(score(r))}`} key={r.id}>
             <b>{r.id}</b>
-            <span>{r.label}</span>
-            <em>{r.p}×{r.i}={r.p * r.i}</em>
+            <span className="rmap-cat">{r.cat}</span>
+            <span className="rmap-lbl">{r.label}</span>
+            <em>{r.p}×{r.i}={score(r)}</em>
           </div>
         ))}
       </div>

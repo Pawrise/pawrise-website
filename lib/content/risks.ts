@@ -124,18 +124,23 @@ export function iprLevel(v: number) {
 
 /* -------------------------------------------------------- RISK MAP ------- */
 // Score = P (probabilité 1-5) × I (impact 1-5).
-export type Risk = { id: string; label: string; p: number; i: number };
+// Source : registre officiel (RiskMap_PawriseCare_v3.xlsx) : 14 risques, 5 catégories.
+export type Risk = { id: string; cat: string; label: string; p: number; i: number };
 export const RISKS: Risk[] = [
-  { id: "R1", label: "Retard keynote", p: 3, i: 4 },
-  { id: "R2", label: "Hardware complexe → retard IoT", p: 4, i: 4 },
-  { id: "R3", label: "RAG plus long que prévu", p: 3, i: 3 },
-  { id: "R4", label: "Intégration tardive → bugs", p: 3, i: 4 },
-  { id: "R5", label: "Responsabilité (mauvais conseil)", p: 2, i: 5 },
-  { id: "R6", label: "Capteurs peu fiables", p: 3, i: 4 },
-  { id: "R7", label: "Concurrence copie l'IA", p: 3, i: 3 },
-  { id: "R8", label: "Désengagement d'un membre", p: 2, i: 3 },
-  { id: "R9", label: "Marge hardware faible", p: 3, i: 2 },
-  { id: "R10", label: "Fuite de données (RGPD)", p: 2, i: 5 },
+  { id: "R01", cat: "Technique", label: "Capteur FC non fiable sur l'animal", p: 4, i: 5 },
+  { id: "R02", cat: "Technique", label: "Bus factor : Cyril seul sur le hardware IoT (firmware)", p: 4, i: 5 },
+  { id: "R03", cat: "Technique", label: "Données d'entraînement insuffisantes : modèle IA peu fiable", p: 3, i: 4 },
+  { id: "R04", cat: "Technique", label: "GPS : latence / dérive, temps réel non garanti", p: 3, i: 4 },
+  { id: "R05", cat: "Technique", label: "BLE : perte de connexion collier-mobile", p: 3, i: 3 },
+  { id: "R06", cat: "Technique", label: "Dépassement du budget API LLM", p: 4, i: 2 },
+  { id: "R07", cat: "Légal", label: "LLM génère un conseil médical erroné : responsabilité juridique", p: 3, i: 5 },
+  { id: "R08", cat: "Légal", label: "Non-conformité RGPD (données de santé animale)", p: 2, i: 4 },
+  { id: "R09", cat: "Marché", label: "Vétérinaire partenaire unique : rupture du partenariat", p: 3, i: 4 },
+  { id: "R10", cat: "Marché", label: "Faible adoption : propriétaires pas prêts à payer", p: 2, i: 4 },
+  { id: "R11", cat: "Marché", label: "Concurrence déjà positionnée (Whistle, Tractive)", p: 4, i: 2 },
+  { id: "R12", cat: "Humain", label: "Départ ou indisponibilité d'un membre clé", p: 3, i: 4 },
+  { id: "R13", cat: "Planning", label: "Sous-estimation de la charge firmware : dérapage calendaire", p: 4, i: 3 },
+  { id: "R14", cat: "Planning", label: "Retard du prototype collier (composants / impression 3D)", p: 3, i: 3 },
 ];
 export function riskZone(score: number) {
   if (score >= 15) return "crit";

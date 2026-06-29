@@ -408,7 +408,10 @@ a{color:inherit;text-decoration:none}
 @media(max-width:680px){.amd-grid{grid-template-columns:1fr}.amdec-summary .am-sumhint{margin-left:0;width:100%}}
 
 /* ===== Risques : Risk Map ===== */
-.rmap{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:start}
+.rmap-summary{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:4px;font-size:13px;color:var(--mut)}
+.rmap-summary b{color:#fff;font-weight:900;font-size:15px}
+.rmap-summary .zt-crit b{color:#fda4af}.rmap-summary .zt-high b{color:#fdba74}.rmap-summary .zt-mod b{color:#fcd34d}
+.rmap{display:grid;grid-template-columns:1.3fr 1fr;gap:20px 20px;align-items:start}
 .rmap-grid-wrap{display:flex;gap:8px}
 .rmap-yaxis{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;color:var(--faint);text-align:center;font-weight:700}
 .rmap-grid{flex:1}
@@ -423,12 +426,14 @@ a{color:inherit;text-decoration:none}
 .z-crit{background:rgba(251,113,133,.22)}
 .rmap-dot{font-size:10px;font-weight:900;color:#0a1020;background:#e8eefc;border-radius:5px;padding:2px 5px;line-height:1}
 .rmap-reg{display:flex;flex-direction:column;gap:5px}
-.rmap-li{display:grid;grid-template-columns:32px 1fr auto;align-items:center;gap:8px;padding:6px 9px;border-radius:8px;font-size:11.5px;border:1px solid var(--line)}
-.rmap-li b{font-weight:900}
-.rmap-li span{color:var(--mut)}
-.rmap-li em{font-style:normal;font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.rmap-li{display:grid;grid-template-columns:34px auto 1fr auto;align-items:center;gap:8px;padding:6px 9px;border-radius:8px;font-size:11.5px;border:1px solid var(--line)}
+.rmap-li b{font-weight:900;font-variant-numeric:tabular-nums}
+.rmap-li .rmap-cat{font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);background:rgba(255,255,255,.05);border:1px solid var(--line);padding:2px 6px;border-radius:999px;white-space:nowrap}
+.rmap-li .rmap-lbl{color:var(--mut);line-height:1.35}
+.rmap-li em{font-style:normal;font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
 .rmap-li.z-crit{border-color:rgba(251,113,133,.4)}
 .rmap-li.z-high{border-color:rgba(251,146,60,.35)}
+@media(max-width:520px){.rmap-li{grid-template-columns:34px 1fr auto}.rmap-li .rmap-cat{display:none}}
 @media(max-width:860px){.rmap{grid-template-columns:1fr}}
 
 /* ===== Équipe : heatmap ===== */
