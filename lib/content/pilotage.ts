@@ -130,11 +130,12 @@ export const COVERAGE: Coverage[] = [
 ];
 
 /* --------------------------------------------------------------- RACI ---- */
-// R responsable · A approbateur · C consulté · I informé
-export type Raci = "R" | "A" | "C" | "I" | "";
+// R responsable · A approbateur (garant) · C consulté · I informé
+// "AR" = à la fois responsable et garant (cas du PO sur un livrable qu'il pilote).
+export type Raci = "R" | "A" | "AR" | "C" | "I" | "";
 export const RACI_POLES = ["Pilotage (PO)", "Fullstack", "IoT", "Design/Mobile", "IA/Data", "Cloud/Ops"];
 export const RACI_ROWS: { activite: string; cells: Raci[] }[] = [
-  { activite: "Cadrage & spécifications", cells: ["R", "C", "C", "C", "C", "C"] },
+  { activite: "Cadrage & spécifications", cells: ["AR", "C", "C", "C", "C", "C"] },
   { activite: "API & ingestion données", cells: ["A", "R", "C", "I", "C", "C"] },
   { activite: "Collier & firmware", cells: ["A", "C", "R", "I", "C", "I"] },
   { activite: "Application mobile", cells: ["A", "C", "I", "R", "C", "I"] },

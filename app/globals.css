@@ -167,13 +167,25 @@ a{color:inherit;text-decoration:none}
 .raci-cell.r-A{background:rgba(251,146,60,.18);color:#fdba74}
 .raci-cell.r-C{background:rgba(56,189,248,.14);color:#7dd3fc}
 .raci-cell.r-I{background:rgba(144,164,200,.10);color:var(--mut)}
-.raci-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px}
-.raci-leg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mut)}
-.raci-dot{display:grid;place-items:center;width:22px;height:22px;border-radius:6px;font-size:11px;font-weight:900}
+/* A/R : responsable + garant (lime, le rôle le plus fort) */
+.raci-cell.r-AR{background:rgba(211,252,114,.18);color:var(--lime)}
+.raci-ar{font-size:11.5px;font-weight:900;letter-spacing:.02em}
+/* surbrillance colonne au survol */
+.raci-table th,.raci-table td{transition:background .12s}
+.raci-table .raci-colon{background:rgba(255,255,255,.06)}
+.raci-table th.raci-colon{color:#fff}
+.raci-legend{display:flex;flex-wrap:wrap;gap:14px 20px;margin-top:16px}
+.raci-leg{display:flex;align-items:flex-start;gap:9px;font-size:12px;color:var(--mut);max-width:280px}
+.raci-leg-txt{display:flex;flex-direction:column;gap:1px}
+.raci-leg-txt b{font-size:12.5px;font-weight:800;color:#fff}
+.raci-leg-txt em{font-size:11.5px;color:var(--mut);font-style:normal;line-height:1.4}
+.raci-dot{display:grid;place-items:center;width:24px;height:24px;border-radius:6px;font-size:11px;font-weight:900;flex:0 0 auto}
 .raci-dot.r-R{background:rgba(1,170,187,.2);color:#7fe9d6}
 .raci-dot.r-A{background:rgba(251,146,60,.2);color:#fdba74}
 .raci-dot.r-C{background:rgba(56,189,248,.18);color:#7dd3fc}
 .raci-dot.r-I{background:rgba(144,164,200,.14);color:var(--mut)}
+.raci-note{margin:14px 0 0;font-size:12px;color:var(--mut);line-height:1.55}
+.raci-note b{color:var(--lime)}
 
 /* Gantt */
 .gantt-scroll{overflow-x:auto}

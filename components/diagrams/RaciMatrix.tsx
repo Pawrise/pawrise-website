@@ -1,13 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import { RACI_POLES, RACI_ROWS, type Raci } from "@/lib/content/pilotage";
 
-const LABEL: Record<Exclude<Raci, "">, string> = {
-  R: "Responsable",
-  A: "Approbateur",
-  C: "Consulté",
-  I: "Informé",
-};
+// Définitions reprises de la page RACI Confluence.
+const LEGEND: { k: Exclude<Raci, "" | "AR">; label: string; def: string }[] = [
+  { k: "R", label: "Responsable", def: "Le pôle en charge de la mission : il produit le livrable." },
+  { k: "A", label: "Approbateur", def: "Le pôle garant : il valide le livrable (review)." },
+  { k: "C", label: "Consulté", def: "Le pôle consulté en amont par l'équipe en charge." },
+  { k: "I", label: "Informé", def: "Le pôle tenu informé du livrable." },
+];
 
 export default function RaciMatrix() {
+  const [col, setCol] = useState<number | null>(null);
+
   return (
     <div className="raci">
       <div className="raci-scroll">
@@ -15,8 +21,15 @@ export default function RaciMatrix() {
           <thead>
             <tr>
               <th className="raci-act">Activité</th>
-              {RACI_POLES.map((p) => (
-                <th key={p}>{p}</th>
+              {RACI_POLES.map((p, i) => (
+                <th
+                  key={p}
+                  className={col === i ? "raci-colon" : ""}
+                  onMouseEnter={() => setCol(i)}
+                  onMouseLeave={() => setCol(null)}
+                >
+                  {p}
+                </th>
               ))}
             </tr>
           </thead>
@@ -25,8 +38,13 @@ export default function RaciMatrix() {
               <tr key={row.activite}>
                 <td className="raci-act">{row.activite}</td>
                 {row.cells.map((c, i) => (
-                  <td key={i} className={`raci-cell r-${c || "none"}`}>
-                    {c}
+                  <td
+                    key={i}
+                    className={`raci-cell r-${c || "none"}${col === i ? " raci-colon" : ""}`}
+                    onMouseEnter={() => setCol(i)}
+                    onMouseLeave={() => setCol(null)}
+                  >
+                    {c === "AR" ? <span className="raci-ar">A/R</span> : c}
                   </td>
                 ))}
               </tr>
@@ -35,13 +53,22 @@ export default function RaciMatrix() {
         </table>
       </div>
       <div className="raci-legend">
-        {(Object.keys(LABEL) as Array<Exclude<Raci, "">>).map((k) => (
-          <span key={k} className="raci-leg">
-            <span className={`raci-dot r-${k}`}>{k}</span>
-            {LABEL[k]}
+        {LEGEND.map((l) => (
+          <span key={l.k} className="raci-leg">
+            <span className={`raci-dot r-${l.k}`}>{l.k}</span>
+            <span className="raci-leg-txt">
+              <b>{l.label}</b>
+              <em>{l.def}</em>
+            </span>
           </span>
         ))}
       </div>
+      <p className="raci-note">
+        <b>A/R</b> : le Product Owner pilote le cadrage et en est le garant (responsable et
+        approbateur). Les 6 pôles recoupent l&apos;organisation (OBS) ci-dessus : Fullstack
+        (backend &amp; portail), IoT (collier), Design/Mobile (app), IA/Data (Care Engine),
+        Cloud/Ops (infra).
+      </p>
     </div>
   );
 }
