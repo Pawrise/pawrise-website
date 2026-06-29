@@ -125,22 +125,76 @@ export function iprLevel(v: number) {
 /* -------------------------------------------------------- RISK MAP ------- */
 // Score = P (probabilité 1-5) × I (impact 1-5).
 // Source : registre officiel (RiskMap_PawriseCare_v3.xlsx) : 14 risques, 5 catégories.
-export type Risk = { id: string; cat: string; label: string; p: number; i: number };
+// Plans de mitigation : politique Confluence = rédigés pour tout risque score ≥ 9.
+// Rattachés aux actions déjà validées dans l'AMDEC et aux jalons de dé-risquage du Gantt.
+// Les risques < 9 restent en surveillance (mitig vide).
+export type Risk = {
+  id: string; cat: string; label: string; p: number; i: number;
+  mitig?: string; resp?: string;
+};
 export const RISKS: Risk[] = [
-  { id: "R01", cat: "Technique", label: "Capteur FC non fiable sur l'animal", p: 4, i: 5 },
-  { id: "R02", cat: "Technique", label: "Bus factor : Cyril seul sur le hardware IoT (firmware)", p: 4, i: 5 },
-  { id: "R03", cat: "Technique", label: "Données d'entraînement insuffisantes : modèle IA peu fiable", p: 3, i: 4 },
-  { id: "R04", cat: "Technique", label: "GPS : latence / dérive, temps réel non garanti", p: 3, i: 4 },
-  { id: "R05", cat: "Technique", label: "BLE : perte de connexion collier-mobile", p: 3, i: 3 },
-  { id: "R06", cat: "Technique", label: "Dépassement du budget API LLM", p: 4, i: 2 },
-  { id: "R07", cat: "Légal", label: "LLM génère un conseil médical erroné : responsabilité juridique", p: 3, i: 5 },
-  { id: "R08", cat: "Légal", label: "Non-conformité RGPD (données de santé animale)", p: 2, i: 4 },
-  { id: "R09", cat: "Marché", label: "Vétérinaire partenaire unique : rupture du partenariat", p: 3, i: 4 },
-  { id: "R10", cat: "Marché", label: "Faible adoption : propriétaires pas prêts à payer", p: 2, i: 4 },
-  { id: "R11", cat: "Marché", label: "Concurrence déjà positionnée (Whistle, Tractive)", p: 4, i: 2 },
-  { id: "R12", cat: "Humain", label: "Départ ou indisponibilité d'un membre clé", p: 3, i: 4 },
-  { id: "R13", cat: "Planning", label: "Sous-estimation de la charge firmware : dérapage calendaire", p: 4, i: 3 },
-  { id: "R14", cat: "Planning", label: "Retard du prototype collier (composants / impression 3D)", p: 3, i: 3 },
+  {
+    id: "R01", cat: "Technique", label: "Capteur FC non fiable sur l'animal", p: 4, i: 5,
+    mitig: "Plages physiologiques validées avec le vétérinaire, moyenne glissante sur 5 mesures avant toute alerte, disclaimer médical systématique (cohérent avec l'AMDEC H03).",
+    resp: "Cyril Porez (IoT) + Véto partenaire",
+  },
+  {
+    id: "R02", cat: "Technique", label: "Bus factor : Cyril seul sur le hardware IoT (firmware)", p: 4, i: 5,
+    mitig: "Documentation firmware versionnée, montée en compétence d'un second développeur en binôme sur le hardware, revues de code systématiques pour supprimer le point de défaillance unique.",
+    resp: "Cyril Porez (IoT)",
+  },
+  {
+    id: "R03", cat: "Technique", label: "Données d'entraînement insuffisantes : modèle IA peu fiable", p: 3, i: 4,
+    mitig: "Baseline individuelle par animal, apprentissage de 2 semaines à l'onboarding, enrichissement progressif du dataset (cohérent avec l'AMDEC I01).",
+    resp: "Nino Litim + Adam Lamouri (Data/IA)",
+  },
+  {
+    id: "R04", cat: "Technique", label: "GPS : latence / dérive, temps réel non garanti", p: 3, i: 4,
+    mitig: "Fréquence GPS adaptative (plus rapide hors zone), reconnexion automatique avec back-off exponentiel, tolérance d'affichage (cohérent avec l'AMDEC T03).",
+    resp: "Ibrahim Sylla / Hamid Bennacef (Full-stack)",
+  },
+  {
+    id: "R05", cat: "Technique", label: "BLE : perte de connexion collier-mobile", p: 3, i: 3,
+    mitig: "Cache local sur le collier (flash embarqué), synchronisation automatique à la reconnexion, notification si le collier n'est pas vu depuis plus d'une heure (cohérent avec l'AMDEC H04).",
+    resp: "Cyril Porez (IoT) + Elarif Inzoudine (DevOps)",
+  },
+  {
+    id: "R06", cat: "Technique", label: "Dépassement du budget API LLM", p: 4, i: 2,
+  },
+  {
+    id: "R07", cat: "Légal", label: "LLM génère un conseil médical erroné : responsabilité juridique", p: 3, i: 5,
+    mitig: "Corpus vétérinaire validé, disclaimer systématique, score de confiance RAG, escalade vers le vétérinaire si la confiance passe sous le seuil (cohérent avec l'AMDEC I03).",
+    resp: "Yassine El Gherrabi (LLM/RAG) + Véto partenaire",
+  },
+  {
+    id: "R08", cat: "Légal", label: "Non-conformité RGPD (données de santé animale)", p: 2, i: 4,
+  },
+  {
+    id: "R09", cat: "Marché", label: "Vétérinaire partenaire unique : rupture du partenariat", p: 3, i: 4,
+    mitig: "Pool de vétérinaires partenaires (minimum 2), contrat-cadre, vétérinaire de garde pour assurer la continuité du service (cohérent avec l'AMDEC E02).",
+    resp: "Yassine El Gherrabi (PO)",
+  },
+  {
+    id: "R10", cat: "Marché", label: "Faible adoption : propriétaires pas prêts à payer", p: 2, i: 4,
+  },
+  {
+    id: "R11", cat: "Marché", label: "Concurrence déjà positionnée (Whistle, Tractive)", p: 4, i: 2,
+  },
+  {
+    id: "R12", cat: "Humain", label: "Départ ou indisponibilité d'un membre clé", p: 3, i: 4,
+    mitig: "Documentation tenue à jour, binôme sur chaque brique critique, absence de point de défaillance unique dans l'équipe.",
+    resp: "Yassine El Gherrabi (PO)",
+  },
+  {
+    id: "R13", cat: "Planning", label: "Sous-estimation de la charge firmware : dérapage calendaire", p: 4, i: 3,
+    mitig: "Buffer de planning, jalons de dé-risquage placés en début de phase (cf. Gantt), revue de charge hebdomadaire pour réajuster tôt.",
+    resp: "Yassine El Gherrabi (PO) + Cyril Porez (IoT)",
+  },
+  {
+    id: "R14", cat: "Planning", label: "Retard du prototype collier (composants / impression 3D)", p: 3, i: 3,
+    mitig: "Composants commandés en avance, fournisseurs alternatifs identifiés, impression 3D internalisée pour ne pas dépendre d'un prestataire.",
+    resp: "Cyril Porez (IoT)",
+  },
 ];
 export function riskZone(score: number) {
   if (score >= 15) return "crit";
