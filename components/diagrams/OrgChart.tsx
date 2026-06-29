@@ -13,7 +13,10 @@ export default function OrgChart() {
         {OBS.map((p) => (
           <div className="obs-pole glass" key={p.name} style={{ ["--a" as string]: p.accent }}>
             <span className="obs-pole-acc" />
-            <h4>{p.name}</h4>
+            <div className="obs-pole-h">
+              <h4>{p.name}</h4>
+              <span className="obs-count">{p.members.length}</span>
+            </div>
             <p className="obs-scope">{p.scope}</p>
             <div className="obs-members">
               {p.members.map((m) => (

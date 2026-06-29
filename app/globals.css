@@ -151,7 +151,9 @@ a{color:inherit;text-decoration:none}
 .obs-poles::before{content:"";position:absolute;top:-13px;left:10%;right:10%;height:2px;background:var(--line)}
 .obs-pole{position:relative;padding:16px 15px 14px;overflow:hidden}
 .obs-pole-acc{position:absolute;top:0;left:0;right:0;height:3px;background:var(--a)}
-.obs-pole h4{margin:2px 0 6px;font-size:14px;font-weight:800}
+.obs-pole-h{display:flex;align-items:center;gap:8px;margin:2px 0 6px}
+.obs-pole-h h4{margin:0;font-size:14px;font-weight:800}
+.obs-count{margin-left:auto;flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:999px;font-size:11px;font-weight:800;color:#fff;background:color-mix(in srgb,var(--a) 22%,transparent);border:1px solid color-mix(in srgb,var(--a) 45%,transparent)}
 .obs-scope{margin:0 0 10px;font-size:11.5px;color:var(--mut);line-height:1.45}
 .obs-members{display:flex;flex-wrap:wrap;gap:6px}
 .obs-mem{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--a) 16%,transparent);border:1px solid color-mix(in srgb,var(--a) 35%,transparent);color:#fff}

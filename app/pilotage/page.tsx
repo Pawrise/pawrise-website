@@ -60,7 +60,7 @@ export default function PilotagePage() {
         <section className="panel-sect">
           <div className="ps-head">
             <h2>OBS · Organisation</h2>
-            <p>10 personnes, 5 pôles, sous le pilotage du Product Owner.</p>
+            <p>10 personnes réparties en 5 pôles de 2, sous le pilotage du Product Owner.</p>
           </div>
           <div className="ps-body">
             <OrgChart />
