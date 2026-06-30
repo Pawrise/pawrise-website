@@ -10,6 +10,14 @@ import {
   FLOWS,
   ADRS,
   KPIS,
+  COST_INTRO,
+  MODEL_CASCADE,
+  COST_PER_CONV,
+  COST_PER_CONV_NOTE,
+  COST_BREAKDOWN,
+  COST_CASCADE_SAVING,
+  COST_MONTHLY,
+  COST_SOVEREIGN,
 } from "@/lib/content/chatbot";
 
 export const metadata: Metadata = {
@@ -113,6 +121,67 @@ export default function AssistantIAPage() {
                 </ol>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Budget modèles */}
+        <section className="panel-sect">
+          <div className="ps-head">
+            <h2>Coût des modèles</h2>
+            <p>Un budget réel et maîtrisé grâce à la cascade : un modèle par nœud, le plus économique qui fait le travail.</p>
+          </div>
+          <div className="glass ps-body">
+            <p className="ps-text" style={{ marginTop: 0 }}>{COST_INTRO}</p>
+            <div className="raci-scroll">
+              <table className="cov-table">
+                <thead>
+                  <tr><th>Nœud</th><th>Modèle</th><th>Prix (entrée / sortie, 1M tokens)</th></tr>
+                </thead>
+                <tbody>
+                  {MODEL_CASCADE.map((r) => (
+                    <tr key={r.node}>
+                      <td className="cov-dom">{r.node}</td>
+                      <td>{r.model}</td>
+                      <td className="cov-bk">{r.price}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="ps-grid2" style={{ marginTop: 16 }}>
+            <div className="glass ps-body">
+              <h3 className="ps-sub">Coût par conversation</h3>
+              <p className="cb-cost-big">{COST_PER_CONV}</p>
+              <ul className="ql-list" style={{ marginTop: 4 }}>
+                {COST_BREAKDOWN.map((b) => (
+                  <li key={b.poste}><b>{b.share}</b> · {b.poste}</li>
+                ))}
+              </ul>
+              <p className="ps-text" style={{ fontSize: 12 }}>{COST_PER_CONV_NOTE}</p>
+              <p className="ql-golden" style={{ marginTop: 12 }}>{COST_CASCADE_SAVING}</p>
+            </div>
+            <div className="glass ps-body">
+              <h3 className="ps-sub">Projection mensuelle</h3>
+              <div className="raci-scroll">
+                <table className="cov-table">
+                  <thead>
+                    <tr><th>Stade</th><th>Volume</th><th>Coût IA</th></tr>
+                  </thead>
+                  <tbody>
+                    {COST_MONTHLY.map((t) => (
+                      <tr key={t.stade}>
+                        <td className="cov-dom">{t.stade}</td>
+                        <td>{t.volume}</td>
+                        <td className="cov-bk">{t.cout}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="ps-text" style={{ fontSize: 12, marginTop: 12 }}>{COST_SOVEREIGN}</p>
+            </div>
           </div>
         </section>
 

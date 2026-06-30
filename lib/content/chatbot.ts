@@ -84,6 +84,45 @@ export const ADRS = [
   { id: "ADR-010", t: "Audit trail append-only", d: "Log immuable de chaque conversation (input, prompts, retrieval, output, décisions guardrail). Rétention 5 ans, base de la défense juridique et de l'eval." },
 ];
 
+// Budget modèles · cascade « un modèle par nœud ». Prix publics 2026 (par 1M de
+// tokens sauf reranking). Azure applique +10 % sur les endpoints data-residency UE
+// pour les modèles sortis après mars 2026.
+export const COST_INTRO =
+  "Chaque nœud du pipeline utilise le modèle le moins cher qui fait le travail : les classifications et reformulations passent par un petit modèle, seul le nœud de génération mobilise le gros modèle. C'est la cascade : elle concentre le coût là où il crée de la valeur.";
+
+export type CascadeRow = { node: string; model: string; price: string };
+export const MODEL_CASCADE: CascadeRow[] = [
+  { node: "1 · Circuit Breaker", model: "mini · GPT-5-nano", price: "0,05 $ / 0,40 $" },
+  { node: "2 · Query Understanding", model: "mini · GPT-5-nano", price: "0,05 $ / 0,40 $" },
+  { node: "3 · Retrieval", model: "embeddings text-embedding-3-large + BM25", price: "0,13 $ / 0" },
+  { node: "4 · Relevance Filter", model: "Cohere Rerank 3.5 multilingue", price: "2 $ / 1 000 recherches" },
+  { node: "5 · Customization (génération)", model: "principal · GPT-5 (ou GPT-4.1)", price: "~1,25 à 2,50 $ / ~10 $" },
+  { node: "6 · Post-Guardrail", model: "mini · GPT-5-nano", price: "0,05 $ / 0,40 $" },
+];
+
+// Coût par conversation (2-3 échanges) et répartition par poste.
+export const COST_PER_CONV = "~0,03 à 0,05 €";
+export const COST_PER_CONV_NOTE =
+  "Calcul à partir des prix publics et d'environ 3 000 tokens cumulés sur les trois nœuds mini, 4 500 tokens d'entrée et 500 de sortie sur le nœud principal, et un reranking. Ce coût valide la cible de la spec (« moins de 0,05 € par conversation ») avec des chiffres réels.";
+export const COST_BREAKDOWN = [
+  { poste: "Génération (nœud principal)", share: "~85 %" },
+  { poste: "Reranking (Cohere)", share: "~10 %" },
+  { poste: "3 nœuds mini (classification, reformulation, garde-fou)", share: "~2 %" },
+  { poste: "Embeddings", share: "< 0,5 %" },
+];
+export const COST_CASCADE_SAVING =
+  "La cascade économise environ 30 à 35 % par rapport à un pipeline qui ferait tout passer par le gros modèle.";
+
+export type CostTier = { stade: string; volume: string; cout: string };
+export const COST_MONTHLY: CostTier[] = [
+  { stade: "Démo / soutenance", volume: "~300 conversations / mois", cout: "~12 à 15 € / mois" },
+  { stade: "Premiers utilisateurs (~1 000)", volume: "~5 000 conversations / mois", cout: "~200 à 250 € / mois" },
+  { stade: "Scale (~10 000 utilisateurs)", volume: "~50 000 conversations / mois", cout: "~2 000 à 2 500 € / mois" },
+];
+
+export const COST_SOVEREIGN =
+  "Alternative souveraine (prévue par l'ADR-002) : bascule vers Mistral (entreprise française, hébergement UE, modèles open-weight) via l'interface LLMProvider, sans toucher au pipeline. Mistral Small 3 (0,10 $ / 0,30 $) en petit modèle et Mistral Large 2 (2 $ / 6 $) en principal donnent un coût équivalent avec des données 100 % en Union européenne.";
+
 // KPIs cibles (MVP).
 export const KPIS = [
   { k: "0", v: "faux diagnostic sur le golden set (conformité)" },

@@ -576,6 +576,7 @@ a{color:inherit;text-decoration:none}
 .cb-kpi b{display:block;font-size:20px;font-weight:900;letter-spacing:-.02em;background:linear-gradient(100deg,var(--lime),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
 .cb-kpi span{font-size:11.5px;color:var(--mut);line-height:1.35;display:block;margin-top:3px}
 @media(max-width:600px){.cb-kpis{grid-template-columns:1fr}}
+.cb-cost-big{margin:2px 0 6px;font-size:30px;font-weight:900;letter-spacing:-.02em;background:linear-gradient(100deg,var(--lime),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* ===== Fond animé (aurora DA) — derrière le contenu, sous le grain ===== */
 .backdrop{position:absolute;top:0;left:0;right:0;height:100vh;z-index:0;overflow:hidden;pointer-events:none;
