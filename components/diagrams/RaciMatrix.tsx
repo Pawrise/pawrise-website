@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { RACI_POLES, RACI_ROWS, type Raci } from "@/lib/content/pilotage";
+import { RACI_POLES, RACI_ROWS, RACI_ROWS_STRICT, type Raci } from "@/lib/content/pilotage";
 
 // Définitions reprises de la page RACI Confluence.
 const LEGEND: { k: Exclude<Raci, "" | "AR">; label: string; def: string }[] = [
@@ -13,9 +13,19 @@ const LEGEND: { k: Exclude<Raci, "" | "AR">; label: string; def: string }[] = [
 
 export default function RaciMatrix() {
   const [col, setCol] = useState<number | null>(null);
+  const [mode, setMode] = useState<"standard" | "strict">("standard");
+  const rows = mode === "standard" ? RACI_ROWS : RACI_ROWS_STRICT;
 
   return (
     <div className="raci">
+      <div className="efilter raci-switch">
+        <button type="button" className={mode === "standard" ? "on" : ""} onClick={() => setMode("standard")}>
+          Standard (A distribué)
+        </button>
+        <button type="button" className={mode === "strict" ? "on" : ""} onClick={() => setMode("strict")}>
+          Format suiveur (1 R / 1 A / 1 C)
+        </button>
+      </div>
       <div className="raci-scroll">
         <table className="raci-table">
           <thead>
@@ -34,7 +44,7 @@ export default function RaciMatrix() {
             </tr>
           </thead>
           <tbody>
-            {RACI_ROWS.map((row) => (
+            {rows.map((row) => (
               <tr key={row.activite}>
                 <td className="raci-act">{row.activite}</td>
                 {row.cells.map((c, i) => (
@@ -63,14 +73,24 @@ export default function RaciMatrix() {
           </span>
         ))}
       </div>
-      <p className="raci-note">
-        <b>Règle appliquée :</b> exactement un garant (A) par activité et au moins un responsable (R).
-        Le A est distribué : chaque pôle est garant de son propre livrable, le Product Owner reste
-        garant du cadrage et de la gouvernance (RGPD, qualité). <b>A/R</b>{" "}
-        signale un pôle à la fois responsable et garant. Les 6 pôles recoupent
-        l&apos;organisation (OBS) ci-dessus : Fullstack
-        (backend &amp; portail), IoT (collier), Design/Mobile (app), IA/Data (Care Engine),
-        Cloud/Ops (infra).
+      {mode === "standard" ? (
+        <p className="raci-note">
+          <b>Version standard :</b> exactement un garant (A) par activité et au moins un responsable (R),
+          C et I libres. Le A est distribué : chaque pôle est garant de son propre livrable, le Product
+          Owner reste garant du cadrage et de la gouvernance (RGPD, qualité). <b>A/R</b>{" "}
+          signale un pôle à la fois responsable et garant. C&apos;est la lecture conforme au standard RACI.
+        </p>
+      ) : (
+        <p className="raci-note">
+          <b>Version format suiveur :</b> exactement un R, un A et un C par activité, tout le reste en I.
+          Plus stricte que le standard (qui autorise plusieurs R et C), elle reste valide : un garant (A)
+          unique et au moins un responsable (R) par activité. Le Product Owner est l&apos;approbateur unique,
+          chaque pôle responsable de son livrable.
+        </p>
+      )}
+      <p className="raci-note" style={{ marginTop: 8 }}>
+        Les 6 pôles recoupent l&apos;organisation (OBS) ci-dessus : Fullstack (backend &amp; portail),
+        IoT (collier), Design/Mobile (app), IA/Data (Care Engine), Cloud/Ops (infra).
       </p>
     </div>
   );

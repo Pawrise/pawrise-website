@@ -151,6 +151,21 @@ export const RACI_ROWS: { activite: string; cells: Raci[] }[] = [
   { activite: "Tests & qualité", cells: ["A", "R", "R", "R", "R", "R"] },
 ];
 
+// Variante stricte demandée en suivi : exactement un R, un A et un C par activité,
+// tout le reste en I. Plus stricte que le standard, mais reste valide (un A unique
+// par ligne, au moins un R). Le PO reste l'approbateur unique.
+export const RACI_ROWS_STRICT: { activite: string; cells: Raci[] }[] = [
+  { activite: "Cadrage & spécifications", cells: ["A", "R", "I", "I", "C", "I"] },
+  { activite: "API & ingestion données", cells: ["A", "R", "I", "I", "I", "C"] },
+  { activite: "Collier & firmware", cells: ["A", "C", "R", "I", "I", "I"] },
+  { activite: "Application mobile", cells: ["A", "C", "I", "R", "I", "I"] },
+  { activite: "Moteur IA / Care Engine", cells: ["A", "C", "I", "I", "R", "I"] },
+  { activite: "Portail vétérinaire", cells: ["A", "R", "I", "I", "C", "I"] },
+  { activite: "Infra / CI-CD / monitoring", cells: ["A", "C", "I", "I", "I", "R"] },
+  { activite: "RGPD & sécurité données", cells: ["A", "R", "I", "I", "I", "C"] },
+  { activite: "Tests & qualité", cells: ["A", "R", "I", "I", "C", "I"] },
+];
+
 /* ----------------------------------------------------------- PLANNING ---- */
 // Frise Déc 2025 → Juil 2027 (20 mois, index 0..19)
 export const MONTHS = [
