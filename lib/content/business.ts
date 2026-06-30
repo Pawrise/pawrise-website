@@ -156,7 +156,7 @@ export const ECON = {
     "Abonnement : 9,90 €/mois (ordre de grandeur du marché : Tractive, Weenect).",
     "Marge contributive sur l'abonnement (après cloud, API LLM et pool vété).",
     "Durée de vie client = 1 / churn mensuel ; LTV = abo × durée de vie × marge.",
-    "Le collier est vendu proche de son coût (BOM ≈ 50 €) : la rentabilité vient de l'abonnement récurrent.",
+    "Le collier est vendu proche de son coût (BOM ≈ 56 €) : la rentabilité vient de l'abonnement récurrent.",
   ],
   rows: [
     { metric: "Marge contributive (abo)", opt: "78 %", base: "69 %", pess: "35 %" },
@@ -173,22 +173,26 @@ export const ECON = {
 
 /* ------------------------------------------- BUDGET PRÉVISIONNEL (HW) --- */
 // BOM prototype collier · Option D recommandée (circuit sur mesure LTE).
+// Composants alignés sur la page IoT (sélection détaillée du document hardware).
 export const BOM = [
-  { c: "ESP32 Dev Kit (MCU)", p: "≈ 11 €" },
-  { c: "Module Quectel BG95-M2 (LTE)", p: "≈ 17 €" },
-  { c: "Accéléromètre GY-291", p: "≈ 4 €" },
-  { c: "Batterie LiPo 3,7 V 1000 mAh", p: "≈ 11 €" },
+  { c: "ESP32-S3 (MCU)", p: "≈ 9 €" },
+  { c: "SIM7000E (modem LTE-M + GPS intégré)", p: "≈ 16 €" },
+  { c: "IMU LSM6DSOX (accéléro + gyro)", p: "≈ 4 €" },
+  { c: "Capteur température TMP117", p: "≈ 4 €" },
+  { c: "Capteur cardiaque MAX30102 (option)", p: "≈ 3 €" },
+  { c: "Mémoire flash 128 Mo (SPI)", p: "≈ 1,50 €" },
+  { c: "Batterie LiPo 2000 mAh + PMU", p: "≈ 12 €" },
   { c: "Boîtier étanche IP67", p: "≈ 2 €" },
-  { c: "Carte SIM Hologram", p: "2,95 €" },
   { c: "LED NeoPixel", p: "≈ 1 €" },
   { c: "PCB prototype", p: "≈ 0,50 €" },
+  { c: "Carte SIM IoT 1NCE", p: "≈ 3 €" },
 ];
-export const BOM_TOTAL = "≈ 50 € / unité";
+export const BOM_TOTAL = "≈ 56 € / unité";
 export const BOM_OPTIONS = [
-  { o: "Option A · 2G, sans soudure", p: "≈ 67 €/u" },
-  { o: "Option B · LTE, sans soudure", p: "≈ 181 €/u" },
-  { o: "Option C · 2G, à souder", p: "≈ 55 €/u" },
-  { o: "Option D · LTE sur mesure (retenue)", p: "≈ 50 €/u" },
+  { o: "Option A · 2G, sans soudure", p: "≈ 73 €/u" },
+  { o: "Option B · LTE, sans soudure", p: "≈ 187 €/u" },
+  { o: "Option C · 2G, à souder", p: "≈ 61 €/u" },
+  { o: "Option D · LTE sur mesure (retenue)", p: "≈ 56 €/u" },
 ];
 export const BUDGET_NOTE =
   "Kit de développement initial : ≈ 106–111 € (investissement unique de prototypage). Côté logiciel, le projet s'appuie sur des briques open source et un hébergement souverain ; les coûts d'exploitation ci-dessous restent maîtrisés et passent à l'échelle avec les abonnements.";
