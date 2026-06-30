@@ -167,59 +167,126 @@ export const RACI_ROWS_STRICT: { activite: string; cells: Raci[] }[] = [
 ];
 
 /* ----------------------------------------------------------- PLANNING ---- */
-// Frise Déc 2025 → Juil 2027 (20 mois, index 0..19)
+// Frise Déc 2025 → Juil 2027 (20 mois, index 0..19). Déc 25 = 0, Déc 26 = 12, Juil 27 = 19.
 export const MONTHS = [
   "Déc 25", "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep",
   "Oct", "Nov", "Déc 26", "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil 27",
 ];
+// Bandeau d'années (lève l'ambiguïté Jan 26 / Jan 27) : start/end sont des index de mois.
+export const YEARS = [
+  { label: "2025", start: 0, end: 0 },
+  { label: "2026", start: 1, end: 12 },
+  { label: "2027", start: 13, end: 19 },
+];
+// Libellé de date depuis un index de mois (ex. 0 → "Déc 2025", 7 → "Juil 2026").
+const MONTH_FULL = ["Déc", "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc", "Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil"];
+export function monthDate(i: number) {
+  const y = i === 0 ? 2025 : i <= 12 ? 2026 : 2027;
+  return `${MONTH_FULL[i]} ${y}`;
+}
+export function rangeLabel(start: number, end: number) {
+  return `${monthDate(start)} → ${monthDate(end)}`;
+}
+// Index du mois courant sur la frise (clampé 0..19). Calculé côté client.
+export function nowIndex(d: Date) {
+  const idx = (d.getFullYear() - 2025) * 12 + d.getMonth() - 11; // déc 2025 = 0
+  return Math.max(0, Math.min(MONTHS.length - 1, idx));
+}
+
 // Une barre peut être découpée en segments : "derisk" (simulateur / POC, on dé-risque
-// d'abord, à faible coût) puis "build" (engagement du coûteux). Le détail relie enfin
-// chaque barre à son contenu, son livrable et sa dépendance (cf. panneau au clic).
+// d'abord, à faible coût) puis "build" (engagement du coûteux). `critical` marque les
+// tâches du chemin critique (Infra → Backend → IA → Portail → Intégration). Le détail
+// relie chaque tâche à son contenu, son livrable et sa dépendance (panneau au clic).
 export type Seg = { label: string; start: number; end: number; kind: "derisk" | "build" };
 export type Bar = {
-  label: string; team: string; start: number; end: number; accent: string;
-  segs?: Seg[];
+  id: string; phase: string; label: string; team: string;
+  start: number; end: number; accent: string;
+  segs?: Seg[]; critical?: boolean;
   detail: { contenu: string[]; livrable: string; depend: string };
 };
+// Les phases du planning (pour les séparateurs et la vue groupée).
+export const GANTT_PHASES = [
+  { key: "Conception", periode: "Déc 2025 → Juin 2026" },
+  { key: "Développement", periode: "Juil 2026 → Mai 2027" },
+  { key: "Intégration", periode: "Mai → Juil 2027" },
+];
 export const GANTT: Bar[] = [
+  // ---- Phase 1 · Conception ----
   {
-    label: "Conception / cadrage", team: "Toute l'équipe", start: 0, end: 6, accent: "var(--ai)",
+    id: "c1", phase: "Conception", label: "Cadrage & spécifications", team: "Toute l'équipe", start: 0, end: 3, accent: "var(--ai)",
     detail: {
-      contenu: ["Cadrage : WBS, OBS, RACI, SWOT, PESTEL, AMDEC, Risk Map", "Architecture, specs, benchmarks", "Étude de marché, positionnement, personas", "Design system, wireframes", "POCs : simulateur collier, RAG / Chat IA"],
-      livrable: "Tous les livrables prêts pour la keynote (juin 2026).",
+      contenu: ["WBS, OBS, RACI", "SWOT, PESTEL, AMDEC, Risk Map", "Spécifications fonctionnelles (FR/NFR)"],
+      livrable: "Dossier de cadrage complet.",
       depend: "Aucune : socle de départ pour tout le reste.",
     },
   },
   {
-    label: "Infrastructure", team: "Oumar", start: 7, end: 9, accent: "var(--data)",
+    id: "c2", phase: "Conception", label: "Marché, personas & design", team: "Adam · Elarif", start: 1, end: 5, accent: "var(--cli)",
     detail: {
-      contenu: ["Cloud, cluster Kubernetes", "CI/CD (GitOps)", "Monitoring / observabilité"],
+      contenu: ["Étude de marché, positionnement océan bleu", "Personas propriétaire et vétérinaire", "Design system, wireframes"],
+      livrable: "Étude de marché + maquettes validées.",
+      depend: "S'appuie sur le cadrage initial.",
+    },
+  },
+  {
+    id: "c3", phase: "Conception", label: "Architecture & benchmarks", team: "Pôles techniques", start: 2, end: 5, accent: "var(--svc)",
+    detail: {
+      contenu: ["Architecture système (3 zones)", "Benchmarks backend, BDD, LLM, mobile, cloud", "Choix techniques justifiés (ADR)"],
+      livrable: "Architecture cible et stack arrêtées.",
+      depend: "Découle du cadrage et de l'étude de marché.",
+    },
+  },
+  {
+    id: "c4", phase: "Conception", label: "POCs (simulateur, RAG)", team: "Nino · Yassine · Cyril", start: 4, end: 6, accent: "var(--edge)",
+    detail: {
+      contenu: ["Simulateur de capteurs collier", "POC RAG / pipeline LangGraph", "Validation de faisabilité avant la keynote"],
+      livrable: "POCs prêts pour la keynote (juin 2026).",
+      depend: "Dé-risque l'IoT et l'IA avant le développement.",
+    },
+  },
+  // ---- Phase 2 · Développement ----
+  {
+    id: "d1", phase: "Développement", label: "Infrastructure", team: "Oumar · Abderrahmane", start: 7, end: 9, accent: "var(--data)", critical: true,
+    detail: {
+      contenu: ["Cluster Kubernetes (Hetzner, Terraform)", "CI/CD GitOps (Argo CD)", "Observabilité (Prometheus / Loki / Tempo / Grafana)"],
       livrable: "Socle de déploiement opérationnel (sept. 2026).",
-      depend: "Démarre dès juillet : prérequis du déploiement backend.",
+      depend: "Prérequis du déploiement backend : démarre dès juillet.",
     },
   },
   {
-    label: "Backend", team: "Hamid · Aaditya · Elarif", start: 7, end: 13, accent: "var(--svc)",
+    id: "d2", phase: "Développement", label: "Backend & API", team: "Hamid · Aaditya · Elarif", start: 7, end: 13, accent: "var(--svc)", critical: true,
     detail: {
-      contenu: ["API (Rust), base de données", "Authentification (OIDC)", "Ingestion des données collier"],
+      contenu: ["API et services métier (Rust)", "Authentification (OIDC), base de données", "Ingestion des données collier"],
       livrable: "Backend complet et documenté (janv. 2027).",
-      depend: "Avance en parallèle ; se déploie sur l'infra dès qu'elle est prête.",
+      depend: "Se déploie sur l'infrastructure dès qu'elle est prête.",
     },
   },
   {
-    label: "Collier IoT", team: "Cyril · Ibrahim", start: 7, end: 16, accent: "var(--edge)",
+    id: "d3", phase: "Développement", label: "Collier IoT", team: "Cyril · Ibrahim", start: 7, end: 16, accent: "var(--edge)",
     segs: [
       { label: "Simulateur", start: 7, end: 11, kind: "derisk" },
       { label: "Hardware", start: 12, end: 16, kind: "build" },
     ],
     detail: {
-      contenu: ["Simulateur de capteurs (dérisque sans matériel)", "Firmware embarqué", "Carte électronique, boîtier, transmission"],
+      contenu: ["Firmware embarqué (Rust)", "Carte électronique, boîtier IP67", "Transmission MQTT / LTE-M"],
       livrable: "Simulateur (nov. 2026) puis prototype matériel (avr. 2027).",
       depend: "On valide tout sur simulateur avant d'engager le hardware coûteux.",
     },
   },
   {
-    label: "App Mobile", team: "Adam · Elarif", start: 7, end: 17, accent: "var(--cli)",
+    id: "d4", phase: "Développement", label: "Moteur IA + Data", team: "Nino · Yassine", start: 7, end: 16, accent: "var(--ai)", critical: true,
+    segs: [
+      { label: "POCs", start: 7, end: 11, kind: "derisk" },
+      { label: "Intégration", start: 12, end: 16, kind: "build" },
+    ],
+    detail: {
+      contenu: ["Pipeline LangGraph 6 nœuds, garde-fous", "RAG hybride sur corpus vétérinaire", "Intégration au backend et aux données réelles"],
+      livrable: "Care Engine intégré au MVP (avr. 2027).",
+      depend: "S'entraîne sur les données du simulateur, consomme les API backend.",
+    },
+  },
+  {
+    id: "d5", phase: "Développement", label: "App Mobile", team: "Adam · Elarif", start: 7, end: 17, accent: "var(--cli)",
     detail: {
       contenu: ["Auth, dashboard bien-être", "Carte GPS, zones de sécurité", "Chat IA, notifications"],
       livrable: "App propriétaire complète (mai 2027).",
@@ -227,27 +294,16 @@ export const GANTT: Bar[] = [
     },
   },
   {
-    label: "Moteur IA + Data", team: "Nino · Yassine", start: 7, end: 16, accent: "var(--ai)",
-    segs: [
-      { label: "POCs", start: 7, end: 11, kind: "derisk" },
-      { label: "Intégration", start: 12, end: 16, kind: "build" },
-    ],
+    id: "d6", phase: "Développement", label: "Portail Véto", team: "Hamid · Aaditya · Elarif", start: 14, end: 17, accent: "var(--svc)", critical: true,
     detail: {
-      contenu: ["POCs RAG / pipeline LangGraph (dérisque l'IA tôt)", "Garde-fous non-diagnostiques", "Intégration au backend et aux données réelles"],
-      livrable: "Care Engine intégré au MVP (avr. 2027).",
-      depend: "POCs autonomes ; l'intégration consomme les données du backend.",
-    },
-  },
-  {
-    label: "Portail Véto", team: "Hamid · Aaditya · Elarif", start: 14, end: 17, accent: "var(--svc)",
-    detail: {
-      contenu: ["Dashboard vétérinaire, timeline", "Escalade et handoff", "Rapports / PDF normalisé"],
+      contenu: ["Dashboard vétérinaire, timeline patient", "Escalade et handoff structuré", "Rapports / PDF normalisé"],
       livrable: "Portail vétérinaire livré (mai 2027).",
-      depend: "Seul composant vraiment dépendant : démarre en février, une fois le moteur IA et le backend assez avancés.",
+      depend: "Démarre en février, une fois le moteur IA et le backend assez avancés.",
     },
   },
+  // ---- Phase 3 · Intégration ----
   {
-    label: "Intégration & tests", team: "Toute l'équipe", start: 17, end: 19, accent: "var(--rose)",
+    id: "i1", phase: "Intégration", label: "Intégration & tests E2E", team: "Toute l'équipe", start: 17, end: 19, accent: "var(--rose)", critical: true,
     detail: {
       contenu: ["Tests E2E (tous les composants connectés)", "Bêta interne, tests utilisateurs", "Documentation technique et guide"],
       livrable: "Produit assemblé, testé et stabilisé (juil. 2027).",
@@ -255,14 +311,16 @@ export const GANTT: Bar[] = [
     },
   },
 ];
-export const MILESTONES: { idx: number; label: string }[] = [
-  { idx: 6, label: "🎤 Keynote" },
-  { idx: 9, label: "Infra op." },
-  { idx: 11, label: "Simulateur" },
-  { idx: 13, label: "Backend complet" },
-  { idx: 16, label: "MVP intégré" },
-  { idx: 17, label: "Portail Véto" },
-  { idx: 19, label: "🎓 Fin projet" },
+// `lvl` étage les libellés (0 = sous l'axe, 1 = plus bas) pour éviter le chevauchement
+// des jalons proches (ex. MVP intégré idx 16 / Portail Véto idx 17).
+export const MILESTONES: { idx: number; label: string; lvl: 0 | 1 }[] = [
+  { idx: 6, label: "🎤 Keynote", lvl: 0 },
+  { idx: 9, label: "Infra op.", lvl: 1 },
+  { idx: 11, label: "Simulateur", lvl: 0 },
+  { idx: 13, label: "Backend complet", lvl: 1 },
+  { idx: 16, label: "MVP intégré", lvl: 0 },
+  { idx: 17, label: "Portail Véto", lvl: 1 },
+  { idx: 19, label: "🎓 Fin projet", lvl: 0 },
 ];
 
 // Pourquoi on peut paralléliser : peu de dépendances réelles entre composants.

@@ -191,30 +191,51 @@ a{color:inherit;text-decoration:none}
 
 /* Gantt */
 .gantt-scroll{overflow-x:auto}
-.gantt{min-width:760px;font-size:12px}
-.gantt-row{display:grid;grid-template-columns:170px 1fr;align-items:center;gap:10px;min-height:34px}
-.gantt-side{text-align:right;padding-right:4px}
-.gantt-side b{display:block;font-size:12.5px;font-weight:700}
-.gantt-side small{display:block;font-size:10.5px;color:var(--faint)}
+.gantt{min-width:880px;font-size:12px}
+.gantt-row{display:grid;grid-template-columns:184px 1fr;align-items:center;gap:10px;min-height:40px}
+.gantt-side{text-align:right;padding-right:8px;position:sticky;left:0;z-index:3;background:linear-gradient(90deg,rgba(8,10,24,.96) 80%,transparent)}
+.gantt-side b{display:flex;justify-content:flex-end;align-items:center;gap:6px;font-size:12.5px;font-weight:700}
+.gantt-side small{display:block;font-size:10px;color:var(--faint)}
+.gantt-side .gantt-dates{color:var(--mut);font-variant-numeric:tabular-nums;margin-top:1px}
 .gantt-track{display:grid;grid-template-columns:repeat(var(--n),1fr);align-items:center;position:relative;border-left:1px solid var(--line);height:100%}
 .gantt-head .gantt-track{height:auto}
-.gantt-mcol{font-size:9.5px;color:var(--faint);text-align:center;padding:4px 0;border-right:1px solid rgba(255,255,255,.05);white-space:nowrap}
-.gantt-bar{height:18px;border-radius:6px;opacity:.9;box-shadow:0 1px 6px rgba(0,0,0,.3)}
-.gantt-miles{margin-top:6px;border-top:1px dashed var(--line);padding-top:8px;align-items:start}
-.gantt-mile{grid-row:1;display:flex;flex-direction:column;align-items:center;justify-self:center}
+/* bandeau années */
+.gantt-years{border-left:1px solid var(--line)}
+.gantt-ycol{font-size:11px;font-weight:800;color:var(--ink);letter-spacing:.05em;text-align:center;padding:3px 0;border-right:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);border-radius:6px 6px 0 0}
+.gantt-mcol{font-size:11px;color:var(--mut);text-align:center;padding:4px 0;border-right:1px solid rgba(255,255,255,.05);white-space:nowrap}
+/* quadrillage vertical mensuel (fond de chaque ligne) */
+.gantt-grid{grid-row:1;border-right:1px solid rgba(255,255,255,.045);height:100%;pointer-events:none}
+/* repère aujourd'hui */
+.gantt-now{grid-row:1;justify-self:center;position:relative}
+.gantt-now-dot{display:block;width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px rgba(211,252,114,.8)}
+.gantt-nowline{grid-row:1;justify-self:center;width:2px;height:100%;background:linear-gradient(var(--lime),rgba(211,252,114,.25));opacity:.55;pointer-events:none;z-index:1}
+/* séparateur de phase */
+.gantt-phase{display:flex;align-items:baseline;gap:10px;margin:14px 0 4px;padding-left:2px}
+.gantt-phase-name{font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--lime)}
+.gantt-phase-per{font-size:10.5px;color:var(--faint)}
+.gantt-bar{position:relative;z-index:2;height:20px;border-radius:6px;opacity:.92;box-shadow:0 1px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.gantt-barlab{font-size:9px;font-weight:800;color:#0a0922;white-space:nowrap;letter-spacing:.02em;padding:0 6px}
+.gantt-miles{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;align-items:start;min-height:64px}
+.gantt-mile{grid-row:1;display:flex;flex-direction:column;align-items:center;justify-self:center;z-index:2}
+.gantt-mile.lvl-1{margin-top:30px}
 .gantt-diamond{width:11px;height:11px;background:var(--rose);transform:rotate(45deg);border-radius:2px;box-shadow:0 0 8px rgba(251,113,133,.6)}
-.gantt-mlabel{font-size:9px;color:var(--mut);margin-top:5px;white-space:nowrap;font-weight:600}
+.gantt-mlabel{font-size:9.5px;color:var(--mut);margin-top:5px;white-space:nowrap;font-weight:600;text-align:center}
 /* lignes cliquables */
-.gantt-rowbtn{width:100%;background:none;border:0;font:inherit;color:inherit;cursor:pointer;border-radius:8px;padding:2px 0;transition:background .15s}
+.gantt-rowbtn{width:100%;background:none;border:0;font:inherit;color:inherit;cursor:pointer;border-radius:8px;padding:3px 0;transition:background .15s;display:grid;grid-template-columns:184px 1fr;align-items:center;gap:10px;min-height:40px}
 .gantt-rowbtn:hover{background:rgba(255,255,255,.04)}
+.gantt-rowbtn:hover .gantt-side,.gantt-rowbtn.on .gantt-side{background:linear-gradient(90deg,rgba(20,22,40,.97) 80%,transparent)}
 .gantt-rowbtn.on{background:rgba(211,252,114,.08)}
 .gantt-rowbtn .gantt-side{text-align:right}
 .gantt-rowbtn .gantt-bar{transition:transform .15s,box-shadow .15s}
-.gantt-rowbtn:hover .gantt-bar{transform:scaleY(1.12)}
+.gantt-rowbtn:hover .gantt-bar{transform:scaleY(1.1)}
 .gantt-rowbtn.on .gantt-bar{box-shadow:0 0 0 1.5px var(--lime),0 2px 10px rgba(0,0,0,.4)}
+/* chemin critique */
+.gantt-critdot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 6px rgba(211,252,114,.8);flex:0 0 auto}
+.gantt-rowbtn.crit .gantt-bar{outline:1.5px solid rgba(211,252,114,.7);outline-offset:1px}
+.gantt-rowbtn.crit .gantt-bar.seg.build{outline:1.5px solid rgba(211,252,114,.7);outline-offset:1px}
 /* segments (dérisquage clair -> engagement plein) */
-.gantt-bar.seg{display:flex;align-items:center;justify-content:center;background:var(--c);position:relative}
-.gantt-bar.seg.derisk{opacity:.42;background:repeating-linear-gradient(110deg,var(--c),var(--c) 5px,transparent 5px,transparent 9px)}
+.gantt-bar.seg{background:var(--c)}
+.gantt-bar.seg.derisk{opacity:.5;background:repeating-linear-gradient(110deg,var(--c),var(--c) 5px,transparent 5px,transparent 9px)}
 .gantt-bar.seg.build{opacity:.95}
 .gantt-seglab{font-size:8.5px;font-weight:800;color:#0a0922;white-space:nowrap;letter-spacing:.02em}
 .gantt-bar.seg.derisk .gantt-seglab{color:var(--ink)}
@@ -224,14 +245,18 @@ a{color:inherit;text-decoration:none}
 .gantt-legend i{width:22px;height:11px;border-radius:4px;display:inline-block}
 .gantt-legend .gl-derisk{background:repeating-linear-gradient(110deg,var(--lime),var(--lime) 5px,transparent 5px,transparent 9px);opacity:.6;border:1px solid rgba(211,252,114,.4)}
 .gantt-legend .gl-build{background:var(--lime);opacity:.9}
+.gantt-legend .gl-diamond{width:11px;height:11px;background:var(--rose);transform:rotate(45deg);border-radius:2px}
+.gantt-legend .gl-crit{background:transparent;outline:1.5px solid rgba(211,252,114,.7);outline-offset:-1px}
 .gantt-legend .gl-hint{margin-left:auto;color:var(--faint);font-style:italic}
 /* panneau détail */
 .gantt-detail{margin-top:14px;padding:16px 18px;animation:gd-in .25s ease}
 @keyframes gd-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.gd-head{display:flex;align-items:center;gap:10px}
+.gd-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .gd-dot{width:12px;height:12px;border-radius:4px;flex:0 0 auto}
 .gd-head h4{margin:0;font-size:15px;font-weight:800;color:#fff}
 .gd-team{font-size:11.5px;color:var(--faint)}
+.gd-when{font-size:11px;color:var(--mut);font-variant-numeric:tabular-nums;background:rgba(255,255,255,.05);border:1px solid var(--line);padding:2px 8px;border-radius:999px}
+.gd-crit{font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--lime);background:rgba(211,252,114,.12);border:1px solid rgba(211,252,114,.4);padding:2px 8px;border-radius:999px}
 .gd-x{margin-left:auto;width:26px;height:26px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);cursor:pointer;font-size:12px}
 .gd-x:hover{border-color:var(--lime)}
 .gd-body{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:12px}
