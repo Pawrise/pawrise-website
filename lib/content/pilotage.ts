@@ -136,16 +136,19 @@ export const COVERAGE: Coverage[] = [
 // "AR" = à la fois responsable et garant (cas du PO sur un livrable qu'il pilote).
 export type Raci = "R" | "A" | "AR" | "C" | "I" | "";
 export const RACI_POLES = ["Pilotage (PO)", "Fullstack", "IoT", "Design/Mobile", "IA/Data", "Cloud/Ops"];
+// A distribué : chaque pôle est garant (A) de son livrable, le PO reste garant
+// du cadrage et de la gouvernance (RGPD, qualité). Règle respectée : exactement
+// un A par ligne, au moins un R, chaque pôle au moins R une fois.
 export const RACI_ROWS: { activite: string; cells: Raci[] }[] = [
   { activite: "Cadrage & spécifications", cells: ["AR", "C", "C", "C", "C", "C"] },
-  { activite: "API & ingestion données", cells: ["A", "R", "C", "I", "C", "C"] },
-  { activite: "Collier & firmware", cells: ["A", "C", "R", "I", "C", "I"] },
-  { activite: "Application mobile", cells: ["A", "C", "I", "R", "C", "I"] },
-  { activite: "Moteur IA / Care Engine", cells: ["A", "C", "I", "C", "R", "I"] },
-  { activite: "Portail vétérinaire", cells: ["A", "R", "I", "C", "C", "I"] },
-  { activite: "Infra / CI-CD / monitoring", cells: ["A", "C", "I", "I", "I", "R"] },
+  { activite: "API & ingestion données", cells: ["C", "AR", "C", "I", "C", "C"] },
+  { activite: "Collier & firmware", cells: ["C", "C", "AR", "I", "C", "I"] },
+  { activite: "Application mobile", cells: ["C", "R", "I", "AR", "C", "I"] },
+  { activite: "Moteur IA / Care Engine", cells: ["C", "C", "I", "C", "AR", "I"] },
+  { activite: "Portail vétérinaire", cells: ["C", "AR", "I", "C", "C", "I"] },
+  { activite: "Infra / CI-CD / monitoring", cells: ["I", "C", "I", "I", "I", "AR"] },
   { activite: "RGPD & sécurité données", cells: ["A", "R", "C", "I", "C", "C"] },
-  { activite: "Tests & qualité", cells: ["A", "R", "C", "C", "C", "C"] },
+  { activite: "Tests & qualité", cells: ["A", "R", "R", "R", "R", "R"] },
 ];
 
 /* ----------------------------------------------------------- PLANNING ---- */

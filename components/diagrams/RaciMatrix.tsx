@@ -64,8 +64,11 @@ export default function RaciMatrix() {
         ))}
       </div>
       <p className="raci-note">
-        <b>A/R</b> : le Product Owner pilote le cadrage et en est le garant (responsable et
-        approbateur). Les 6 pôles recoupent l&apos;organisation (OBS) ci-dessus : Fullstack
+        <b>Règle appliquée :</b> exactement un garant (A) par activité et au moins un responsable (R).
+        Le A est distribué : chaque pôle est garant de son propre livrable, le Product Owner reste
+        garant du cadrage et de la gouvernance (RGPD, qualité). <b>A/R</b>{" "}
+        signale un pôle à la fois responsable et garant. Les 6 pôles recoupent
+        l&apos;organisation (OBS) ci-dessus : Fullstack
         (backend &amp; portail), IoT (collier), Design/Mobile (app), IA/Data (Care Engine),
         Cloud/Ops (infra).
       </p>
