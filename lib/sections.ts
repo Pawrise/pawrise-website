@@ -36,6 +36,19 @@ export const SECTIONS: Section[] = [
     ],
   },
   {
+    slug: "cloud",
+    title: "Cloud & Infra",
+    tag: "L'hébergement",
+    desc: "Infrastructure souveraine et maîtrisée : Hetzner auto-géré via Terraform, GitOps Argo CD, stratégie de scale et coût annuel.",
+    accent: "#4aa8ff",
+    blocks: [
+      { title: "Choix d'hébergement", desc: "Bare Metal vs VPS vs cloud managé : Hetzner ARM auto-géré, justifié." },
+      { title: "Stack IaC / GitOps", desc: "Terraform, Kubernetes, Argo CD, Helm, SOPS, observabilité." },
+      { title: "Stratégie de scale", desc: "Hetzner maintenant, Scaleway Kapsule (managé EU) au scale." },
+      { title: "Maîtrise des coûts", desc: "Environnements éphémères et projection de coût annuel." },
+    ],
+  },
+  {
     slug: "assistant-ia",
     title: "Assistant IA",
     tag: "Le différenciateur",
