@@ -88,4 +88,5 @@ export const SHELL = `
   <div class="searchres" id="searchres"></div>
 </div></div>
 <button class="presentstop" id="presentstop">⏹ Quitter la présentation</button>
+<a class="archcue" href="#archi-choix">Choix techniques justifiés ↓</a>
 `;

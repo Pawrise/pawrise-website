@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import "./cockpit.css";
 import { SHELL } from "./shell";
 import { initCockpit } from "./cockpitRuntime";
+import { ARCHI_DECISIONS_INTRO, ARCHI_DECISIONS } from "@/lib/content/architecture";
 
 // Le cockpit d'architecture est désormais une vraie route du site (plus d'iframe).
 // On réutilise tel quel le CSS, le shell HTML et le moteur JS d'origine : le rendu
@@ -48,17 +49,36 @@ export default function CockpitClient() {
       <div className="cockpit-mobile">
         <div className="cmob-card glass">
           <span className="cmob-ic">🗺️</span>
-          <h2>L&apos;architecture, en grand</h2>
+          <h2>La carte interactive est sur desktop</h2>
           <p>
-            Cette section est une <b>carte interactive</b> : on y explore les briques du
-            produit, les flux de données et les parcours, en zoomant et en cliquant. Pensée
-            pour les grands écrans, elle se découvre bien mieux sur un <b>ordinateur</b>.
+            Le <b>cockpit d&apos;architecture</b> (briques, flux et parcours, à explorer en
+            zoomant et en cliquant) est pensé pour les grands écrans. Les <b>choix techniques
+            justifiés</b> ci-dessous, eux, se lisent partout.
           </p>
-          <p className="cmob-sub">En attendant, le reste du projet est à explorer juste ici.</p>
-          <a href="/" className="cmob-btn">Retour à l&apos;accueil</a>
         </div>
       </div>
       <div className="cockpit-root" dangerouslySetInnerHTML={{ __html: SHELL }} />
+
+      {/* Option A : justifications consolidées sous le cockpit (et contenu mobile). */}
+      <section id="archi-choix" className="arch-deco">
+        <div className="wrap sect-stack">
+          <div className="ps-head">
+            <h2>Choix techniques justifiés</h2>
+            <p>{ARCHI_DECISIONS_INTRO}</p>
+          </div>
+          <div className="archd-grid">
+            {ARCHI_DECISIONS.map((d) => (
+              <div className="archd glass" key={d.titre}>
+                <h3>{d.titre}</h3>
+                <div className="archd-row"><span>Besoin</span><p>{d.besoin}</p></div>
+                <div className="archd-row"><span>Alternatives écartées</span><p>{d.alternatives}</p></div>
+                <div className="archd-row"><span>Décision</span><p>{d.decision}</p></div>
+                <div className="archd-row archd-to"><span>Trade-off assumé</span><p>{d.tradeoff}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

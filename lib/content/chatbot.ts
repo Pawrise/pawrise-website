@@ -16,7 +16,7 @@ export const PIPELINE: Node[] = [
   { n: 1, name: "Circuit Breaker", role: "Classifie l'intention (abus, jailbreak, hors-scope, demande de diagnostic, clean). Si non-clean → branche dédiée, sans RAG ni LLM principal.", model: "LLM mini" },
   { n: 2, name: "Query Understanding", role: "Reformule la question en termes vétérinaires canoniques et déclenche un tool call télémétrie si besoin.", model: "LLM mini" },
   { n: 3, name: "Retrieval", role: "Recherche hybride BM25 (mots-clés) + dense (sémantique), fusion par Reciprocal Rank Fusion. Top-20.", model: "RAG" },
-  { n: 4, name: "Relevance Filter", role: "Reranker dédié (Cohere v3) : top-20 → top-5 chunks les plus pertinents (~100 ms).", model: "Reranker" },
+  { n: 4, name: "Relevance Filter", role: "Reranker dédié (Cohere Rerank 3.5 multilingue) : top-20 → top-5 chunks les plus pertinents (~100 ms).", model: "Reranker" },
   { n: 5, name: "Customization", role: "LLM principal sous contrainte : génère la réponse + citations + signal d'escalade, tools bornés.", model: "LLM principal" },
   { n: 6, name: "Post-LLM Guardrail", role: "Détecte le langage « diagnostic », vérifie l'ancrage (chaque claim médical = une source) et force l'escalade selon les règles métier.", model: "LLM mini" },
 ];

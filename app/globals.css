@@ -897,7 +897,9 @@ a{color:inherit;text-decoration:none}
 .cockpit-mobile{display:none}
 @media(max-width:820px){
   .cockpit-root{display:none !important}
-  .cockpit-mobile{display:flex;position:fixed;inset:0;z-index:30;align-items:center;justify-content:center;padding:24px}
+  /* Option A : sur mobile le cockpit est masqué, mais la section "Choix techniques
+     justifiés" reste lisible : le message devient une bannière en flux normal. */
+  .cockpit-mobile{display:flex;justify-content:center;padding:96px 20px 8px}
 }
 .cmob-card{max-width:430px;text-align:center;padding:34px 26px}
 .cmob-ic{font-size:42px;line-height:1}
@@ -907,6 +909,19 @@ a{color:inherit;text-decoration:none}
 .cmob-btn{display:inline-block;margin-top:22px;padding:12px 24px;border-radius:12px;font-weight:800;color:#f4f6ff;
   border:1px solid rgba(211,252,114,.55);background:rgba(255,255,255,.06);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .cmob-btn:hover{border-color:var(--lime);box-shadow:0 0 24px rgba(211,252,114,.35)}
+
+/* ===== Architecture : section "Choix techniques justifiés" (sous le cockpit) ===== */
+.arch-deco{padding:8px 0 56px}
+.archd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.archd{padding:18px 18px 14px}
+.archd h3{margin:0 0 12px;font-size:15px;font-weight:800;color:#fff;letter-spacing:-.01em}
+.archd-row{margin:0 0 10px}
+.archd-row > span{display:block;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.archd-row p{margin:0;font-size:12.5px;color:var(--mut);line-height:1.5}
+.archd-to{margin-top:12px;padding:10px 12px;border-radius:10px;background:rgba(211,252,114,.06);border:1px solid rgba(211,252,114,.28)}
+.archd-to > span{color:var(--lime)}
+.archd-to p{color:var(--ink)}
+@media(max-width:860px){.archd-grid{grid-template-columns:1fr}}
 
 /* ===== PESTEL : tableau de hiérarchisation ===== */
 .pestel-rank td{vertical-align:top}
