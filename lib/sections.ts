@@ -49,6 +49,19 @@ export const SECTIONS: Section[] = [
     ],
   },
   {
+    slug: "iot",
+    title: "IoT & Collier",
+    tag: "Le hardware",
+    desc: "Le collier connecté : composants embarqués, capteurs justifiés, réseau LTE-M / MQTT, sécurité mTLS et logique firmware Rust.",
+    accent: "#5eead4",
+    blocks: [
+      { title: "Composants embarqués", desc: "MCU, modem LTE-M, GPS, capteurs, batterie : ce qu'on met dans le collier." },
+      { title: "Capteurs justifiés", desc: "IMU LSM6DSOX, température TMP117, fréquence cardiaque MAX30102." },
+      { title: "Réseau & sécurité", desc: "LTE-M, MQTT sur TLS, SIM IoT, authentification mutuelle (mTLS)." },
+      { title: "Logique firmware", desc: "Machine à états : repos, activité, fugue, zone blanche, batterie faible." },
+    ],
+  },
+  {
     slug: "assistant-ia",
     title: "Assistant IA",
     tag: "Le différenciateur",
