@@ -79,8 +79,13 @@ export const FLOWS: Flow[] = [
 export const ADRS = [
   { id: "ADR-001", t: "Pipeline LangGraph borné (pas d'agent autonome)", d: "6 nœuds déterministes, chaque étape testable. La responsabilité juridique est portée par le pipeline ; un agent libre serait indéfendable face au Code rural." },
   { id: "ADR-002", t: "Azure OpenAI Europe + cascade", d: "Data residency EU stricte, pas d'entraînement sur les données. Cascade mini/principal pour contenir le coût. Interface LLMProvider abstraite (bascule possible)." },
+  { id: "ADR-003", t: "Reranker dédié (pas de filtre LLM)", d: "Cohere Rerank 3.5 multilingue pour passer de top-20 à top-5. Latence ~10× meilleure qu'un filtre LLM (~100 ms vs 1,5-3 s), meilleure pertinence et pas de « rationalisation ». Interface RelevanceFilter pour bascule." },
+  { id: "ADR-004", t: "Mémoire long-terme = backend Pawrise", d: "Pas de stockage d'état dans le chatbot : il interroge le Core API par tool calls (profil, télémétrie, alertes, historique). Source de vérité unique, pas de duplication. Contrainte : tools p95 < 200 ms, fallback gracieux." },
+  { id: "ADR-005", t: "Sortie JSON structurée (pas de markdown nu)", d: "Chaque réponse est un JSON (texte, citations, signal d'escalade, actions suggérées, métadonnées). Le front affiche les actions sans parser du markdown fragile : découplage front/back propre." },
+  { id: "ADR-006", t: "RGPD progressif (MVP léger, V1 complet)", d: "MVP : masquage regex des PII avant envoi au LLM, jamais d'identifiants ni de GPS bruts (le LLM ne voit que « Rex, golden 5 ans, activité -30 % »). V1 : Microsoft Presidio + dictionnaire vétérinaire. Baseline Azure EU + DPA." },
   { id: "ADR-007", t: "Garde-fous 3 couches", d: "Défense en profondeur : l'échec d'une couche n'expose pas le système. Non négociable vu le Code rural." },
   { id: "ADR-008", t: "Retrieval hybride (BM25 + dense)", d: "BM25 capte les termes techniques exacts (Lyme, dysplasie), dense capte la similarité conversationnelle. Fusion RRF." },
+  { id: "ADR-009", t: "Query Understanding avant le RAG", d: "Un nœud reformule la question en termes vétérinaires canoniques et déclenche un tool télémétrie si besoin, avant la recherche. Coût : un appel LLM mini (~100 ms) ; gain : meilleur recall@5." },
   { id: "ADR-010", t: "Audit trail append-only", d: "Log immuable de chaque conversation (input, prompts, retrieval, output, décisions guardrail). Rétention 5 ans, base de la défense juridique et de l'eval." },
 ];
 
