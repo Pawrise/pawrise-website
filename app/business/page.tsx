@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SwotMatrix from "@/components/diagrams/SwotMatrix";
 import PageHeader from "@/components/PageHeader";
 import PestelGrid from "@/components/diagrams/PestelGrid";
-import { VALUE, MARKET, ECON, BOM, BOM_TOTAL, BOM_OPTIONS, BUDGET_NOTE, CONFRONTATION, PESTEL_SYNTHESE } from "@/lib/content/business";
+import { VALUE, MARKET, ECON, BOM, BOM_TOTAL, BOM_OPTIONS, BUDGET_NOTE, CLOUD_BUDGET, CLOUD_BUDGET_TOTAL, CLOUD_BUDGET_NOTE, CONFRONTATION, PESTEL_SYNTHESE } from "@/lib/content/business";
 
 export const metadata: Metadata = {
   title: "Business & Stratégie · Pawrise Care",
@@ -206,6 +206,38 @@ export default function BusinessPage() {
               </div>
               <p className="ps-text">{BUDGET_NOTE}</p>
             </div>
+          </div>
+        </section>
+
+        {/* Budget cloud & exploitation */}
+        <section className="panel-sect">
+          <div className="ps-head">
+            <h2>Budget cloud & exploitation</h2>
+            <p>Coûts de fonctionnement sur la phase projet (11 mois) : hébergement souverain Hetzner et modèle de langage.</p>
+          </div>
+          <div className="glass ps-body">
+            <div className="raci-scroll">
+              <table className="cov-table">
+                <thead>
+                  <tr><th>Poste</th><th>Détail</th><th>Coût</th></tr>
+                </thead>
+                <tbody>
+                  {CLOUD_BUDGET.map((c) => (
+                    <tr key={c.poste}>
+                      <td className="cov-dom">{c.poste}</td>
+                      <td>{c.detail}</td>
+                      <td className="cov-bk">{c.cout}</td>
+                    </tr>
+                  ))}
+                  <tr className="bom-total">
+                    <td>Total exploitation</td>
+                    <td />
+                    <td className="cov-bk">{CLOUD_BUDGET_TOTAL}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="ps-text" style={{ fontSize: 12 }}>{CLOUD_BUDGET_NOTE}</p>
           </div>
         </section>
       </div>

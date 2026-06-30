@@ -191,4 +191,19 @@ export const BOM_OPTIONS = [
   { o: "Option D · LTE sur mesure (retenue)", p: "≈ 50 €/u" },
 ];
 export const BUDGET_NOTE =
-  "Kit de développement initial : ≈ 106–111 € (investissement unique de prototypage). Côté logiciel, le projet s'appuie sur des crédits cloud étudiants et des briques open source ; les coûts récurrents (cloud, API LLM) sont maîtrisés et passent à l'échelle avec les abonnements.";
+  "Kit de développement initial : ≈ 106–111 € (investissement unique de prototypage). Côté logiciel, le projet s'appuie sur des briques open source et un hébergement souverain ; les coûts d'exploitation ci-dessous restent maîtrisés et passent à l'échelle avec les abonnements.";
+
+/* --------------------------------------- BUDGET CLOUD & EXPLOITATION ---- */
+// Coûts d'exploitation sur la phase projet (11 mois). Hébergement Hetzner
+// (cluster K8s autogéré, ligne ARM CAX la moins chère depuis juin 2026),
+// LLM = Azure OpenAI + Cohere. Détail infra page Cloud, détail IA page Assistant IA.
+export type CloudCost = { poste: string; detail: string; cout: string };
+export const CLOUD_BUDGET: CloudCost[] = [
+  { poste: "Cluster Hetzner · Phase 1 (8 mois)", detail: "control-plane + 2 workers ARM (CAX)", cout: "≈ 330 €" },
+  { poste: "Cluster Hetzner · Phase 2 (3 mois)", detail: "3 workers + load balancer + backups", cout: "≈ 220 €" },
+  { poste: "LLM · Azure OpenAI + Cohere (11 mois)", detail: "cascade, faible volume (~15 €/mois)", cout: "≈ 165 €" },
+  { poste: "Nom de domaine (11 mois)", detail: "1 €/mois", cout: "≈ 11 €" },
+];
+export const CLOUD_BUDGET_TOTAL = "≈ 726 € sur 11 mois";
+export const CLOUD_BUDGET_NOTE =
+  "Hébergement 100 % Hetzner (souverain, UE), chiffré sur la ligne ARM (CAX), la plus rentable depuis la hausse des prix Hetzner de juin 2026. Borne haute sur les anciens prix AMD du document source : ≈ 987 €. Azure n'intervient que pour le modèle de langage. L'IA coûte ≈ 0,03 à 0,05 € par conversation et passe à l'échelle avec les abonnements.";
