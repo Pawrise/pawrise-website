@@ -34,4 +34,4 @@ Les dix ADR du Care Engine sont détaillées dans la partie « IA — le Care En
 
 == Prototype en ligne
 
-Une version interactive de l'architecture (cockpit jouable), des diagrammes et de l'ensemble des contenus est disponible sur *pawrise-care.com*. Ce dossier en est la version académique, imprimable et autoportante.
+Une version interactive de l'architecture (cockpit jouable), des diagrammes et de l'ensemble des contenus est disponible sur #link("https://pawrise-care.com")[pawrise-care.com]. Ce dossier en est la version académique, imprimable et autoportante.

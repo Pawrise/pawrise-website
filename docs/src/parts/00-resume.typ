@@ -14,7 +14,7 @@ Là où les acteurs établis (Tractive, Weenect, Invoxia) se concentrent sur la 
 
 #v(6pt)
 
-Ce dossier réunit l'ensemble des livrables de conception : vision et marché, modèle économique et budget, découpage (WBS) et organisation (OBS, RACI), planning et méthodologie, plan qualité, gestion des risques, et l'architecture technique complète (système, cloud, IoT, IA). Une maquette interactive du produit est par ailleurs consultable en ligne (voir annexes).
+Ce dossier réunit l'ensemble des livrables de conception : vision et marché, modèle économique et budget, découpage (WBS) et organisation (OBS, RACI), planning et méthodologie, plan qualité, gestion des risques, et l'architecture technique complète (système, cloud, IoT, IA). Une maquette interactive du produit (architecture jouable, diagrammes et contenus) est par ailleurs consultable sur notre site #link("https://pawrise-care.com")[pawrise-care.com].
 
 #keybox(title: "Ce qui distingue Pawrise Care")[
   Une IA d'orientation conçue conforme dès l'origine (Code rural, AI Act, RGPD), un réseau vétérinaire réel, un modèle économique dont le coût vétérinaire est plafonné (une part fixe de l'abonnement finance le réseau : la dépense vétérinaire ne peut donc pas dépasser ce budget), et une architecture souveraine (UE) maîtrisée en coût.
