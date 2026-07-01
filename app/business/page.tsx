@@ -212,8 +212,8 @@ export default function BusinessPage() {
         {/* Budget cloud & exploitation */}
         <section className="panel-sect">
           <div className="ps-head">
-            <h2>Budget cloud & exploitation</h2>
-            <p>Coûts de fonctionnement sur la phase projet (11 mois) : hébergement souverain Hetzner et modèle de langage.</p>
+            <h2>Coût annuel de l&apos;infrastructure</h2>
+            <p>Ce que coûte l&apos;infra sur un an une fois le produit lancé : hébergement souverain Hetzner (auto-géré, ligne ARM), sauvegardes et modèle de langage.</p>
           </div>
           <div className="glass ps-body">
             <div className="raci-scroll">

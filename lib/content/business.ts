@@ -198,16 +198,19 @@ export const BUDGET_NOTE =
   "Kit de développement initial : ≈ 106–111 € (investissement unique de prototypage). Côté logiciel, le projet s'appuie sur des briques open source et un hébergement souverain ; les coûts d'exploitation ci-dessous restent maîtrisés et passent à l'échelle avec les abonnements.";
 
 /* --------------------------------------- BUDGET CLOUD & EXPLOITATION ---- */
-// Coûts d'exploitation sur la phase projet (11 mois). Hébergement Hetzner
-// (cluster K8s autogéré, ligne ARM CAX la moins chère depuis juin 2026),
-// LLM = Azure OpenAI + Cohere. Détail infra page Cloud, détail IA page Assistant IA.
+// Coût annuel d'exploitation d'une infra de PRODUCTION (produit lancé), pas de
+// découpage par phase. Hébergement Hetzner auto-géré (K8s + Terraform), ligne
+// ARM CAX (Ampere Altra). Prix : tarifs publics Hetzner juin 2026. IA = Azure
+// OpenAI + Cohere (poste variable, croît avec les abonnements).
 export type CloudCost = { poste: string; detail: string; cout: string };
 export const CLOUD_BUDGET: CloudCost[] = [
-  { poste: "Cluster Hetzner · Phase 1 (8 mois)", detail: "control-plane + 2 workers ARM (CAX)", cout: "≈ 330 €" },
-  { poste: "Cluster Hetzner · Phase 2 (3 mois)", detail: "3 workers + load balancer + backups", cout: "≈ 220 €" },
-  { poste: "LLM · Azure OpenAI + Cohere (11 mois)", detail: "cascade, faible volume (~15 €/mois)", cout: "≈ 165 €" },
-  { poste: "Nom de domaine (11 mois)", detail: "1 €/mois", cout: "≈ 11 €" },
+  { poste: "Cluster Kubernetes (auto-géré)", detail: "1× CAX21 control-plane + 2× CAX31 workers (ARM Ampere, 8 vCPU / 16 Go)", cout: "≈ 630 €/an" },
+  { poste: "Sauvegardes & volumes", detail: "volumes bloc ~150 Go (0,057 €/Go) + backups automatiques (+20 %)", cout: "≈ 230 €/an" },
+  { poste: "Load balancer + IP publique", detail: "LB11 (répartition de charge, TLS)", cout: "≈ 72 €/an" },
+  { poste: "Sauvegardes hors-site", detail: "Storage Box (rétention longue durée)", cout: "≈ 60 €/an" },
+  { poste: "Modèle de langage (IA)", detail: "Azure OpenAI + Cohere · ~0,03 à 0,05 €/conversation (variable)", cout: "≈ 600 €/an" },
+  { poste: "Nom de domaine", detail: ".com (TLS Let's Encrypt gratuit)", cout: "≈ 12 €/an" },
 ];
-export const CLOUD_BUDGET_TOTAL = "≈ 726 € sur 11 mois";
+export const CLOUD_BUDGET_TOTAL = "≈ 1 600 €/an";
 export const CLOUD_BUDGET_NOTE =
-  "Hébergement 100 % Hetzner (souverain, UE), chiffré sur la ligne ARM (CAX), la plus rentable depuis la hausse des prix Hetzner de juin 2026. Borne haute sur les anciens prix AMD du document source : ≈ 987 €. Azure n'intervient que pour le modèle de langage. L'IA coûte ≈ 0,03 à 0,05 € par conversation et passe à l'échelle avec les abonnements.";
+  "Coût d'exploitation d'une infrastructure de production sur un an. Hébergement 100 % Hetzner (souverain, UE) sur la ligne ARM CAX (Ampere Altra), la plus rentable après la hausse tarifaire Hetzner du 15 juin 2026 (l'ARM a bien moins augmenté que l'AMD/Intel). Seul le poste IA est variable : il croît avec le nombre de conversations, donc avec les abonnements qui le financent. Un hyperscaler équivalent (Azure AKS) coûterait de l'ordre de 4 à 6× plus. Prix serveurs : tarifs publics Hetzner Cloud, juin 2026.";

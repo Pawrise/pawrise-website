@@ -1,8 +1,10 @@
 // Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
 #let CLOUDBUDGET = (
-  ("Cluster Hetzner · Phase 1 (8 mois)", "control-plane + 2 workers ARM (CAX)", "≈ 330 €"),
-  ("Cluster Hetzner · Phase 2 (3 mois)", "3 workers + load balancer + backups", "≈ 220 €"),
-  ("LLM · Azure OpenAI + Cohere (11 mois)", "cascade, faible volume (~15 €/mois)", "≈ 165 €"),
-  ("Nom de domaine (11 mois)", "1 €/mois", "≈ 11 €"),
+  ("Cluster Kubernetes (auto-géré)", "1× CAX21 control-plane + 2× CAX31 workers (ARM Ampere, 8 vCPU / 16 Go)", "≈ 630 €/an"),
+  ("Sauvegardes & volumes", "volumes bloc ~150 Go (0,057 €/Go) + backups automatiques (+20 %)", "≈ 230 €/an"),
+  ("Load balancer + IP publique", "LB11 (répartition de charge, TLS)", "≈ 72 €/an"),
+  ("Sauvegardes hors-site", "Storage Box (rétention longue durée)", "≈ 60 €/an"),
+  ("Modèle de langage (IA)", "Azure OpenAI + Cohere · ~0,03 à 0,05 €/conversation (variable)", "≈ 600 €/an"),
+  ("Nom de domaine", ".com (TLS Let's Encrypt gratuit)", "≈ 12 €/an"),
 )
-#let CLOUD_TOTAL = "≈ 726 € sur 11 mois"
+#let CLOUD_TOTAL = "≈ 1 600 €/an"

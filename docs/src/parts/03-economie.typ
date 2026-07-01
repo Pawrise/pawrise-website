@@ -49,19 +49,22 @@ Nomenclature du prototype, option retenue (LTE sur mesure). Les composants sont 
 #align(right)[#text(fill: brand, weight: 800)[Total unitaire : #BOM_TOTAL]]
 ]
 
-== Budget cloud & exploitation (11 mois)
+== Coût annuel de l'infrastructure (production)
+
+Ce que coûte l'infrastructure sur *un an*, une fois le produit lancé (sans découpage par phase). Hébergement souverain (UE), auto-géré via Terraform et Kubernetes.
+
+*Pourquoi ces serveurs ?*
+- *Hetzner (Allemagne)* : hébergeur européen (souveraineté, RGPD), ~4 à 6× moins cher qu'un hyperscaler à capacités égales.
+- *Ligne ARM CAX (Ampere Altra)* : meilleur prix/performance ; après la hausse Hetzner du 15/06/2026 (ARM ~1,3 à 1,4× contre ~2,5× pour l'AMD/Intel), c'est la ligne la plus rentable.
+- *Auto-géré, pas managé* : moins cher à capacités égales et sans lock-in ; cloud managé UE prévu au scale (voir partie Cloud).
 
 #keep[
-Coûts de fonctionnement sur la phase projet : hébergement souverain Hetzner (cluster Kubernetes, ligne ARM) et modèle de langage.
-
 #dtable(
   columns: (1fr, auto, auto),
-  headers: ("Poste", "Détail", "Coût"),
+  headers: ("Poste", "Détail", "Coût annuel"),
   rows: CLOUDBUDGET,
 )
-#align(right)[#text(fill: brand, weight: 800)[Total exploitation : #CLOUD_TOTAL]]
-]
+#align(right)[#text(fill: brand, weight: 800)[Total : #CLOUD_TOTAL]]
 
-#keybox(title: "Cohérence des coûts")[
-  Hébergement 100 % Hetzner (souverain, UE), chiffré sur la ligne ARM la plus rentable depuis la hausse des prix Hetzner de juin 2026 ; borne haute sur les anciens prix AMD ≈ 987 €. Azure n'intervient que pour le modèle de langage. Le coût IA est d'environ 0,03 à 0,05 € par conversation et passe à l'échelle avec les abonnements. Détail sur les parties Cloud et Assistant IA.
+#text(size: 8.5pt, fill: mut)[Sources : #link("https://www.hetzner.com/cloud/")[Hetzner Cloud] + #link("https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/")[ajustement du 15/06/2026] (CAX21 ≈ 10,49 €, CAX31 ≈ 20,99 €/mois ; volumes 0,057 €/Go) ; IA : #link("https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/")[Azure OpenAI], #link("https://cohere.com/pricing")[Cohere]. Comparatif VPS / managé / hyperscaler en partie Cloud.]
 ]
