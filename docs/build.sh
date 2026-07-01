@@ -21,7 +21,6 @@ titre() {
     02-marche) echo "Marché & stratégie" ;;
     03-economie) echo "Modèle économique & budget" ;;
     04-wbs) echo "WBS & fonctions" ;;
-    05-bmad) echo "Méthode BMAD" ;;
     05-prd) echo "Exigences produit (PRD)" ;;
     05-organisation) echo "Organisation & compétences" ;;
     06-raci) echo "Matrice RACI" ;;

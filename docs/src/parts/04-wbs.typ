@@ -2,7 +2,7 @@
 
 = WBS & fonctions par epic
 
-Ce *Work Breakdown Structure (WBS)* décompose le *périmètre total* du projet de façon *hiérarchique et orientée livrables*, selon la méthode BMAD. Trois niveaux : le projet Pawrise Care (niveau 0), ses *11 epics* livrables (niveau 1, codes 1 à 11), et les *fonctions* attendues de chaque epic (niveau 2, codes 1.1, 1.2…). Les 66 user stories et leurs critères d'acceptation (Given/When/Then) affinent le niveau 2. Les codes FR/NFR affichés renvoient au référentiel défini en partie *Exigences produit (PRD)* ; la *traçabilité* epic vers exigences est portée par chaque carte ci-après (ligne « Exigences »).
+Ce *Work Breakdown Structure (WBS)* décompose le *périmètre total* du projet de façon *hiérarchique et orientée livrables*. Trois niveaux : le projet Pawrise Care (niveau 0), ses *11 epics* livrables (niveau 1, codes 1 à 11), et les *fonctions* attendues de chaque epic (niveau 2, codes 1.1, 1.2…). Les 66 user stories et leurs critères d'acceptation (Given/When/Then) affinent le niveau 2. Les codes FR/NFR affichés renvoient au référentiel défini en partie *Exigences produit (PRD)* ; la *traçabilité* epic vers exigences est portée par chaque carte ci-après (ligne « Exigences »).
 
 Le diagramme unique ci-après (page suivante, en paysage) présente cette décomposition et, pour chaque livrable, décrit les *fonctions attendues* ainsi que les *exigences* qu'elles couvrent, afin d'en faciliter l'implémentation. Les codes FR/NFR renvoient au référentiel de la partie *Exigences produit (PRD)*. Périmètre MVP : 9 epics (52 US) ; post-MVP : epics 8 et 10.
 

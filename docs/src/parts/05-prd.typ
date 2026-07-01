@@ -2,7 +2,7 @@
 
 = Exigences produit (PRD)
 
-Ce chapitre constitue le cœur du *Product Requirements Document (PRD)* : il définit *ce que le produit doit faire* et *les qualités qu'il doit garantir*. La vision, le problème et les personas figurent en partie Vision ; les exigences ci-dessous ont été élicitées avec la méthode BMAD et servent de *référentiel* au découpage du travail (WBS, partie suivante).
+Ce chapitre constitue le cœur du *Product Requirements Document (PRD)* : il définit *ce que le produit doit faire* et *les qualités qu'il doit garantir*. La vision, le problème et les personas figurent en partie Vision ; les exigences ci-dessous constituent le *référentiel* du découpage du travail (WBS, partie suivante).
 
 On distingue les *exigences fonctionnelles (FR)*, ce que le système doit faire, et les *exigences non fonctionnelles (NFR)*, les qualités et contraintes. Chaque exigence porte un *code unique*, un *énoncé testable*, une *méthode de vérification*, une *priorité* (MVP ou post-MVP) et l'*epic* qui la couvre ; les deux dernières colonnes assurent la traçabilité (aucune exigence orpheline) et le contrôle qualité. Les bandeaux de domaine reprennent les couleurs du WBS.
 
