@@ -51,7 +51,11 @@ Nomenclature du prototype, option retenue (LTE sur mesure). Les composants sont 
 
 == Coût annuel de l'infrastructure
 
-Ce que coûte l'infrastructure sur *un an* (production + développement, sans découpage par phase). Souverain UE, auto-géré (Terraform + Kubernetes) ; le dev se fait surtout *en local* et les tests sont facturés *à la consommation*. Serveurs Hetzner (UE, ~4 à 6× moins cher qu'un hyperscaler), ligne ARM CAX (la plus rentable après la hausse du 15/06/2026), auto-géré sans lock-in. Dimensionnement, comparaison et souveraineté détaillés en partie Cloud.
+Coût d'exploitation sur *un an*, en production une fois le produit lancé, développement inclus. Hébergement souverain (UE), auto-géré via Terraform et Kubernetes. Le dimensionnement retenu (≈ 16 vCPU / 32 Go) découle directement de l'architecture (services Rust, bases de données, bus d'événements, broker MQTT, moteur IA, observabilité), justifié en partie Cloud.
+
+*Hypothèses de calcul* : lancement à faible trafic et usage IA modéré ; prix serveurs = tarifs publics Hetzner de juin 2026 (ligne ARM CAX) ; parité euro/dollar retenue pour l'IA ; certificats TLS gratuits (Let's Encrypt).
+
+=== Détail des postes
 
 #keep[
 #dtable(
@@ -60,6 +64,44 @@ Ce que coûte l'infrastructure sur *un an* (production + développement, sans d�
   rows: CLOUDBUDGET,
 )
 #align(right)[#text(fill: brand, weight: 800)[Total : #CLOUD_TOTAL]]
-
-#text(size: 8.5pt, fill: mut)[Sources : #link("https://www.hetzner.com/cloud/")[Hetzner Cloud] + #link("https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/")[ajustement 15/06/2026] (CAX21 10,49 €, CAX31 20,99 €/mois) ; IA : #link("https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/")[Azure OpenAI], #link("https://cohere.com/pricing")[Cohere]. Détail en partie Cloud.]
 ]
+
+Comment chaque poste est chiffré :
+- *Compute (cluster)* : 1× CAX21 (10,49 €) + 2× CAX31 (2 × 20,99 €) = 52,47 €/mois, soit ≈ 630 €/an. Taille calée sur le besoin de 16 vCPU / 32 Go.
+- *Sauvegardes & volumes* : ~150 Go de volumes bloc (0,057 €/Go) + sauvegardes automatiques (+20 % du prix des instances) ≈ 19 €/mois, soit ≈ 230 €/an.
+- *Load balancer + IP publique* : LB11 à 5,99 €/mois, soit ≈ 72 €/an.
+- *Sauvegardes hors-site* : Storage Box (rétention longue durée) ~5 €/mois, soit ≈ 60 €/an.
+- *Modèle de langage (IA)* : ~0,03 à 0,05 € par conversation ; poste *variable*, ≈ 600 €/an à faible volume, qui croît avec les abonnements qui le financent.
+- *Nom de domaine* : ≈ 12 €/an (TLS gratuit).
+
+=== Développement & tests (à la consommation)
+
+L'essentiel du développement ne coûte rien, et les tests sont payés à l'usage :
+- *Développement en local* : 0 €. Chaque développeur lance la stack sur sa machine (Docker Compose / kind).
+- *Intégration continue* : GitHub Actions (offre incluse pour le projet).
+- *Environnement de test / staging éphémère* : un petit cluster (~31 €/mois en continu) n'est actif que ~40 h/semaine, détruit le soir et le week-end via `terraform destroy` (~24 % du temps), soit ≈ 7,5 €/mois → ≈ 90 €/an.
+- *Consommation IA de test* : ~5 €/mois à l'usage, soit ≈ 60 €/an.
+
+Total développement ≈ *150 €/an*. Un serveur arrêté restant facturé chez Hetzner, l'économie vient de la destruction/recréation par IaC, pas de l'extinction (mécanisme détaillé en partie Cloud).
+
+=== Comparaison (coût annuel, capacité équivalente)
+
+#keep[
+#dtable(
+  columns: (1fr, auto),
+  headers: ("Option d'hébergement", "Coût annuel*"),
+  rows: (
+    ("Bare metal (serveur dédié)", "~1 000 à 1 500 €"),
+    ("Hetzner Cloud auto-géré (retenu)", "≈ 1 750 € (dont ~150 € de dev)"),
+    ("Cloud managé EU (Scaleway / OVH)", "~3 000 à 3 700 €"),
+    ("Hyperscaler (AWS / Azure / GCP)", "~6 000 à 10 000 €"),
+  ),
+)
+]
+#text(size: 8.5pt, fill: mut)[\* Capacité équivalente (~16 vCPU / 32 Go + bases de données, load balancer, sauvegardes et IA), faible trafic. Critères complets (souveraineté, exploitation, lock-in) en partie Cloud.]
+
+=== Ce qui varie avec l'échelle
+
+Seul le poste IA est réellement variable : il augmente avec le nombre de conversations, donc avec les abonnements qui le financent, ce qui garde ce coût couvert par la marge. Le compute, lui, croît par paliers (ajout de workers) ; au-delà d'un certain volume, on bascule vers un cloud managé européen (voir partie Cloud). L'infrastructure reste ainsi maîtrisée et proportionnée à l'usage.
+
+#text(size: 8.5pt, fill: mut)[Sources des prix : #link("https://www.hetzner.com/cloud/")[Hetzner Cloud] + #link("https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/")[ajustement du 15/06/2026] (CAX21 10,49 €, CAX31 20,99 €/mois ; volumes 0,057 €/Go) ; IA : #link("https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/")[Azure OpenAI], #link("https://cohere.com/pricing")[Cohere].]
