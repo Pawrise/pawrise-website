@@ -32,35 +32,37 @@ Le marché total (TAM ≈ 73 M, tous animaux) inclut poissons, oiseaux et NAC. L
   #for it in items [ #text(size: 8.7pt)[*#it.at(0)* : #it.at(1)]#v(3pt) ]
 ]
 
-#grid(columns: (1fr, 1fr), gutter: 8pt,
-  quad("Forces", "pos", (
-    ("Santé expliquée et accompagnée", "la donnée brute des concurrents traduite en clair par l'IA, relayée par un vétérinaire."),
-    ("Expertise IA + garde-fous non-diagnostiques", "RAG/LLM maîtrisés en interne, conformité intégrée dès le départ."),
-    ("Vétérinaire partenaire réel", "crédibilité scientifique et accès au métier."),
-    ("Données longitudinales propriétaires", "un actif santé par animal qui grossit avec le temps."),
-  )),
-  quad("Faiblesses", "neg", (
-    ("Hardware complexe et coûteux", "conception d'un collier fiable, lourde en temps et budget."),
-    ("Démarrage à froid des données", "fiabilité de l'IA dépendante de données à accumuler."),
-    ("Prototype non finalisé", "encore sur capteurs simulés, risque technique avant produit réel."),
-    ("Rentabilité à prouver", "modèle d'abonnement dont la viabilité reste à valider."),
-  )),
-)
-#v(8pt)
-#grid(columns: (1fr, 1fr), gutter: 8pt,
-  quad("Opportunités", "pos", (
-    ("Marché français massif et porteur", "26,5 M de chiens et chats, segment connecté en croissance."),
-    ("Humanisation des animaux", "disposition réelle à payer pour la santé et la prévention."),
-    ("Assurance animale en croissance", "nos données aident la prévention et la tarification : canal + revenu B2B."),
-    ("Interopérabilité via le PDF normalisé", "gain de temps vétérinaire, adoption facilitée."),
-  )),
-  quad("Menaces", "neg", (
-    ("Concurrents déjà sur la santé", "Invoxia, Tractive mesurent déjà FC/FR : angle santé non vierge."),
-    ("Acteur capitalisé qui copie la couche vétérinaire", "un géant pourrait aller plus vite."),
-    ("Cadre réglementaire strict et mouvant", "acte médical réservé au vétérinaire, IA encadrée (AI Act)."),
-    ("Adoption lente des vétérinaires", "profession prudente et surchargée."),
-  )),
-)
+#block(breakable: false)[
+  #grid(columns: (1fr, 1fr), gutter: 8pt,
+    quad("Forces", "pos", (
+      ("Santé expliquée et accompagnée", "la donnée brute des concurrents traduite en clair par l'IA, relayée par un vétérinaire."),
+      ("Expertise IA + garde-fous non-diagnostiques", "RAG/LLM maîtrisés en interne, conformité intégrée dès le départ."),
+      ("Vétérinaire partenaire réel", "crédibilité scientifique et accès au métier."),
+      ("Données longitudinales propriétaires", "un actif santé par animal qui grossit avec le temps."),
+    )),
+    quad("Faiblesses", "neg", (
+      ("Hardware complexe et coûteux", "conception d'un collier fiable, lourde en temps et budget."),
+      ("Démarrage à froid des données", "fiabilité de l'IA dépendante de données à accumuler."),
+      ("Prototype non finalisé", "encore sur capteurs simulés, risque technique avant produit réel."),
+      ("Rentabilité à prouver", "modèle d'abonnement dont la viabilité reste à valider."),
+    )),
+  )
+  #v(8pt)
+  #grid(columns: (1fr, 1fr), gutter: 8pt,
+    quad("Opportunités", "pos", (
+      ("Marché français massif et porteur", "26,5 M de chiens et chats, segment connecté en croissance."),
+      ("Humanisation des animaux", "disposition réelle à payer pour la santé et la prévention."),
+      ("Assurance animale en croissance", "nos données aident la prévention et la tarification : canal + revenu B2B."),
+      ("Interopérabilité via le PDF normalisé", "gain de temps vétérinaire, adoption facilitée."),
+    )),
+    quad("Menaces", "neg", (
+      ("Concurrents déjà sur la santé", "Invoxia, Tractive mesurent déjà FC/FR : angle santé non vierge."),
+      ("Acteur capitalisé qui copie la couche vétérinaire", "un géant pourrait aller plus vite."),
+      ("Cadre réglementaire strict et mouvant", "acte médical réservé au vétérinaire, IA encadrée (AI Act)."),
+      ("Adoption lente des vétérinaires", "profession prudente et surchargée."),
+    )),
+  )
+]
 
 == Matrice de confrontation
 

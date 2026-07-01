@@ -109,24 +109,21 @@
   set list(indent: 6pt, spacing: 0.7em)
   set enum(indent: 6pt, spacing: 0.7em)
 
-  // Titres
+  // Titres · `sticky: true` empêche un titre de rester orphelin en bas de page
+  // (il bascule avec son contenu sur la page suivante).
   set heading(numbering: "1.1")
-  show heading.where(level: 1): it => {
-    v(6pt)
-    block(spacing: 10pt)[
-      #text(fill: brand, weight: 900, size: 15pt)[#counter(heading).display() #h(6pt) #it.body]
-      #v(-3pt)
-      #box(width: 34pt, line(length: 100%, stroke: 3pt + lime))
-      #box(width: 100% - 34pt, line(length: 100%, stroke: 0.8pt + hair))
-    ]
-  }
-  show heading.where(level: 2): it => {
-    v(3pt)
-    text(fill: brand, weight: 800, size: 12pt)[#counter(heading).display() #h(5pt) #it.body]
-  }
-  show heading.where(level: 3): it => {
-    text(fill: accent, weight: 700, size: 10.5pt, it.body)
-  }
+  show heading.where(level: 1): it => block(sticky: true, above: 16pt, below: 10pt)[
+    #text(fill: brand, weight: 900, size: 15pt)[#counter(heading).display() #h(6pt) #it.body]
+    #v(-3pt)
+    #box(width: 34pt, line(length: 100%, stroke: 3pt + lime))
+    #box(width: 100% - 34pt, line(length: 100%, stroke: 0.8pt + hair))
+  ]
+  show heading.where(level: 2): it => block(sticky: true, above: 12pt, below: 5pt)[
+    #text(fill: brand, weight: 800, size: 12pt)[#counter(heading).display() #h(5pt) #it.body]
+  ]
+  show heading.where(level: 3): it => block(sticky: true, above: 9pt, below: 3pt)[
+    #text(fill: accent, weight: 700, size: 10.5pt, it.body)
+  ]
   show link: it => text(fill: accent, it)
 
   body
