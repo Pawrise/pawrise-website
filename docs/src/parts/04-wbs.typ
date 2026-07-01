@@ -1,40 +1,43 @@
-#import "../lib.typ": dtable, brand, mut, lime, zebra
+#import "../lib.typ": dtable, brand, mut, lime, zebra, hair
+#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+#import fletcher.shapes: rect as frect
 
 = WBS & fonctions par lot
 
 == Structure de découpage (WBS)
 
-Le WBS décompose le projet en 9 lots techniques, du collier à la conformité, chacun subdivisé en sous-composants numérotés.
+Le WBS décompose le projet en 9 lots techniques, du collier à la conformité, chacun subdivisé en sous-composants numérotés. L'arbre ci-après (page suivante, en paysage) présente la décomposition complète.
 
-#let lot(n, titre, subs) = block(breakable: false, spacing: 8pt, width: 100%, inset: (left: 2pt))[
-  #block(fill: brand, radius: 3pt, inset: (x: 8pt, y: 4pt), width: 100%)[
-    #text(fill: white, weight: 800, size: 9.5pt)[#n · #titre]
-  ]
-  #v(1pt)
-  #for s in subs [
-    #grid(columns: (2.6em, 1fr), gutter: 0pt,
-      text(fill: rgb("#37338f"), weight: 700, size: 8.5pt, s.at(0)),
-      text(fill: mut, size: 8.5pt, s.at(1)),
-    )
-    #v(1.5pt)
-  ]
+#let lotnode(n, t, subs) = align(left)[
+  #text(fill: brand, weight: 800, size: 7pt)[#n · #t]
+  #v(2.5pt)
+  #for s in subs [ #text(fill: rgb("#37338f"), weight: 700, size: 6pt)[#s.at(0)] #text(fill: mut, size: 6pt)[#s.at(1)]#linebreak() ]
 ]
 
-#grid(columns: (1fr, 1fr), gutter: 14pt,
-  [
-    #lot("1", "Pawrise Collar — Hardware", (("1.1", "Capteurs & mesures"), ("1.2", "Système embarqué"), ("1.3", "Communication"), ("1.4", "Boîtier & conception physique"), ("1.5", "Batterie & autonomie")))
-    #lot("2", "Collector & Firmware", (("2.1", "Acquisition de données"), ("2.2", "Transmission & protocoles"), ("2.3", "Sécurité")))
-    #lot("3", "Backend & API Platform", (("3.1", "Ingestion des données"), ("3.2", "Stockage & modélisation"), ("3.3", "API App & Vet"), ("3.4", "Administration")))
-    #lot("4", "Care Engine — IA & Analyse", (("4.1", "Prétraitement"), ("4.2", "Analyse comportementale"), ("4.3", "Analyse santé contextuelle"), ("4.4", "Chat IA & expertise"), ("4.5", "Export vétérinaire")))
-    #lot("5", "Mobile App — Propriétaire", (("5.1", "Écran bien-être"), ("5.2", "Localisation"), ("5.3", "Notifications & alertes"), ("5.4", "Chat & accompagnement")))
-  ],
-  [
-    #lot("6", "Vet Portal — Interface véto", (("6.1", "Vue patient"), ("6.2", "Analyse professionnelle"), ("6.3", "Collaboration")))
-    #lot("7", "Infrastructure & Ops", (("7.1", "Hébergement"), ("7.2", "Monitoring"), ("7.3", "CI/CD")))
-    #lot("8", "Data, Privacy & Compliance", (("8.1", "Protection des données"), ("8.2", "Transparence & éthique")))
-    #lot("9", "Business & User Lifecycle", (("9.1", "Onboarding & appairage"), ("9.2", "Abonnement & facturation"), ("9.3", "Support client"), ("9.4", "Provisioning matériel"), ("9.5", "Partenaires vétérinaires")))
-  ],
-)
+#page(flipped: true)[
+  #align(center)[
+    #v(4pt)
+    #text(fill: brand, weight: 800, size: 12pt)[WBS · Décomposition du projet Pawrise Care]
+    #v(10pt)
+    #set text(size: 7pt)
+    #diagram(
+      spacing: (4mm, 22mm),
+      node((4, 0), text(fill: white, weight: 900, size: 10pt)[Pawrise Care], fill: brand, stroke: none, shape: frect, corner-radius: 4pt, inset: 9pt),
+      ..(
+        ("1", "Collar — HW", (("1.1","Capteurs"), ("1.2","Système embarqué"), ("1.3","Communication"), ("1.4","Boîtier IP67"), ("1.5","Batterie"))),
+        ("2", "Firmware", (("2.1","Acquisition"), ("2.2","Transmission"), ("2.3","Sécurité"))),
+        ("3", "Backend & API", (("3.1","Ingestion"), ("3.2","Stockage"), ("3.3","API App/Vet"), ("3.4","Administration"))),
+        ("4", "Care Engine IA", (("4.1","Prétraitement"), ("4.2","Comportement"), ("4.3","Santé contextuelle"), ("4.4","Chat IA"), ("4.5","Export véto"))),
+        ("5", "Mobile App", (("5.1","Bien-être"), ("5.2","Localisation"), ("5.3","Notifications"), ("5.4","Chat"))),
+        ("6", "Vet Portal", (("6.1","Vue patient"), ("6.2","Analyse pro"), ("6.3","Collaboration"))),
+        ("7", "Infra & Ops", (("7.1","Hébergement"), ("7.2","Monitoring"), ("7.3","CI/CD"))),
+        ("8", "Data & Privacy", (("8.1","Protection"), ("8.2","Transparence"))),
+        ("9", "Business", (("9.1","Onboarding"), ("9.2","Abonnement"), ("9.3","Support"), ("9.4","Provisioning"), ("9.5","Partenaires véto"))),
+      ).enumerate().map(((i, l)) => node((i, 1), lotnode(l.at(0), l.at(1), l.at(2)), fill: zebra, stroke: 0.6pt + hair, shape: frect, corner-radius: 3pt, inset: 5pt)),
+      ..range(9).map(i => edge((4, 0), (i, 1), stroke: 0.6pt + hair.darken(20%))),
+    )
+  ]
+]
 
 == Fonctions attendues par lot
 

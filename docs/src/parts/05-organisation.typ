@@ -43,7 +43,7 @@ Chaque domaine est porté par un ou plusieurs responsables nommés, avec un back
 
 == Matrice de compétences (extrait)
 
-Niveaux : #box(rect(width:8pt,height:8pt,fill:brand)) expert · #box(rect(width:8pt,height:8pt,fill:rgb("#7d79c0"))) intermédiaire · #box(rect(width:8pt,height:8pt,fill:rgb("#c9c7e8"))) débutant · #box(rect(width:8pt,height:8pt,fill:zebra,stroke:0.5pt+hair)) aucune. Membres : Yas Ela Ibr Cyr Aad Ham Nin Ada Oum Abd.
+Niveaux : #box(rect(width:8pt,height:8pt,fill:brand)) expert · #box(rect(width:8pt,height:8pt,fill:rgb("#7d79c0"))) intermédiaire · #box(rect(width:8pt,height:8pt,fill:rgb("#c9c7e8"))) débutant · #box(rect(width:8pt,height:8pt,fill:zebra,stroke:0.5pt+hair)) aucune expérience.
 
 #let lvlcol = (l) => if l == 3 { brand } else if l == 2 { rgb("#7d79c0") } else if l == 1 { rgb("#c9c7e8") } else { zebra }
 #let skills = (
@@ -60,13 +60,17 @@ Niveaux : #box(rect(width:8pt,height:8pt,fill:brand)) expert · #box(rect(width:
   ("Réseau vétérinaire", (0,3,0,0,0,0,2,0,0,0)),
 )
 #set text(size: 8pt)
+#let members = ("Yassine","Elarif","Ibrahim","Cyril","Aaditya","Hamid","Nino","Adam","Oumar","Abderrahmane")
 #table(
   columns: (4.6cm,) + (1fr,) * 10,
   stroke: (x, y) => (bottom: 0.5pt + hair),
   inset: (x: 4pt, y: 5pt),
-  align: (x, y) => if x == 0 { left + horizon } else { center + horizon },
+  align: (x, y) => if x == 0 { left + bottom } else { center + bottom },
   fill: (x, y) => if y == 0 { brand },
-  table.header(text(fill: white, weight: 800, size: 7.5pt)[Compétence], ..("Yas","Ela","Ibr","Cyr","Aad","Ham","Nin","Ada","Oum","Abd").map(m => text(fill: white, weight: 700, size: 7.5pt, m))),
+  table.header(
+    box(height: 62pt)[#place(bottom + left)[#text(fill: white, weight: 800, size: 7.5pt)[Compétence]]],
+    ..members.map(m => box(height: 62pt)[#place(bottom + center)[#rotate(-90deg, reflow: true, text(fill: white, weight: 700, size: 7.5pt, m))]]),
+  ),
   ..skills.map(row => (text(size: 8pt, row.at(0)),) + row.at(1).map(l => align(center, box(width: 12pt, height: 11pt, radius: 2pt, fill: lvlcol(l))))).flatten()
 )
 #set text(size: 10.5pt)
