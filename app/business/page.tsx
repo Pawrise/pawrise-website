@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SwotMatrix from "@/components/diagrams/SwotMatrix";
 import PageHeader from "@/components/PageHeader";
 import PestelGrid from "@/components/diagrams/PestelGrid";
-import { VALUE, MARKET, ECON, BOM, BOM_TOTAL, BOM_OPTIONS, BUDGET_NOTE, CLOUD_BUDGET, CLOUD_BUDGET_TOTAL, CLOUD_BUDGET_NOTE, CONFRONTATION, PESTEL_SYNTHESE } from "@/lib/content/business";
+import { VALUE, MARKET, ECON, BOM, BOM_TOTAL_P1, BOM_TOTAL_PK, BOM_OPTIONS, BUDGET_NOTE, CLOUD_BUDGET, CLOUD_BUDGET_TOTAL, CLOUD_BUDGET_NOTE, CONFRONTATION, PESTEL_SYNTHESE } from "@/lib/content/business";
 
 export const metadata: Metadata = {
   title: "Business & Stratégie · Pawrise Care",
@@ -174,31 +174,36 @@ export default function BusinessPage() {
         <section className="panel-sect">
           <div className="ps-head">
             <h2>Budget prévisionnel · collier</h2>
-            <p>Coût matériel du prototype (BOM) et options de production.</p>
+            <p>Coût matériel du produit final (BOM PCB custom), en prototype et en série, et phases de production.</p>
           </div>
           <div className="ps-grid2">
             <div className="glass ps-body">
-              <h3 className="ps-sub">Nomenclature (Option D retenue)</h3>
+              <h3 className="ps-sub">Nomenclature (produit final)</h3>
               <table className="bom-table">
+                <thead>
+                  <tr><th>Composant</th><th className="bom-p">Proto ×1</th><th className="bom-p">Série ×1000</th></tr>
+                </thead>
                 <tbody>
                   {BOM.map((b) => (
                     <tr key={b.c}>
                       <td>{b.c}</td>
-                      <td className="bom-p">{b.p}</td>
+                      <td className="bom-p">{b.p1}</td>
+                      <td className="bom-p">{b.pk}</td>
                     </tr>
                   ))}
                   <tr className="bom-total">
-                    <td>Total unitaire</td>
-                    <td className="bom-p">{BOM_TOTAL}</td>
+                    <td>Total</td>
+                    <td className="bom-p">{BOM_TOTAL_P1}</td>
+                    <td className="bom-p">{BOM_TOTAL_PK}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <div className="glass ps-body">
-              <h3 className="ps-sub">Options de production</h3>
+              <h3 className="ps-sub">Phases de production</h3>
               <div className="bom-opts">
                 {BOM_OPTIONS.map((o) => (
-                  <div className={`bom-opt${o.o.includes("retenue") ? " on" : ""}`} key={o.o}>
+                  <div className={`bom-opt${o.o.includes("cible") ? " on" : ""}`} key={o.o}>
                     <span>{o.o}</span>
                     <b>{o.p}</b>
                   </div>

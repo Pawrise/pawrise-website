@@ -156,7 +156,7 @@ export const ECON = {
     "Abonnement : 9,90 €/mois (ordre de grandeur du marché : Tractive, Weenect).",
     "Marge contributive sur l'abonnement (après cloud, API LLM et pool vété).",
     "Durée de vie client = 1 / churn mensuel ; LTV = abo × durée de vie × marge.",
-    "Le collier est vendu proche de son coût (BOM ≈ 56 €) : la rentabilité vient de l'abonnement récurrent.",
+    "Le collier est vendu proche de son coût de série (BOM ≈ 66 €/u) : la rentabilité vient de l'abonnement récurrent.",
   ],
   rows: [
     { metric: "Marge contributive (abo)", opt: "78 %", base: "69 %", pess: "35 %" },
@@ -172,30 +172,38 @@ export const ECON = {
 };
 
 /* ------------------------------------------- BUDGET PRÉVISIONNEL (HW) --- */
-// BOM prototype collier · Option D recommandée (circuit sur mesure LTE).
-// Composants alignés sur la page IoT (sélection détaillée du document hardware).
-export const BOM = [
-  { c: "ESP32-S3 (MCU)", p: "≈ 9 €" },
-  { c: "SIM7000E (modem LTE-M + GPS intégré)", p: "≈ 16 €" },
-  { c: "IMU LSM6DSOX (accéléro + gyro)", p: "≈ 4 €" },
-  { c: "Capteur température TMP117", p: "≈ 4 €" },
-  { c: "Capteur cardiaque MAX30102 (option)", p: "≈ 3 €" },
-  { c: "Mémoire flash 128 Mo (SPI)", p: "≈ 1,50 €" },
-  { c: "Batterie LiPo 2000 mAh + PMU", p: "≈ 12 €" },
-  { c: "Boîtier étanche IP67", p: "≈ 2 €" },
-  { c: "LED NeoPixel", p: "≈ 1 €" },
-  { c: "PCB prototype", p: "≈ 0,50 €" },
-  { c: "Carte SIM IoT 1NCE", p: "≈ 3 €" },
+// BOM du produit final (PCB custom SMD/CMS, assemblage JLCPCB). Deux colonnes :
+// prototype unitaire (×1) et série (×1000, tarifs dégressifs). Choix clé :
+// nRF9160 (SiP MCU + modem LTE-M) qui supprime les AT commands. La fréquence
+// cardiaque reste un axe R&D (4 candidats, décision Go/No-Go). Détail complet
+// et phase de développement (nRF9160-DK) dans le document BOM et la page IoT.
+export type BomLine = { c: string; p1: string; pk: string };
+export const BOM: BomLine[] = [
+  { c: "nRF9160-SICA · MCU + modem LTE-M/NB-IoT (SiP)", p1: "12 €", pk: "10 €" },
+  { c: "u-blox ZOE-M8Q · GNSS multi-constellation", p1: "14 €", pk: "10 €" },
+  { c: "LSM6DSOX · centrale inertielle (IMU)", p1: "2,85 €", pk: "1,85 €" },
+  { c: "TMP117 · température ±0,1 °C", p1: "2,50 €", pk: "1,45 €" },
+  { c: "Fréquence cardiaque · 1 option (conditionnel R&D)", p1: "0,80 à 6,50 €", pk: "0,45 à 4,20 €" },
+  { c: "W25Q128 · mémoire flash 16 Mo", p1: "1,20 €", pk: "0,80 €" },
+  { c: "BQ25895 + TLV62585 · PMU (charge, fuel gauge, régulateur)", p1: "5,35 €", pk: "3,55 €" },
+  { c: "Antennes Taoglas FPC (LTE-M + GNSS)", p1: "4,70 €", pk: "2,70 €" },
+  { c: "Connecteurs (USB-C, JST)", p1: "0,85 €", pk: "0,57 €" },
+  { c: "Composants passifs (R/C/L, quartz, LED, bouton)", p1: "6,10 €", pk: "2,00 €" },
+  { c: "PCB 4 couches + assemblage PCBA (JLCPCB)", p1: "38 €", pk: "6,50 €" },
+  { c: "Batterie Li-Po 2000 mAh", p1: "12 €", pk: "8 €" },
+  { c: "SIM IoT 1NCE (500 Mo / 10 ans)", p1: "10 €", pk: "10 €" },
+  { c: "Boîtier IP67 (injection) + étanchéité + mécanique", p1: "25,60 €", pk: "5,30 €" },
 ];
-export const BOM_TOTAL = "≈ 56 € / unité";
+export const BOM_TOTAL_P1 = "≈ 131 €";
+export const BOM_TOTAL_PK = "≈ 66 €/u";
 export const BOM_OPTIONS = [
-  { o: "Option A · 2G, sans soudure", p: "≈ 73 €/u" },
-  { o: "Option B · LTE, sans soudure", p: "≈ 187 €/u" },
-  { o: "Option C · 2G, à souder", p: "≈ 61 €/u" },
-  { o: "Option D · LTE sur mesure (retenue)", p: "≈ 56 €/u" },
+  { o: "Kit de développement (nRF9160-DK + shields)", p: "≈ 228 €" },
+  { o: "R&D fréquence cardiaque (4 candidats à tester)", p: "≈ 105 €" },
+  { o: "Produit final · prototype PCB unitaire", p: "≈ 131 €" },
+  { o: "Produit final · série de 1000 (cible)", p: "≈ 66 €/u" },
 ];
 export const BUDGET_NOTE =
-  "Kit de développement initial : ≈ 106–111 € (investissement unique de prototypage). Côté logiciel, le projet s'appuie sur des briques open source et un hébergement souverain ; les coûts d'exploitation ci-dessous restent maîtrisés et passent à l'échelle avec les abonnements.";
+  "Deux temps : une phase de développement sur kit nRF9160-DK et shields (≈ 228 €, ou ≈ 332 € avec la R&D fréquence cardiaque), puis le produit final sur PCB custom (≈ 131 € en prototype unitaire, ≈ 66 €/u en série de 1000). Le collier est vendu proche de son coût de série ; la rentabilité vient de l'abonnement.";
 
 /* --------------------------------------- BUDGET CLOUD & EXPLOITATION ---- */
 // Coût annuel d'exploitation d'une infra de PRODUCTION (produit lancé), pas de

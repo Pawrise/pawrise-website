@@ -2,7 +2,7 @@
 // Lancer : npx tsx docs/gen.ts  → écrit docs/data/*.typ
 import { writeFileSync } from "node:fs";
 import { AMDEC, RISKS, ipr, iprLevel, riskZone } from "../lib/content/risks";
-import { BOM, BOM_TOTAL, CLOUD_BUDGET, CLOUD_BUDGET_TOTAL, ECON } from "../lib/content/business";
+import { BOM, BOM_TOTAL_P1, BOM_TOTAL_PK, CLOUD_BUDGET, CLOUD_BUDGET_TOTAL, ECON } from "../lib/content/business";
 import { EPICS, BACKLOG_STATS } from "../lib/content/backlog";
 import { RACI_POLES, RACI_ROWS, RACI_ROWS_STRICT } from "../lib/content/pilotage";
 
@@ -28,8 +28,8 @@ const lvlFr: Record<string, string> = { crit: "Critique", high: "Élevé", mod: 
 }
 // BOM collier
 {
-  const rows = BOM.map((b) => row([b.c, b.p]));
-  writeFileSync(new URL("bom.typ", OUT), emit("BOM", `#let BOM_TOTAL = ${s(BOM_TOTAL)}\n`, rows));
+  const rows = BOM.map((b) => row([b.c, b.p1, b.pk]));
+  writeFileSync(new URL("bom.typ", OUT), emit("BOM", `#let BOM_TOTAL_P1 = ${s(BOM_TOTAL_P1)}\n#let BOM_TOTAL_PK = ${s(BOM_TOTAL_PK)}\n`, rows));
 }
 // Budget cloud
 {

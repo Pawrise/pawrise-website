@@ -1,6 +1,6 @@
 #import "../lib.typ": dtable, keybox, keep, brand, mut
 #import "../../data/econ.typ": ECON
-#import "../../data/bom.typ": BOM, BOM_TOTAL
+#import "../../data/bom.typ": BOM, BOM_TOTAL_P1, BOM_TOTAL_PK
 #import "../../data/cloudbudget.typ": CLOUDBUDGET, CLOUD_TOTAL
 
 = Modèle économique & budget
@@ -39,14 +39,14 @@ Les *unit economics* répondent à une seule question : un client, à lui seul, 
 == Budget prévisionnel · collier (BOM)
 
 #keep[
-Nomenclature du prototype, option retenue (LTE sur mesure). Les composants sont alignés sur la partie IoT.
+Nomenclature du produit final (PCB custom, assemblage JLCPCB), en prototype unitaire et en série de 1000. Choix clé : le nRF9160 (SiP MCU + modem) qui supprime les AT commands. Composants détaillés en partie IoT.
 
 #dtable(
-  columns: (1fr, auto),
-  headers: ("Composant", "Coût unitaire"),
+  columns: (1fr, auto, auto),
+  headers: ("Composant", "Prototype ×1", "Série ×1000"),
   rows: BOM,
 )
-#align(right)[#text(fill: brand, weight: 800)[Total unitaire : #BOM_TOTAL]]
+#align(right)[#text(fill: brand, weight: 800)[Total : #BOM_TOTAL_P1 (prototype) · #BOM_TOTAL_PK (série)]]
 ]
 
 == Coût annuel de l'infrastructure

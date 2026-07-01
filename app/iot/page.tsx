@@ -3,6 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import {
   IOT_INTRO,
   IOT_CHALLENGES,
+  IOT_MCU,
   IOT_ZONES,
   IOT_COMPONENTS,
   IOT_SENSORS,
@@ -67,6 +68,16 @@ export default function IotPage() {
                 <p className="ps-text" style={{ margin: 0 }}>{z.d}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Choix du MCU */}
+        <section className="panel-sect">
+          <div className="ps-head">
+            <h2>{IOT_MCU.titre}</h2>
+          </div>
+          <div className="glass ps-body">
+            <p className="ps-text">{IOT_MCU.d}</p>
           </div>
         </section>
 
