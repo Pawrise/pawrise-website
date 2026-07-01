@@ -15,4 +15,10 @@
 
 #include "parts/01-vision.typ"
 #pagebreak()
+#include "parts/02-marche.typ"
+#pagebreak()
+#include "parts/03-economie.typ"
+#pagebreak()
+#include "parts/04-wbs.typ"
+#pagebreak()
 #include "parts/09-risques.typ"
