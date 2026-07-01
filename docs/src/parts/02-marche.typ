@@ -10,15 +10,19 @@ Trois piliers : *Prévention* (détecter les signaux faibles avant qu'ils n'empi
 
 == Marché (TAM / SAM / SOM)
 
+On dimensionne le marché en entonnoir : le *TAM* (Total Addressable Market) est le marché total si l'on captait tout le monde ; le *SAM* (Serviceable Addressable Market) la part que notre produit peut réellement adresser ; le *SOM* (Serviceable Obtainable Market) la part réalistement captable à court/moyen terme.
+
 #grid(columns: (1fr, 1fr, 1fr, 1fr), gutter: 8pt,
-  ..(("≈ 73 M", "TAM · animaux de compagnie en France"), ("≈ 26,5 M", "SAM · chiens (9,9 M) + chats (16,6 M)"), ("1 foyer / 2", "possède au moins un animal"), ("3-5 ans", "SOM · dizaines de milliers d'abonnés")).map(f => block(fill: zebra, radius: 4pt, inset: 9pt, width: 100%)[
+  ..(("≈ 73 M", "TAM · tous animaux de compagnie en France"), ("≈ 26,5 M", "SAM · chiens (9,9 M) + chats (16,6 M)"), ("1 foyer / 2", "possède au moins un animal"), ("3-5 ans", "SOM · dizaines de milliers d'abonnés")).map(f => block(fill: zebra, radius: 4pt, inset: 9pt, width: 100%)[
     #text(fill: brand, weight: 900, size: 14pt, f.at(0))\
     #text(size: 8pt, fill: mut, f.at(1))
   ])
 )
 
 #v(6pt)
-Le marché total (TAM ≈ 73 M, tous animaux) inclut poissons, oiseaux et NAC. Le marché réellement adressable par un collier connecté est celui des chiens et chats, soit ≈ 26,5 M (9,9 M chiens + 16,6 M chats, FACCO 2024). Le marché pet tech est en forte croissance, porté par l'humanisation des animaux. Les concurrents (Tractive, Weenect, Invoxia Minitailz) proposent désormais aussi des mesures de santé mais restent sur la donnée brute ; l'interprétation accompagnée (IA + vétérinaire) reste notre différenciation. #text(size: 8.5pt, fill: mut)[Sources : FACCO 2024-2025, rapports marché pet tech.]
+*TAM ≈ 73 M* : l'ensemble des animaux de compagnie en France, poissons, oiseaux et NAC compris. *SAM ≈ 26,5 M* : les chiens et chats (9,9 M + 16,6 M), seuls réellement adressables par un collier connecté. *SOM* : quelques dizaines de milliers d'abonnés visés sur 3 à 5 ans, compte tenu de la notoriété à bâtir, du budget et de la concurrence. Le repère « 1 foyer sur 2 » (part des foyers français possédant un animal) illustre la profondeur du marché. Le marché pet tech est en forte croissance, porté par l'humanisation des animaux ; les concurrents mesurent désormais la santé mais restent sur la donnée brute, l'interprétation accompagnée (IA + vétérinaire) reste notre différenciation.
+
+#text(size: 8.5pt, fill: mut)[Sources : #link("https://www.facco.fr/chiffres-cles/")[FACCO / Kantar, chiffres clés 2024-2025] ; rapports de marché pet tech (#link("https://www.grandviewresearch.com/industry-analysis/pet-wearable-market")[Grand View Research, pet wearables]).]
 
 == SWOT
 
