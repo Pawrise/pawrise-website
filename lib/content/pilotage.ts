@@ -201,7 +201,7 @@ export type Seg = { label: string; start: number; end: number; kind: "derisk" | 
 export type Bar = {
   id: string; phase: string; label: string; team: string;
   start: number; end: number; accent: string;
-  segs?: Seg[]; critical?: boolean;
+  segs?: Seg[]; critical?: boolean; deps?: string[];
   detail: { contenu: string[]; livrable: string; depend: string };
 };
 // Les phases du planning (pour les séparateurs et la vue groupée).
@@ -254,7 +254,7 @@ export const GANTT: Bar[] = [
     },
   },
   {
-    id: "d2", phase: "Développement", label: "Backend & API", team: "Hamid · Aaditya · Elarif", start: 7, end: 13, accent: "var(--svc)", critical: true,
+    id: "d2", phase: "Développement", label: "Backend & API", team: "Hamid · Aaditya · Elarif", start: 7, end: 13, accent: "var(--svc)", critical: true, deps: ["d1"],
     detail: {
       contenu: ["API et services métier (Rust)", "Authentification (OIDC), base de données", "Ingestion des données collier"],
       livrable: "Backend complet et documenté (janv. 2027).",
@@ -274,7 +274,7 @@ export const GANTT: Bar[] = [
     },
   },
   {
-    id: "d4", phase: "Développement", label: "Moteur IA + Data", team: "Nino · Yassine", start: 7, end: 16, accent: "var(--ai)", critical: true,
+    id: "d4", phase: "Développement", label: "Moteur IA + Data", team: "Nino · Yassine", start: 7, end: 16, accent: "var(--ai)", critical: true, deps: ["d3"],
     segs: [
       { label: "POCs", start: 7, end: 11, kind: "derisk" },
       { label: "Intégration", start: 12, end: 16, kind: "build" },
@@ -286,7 +286,7 @@ export const GANTT: Bar[] = [
     },
   },
   {
-    id: "d5", phase: "Développement", label: "App Mobile", team: "Adam · Elarif", start: 7, end: 17, accent: "var(--cli)",
+    id: "d5", phase: "Développement", label: "App Mobile", team: "Adam · Elarif", start: 7, end: 17, accent: "var(--cli)", deps: ["d2"],
     detail: {
       contenu: ["Auth, dashboard bien-être", "Carte GPS, zones de sécurité", "Chat IA, notifications"],
       livrable: "App propriétaire complète (mai 2027).",
@@ -294,7 +294,7 @@ export const GANTT: Bar[] = [
     },
   },
   {
-    id: "d6", phase: "Développement", label: "Portail Véto", team: "Hamid · Aaditya · Elarif", start: 14, end: 17, accent: "var(--svc)", critical: true,
+    id: "d6", phase: "Développement", label: "Portail Véto", team: "Hamid · Aaditya · Elarif", start: 14, end: 17, accent: "var(--svc)", critical: true, deps: ["d2", "d4"],
     detail: {
       contenu: ["Dashboard vétérinaire, timeline patient", "Escalade et handoff structuré", "Rapports / PDF normalisé"],
       livrable: "Portail vétérinaire livré (mai 2027).",
@@ -303,7 +303,7 @@ export const GANTT: Bar[] = [
   },
   // ---- Phase 3 · Intégration ----
   {
-    id: "i1", phase: "Intégration", label: "Intégration & tests E2E", team: "Toute l'équipe", start: 17, end: 19, accent: "var(--rose)", critical: true,
+    id: "i1", phase: "Intégration", label: "Intégration & tests E2E", team: "Toute l'équipe", start: 17, end: 19, accent: "var(--rose)", critical: true, deps: ["d5", "d6"],
     detail: {
       contenu: ["Tests E2E (tous les composants connectés)", "Bêta interne, tests utilisateurs", "Documentation technique et guide"],
       livrable: "Produit assemblé, testé et stabilisé (juil. 2027).",

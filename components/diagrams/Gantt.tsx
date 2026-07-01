@@ -1,24 +1,99 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { GANTT, GANTT_PHASES, MILESTONES, MONTHS, YEARS, rangeLabel, nowIndex } from "@/lib/content/pilotage";
 
 const N = MONTHS.length; // 20 mois
 
+type Link = { key: string; d: string; crit: boolean };
+
 export default function Gantt() {
   const [sel, setSel] = useState<string | null>(null);
   const [now, setNow] = useState<number | null>(null);
+  const [showDeps, setShowDeps] = useState(true);
+  const [links, setLinks] = useState<Link[]>([]);
   const active = GANTT.find((b) => b.id === sel) || null;
+
+  const ganttRef = useRef<HTMLDivElement>(null);
+  const trackRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   // Repère "aujourd'hui" calculé côté client (évite tout mismatch d'hydratation).
   useEffect(() => {
     setNow(nowIndex(new Date()));
   }, []);
 
+  // Trace les flèches de dépendance en mesurant la position réelle des barres.
+  useLayoutEffect(() => {
+    const measure = () => {
+      const cont = ganttRef.current;
+      if (!cont) return;
+      const cr = cont.getBoundingClientRect();
+      const out: Link[] = [];
+      GANTT.forEach((b) => {
+        if (!b.deps) return;
+        const st = trackRefs.current[b.id];
+        if (!st) return;
+        const sr = st.getBoundingClientRect();
+        const sx = sr.left - cr.left;
+        const startX = sx + (b.start / N) * sr.width; // bord gauche du successeur
+        const startY = sr.top - cr.top + sr.height / 2;
+        b.deps.forEach((pid) => {
+          const pt = trackRefs.current[pid];
+          const pb = GANTT.find((x) => x.id === pid);
+          if (!pt || !pb) return;
+          const pr = pt.getBoundingClientRect();
+          const px = pr.left - cr.left;
+          // pour un prédécesseur segmenté, la dépendance porte sur la fin du
+          // segment de dé-risquage (ex. simulateur), pas sur la fin du hardware.
+          const endIdx = pb.segs ? pb.segs[0].end : pb.end;
+          const endX = px + ((endIdx + 1) / N) * pr.width; // bord droit utile du prédécesseur
+          const endY = pr.top - cr.top + pr.height / 2;
+          const dx = Math.max(20, Math.min(64, Math.abs(startX - endX) * 0.5));
+          const d = `M ${endX.toFixed(1)} ${endY.toFixed(1)} C ${(endX + dx).toFixed(1)} ${endY.toFixed(1)}, ${(startX - dx).toFixed(1)} ${startY.toFixed(1)}, ${startX.toFixed(1)} ${startY.toFixed(1)}`;
+          out.push({ key: `${pid}-${b.id}`, d, crit: !!(pb.critical && b.critical) });
+        });
+      });
+      setLinks(out);
+    };
+    const raf = requestAnimationFrame(measure);
+    const t = setTimeout(measure, 350); // après reveal / polices
+    const ro = new ResizeObserver(measure);
+    if (ganttRef.current) ro.observe(ganttRef.current);
+    window.addEventListener("resize", measure);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t);
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [now]);
+
   return (
     <div className="gantt-wrap">
       <div className="gantt-scroll">
-        <div className="gantt" style={{ ["--n" as string]: N }}>
+        <div className="gantt" style={{ ["--n" as string]: N }} ref={ganttRef}>
+          {/* flèches de dépendance (overlay mesuré) */}
+          {showDeps && links.length > 0 && (
+            <svg className="gantt-deps" aria-hidden="true">
+              <defs>
+                <marker id="gdep-a" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#8ea3c4" />
+                </marker>
+                <marker id="gdep-c" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#d3fc72" />
+                </marker>
+              </defs>
+              {links.map((l) => (
+                <path
+                  key={l.key}
+                  d={l.d}
+                  className={`gdep-path${l.crit ? " crit" : ""}`}
+                  markerEnd={`url(#${l.crit ? "gdep-c" : "gdep-a"})`}
+                />
+              ))}
+            </svg>
+          )}
+
           {/* en-tête : années puis mois */}
           <div className="gantt-row gantt-head">
             <div className="gantt-side" />
@@ -70,7 +145,7 @@ export default function Gantt() {
                     <small>{b.team}</small>
                     <small className="gantt-dates">{rangeLabel(b.start, b.end)}</small>
                   </div>
-                  <div className="gantt-track">
+                  <div className="gantt-track" ref={(el) => { trackRefs.current[b.id] = el; }}>
                     {/* quadrillage vertical mensuel */}
                     {MONTHS.map((_, c) => (
                       <span className="gantt-grid" key={c} style={{ gridColumn: c + 1 }} />
@@ -126,6 +201,10 @@ export default function Gantt() {
         <span><i className="gl-build" /> Engagement (développement)</span>
         <span><i className="gl-diamond" /> Jalon</span>
         <span><i className="gl-crit" /> Chemin critique</span>
+        <span><i className="gl-dep" /> Dépendance</span>
+        <button type="button" className={`gantt-depbtn${showDeps ? " on" : ""}`} onClick={() => setShowDeps((v) => !v)}>
+          {showDeps ? "Masquer les liens" : "Afficher les liens"}
+        </button>
         <span className="gl-hint">Cliquez une tâche pour le détail</span>
       </div>
 
