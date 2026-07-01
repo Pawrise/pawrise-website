@@ -65,6 +65,8 @@ On dimensionne le marché en entonnoir : le *TAM* (Total Addressable Market) est
   )
 ))
 
+#text(size: 8.5pt, fill: mut)[Sources : marché #link("https://www.facco.fr/chiffres-cles/")[FACCO / Kantar] ; santé embarquée des concurrents #link("https://www.invoxia.com/")[Invoxia], #link("https://tractive.com/")[Tractive] ; cadre réglementaire #link("https://eur-lex.europa.eu/eli/reg/2024/1689")[AI Act (UE 2024/1689)], #link("https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006583276")[Code rural, art. L243-1].]
+
 == Matrice de confrontation
 
 #keep[
@@ -100,3 +102,5 @@ L'analyse macro-environnementale, fil conducteur : orienter, jamais diagnostique
   ),
 )
 ]
+
+#text(size: 8.5pt, fill: mut)[Sources officielles : #link("https://www.economie.gouv.fr/france-2030")[France 2030], #link("https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044387560")[loi n° 2021-1539 (bien-être animal)], #link("https://www.facco.fr/chiffres-cles/")[FACCO / Kantar] ; #link("https://eur-lex.europa.eu/eli/reg/2016/679")[RGPD], #link("https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006583276")[Code rural L243-1], #link("https://eur-lex.europa.eu/eli/reg/2024/1689")[AI Act], #link("https://eur-lex.europa.eu/eli/reg/2023/988")[GPSR (UE 2023/988)], #link("https://eur-lex.europa.eu/eli/reg/2023/1542")[Règlement Batteries (UE 2023/1542)], #link("https://www.economie.gouv.fr/particuliers/indice-reparabilite")[indice de réparabilité].]
