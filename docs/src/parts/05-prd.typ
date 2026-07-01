@@ -1,23 +1,14 @@
-#import "../lib.typ": dtable, keybox, keep, brand, mut, zebra
-#import "../../data/backlog.typ": BACKLOG, BACKLOG_EPICS, BACKLOG_US, BACKLOG_MVP
+#import "../lib.typ": dtable, brand, mut
 
-= Backlog & exigences
+= Exigences produit (PRD)
 
-Le découpage produit compte #BACKLOG_EPICS epics et #BACKLOG_US user stories, dont #BACKLOG_MVP dans le périmètre MVP. Chaque story porte des critères d'acceptation au format Given/When/Then. Cette partie fournit le *référentiel d'exigences* (FR/NFR) auquel renvoie le WBS, et la *traçabilité* epic vers exigences.
+Ce chapitre constitue le cœur du *Product Requirements Document (PRD)* : il définit *ce que le produit doit faire* et *les qualités qu'il doit garantir*. La vision, le problème et les personas figurent en partie Vision ; les exigences ci-dessous ont été élicitées avec la méthode BMAD et servent de *référentiel* au découpage du travail (WBS, partie suivante). Chaque exigence est unique, testable, et tracée jusqu'aux epics qui la couvrent.
 
-== Epics (traçabilité vers les exigences)
+On distingue les *exigences fonctionnelles (FR)*, ce que le système doit faire, et les *exigences non fonctionnelles (NFR)*, les qualités et contraintes (fiabilité, sécurité, RGPD, performance, autonomie…).
 
-La colonne « Exigences » relie chaque epic aux exigences du référentiel ci-après : c'est la matrice de traçabilité (chaque exigence est portée par au moins un epic, aucune n'est orpheline).
+== Exigences fonctionnelles (FR1 à FR43)
 
-#dtable(
-  columns: (auto, 1fr, auto, auto, auto),
-  headers: ("#", "Epic", "US", "Périmètre", "Exigences"),
-  rows: BACKLOG,
-)
-
-== Référentiel des exigences fonctionnelles (FR1 à FR43)
-
-Les exigences fonctionnelles décrivent ce que le système doit faire. Elles sont issues du cahier des exigences produit (PRD) et regroupées par domaine.
+Regroupées par domaine, elles décrivent les capacités attendues du système.
 
 #let frg(title, lines) = block(breakable: false, width: 100%, spacing: 9pt, inset: (bottom: 2pt))[
   #text(fill: brand, weight: 800, size: 9pt)[#title]
@@ -91,7 +82,7 @@ Les exigences fonctionnelles décrivent ce que le système doit faire. Elles son
 
 == Exigences non fonctionnelles (NFR1 à NFR10)
 
-Les exigences non fonctionnelles décrivent les qualités et contraintes du système.
+Elles décrivent les qualités et contraintes transverses du système.
 
 #dtable(
   columns: (auto, 1fr),
@@ -109,13 +100,3 @@ Les exigences non fonctionnelles décrivent les qualités et contraintes du syst
     ("NFR10 · Maintenabilité", "Qualité de code, tests, documentation."),
   ),
 )
-
-== Exemple de critère d'acceptation
-
-#keybox(title: "Story 1.1 · Création de compte sécurisée")[
-  *En tant que* propriétaire d'animal, *je veux* créer un compte avec email et mot de passe, *afin d'*accéder à l'application en toute sécurité.\
-  *Given* un visiteur sur l'écran d'inscription\
-  *When* il saisit un email valide et un mot de passe respectant la politique de sécurité\
-  *Then* un compte est créé et un email de vérification est envoyé\
-  *And* un mot de passe faible ou un email déjà utilisé déclenche une erreur explicite sans créer de compte.
-]

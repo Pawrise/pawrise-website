@@ -1,10 +1,22 @@
-#import "../lib.typ": brand, mut, lime, zebra, hair, limebg
+#import "../lib.typ": keybox, brand, mut, lime, zebra, hair, limebg
 
 = WBS & fonctions par epic
 
-Ce *Work Breakdown Structure (WBS)* décompose le *périmètre total* du projet de façon *hiérarchique et orientée livrables*, selon la méthode BMAD. Trois niveaux : le projet Pawrise Care (niveau 0), ses *11 epics* livrables (niveau 1, codes 1 à 11), et les *fonctions* attendues de chaque epic (niveau 2, codes 1.1, 1.2…). Les 66 user stories et leurs critères d'acceptation (Given/When/Then) affinent le niveau 2. Les codes FR/NFR affichés renvoient au *référentiel complet des exigences* (FR1-FR43, NFR1-NFR10) et à la *traçabilité* epic vers exigences, détaillés en partie Backlog.
+Ce *Work Breakdown Structure (WBS)* décompose le *périmètre total* du projet de façon *hiérarchique et orientée livrables*, selon la méthode BMAD. Trois niveaux : le projet Pawrise Care (niveau 0), ses *11 epics* livrables (niveau 1, codes 1 à 11), et les *fonctions* attendues de chaque epic (niveau 2, codes 1.1, 1.2…). Les 66 user stories et leurs critères d'acceptation (Given/When/Then) affinent le niveau 2. Les codes FR/NFR affichés renvoient au référentiel défini en partie *Exigences produit (PRD)* ; la *traçabilité* epic vers exigences est portée par chaque carte ci-après (ligne « Exigences »).
 
-Le diagramme unique ci-après (page suivante, en paysage) présente cette décomposition et, pour chaque livrable, décrit les *fonctions attendues* ainsi que les *exigences* qu'elles couvrent, afin d'en faciliter l'implémentation. Les *exigences fonctionnelles (FR)* désignent ce que le système doit faire (ex. FR16 : répondre via l'assistant IA) ; les *exigences non fonctionnelles (NFR)* désignent les qualités et contraintes (fiabilité, sécurité, RGPD, performance, autonomie…). Périmètre MVP : 9 epics (52 US) ; post-MVP : epics 8 et 10.
+Le diagramme unique ci-après (page suivante, en paysage) présente cette décomposition et, pour chaque livrable, décrit les *fonctions attendues* ainsi que les *exigences* qu'elles couvrent, afin d'en faciliter l'implémentation. Les codes FR/NFR renvoient au référentiel de la partie *Exigences produit (PRD)*. Périmètre MVP : 9 epics (52 US) ; post-MVP : epics 8 et 10.
+
+== User stories & critères d'acceptation
+
+Chaque epic (niveau 1) se décline en *user stories* (66 au total) ; chacune porte des *critères d'acceptation* testables au format Given/When/Then, qui rendent la fonction vérifiable et prête à implémenter. Exemple :
+
+#keybox(title: "Story 1.1 · Création de compte sécurisée")[
+  *En tant que* propriétaire d'animal, *je veux* créer un compte avec email et mot de passe, *afin d'*accéder à l'application en toute sécurité.\
+  *Given* un visiteur sur l'écran d'inscription\
+  *When* il saisit un email valide et un mot de passe respectant la politique de sécurité\
+  *Then* un compte est créé et un email de vérification est envoyé\
+  *And* un mot de passe faible ou un email déjà utilisé déclenche une erreur explicite sans créer de compte.
+]
 
 #let dcolor(d) = (
   if d == "cli" { rgb("#eaf1fb") }
@@ -69,7 +81,7 @@ Le diagramme unique ci-après (page suivante, en paysage) présente cette décom
       #v(3pt)
       #text(size: 6pt, fill: mut)[Couleur = domaine : #box(baseline:1pt, rect(width:6pt,height:6pt,radius:1pt,fill:dcolor("cli"))) App · #box(baseline:1pt, rect(width:6pt,height:6pt,radius:1pt,fill:dcolor("edge"))) IoT · #box(baseline:1pt, rect(width:6pt,height:6pt,radius:1pt,fill:dcolor("ai"))) IA · #box(baseline:1pt, rect(width:6pt,height:6pt,radius:1pt,fill:dcolor("svc"))) Vété · #box(baseline:1pt, rect(width:6pt,height:6pt,radius:1pt,fill:dcolor("ext"))) Business · #box(baseline:1pt, rect(width:6pt,height:6pt,radius:1pt,fill:dcolor("rose"))) Conformité · #box(baseline:1pt, rect(width:6pt,height:6pt,radius:1pt,fill:dcolor("data"))) Ops]
       #v(3pt)
-      #text(size: 5.8pt, fill: mut, style: "italic")[En italique : exigences (FR/NFR) couvertes. Détail des US et critères d'acceptation en partie Backlog.]
+      #text(size: 5.8pt, fill: mut, style: "italic")[En italique : exigences (FR/NFR) couvertes, définies en partie Exigences produit (PRD).]
     ],
   )
 ]

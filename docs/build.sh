@@ -20,7 +20,8 @@ titre() {
     01-vision) echo "Vision & problématique" ;;
     02-marche) echo "Marché & stratégie" ;;
     03-economie) echo "Modèle économique & budget" ;;
-    04-wbs) echo "WBS & fonctions par lot" ;;
+    04-wbs) echo "WBS & fonctions" ;;
+    05-prd) echo "Exigences produit (PRD)" ;;
     05-organisation) echo "Organisation & compétences" ;;
     06-raci) echo "Matrice RACI" ;;
     07-planning) echo "Planning & méthodologie" ;;
@@ -30,7 +31,6 @@ titre() {
     11-cloud) echo "Cloud & infrastructure" ;;
     12-iot) echo "IoT — collier connecté" ;;
     13-ia) echo "IA — Care Engine" ;;
-    14-backlog) echo "Backlog & exigences" ;;
     99-annexes) echo "Annexes" ;;
     *) echo "$1" ;;
   esac
