@@ -80,6 +80,8 @@ Regroupées par domaine, elles décrivent les capacités attendues du système.
   ],
 )
 
+#pagebreak(weak: true)
+
 == Exigences non fonctionnelles (NFR1 à NFR10)
 
 Elles décrivent les qualités et contraintes transverses du système.
