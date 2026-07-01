@@ -43,6 +43,11 @@ next-env.d.ts
 # gros asset local (deck)
 PAWRISE.pdf
 *.pdf
+# mais on versionne les livrables PDF finaux de la doc
+!docs/out/*.pdf
+
+# artefacts de rendu (PNG de prévisualisation)
+docs/out/*.png
 
 # fichiers sources docs (livrables gérés à la fin)
 *.docx
