@@ -7,7 +7,9 @@
 
 == Modèle économique
 
-Le hardware est vendu proche de son coût ; la rentabilité vient de l'*abonnement récurrent*. Le modèle intègre un *pool façon Spotify* : une part fixe de l'abonnement finance le réseau vétérinaire, ce qui plafonne le coût vétérinaire par construction et protège la marge contributive.
+Le hardware est vendu proche de son coût ; la rentabilité vient de l'*abonnement récurrent*.
+
+Le modèle intègre un *pool de rémunération façon Spotify*. Concrètement : une *part fixe* de chaque abonnement (un pourcentage défini du prix mensuel) alimente une cagnotte commune qui rémunère les vétérinaires, répartie entre eux au prorata de leur activité. La conséquence est que le *coût vétérinaire total ne peut jamais dépasser ce pourcentage du chiffre d'affaires*, quel que soit le nombre de sollicitations : il est plafonné « par construction », c'est-à-dire mathématiquement, et non par une simple règle de gestion. Aucun utilisateur ne coûte donc plus, en temps vétérinaire, que ce que son abonnement apporte au pool. C'est ce qui protège la marge : la dépense vétérinaire grandit avec les revenus, jamais plus vite. Des garde-fous (filtrage IA avant escalade, quota d'usage équitable) évitent l'abus tout en gardant le service soutenable.
 
 *Hypothèses :* abonnement 9,90 €/mois (ordre de grandeur du marché) ; marge contributive après cloud, API LLM et pool vétérinaire ; durée de vie client = 1 / churn mensuel ; LTV = abonnement × durée de vie × marge.
 
