@@ -4,27 +4,37 @@
 
 == Structure de découpage (WBS)
 
-Le WBS décompose le projet en 9 lots techniques, du collier à la conformité. Chaque lot regroupe ses sous-composants.
+Le WBS décompose le projet en 9 lots techniques, du collier à la conformité, chacun subdivisé en sous-composants numérotés.
 
-#let wbs = (
-  ("1 · Pawrise Collar — Hardware", ("Capteurs & mesures (GPS, accéléro, température, cardio)", "Système embarqué (MCU, firmware, énergie)", "Communication (BLE, LTE-M, chiffrement)", "Boîtier & conception physique (IP67)", "Batterie & autonomie")),
-  ("2 · Collector & Firmware Communication", ("Acquisition (lecture périodique, buffer edge)", "Transmission & protocoles (sync, retry)", "Sécurité (auth collier, intégrité, horodatage)")),
-  ("3 · Backend & API Platform", ("Ingestion (API capteurs, normalisation)", "Stockage & modélisation (time-series, agrégats)", "API App & Vet", "Administration (comptes, animaux, règles)")),
-  ("4 · Pawrise Care Engine — IA & Analyse", ("Prétraitement", "Analyse comportementale", "Analyse santé contextuelle", "Chat IA & expertise (LLM + RAG)", "Export vétérinaire (PDF, JSON)")),
-  ("5 · Mobile App — Propriétaire", ("Écran bien-être", "Localisation (GPS, geofencing)", "Notifications & alertes", "Chat & accompagnement")),
-  ("6 · Vet Portal — Interface vétérinaire", ("Vue patient", "Analyse professionnelle", "Collaboration")),
-  ("7 · Infrastructure & Ops", ("Hébergement (cloud, Docker, scalabilité)", "Monitoring (logs, perfs, alertes)", "CI/CD (tests, build, déploiements)")),
-  ("8 · Data, Privacy & Compliance", ("Protection des données (anonymisation, consentement)", "Transparence & éthique (pas de diagnostic auto)")),
-  ("9 · Business & User Lifecycle", ("Onboarding & appairage", "Abonnement & facturation (Stripe)", "Support client", "Provisioning matériel", "Partenaires vétérinaires")),
-)
-
-#for lot in wbs [
-  #block(breakable: false, spacing: 9pt)[
-    #text(fill: brand, weight: 800, size: 10pt, lot.at(0))
-    #v(2pt)
-    #grid(columns: (1fr, 1fr), gutter: 4pt, ..lot.at(1).map(c => text(size: 8.7pt, fill: mut)[• #c]))
+#let lot(n, titre, subs) = block(breakable: false, spacing: 8pt, width: 100%, inset: (left: 2pt))[
+  #block(fill: brand, radius: 3pt, inset: (x: 8pt, y: 4pt), width: 100%)[
+    #text(fill: white, weight: 800, size: 9.5pt)[#n · #titre]
+  ]
+  #v(1pt)
+  #for s in subs [
+    #grid(columns: (2.6em, 1fr), gutter: 0pt,
+      text(fill: rgb("#37338f"), weight: 700, size: 8.5pt, s.at(0)),
+      text(fill: mut, size: 8.5pt, s.at(1)),
+    )
+    #v(1.5pt)
   ]
 ]
+
+#grid(columns: (1fr, 1fr), gutter: 14pt,
+  [
+    #lot("1", "Pawrise Collar — Hardware", (("1.1", "Capteurs & mesures"), ("1.2", "Système embarqué"), ("1.3", "Communication"), ("1.4", "Boîtier & conception physique"), ("1.5", "Batterie & autonomie")))
+    #lot("2", "Collector & Firmware", (("2.1", "Acquisition de données"), ("2.2", "Transmission & protocoles"), ("2.3", "Sécurité")))
+    #lot("3", "Backend & API Platform", (("3.1", "Ingestion des données"), ("3.2", "Stockage & modélisation"), ("3.3", "API App & Vet"), ("3.4", "Administration")))
+    #lot("4", "Care Engine — IA & Analyse", (("4.1", "Prétraitement"), ("4.2", "Analyse comportementale"), ("4.3", "Analyse santé contextuelle"), ("4.4", "Chat IA & expertise"), ("4.5", "Export vétérinaire")))
+    #lot("5", "Mobile App — Propriétaire", (("5.1", "Écran bien-être"), ("5.2", "Localisation"), ("5.3", "Notifications & alertes"), ("5.4", "Chat & accompagnement")))
+  ],
+  [
+    #lot("6", "Vet Portal — Interface véto", (("6.1", "Vue patient"), ("6.2", "Analyse professionnelle"), ("6.3", "Collaboration")))
+    #lot("7", "Infrastructure & Ops", (("7.1", "Hébergement"), ("7.2", "Monitoring"), ("7.3", "CI/CD")))
+    #lot("8", "Data, Privacy & Compliance", (("8.1", "Protection des données"), ("8.2", "Transparence & éthique")))
+    #lot("9", "Business & User Lifecycle", (("9.1", "Onboarding & appairage"), ("9.2", "Abonnement & facturation"), ("9.3", "Support client"), ("9.4", "Provisioning matériel"), ("9.5", "Partenaires vétérinaires")))
+  ],
+)
 
 == Fonctions attendues par lot
 

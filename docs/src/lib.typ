@@ -47,10 +47,8 @@
 #let cover(title: "", subtitle: "", part: none, authors: (), date: "") = {
   set page(header: none, footer: none, numbering: none)
   place(top + left, dy: 0pt)[
-    #box(baseline: 1.5pt, rect(width: 10pt, height: 10pt, radius: 2.5pt, fill: brand))
-    #h(-6.5pt)
-    #box(baseline: 5pt, circle(radius: 2.5pt, fill: lime))
-    #h(3pt)
+    #box(baseline: 3.5pt, image("/figures/logo.svg", height: 15pt))
+    #h(4pt)
     #text(fill: brand, weight: 900, size: 13pt)[Pawrise Care]
   ]
   v(1fr)

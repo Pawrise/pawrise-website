@@ -61,13 +61,13 @@ Niveaux : #box(rect(width:8pt,height:8pt,fill:brand)) expert · #box(rect(width:
 )
 #set text(size: 8pt)
 #table(
-  columns: (1fr,) + (14pt,) * 10,
+  columns: (4.6cm,) + (1fr,) * 10,
   stroke: (x, y) => (bottom: 0.5pt + hair),
-  inset: (x: 3pt, y: 5pt),
+  inset: (x: 4pt, y: 5pt),
   align: (x, y) => if x == 0 { left + horizon } else { center + horizon },
   fill: (x, y) => if y == 0 { brand },
-  table.header(text(fill: white, weight: 800, size: 7.5pt)[Compétence], ..("Yas","Ela","Ibr","Cyr","Aad","Ham","Nin","Ada","Oum","Abd").map(m => text(fill: white, weight: 700, size: 7pt, m))),
-  ..skills.map(row => (text(size: 8pt, row.at(0)),) + row.at(1).map(l => box(width: 11pt, height: 11pt, radius: 2pt, fill: lvlcol(l)))).flatten()
+  table.header(text(fill: white, weight: 800, size: 7.5pt)[Compétence], ..("Yas","Ela","Ibr","Cyr","Aad","Ham","Nin","Ada","Oum","Abd").map(m => text(fill: white, weight: 700, size: 7.5pt, m))),
+  ..skills.map(row => (text(size: 8pt, row.at(0)),) + row.at(1).map(l => align(center, box(width: 12pt, height: 11pt, radius: 2pt, fill: lvlcol(l))))).flatten()
 )
 #set text(size: 10.5pt)
 
