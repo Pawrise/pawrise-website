@@ -213,7 +213,7 @@ export default function BusinessPage() {
         <section className="panel-sect">
           <div className="ps-head">
             <h2>Coût annuel de l&apos;infrastructure</h2>
-            <p>Ce que coûte l&apos;infra sur un an une fois le produit lancé : hébergement souverain Hetzner (auto-géré, ligne ARM), sauvegardes et modèle de langage.</p>
+            <p>Ce que coûte l&apos;infra sur un an (production + développement) : hébergement souverain Hetzner (auto-géré, ligne ARM), sauvegardes et modèle de langage. Le dev se fait surtout en local et les tests sont facturés à la consommation.</p>
           </div>
           <div className="glass ps-body">
             <div className="raci-scroll">

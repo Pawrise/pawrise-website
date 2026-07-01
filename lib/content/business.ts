@@ -210,7 +210,8 @@ export const CLOUD_BUDGET: CloudCost[] = [
   { poste: "Sauvegardes hors-site", detail: "Storage Box (rétention longue durée)", cout: "≈ 60 €/an" },
   { poste: "Modèle de langage (IA)", detail: "Azure OpenAI + Cohere · ~0,03 à 0,05 €/conversation (variable)", cout: "≈ 600 €/an" },
   { poste: "Nom de domaine", detail: ".com (TLS Let's Encrypt gratuit)", cout: "≈ 12 €/an" },
+  { poste: "Développement & tests", detail: "dev en local (gratuit) + CI ; tests éphémères et IA à la consommation", cout: "≈ 150 €/an" },
 ];
-export const CLOUD_BUDGET_TOTAL = "≈ 1 600 €/an";
+export const CLOUD_BUDGET_TOTAL = "≈ 1 750 €/an";
 export const CLOUD_BUDGET_NOTE =
   "Coût d'exploitation d'une infrastructure de production sur un an. Hébergement 100 % Hetzner (souverain, UE) sur la ligne ARM CAX (Ampere Altra), la plus rentable après la hausse tarifaire Hetzner du 15 juin 2026 (l'ARM a bien moins augmenté que l'AMD/Intel). Seul le poste IA est variable : il croît avec le nombre de conversations, donc avec les abonnements qui le financent. Un hyperscaler équivalent (Azure AKS) coûterait de l'ordre de 4 à 6× plus. Prix serveurs : tarifs publics Hetzner Cloud, juin 2026.";

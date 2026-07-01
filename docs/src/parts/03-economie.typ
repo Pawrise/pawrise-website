@@ -49,14 +49,9 @@ Nomenclature du prototype, option retenue (LTE sur mesure). Les composants sont 
 #align(right)[#text(fill: brand, weight: 800)[Total unitaire : #BOM_TOTAL]]
 ]
 
-== Coût annuel de l'infrastructure (production)
+== Coût annuel de l'infrastructure
 
-Ce que coûte l'infrastructure sur *un an*, une fois le produit lancé (sans découpage par phase). Hébergement souverain (UE), auto-géré via Terraform et Kubernetes.
-
-*Pourquoi ces serveurs ?*
-- *Hetzner (Allemagne)* : hébergeur européen (souveraineté, RGPD), ~4 à 6× moins cher qu'un hyperscaler à capacités égales.
-- *Ligne ARM CAX (Ampere Altra)* : meilleur prix/performance ; après la hausse Hetzner du 15/06/2026 (ARM ~1,3 à 1,4× contre ~2,5× pour l'AMD/Intel), c'est la ligne la plus rentable.
-- *Auto-géré, pas managé* : moins cher à capacités égales et sans lock-in ; cloud managé UE prévu au scale (voir partie Cloud).
+Ce que coûte l'infrastructure sur *un an* (production + développement, sans découpage par phase). Souverain UE, auto-géré (Terraform + Kubernetes) ; le dev se fait surtout *en local* et les tests sont facturés *à la consommation*. Serveurs Hetzner (UE, ~4 à 6× moins cher qu'un hyperscaler), ligne ARM CAX (la plus rentable après la hausse du 15/06/2026), auto-géré sans lock-in. Dimensionnement, comparaison et souveraineté détaillés en partie Cloud.
 
 #keep[
 #dtable(
@@ -66,5 +61,5 @@ Ce que coûte l'infrastructure sur *un an*, une fois le produit lancé (sans dé
 )
 #align(right)[#text(fill: brand, weight: 800)[Total : #CLOUD_TOTAL]]
 
-#text(size: 8.5pt, fill: mut)[Sources : #link("https://www.hetzner.com/cloud/")[Hetzner Cloud] + #link("https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/")[ajustement du 15/06/2026] (CAX21 ≈ 10,49 €, CAX31 ≈ 20,99 €/mois ; volumes 0,057 €/Go) ; IA : #link("https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/")[Azure OpenAI], #link("https://cohere.com/pricing")[Cohere]. Comparatif VPS / managé / hyperscaler en partie Cloud.]
+#text(size: 8.5pt, fill: mut)[Sources : #link("https://www.hetzner.com/cloud/")[Hetzner Cloud] + #link("https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/")[ajustement 15/06/2026] (CAX21 10,49 €, CAX31 20,99 €/mois) ; IA : #link("https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/")[Azure OpenAI], #link("https://cohere.com/pricing")[Cohere]. Détail en partie Cloud.]
 ]

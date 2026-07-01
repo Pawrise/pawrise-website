@@ -6,5 +6,6 @@
   ("Sauvegardes hors-site", "Storage Box (rétention longue durée)", "≈ 60 €/an"),
   ("Modèle de langage (IA)", "Azure OpenAI + Cohere · ~0,03 à 0,05 €/conversation (variable)", "≈ 600 €/an"),
   ("Nom de domaine", ".com (TLS Let's Encrypt gratuit)", "≈ 12 €/an"),
+  ("Développement & tests", "dev en local (gratuit) + CI ; tests éphémères et IA à la consommation", "≈ 150 €/an"),
 )
-#let CLOUD_TOTAL = "≈ 1 600 €/an"
+#let CLOUD_TOTAL = "≈ 1 750 €/an"
