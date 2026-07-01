@@ -2,9 +2,9 @@
 
 = WBS & fonctions par epic
 
-Le découpage du travail suit la décomposition produit issue de la méthode BMAD : *11 epics* regroupant *66 user stories*, chacune portant des critères d'acceptation (Given/When/Then). Chaque epic est une brique livrable de bout en bout, tracée jusqu'aux exigences fonctionnelles et non fonctionnelles (FR/NFR) qu'elle couvre.
+Ce *Work Breakdown Structure (WBS)* décompose le *périmètre total* du projet de façon *hiérarchique et orientée livrables*, selon la méthode BMAD. Trois niveaux : le projet Pawrise Care (niveau 0), ses *11 epics* livrables (niveau 1, codes 1 à 11), et les *fonctions* attendues de chaque epic (niveau 2, codes 1.1, 1.2…). Les 66 user stories et leurs critères d'acceptation (Given/When/Then) affinent le niveau 2 (détail en partie Backlog).
 
-Le diagramme ci-après (page suivante, en paysage) réunit sur une seule vue *la structure* (les 11 epics, colorés par domaine) et *les fonctions* attendues de chacun, avec leur nombre de user stories, leur périmètre (MVP / post-MVP) et les exigences couvertes. Le périmètre MVP couvre 9 epics (52 US) ; les epics 8 et 10 sont post-MVP. Le détail des user stories et des critères d'acceptation figure en partie Backlog & exigences.
+Le diagramme unique ci-après (page suivante, en paysage) présente cette décomposition et, pour chaque livrable, décrit les *fonctions attendues* ainsi que les *exigences* qu'elles couvrent, afin d'en faciliter l'implémentation. Les *exigences fonctionnelles (FR)* désignent ce que le système doit faire (ex. FR16 : répondre via l'assistant IA) ; les *exigences non fonctionnelles (NFR)* désignent les qualités et contraintes (fiabilité, sécurité, RGPD, performance, autonomie…). Périmètre MVP : 9 epics (52 US) ; post-MVP : epics 8 et 10.
 
 #let dcolor(d) = (
   if d == "cli" { rgb("#eaf1fb") }
@@ -20,19 +20,22 @@ Le diagramme ci-après (page suivante, en paysage) réunit sur une seule vue *la
 )[
   #block(fill: dcolor(dom), width: 100%, inset: (x: 6pt, y: 4pt))[
     #grid(columns: (1fr, auto), align: (left + horizon, right + horizon), column-gutter: 4pt,
-      text(fill: brand, weight: 900, size: 7.5pt)[E#n · #title],
+      text(fill: brand, weight: 900, size: 7.5pt)[#n · #title],
       text(fill: mut, size: 6pt)[#us US · #mvp],
     )
   ]
   #block(inset: (x: 6pt, y: 5pt))[
-    #for f in funcs [ #text(size: 6.3pt)[• #f]#linebreak() ]
+    #for (j, f) in funcs.enumerate() [
+      #text(fill: rgb("#37338f"), weight: 700, size: 6.3pt)[#(n + "." + str(j + 1))]#text(size: 6.3pt)[ #f]#linebreak()
+    ]
     #v(3pt)
-    #text(size: 5.8pt, fill: mut, style: "italic")[#fr]
+    #text(size: 5.8pt, fill: mut, style: "italic")[Exigences : #fr]
   ]
 ]
 
 #page(flipped: true)[
-  #align(center)[#text(fill: brand, weight: 800, size: 12pt)[WBS produit · fonctions par epic (11 epics · 66 US)]]
+  #align(center)[#text(fill: brand, weight: 800, size: 12pt)[WBS · décomposition hiérarchique orientée livrables]]
+  #align(center)[#text(size: 8pt, fill: mut)[Niveau 0 : Pawrise Care (périmètre total) → Niveau 1 : 11 epics livrables (1 à 11) → Niveau 2 : fonctions (1.1, 1.2…). En italique : exigences (FR/NFR) couvertes.]]
   #v(6pt)
   #grid(
     columns: (1fr,) * 4,
