@@ -2,7 +2,7 @@
 
 = Organisation & compétences
 
-== OBS — organisation des responsabilités
+== OBS · organisation des responsabilités
 
 Dix personnes réparties en cinq pôles de deux, sous le pilotage du Product Owner (Yassine El Gherrabi, qui cumule pilotage produit et contribution IA/Data).
 

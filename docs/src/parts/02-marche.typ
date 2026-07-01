@@ -4,9 +4,9 @@
 
 == Proposition de valeur
 
-Là où Tractive, Weenect ou Invoxia se concentrent sur la localisation, Pawrise Care *interprète*. Le collier combine GPS, capteurs de santé et une lecture vétérinaire structurée pour orienter le propriétaire vers le bon soin, au bon moment. C'est un positionnement *océan bleu* : ne pas affronter le marché GPS saturé, mais ouvrir la passerelle propriétaire vers vétérinaire (dossier normalisé, suivi longitudinal) que les acteurs établis ne couvrent pas.
+Les concurrents (Tractive, Weenect, Invoxia) ne se limitent plus au GPS : ils embarquent aussi des capteurs de santé. Mais ils s'arrêtent à la donnée brute. Pawrise Care *interprète* : GPS et capteurs de santé, plus une lecture accompagnée par l'IA et le vétérinaire pour orienter le propriétaire vers le bon soin, au bon moment. C'est un positionnement *océan bleu* : ne pas livrer la guerre des capteurs, mais ouvrir la passerelle propriétaire vers vétérinaire (dossier normalisé, suivi longitudinal) que les acteurs établis ne couvrent pas.
 
-Trois piliers : *Prévention* (détecter les signaux faibles avant qu'ils n'empirent), *Orientation non-diagnostique* (aide à l'observation, jamais un acte médical), *Réseau vétérinaire* (escalade vers un professionnel avec un dossier prêt à l'emploi).
+Trois piliers : *Prévention* (détecter les signaux faibles avant qu'ils n'empirent), *Orientation non-diagnostique* (aide à l'observation, jamais un acte médical), *Réseau vétérinaire* (escalade vers un professionnel avec un dossier prêt à l'emploi, rémunéré par une part fixe des abonnements).
 
 == Marché (TAM / SAM / SOM)
 
@@ -29,7 +29,7 @@ Le marché total (TAM ≈ 73 M, tous animaux) inclut poissons, oiseaux et NAC. L
 )[
   #text(fill: brand, weight: 800, size: 10pt, title)
   #v(3pt)
-  #for it in items [ #text(size: 8.7pt)[*#it.at(0)* — #it.at(1)]#v(3pt) ]
+  #for it in items [ #text(size: 8.7pt)[*#it.at(0)* : #it.at(1)]#v(3pt) ]
 ]
 
 #grid(columns: (1fr, 1fr), gutter: 8pt,

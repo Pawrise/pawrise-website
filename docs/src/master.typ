@@ -1,6 +1,6 @@
 #import "lib.typ": conf, cover
 
-#show: conf.with(doc-title: "Dossier de conception — Pawrise Care")
+#show: conf.with(doc-title: "Dossier de conception · Pawrise Care")
 
 #cover(
   title: "Pawrise Care",

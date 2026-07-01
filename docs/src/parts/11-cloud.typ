@@ -6,11 +6,11 @@ Une infrastructure souveraine (UE / RGPD), maîtrisée en coût et prête à sca
 
 == Principes directeurs
 
-- *Souveraineté & RGPD* — infrastructure et données de santé en UE ; Azure seulement pour le modèle de langage.
-- *Infrastructure as Code* — toute l'infra en Terraform, un cluster se recrée à l'identique en une commande.
-- *GitOps* — Git seule source de vérité ; Argo CD synchronise le cluster, rollback par revert.
-- *Maîtrise des coûts* — lignes ARM, environnements de dev éphémères, auto-géré moins cher qu'un managé à capacités égales.
-- *Observabilité* — chaque service tracé (OpenTelemetry) ; métriques, logs, traces centralisés dans Grafana.
+- *Souveraineté & RGPD* · infrastructure et données de santé en UE ; Azure seulement pour le modèle de langage.
+- *Infrastructure as Code* · toute l'infra en Terraform, un cluster se recrée à l'identique en une commande.
+- *GitOps* · Git seule source de vérité ; Argo CD synchronise le cluster, rollback par revert.
+- *Maîtrise des coûts* · lignes ARM, environnements de dev éphémères, auto-géré moins cher qu'un managé à capacités égales.
+- *Observabilité* · chaque service tracé (OpenTelemetry) ; métriques, logs, traces centralisés dans Grafana.
 
 == La stack d'infrastructure
 
@@ -39,7 +39,7 @@ Une infrastructure souveraine (UE / RGPD), maîtrisée en coût et prête à sca
 
 *Maintenant (dev → keynote → premiers utilisateurs) :* cluster Kubernetes provisionné par Terraform (control-plane CAX21 + 2 workers CAX31, ~40 €/mois), déploiement GitOps, secrets chiffrés, PKI interne, souveraineté UE.
 
-*Au scale (traction réelle) :* Cloud managé EU — Scaleway Kapsule (control-plane managé gratuit, PostgreSQL managé, Object Storage, GPU à la demande), sans lock-in hyperscaler. Alternative : OVHcloud Managed K8s. Azure AKS gardé pour un besoin multi-région ou SLA entreprise.
+*Au scale (traction réelle) :* Cloud managé EU · Scaleway Kapsule (control-plane managé gratuit, PostgreSQL managé, Object Storage, GPU à la demande), sans lock-in hyperscaler. Alternative : OVHcloud Managed K8s. Azure AKS gardé pour un besoin multi-région ou SLA entreprise.
 
 == Maîtrise des coûts en développement
 

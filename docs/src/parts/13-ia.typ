@@ -1,7 +1,7 @@
 #import "../lib.typ": dtable, keybox, brand, accent, lime, mut, hair, limebg
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 
-= IA — le Care Engine
+= IA · le Care Engine
 
 L'assistant conversationnel contextualise l'état d'un chien à partir des données du collier, répond sur la base d'un corpus vétérinaire validé, et organise un handoff structuré vers un vétérinaire quand c'est pertinent.
 
@@ -38,9 +38,9 @@ L'assistant conversationnel contextualise l'état d'un chien à partir des donn�
 
 == Garde-fous (défense en profondeur, 3 couches)
 
-- *Couche 1 — pré-LLM (Circuit Breaker)* : classifier d'intention ; tout ce qui n'est pas « clean » est dérouté vers une Safe Response ou une escalade, sans atteindre le LLM principal.
-- *Couche 2 — raisonnement* : system prompt strict + whitelist de tools + obligation de citer le corpus pour tout claim médical.
-- *Couche 3 — post-LLM* : détection « diagnostic-like », contrôle d'ancrage sur les sources, déclenchement forcé de l'escalade selon des règles explicites.
+- *Couche 1 · pré-LLM (Circuit Breaker)* : classifier d'intention ; tout ce qui n'est pas « clean » est dérouté vers une Safe Response ou une escalade, sans atteindre le LLM principal.
+- *Couche 2 · raisonnement* : system prompt strict + whitelist de tools + obligation de citer le corpus pour tout claim médical.
+- *Couche 3 · post-LLM* : détection « diagnostic-like », contrôle d'ancrage sur les sources, déclenchement forcé de l'escalade selon des règles explicites.
 
 == Périmètre
 
@@ -75,16 +75,16 @@ Chaque nœud utilise le modèle le moins cher qui fait le travail ; seul le nœu
   columns: (auto, 1fr),
   headers: ("ADR", "Décision"),
   rows: (
-    ("001 — Pipeline borné", "6 nœuds déterministes, pas d'agent autonome : responsabilité juridique portée par le pipeline."),
-    ("002 — Azure OpenAI EU + cascade", "Data residency UE, pas d'entraînement sur les données ; interface LLMProvider (bascule possible)."),
-    ("003 — Reranker dédié", "Cohere Rerank 3.5 : latence ~10× meilleure qu'un filtre LLM, meilleure pertinence."),
-    ("004 — Mémoire = backend", "Pas de fact store dans le chatbot ; tool calls vers le Core API (source de vérité unique)."),
-    ("005 — Sortie JSON structurée", "Le front affiche les actions sans parser du markdown fragile."),
-    ("006 — RGPD progressif", "MVP : masquage regex des PII ; V1 : Presidio + dictionnaire vétérinaire."),
-    ("007 — Garde-fous 3 couches", "Défense en profondeur : l'échec d'une couche n'expose pas le système."),
-    ("008 — Retrieval hybride", "BM25 (termes exacts) + dense (similarité), fusion RRF."),
-    ("009 — Query Understanding", "Reformulation en termes vétérinaires + tool télémétrie avant le RAG."),
-    ("010 — Audit append-only", "Log immuable de chaque conversation, rétention 5 ans : défense juridique et base d'eval."),
+    ("001 · Pipeline borné", "6 nœuds déterministes, pas d'agent autonome : responsabilité juridique portée par le pipeline."),
+    ("002 · Azure OpenAI EU + cascade", "Data residency UE, pas d'entraînement sur les données ; interface LLMProvider (bascule possible)."),
+    ("003 · Reranker dédié", "Cohere Rerank 3.5 : latence ~10× meilleure qu'un filtre LLM, meilleure pertinence."),
+    ("004 · Mémoire = backend", "Pas de fact store dans le chatbot ; tool calls vers le Core API (source de vérité unique)."),
+    ("005 · Sortie JSON structurée", "Le front affiche les actions sans parser du markdown fragile."),
+    ("006 · RGPD progressif", "MVP : masquage regex des PII ; V1 : Presidio + dictionnaire vétérinaire."),
+    ("007 · Garde-fous 3 couches", "Défense en profondeur : l'échec d'une couche n'expose pas le système."),
+    ("008 · Retrieval hybride", "BM25 (termes exacts) + dense (similarité), fusion RRF."),
+    ("009 · Query Understanding", "Reformulation en termes vétérinaires + tool télémétrie avant le RAG."),
+    ("010 · Audit append-only", "Log immuable de chaque conversation, rétention 5 ans : défense juridique et base d'eval."),
   ),
 )
 

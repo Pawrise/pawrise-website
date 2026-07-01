@@ -22,7 +22,7 @@
 
 == Références des décisions d'architecture (ADR)
 
-Les dix ADR du Care Engine sont détaillées dans la partie « IA — le Care Engine ». Les choix d'architecture système et cloud sont justifiés dans les parties correspondantes (besoin, alternatives écartées, décision, trade-off).
+Les dix ADR du Care Engine sont détaillées dans la partie « IA · le Care Engine ». Les choix d'architecture système et cloud sont justifiés dans les parties correspondantes (besoin, alternatives écartées, décision, trade-off).
 
 == Sources & outils
 

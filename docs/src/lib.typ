@@ -1,5 +1,5 @@
 // ============================================================
-//  Pawrise Care — template de documentation (Typst)
+//  Pawrise Care · template de documentation (Typst)
 //  DA claire, sobre, "print-native" : blanc, accent indigo, sans-serif propre.
 // ============================================================
 

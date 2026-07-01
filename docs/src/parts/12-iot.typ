@@ -1,6 +1,6 @@
 #import "../lib.typ": dtable, keybox, brand, mut, zebra
 
-= IoT — le collier connecté
+= IoT · le collier connecté
 
 Le collier est le cœur produit : capteurs embarqués, connectivité cellulaire basse consommation et firmware Rust, pensés pour tenir sur batterie, fonctionner en zone blanche et transmettre en sécurité.
 
@@ -12,17 +12,17 @@ Le collier est le cœur produit : capteurs embarqués, connectivité cellulaire 
 
 == Les défis à résoudre
 
-- *Autonomie énergétique* — cible 7 à 15 jours ; GPS, modem et capteurs sont énergivores, d'où veille profonde, capteurs à la demande, transmission par batch.
-- *Zones blanches* — le cas critique (fugue) arrive souvent sans couverture ; mode dégradé : stockage local puis rattrapage (store and forward).
-- *Précision de localisation* — GPS qui dérive et premier fix long, accélérés par l'A-GPS et une fréquence adaptée au contexte.
-- *Robustesse* — chocs, eau, température : certification IP67 et composants qualifiés -20 à +60°C, gestion thermique au contact de la peau.
-- *Sécurité des données* — un appareil qui transmet la position doit être inviolable : authentification par certificat et chiffrement de bout en bout.
+- *Autonomie énergétique* · cible 7 à 15 jours ; GPS, modem et capteurs sont énergivores, d'où veille profonde, capteurs à la demande, transmission par batch.
+- *Zones blanches* · le cas critique (fugue) arrive souvent sans couverture ; mode dégradé : stockage local puis rattrapage (store and forward).
+- *Précision de localisation* · GPS qui dérive et premier fix long, accélérés par l'A-GPS et une fréquence adaptée au contexte.
+- *Robustesse* · chocs, eau, température : certification IP67 et composants qualifiés -20 à +60°C, gestion thermique au contact de la peau.
+- *Sécurité des données* · un appareil qui transmet la position doit être inviolable : authentification par certificat et chiffrement de bout en bout.
 
 == Architecture en 3 zones
 
-- *Zone 1 — Collier (Edge)* : MCU, capteurs, modem, GPS, batterie. Collecte, tampon local, transmission chiffrée.
-- *Zone 2 — Réseau & communication* : LTE-M + SIM IoT, transport MQTT sur TLS, pensé basse consommation et réseau instable.
-- *Zone 3 — Backend & cloud* : ingestion, stockage, analyse (stack du site : Hetzner/Kubernetes, observabilité Grafana). Le collier s'y authentifie en mTLS.
+- *Zone 1 · Collier (Edge)* : MCU, capteurs, modem, GPS, batterie. Collecte, tampon local, transmission chiffrée.
+- *Zone 2 · Réseau & communication* : LTE-M + SIM IoT, transport MQTT sur TLS, pensé basse consommation et réseau instable.
+- *Zone 3 · Backend & cloud* : ingestion, stockage, analyse (stack du site : Hetzner/Kubernetes, observabilité Grafana). Le collier s'y authentifie en mTLS.
 
 == Composants embarqués
 

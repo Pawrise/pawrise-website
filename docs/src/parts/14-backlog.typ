@@ -15,9 +15,9 @@ Le découpage produit compte #BACKLOG_EPICS epics et #BACKLOG_US user stories, d
 
 == Exigences (FR / NFR)
 
-*Fonctionnelles (FR1 à FR43)* — regroupées par domaine : collier & collecte (FR1–7), backend & données (FR8–12), moteur IA (FR13–18), app propriétaire (FR19–23), Vet Portal (FR24–28), cycle de vie & business (FR29–34), téléconsultation & triage (FR35–43).
+*Fonctionnelles (FR1 à FR43)* · regroupées par domaine : collier & collecte (FR1–7), backend & données (FR8–12), moteur IA (FR13–18), app propriétaire (FR19–23), Vet Portal (FR24–28), cycle de vie & business (FR29–34), téléconsultation & triage (FR35–43).
 
-*Non-fonctionnelles (NFR1 à NFR10)* — Fiabilité, Autonomie/énergie, Sécurité, Confidentialité/RGPD, Éthique IA, Performance, Scalabilité/Ops, Robustesse physique, Utilisabilité, Maintenabilité.
+*Non-fonctionnelles (NFR1 à NFR10)* · Fiabilité, Autonomie/énergie, Sécurité, Confidentialité/RGPD, Éthique IA, Performance, Scalabilité/Ops, Robustesse physique, Utilisabilité, Maintenabilité.
 
 == Exemple de critère d'acceptation
 
