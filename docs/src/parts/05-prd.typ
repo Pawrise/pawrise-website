@@ -101,25 +101,48 @@ On distingue les *exigences fonctionnelles (FR)*, ce que le système doit faire,
   )),
 )
 
-#pagebreak(weak: true)
-
 == Exigences non fonctionnelles (NFR1 à NFR10)
 
-Qualités et contraintes transverses du système (toutes en périmètre MVP).
+Qualités et contraintes transverses du système, regroupées par catégorie (toutes en périmètre MVP).
 
-#dtable(
+#let grp4(cat, dc, rows) = (
+  (table.cell(colspan: 4, fill: dcolor(dc), inset: (x: 7pt, y: 4pt))[#text(weight: 800, fill: brand, size: 8.5pt)[#cat]],)
+    + rows.map(r => (
+        text(fill: rgb("#37338f"), weight: 700, size: 7.8pt)[#r.at(0)],
+        text(size: 7.8pt)[#r.at(1)],
+        text(size: 7.6pt, fill: mut)[#r.at(2)],
+        text(size: 7.8pt, fill: mut)[#r.at(3)],
+      )).flatten()
+)
+
+#table(
   columns: (auto, 1fr, 1fr, auto),
-  headers: ("Code", "Exigence", "Vérification", "Epic"),
-  rows: (
-    ("NFR1 · Fiabilité", "Disponibilité et tolérance aux pannes.", "Tests de charge / chaos, SLA", "E11"),
-    ("NFR2 · Autonomie / énergie", "Autonomie du collier et sobriété.", "Mesure d'autonomie terrain", "E2"),
-    ("NFR3 · Sécurité", "Chiffrement, authentification, mTLS.", "Audit / pentest, revue de code", "E9"),
-    ("NFR4 · Confidentialité / RGPD", "Consentement, minimisation, droits.", "Revue conformité, DPIA", "E9"),
-    ("NFR5 · Éthique IA", "Non-diagnostic, garde-fous, transparence.", "Golden set anti-diagnostic", "E9"),
-    ("NFR6 · Performance", "Temps de réponse maîtrisés.", "Tests de performance (p95)", "E11"),
-    ("NFR7 · Scalabilité / Ops", "Montée en charge et exploitabilité.", "Tests de montée en charge", "E11"),
-    ("NFR8 · Robustesse physique", "IP67, chocs et températures.", "Tests IP67, chocs, thermiques", "E2"),
-    ("NFR9 · Utilisabilité", "Simplicité d'usage et accessibilité.", "Tests utilisateurs", "E3"),
-    ("NFR10 · Maintenabilité", "Qualité de code, tests, documentation.", "Revue de code, couverture tests", "E11"),
+  stroke: (x, y) => (bottom: 0.5pt + hair),
+  align: (x, y) => left + horizon,
+  inset: (x: 7pt, y: 4pt),
+  fill: (x, y) => if y == 0 { brand },
+  table.header(
+    text(fill: white, weight: 800, size: 7.8pt)[Code],
+    text(fill: white, weight: 800, size: 7.8pt)[Exigence],
+    text(fill: white, weight: 800, size: 7.8pt)[Vérification],
+    text(fill: white, weight: 800, size: 7.8pt)[Epic],
   ),
+  ..grp4("Qualité de service", "data", (
+    ("NFR1", "Fiabilité : disponibilité et tolérance aux pannes", "Tests de charge / chaos, SLA", "E11"),
+    ("NFR6", "Performance : temps de réponse maîtrisés", "Tests de performance (p95)", "E11"),
+    ("NFR7", "Scalabilité / Ops : montée en charge et exploitabilité", "Tests de montée en charge", "E11"),
+  )),
+  ..grp4("Sécurité, données & éthique", "rose", (
+    ("NFR3", "Sécurité : chiffrement, authentification, mTLS", "Audit / pentest, revue de code", "E9"),
+    ("NFR4", "Confidentialité / RGPD : consentement, minimisation, droits", "Revue conformité, DPIA", "E9"),
+    ("NFR5", "Éthique IA : non-diagnostic, garde-fous, transparence", "Golden set anti-diagnostic", "E9"),
+  )),
+  ..grp4("Matériel & énergie", "edge", (
+    ("NFR2", "Autonomie / énergie : autonomie du collier et sobriété", "Mesure d'autonomie terrain", "E2"),
+    ("NFR8", "Robustesse physique : IP67, chocs et températures", "Tests IP67, chocs, thermiques", "E2"),
+  )),
+  ..grp4("Qualité produit & code", "cli", (
+    ("NFR9", "Utilisabilité : simplicité d'usage et accessibilité", "Tests utilisateurs", "E3"),
+    ("NFR10", "Maintenabilité : qualité de code, tests, documentation", "Revue de code, couverture tests", "E11"),
+  )),
 )
