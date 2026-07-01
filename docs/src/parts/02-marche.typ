@@ -1,4 +1,4 @@
-#import "../lib.typ": dtable, keybox, brand, lime, limebg, hair, mut, zebra
+#import "../lib.typ": dtable, keybox, keep, brand, lime, limebg, hair, mut, zebra
 
 = Marché & analyse stratégique
 
@@ -66,6 +66,7 @@ Le marché total (TAM ≈ 73 M, tous animaux) inclut poissons, oiseaux et NAC. L
 
 == Matrice de confrontation
 
+#keep[
 Ce qu'on fait du SWOT : croiser forces et faiblesses avec opportunités et menaces pour en tirer des axes d'action.
 
 #dtable(
@@ -78,9 +79,11 @@ Ce qu'on fait du SWOT : croiser forces et faiblesses avec opportunités et menac
     ("Vigilance · Faiblesses × Menaces", "Sécuriser les points faibles avant de grandir : LLM derrière une couche d'abstraction, garde-fous documentés pour encaisser un durcissement réglementaire, rentabilité prouvée sur un périmètre réduit."),
   ),
 )
+]
 
 == PESTEL
 
+#keep[
 L'analyse macro-environnementale, fil conducteur : orienter, jamais diagnostiquer.
 
 #dtable(
@@ -95,3 +98,4 @@ L'analyse macro-environnementale, fil conducteur : orienter, jamais diagnostique
     ("Légal", "RGPD, Code rural (diagnostic réservé aux vétérinaires), AI Act, sécurité produit (GPSR UE 2023/988).", "Tout repose sur la frontière orienter / diagnostiquer."),
   ),
 )
+]

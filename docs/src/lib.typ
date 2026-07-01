@@ -28,6 +28,9 @@
   )
 }
 
+// ---- Bloc insécable : garde intro + tableau court (et le titre collant) ensemble
+#let keep(body) = block(breakable: false, width: 100%, body)
+
 // ---- Encadré "point clé / décision" ----------------------------------------
 #let keybox(title: "", body) = {
   block(

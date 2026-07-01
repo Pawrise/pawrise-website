@@ -1,4 +1,4 @@
-#import "../lib.typ": dtable, keybox, brand, accent, lime, mut, hair, limebg
+#import "../lib.typ": dtable, keybox, keep, brand, accent, lime, mut, hair, limebg
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 
 = IA · le Care Engine
@@ -50,6 +50,7 @@ L'assistant conversationnel contextualise l'état d'un chien à partir des donn�
 
 == Coût des modèles (cascade « un modèle par nœud »)
 
+#keep[
 Chaque nœud utilise le modèle le moins cher qui fait le travail ; seul le nœud de génération mobilise le gros modèle.
 
 #dtable(
@@ -64,6 +65,7 @@ Chaque nœud utilise le modèle le moins cher qui fait le travail ; seul le nœu
     ("6 · Post-Guardrail", "mini · GPT-5-nano", "0,05 $ / 0,40 $"),
   ),
 )
+]
 
 #keybox(title: "Coût par conversation ≈ 0,03 à 0,05 €")[
   Répartition : génération ~85 %, reranking ~10 %, nœuds mini ~2 %, embeddings < 0,5 %. La cascade économise ~30 à 35 % vs tout passer par le gros modèle. Ce coût valide la cible de la spec (moins de 0,05 €/conversation). Alternative souveraine prévue (ADR-002) : Mistral (UE), coût équivalent, données 100 % UE. Prix éditeurs en dollars, parité dollar/euro retenue.

@@ -1,10 +1,8 @@
-#import "../lib.typ": dtable, keybox, brand, lime, mut, hair, zebra, faint
+#import "../lib.typ": dtable, keybox, keep, brand, lime, mut, hair, zebra, faint
 
 = Organisation & compétences
 
 == OBS · organisation des responsabilités
-
-Dix personnes réparties en cinq pôles de deux, sous le pilotage du Product Owner (Yassine El Gherrabi, qui cumule pilotage produit et contribution IA/Data).
 
 #let poles = (
   ("Backend / API", "Hamid · Aaditya", "API, ingestion, base de données, authentification, Vet Portal"),
@@ -13,16 +11,21 @@ Dix personnes réparties en cinq pôles de deux, sous le pilotage du Product Own
   ("Design / Mobile", "Adam · Elarif", "UX/UI, app mobile, identité visuelle, étude de marché"),
   ("Cloud / DevOps", "Oumar · Abderrahmane", "Cloud, CI/CD, monitoring, sécurité"),
 )
+#keep[
+Dix personnes réparties en cinq pôles de deux, sous le pilotage du Product Owner (Yassine El Gherrabi, qui cumule pilotage produit et contribution IA/Data).
+
 #dtable(
   columns: (auto, auto, 1fr),
   headers: ("Pôle", "Membres", "Périmètre"),
   rows: poles,
 )
+]
 
 Elarif est rattaché au pôle Design/Mobile (binôme avec Adam sur l'application) mais intervient en transverse sur le Backend, la CI/CD, le marché et le lien vétérinaire.
 
 == Couverture nominative
 
+#keep[
 Chaque domaine est porté par un ou plusieurs responsables nommés, avec un backup identifié pour assurer la continuité.
 
 #dtable(
@@ -40,6 +43,7 @@ Chaque domaine est porté par un ou plusieurs responsables nommés, avec un back
     ("Réseau vétérinaire", "Elarif, Nino", "Binôme (2 contacts vété distincts)"),
   ),
 )
+]
 
 == Matrice de compétences (extrait)
 
