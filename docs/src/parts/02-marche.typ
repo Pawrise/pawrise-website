@@ -29,15 +29,15 @@ On dimensionne le marché en entonnoir : le *TAM* (Total Addressable Market) est
 #let quad(title, tone, items) = block(
   fill: if tone == "pos" { limebg } else { rgb("#fdeef0") },
   stroke: (left: 3pt + if tone == "pos" { lime } else { rgb("#e8879a") }),
-  radius: 3pt, inset: 10pt, width: 100%, spacing: 8pt,
+  radius: 3pt, inset: 10pt, width: 100%, height: 100%, spacing: 8pt,
 )[
   #text(fill: brand, weight: 800, size: 10pt, title)
   #v(3pt)
   #for it in items [ #text(size: 8.7pt)[*#it.at(0)* : #it.at(1)]#v(3pt) ]
 ]
 
-#block(breakable: false)[
-  #grid(columns: (1fr, 1fr), gutter: 8pt,
+#block(breakable: false, box(width: 100%, height: 392pt,
+  grid(columns: (1fr, 1fr), rows: (1fr, 1fr), gutter: 8pt,
     quad("Forces", "pos", (
       ("Santé expliquée et accompagnée", "la donnée brute des concurrents traduite en clair par l'IA, relayée par un vétérinaire."),
       ("Expertise IA + garde-fous non-diagnostiques", "RAG/LLM maîtrisés en interne, conformité intégrée dès le départ."),
@@ -50,9 +50,6 @@ On dimensionne le marché en entonnoir : le *TAM* (Total Addressable Market) est
       ("Prototype non finalisé", "encore sur capteurs simulés, risque technique avant produit réel."),
       ("Rentabilité à prouver", "modèle d'abonnement dont la viabilité reste à valider."),
     )),
-  )
-  #v(8pt)
-  #grid(columns: (1fr, 1fr), gutter: 8pt,
     quad("Opportunités", "pos", (
       ("Marché français massif et porteur", "26,5 M de chiens et chats, segment connecté en croissance."),
       ("Humanisation des animaux", "disposition réelle à payer pour la santé et la prévention."),
@@ -66,7 +63,7 @@ On dimensionne le marché en entonnoir : le *TAM* (Total Addressable Market) est
       ("Adoption lente des vétérinaires", "profession prudente et surchargée."),
     )),
   )
-]
+))
 
 == Matrice de confrontation
 
