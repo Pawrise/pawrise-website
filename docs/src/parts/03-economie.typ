@@ -102,10 +102,21 @@ Total développement ≈ *150 €/an*. Un serveur arrêté restant facturé chez
 ]
 #text(size: 8.5pt, fill: mut)[\* Capacité équivalente (~16 vCPU / 32 Go + bases de données, load balancer, sauvegardes et IA), faible trafic. Critères complets (souveraineté, exploitation, lock-in) en partie Cloud.]
 
-*Pourquoi pas le bare metal* : malgré un compute peu cher, il impose l'exploitation matérielle (pannes de disque, redondance physique à acheter en double) et n'offre aucune élasticité, ce qui est incompatible avec nos environnements de test éphémères facturés à la consommation. Le faible gain de coût ne justifie pas cette charge d'exploitation.
+*Pourquoi pas le bare metal* : il reste acceptable pour des tests ponctuels, mais il n'est pas maintenable en production. Il ajoute toute une couche de complexité opérationnelle dont on ne veut absolument pas : gestion physique des serveurs, remplacement des disques et du matériel défaillant, redondance à provisionner et câbler en double, mises à jour firmware, supervision matérielle, et aucune élasticité pour absorber un pic ou créer un environnement à la demande. Le gain sur le compute brut ne compense pas cette charge d'exploitation permanente. On le réserve donc, au mieux, à des tests, jamais à la production.
 
-*Pourquoi pas l'hyperscaler aujourd'hui* : notre charge de lancement ne le justifie pas. Il coûte 4 à 6× plus, avec un fort lock-in et une souveraineté seulement partielle (Cloud Act US). Y aller avant d'en avoir le besoin serait du sur-engineering. On le garde en réserve pour un éventuel besoin multi-région ou un SLA entreprise.
+*Pourquoi pas l'hyperscaler aujourd'hui* : notre charge de lancement ne le justifie tout simplement pas. Il coûte 4 à 6× plus cher, avec un fort lock-in et une souveraineté seulement partielle (le Cloud Act américain peut s'appliquer même sur une région européenne). Y aller avant d'en avoir le besoin serait du sur-engineering. On le garde en réserve pour un éventuel besoin multi-région ou un SLA entreprise.
 
-*Retenu* : Hetzner Cloud auto-géré, meilleur compromis coût / souveraineté / élasticité pour notre charge actuelle ; le cloud managé européen prend le relais au moment du passage à l'échelle.
+*Retenu* : Hetzner Cloud auto-géré, le meilleur compromis coût / souveraineté / élasticité pour notre charge actuelle ; le cloud managé européen prend le relais au moment du passage à l'échelle.
 
-*Ce qui varie avec l'échelle.* Seul le poste IA est réellement variable : il croît avec le nombre de conversations, donc avec les abonnements qui le financent (coût couvert par la marge). Le compute augmente par paliers (ajout de workers) et bascule vers un cloud managé européen au scale (voir partie Cloud), gardant l'infrastructure proportionnée à l'usage.
+=== Prudence des chiffres (scénarios majorants)
+
+Tous les montants présentés sont volontairement des majorants (hypothèses pessimistes), afin de ne jamais sous-estimer le budget :
+
+- *Développement* : le calcul suppose un environnement de test actif environ 40 h par semaine, chaque semaine. En réalité, nous ne développerons pas en continu, et un environnement de staging ne sera monté que lors des vraies phases de test, bien plus rarement. Le coût réel de développement sera donc nettement inférieur aux ≈ 150 €/an affichés.
+- *Intelligence artificielle* : le coût de 0,03 à 0,05 € par conversation est une fourchette haute, délibérément peu optimiste. Les optimisations prévues (mise en cache, cascade de modèles, modèles moins chers sur les nœuds simples) le feront baisser. Surtout, le poste IA est encadré par des *alertes de consommation* et des *plafonds journaliers* : au-delà d'un seuil, le service se dégrade gracieusement ou bascule sur une réponse de repli, ce qui rend tout dérapage budgétaire impossible.
+
+Autrement dit, le total de ≈ 1 750 €/an est un plafond prudent, pas une projection optimiste : le coût réel devrait être sensiblement inférieur.
+
+=== Ce qui varie avec l'échelle
+
+Seul le poste IA est réellement variable : il croît avec le nombre de conversations, donc avec les abonnements qui le financent, ce qui garde ce coût couvert par la marge. Le compute, lui, augmente par paliers (ajout de workers) et bascule vers un cloud managé européen au moment du passage à l'échelle (voir partie Cloud). L'infrastructure reste ainsi maîtrisée et proportionnée à l'usage.
