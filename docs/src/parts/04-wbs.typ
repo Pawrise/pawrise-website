@@ -8,7 +8,7 @@ Le diagramme unique ci-après (page suivante, en paysage) présente cette décom
 
 == User stories & critères d'acceptation
 
-Chaque epic (niveau 1) se décline en *user stories* (66 au total) ; chacune porte des *critères d'acceptation* testables au format Given/When/Then, qui rendent la fonction vérifiable et prête à implémenter. Exemple :
+Chaque epic (niveau 1) se décline en *user stories* (66 au total, liste complète en annexe) ; chacune porte des *critères d'acceptation* testables au format Given/When/Then, qui rendent la fonction vérifiable et prête à implémenter. Exemple :
 
 #keybox(title: "Story 1.1 · Création de compte sécurisée")[
   *En tant que* propriétaire d'animal, *je veux* créer un compte avec email et mot de passe, *afin d'*accéder à l'application en toute sécurité.\
