@@ -21,6 +21,8 @@
 #pagebreak()
 #include "parts/03-economie.typ"
 #pagebreak()
+#include "parts/05-bmad.typ"
+#pagebreak()
 #include "parts/05-prd.typ"
 #pagebreak()
 #include "parts/04-wbs.typ"
