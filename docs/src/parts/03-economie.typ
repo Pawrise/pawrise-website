@@ -23,6 +23,8 @@ Le modèle intègre un *pool de rémunération façon Spotify*. Concrètement : 
 
 Les *unit economics* répondent à une seule question : un client, à lui seul, rapporte-t-il plus qu'il ne coûte ? On encadre l'incertitude avec trois scénarios (optimiste, réaliste, pessimiste).
 
+*Comment les scénarios sont bâtis.* On fixe trois *leviers d'entrée* à partir de repères du marché de l'abonnement grand public : le *churn* (taux de résiliation mensuel, ~2 % / ~3 % / ~8 % par mois, d'où une durée de vie de ~48 / ~30 / ~12 mois), le *CAC* (35 / 50 / 90 €, repères d'acquisition digitale) et la *marge* (78 / 69 / 35 %, selon ce que consomment cloud, IA et pool vétérinaire). Les deux dernières lignes, *LTV : CAC* et *Payback*, en sont ensuite calculées. Optimiste = meilleurs niveaux plausibles ; base = prudent et réaliste ; pessimiste = combinaison défavorable servant de garde-fou. C'est un modèle prévisionnel, à affiner avec les chiffres réels une fois en marché.
+
 #keep[
 #dtable(
   columns: (1fr, auto, auto, auto),
