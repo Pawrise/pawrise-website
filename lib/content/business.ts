@@ -4,13 +4,13 @@
 /* ----------------------------------------------- PROPOSITION DE VALEUR --- */
 export const VALUE = {
   pitch:
-    "Là où Tractive, Weenect ou Invoxia se concentrent sur la localisation, Pawrise Care interprète. Le collier combine GPS, capteurs de santé et une lecture vétérinaire structurée pour orienter le propriétaire vers le bon soin, au bon moment.",
+    "Les concurrents (Tractive, Weenect, Invoxia) ne se limitent plus au GPS : ils embarquent aussi des capteurs de santé, mais s'arrêtent à la donnée brute. Pawrise Care interprète : GPS et capteurs de santé, plus une lecture accompagnée par l'IA et le vétérinaire pour orienter le propriétaire vers le bon soin, au bon moment. On ne court pas après la course aux capteurs, notre valeur est l'explicabilité.",
   ocean:
     "Stratégie océan bleu : ne pas affronter le marché GPS saturé, mais ouvrir la passerelle propriétaire ↔ vétérinaire (PDF normalisé, suivi longitudinal), un espace que les acteurs établis ne couvrent pas.",
   piliers: [
     { t: "Prévention", d: "Détecter les signaux faibles avant qu'ils n'empirent." },
     { t: "Orientation non-diagnostique", d: "Aide à l'observation, jamais un acte médical." },
-    { t: "Réseau vétérinaire", d: "Escalade vers un professionnel avec un dossier prêt à l'emploi." },
+    { t: "Réseau vétérinaire", d: "Escalade vers un professionnel avec un dossier prêt à l'emploi, rémunéré par une part fixe des abonnements (pool)." },
   ],
 };
 

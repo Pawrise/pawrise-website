@@ -25,6 +25,8 @@ C'est un positionnement *océan bleu* : ne pas livrer la guerre des capteurs, ma
   L'assistant IA n'établit *jamais* de diagnostic médical (Code rural, article L243-1) : il explique, oriente, et invite à consulter. C'est précisément le réseau vétérinaire qui prend le relais dès qu'un acte médical est requis. Toute situation ambiguë déclenche une orientation ou une escalade vers le vétérinaire, jamais une conclusion médicale.
 ]
 
+#pagebreak(weak: true)
+
 == Personas
 
 Deux personas primaires, les deux faces de la plateforme, volontairement approfondis.
