@@ -217,11 +217,23 @@ a{color:inherit;text-decoration:none}
 .gantt-phase-per{font-size:10.5px;color:var(--faint)}
 .gantt-bar{position:relative;z-index:2;height:20px;border-radius:6px;opacity:.92;box-shadow:0 1px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;overflow:hidden}
 .gantt-barlab{font-size:9px;font-weight:800;color:#0a0922;white-space:nowrap;letter-spacing:.02em;padding:0 6px}
-.gantt-miles{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;align-items:start;min-height:64px}
-.gantt-mile{grid-row:1;display:flex;flex-direction:column;align-items:center;justify-self:center;z-index:2}
-.gantt-mile.lvl-1{margin-top:30px}
-.gantt-diamond{width:11px;height:11px;background:var(--rose);transform:rotate(45deg);border-radius:2px;box-shadow:0 0 8px rgba(251,113,133,.6)}
-.gantt-mlabel{font-size:9.5px;color:var(--mut);margin-top:5px;white-space:nowrap;font-weight:600;text-align:center}
+/* jalons · frise-étapes numérotée */
+.gantt-steps-wrap{margin-top:16px;border-top:1px dashed var(--line);padding-top:14px}
+.gantt-steps-title{display:block;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:12px}
+.gantt-steps{display:flex;gap:0;margin:0;padding:0;list-style:none}
+.gstep{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;padding:0 6px}
+.gstep:not(:first-child)::before{content:"";position:absolute;top:13px;left:-50%;width:100%;height:2px;background:var(--line);z-index:0}
+.gstep-n{position:relative;z-index:1;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;font-size:12.5px;font-weight:900;color:#0a0922;background:linear-gradient(120deg,var(--lime),var(--teal));box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.gstep-date{font-size:10.5px;color:var(--faint);margin-top:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.gstep-name{font-size:11.5px;color:var(--ink);font-weight:600;line-height:1.3;margin-top:2px}
+@media(max-width:640px){
+  .gantt-steps{flex-direction:column;gap:12px}
+  .gstep{flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;text-align:left;padding:0}
+  .gstep:not(:first-child)::before{display:none}
+  .gstep-n{flex:0 0 auto}
+  .gstep-date{margin-top:0;min-width:78px}
+  .gstep-name{margin-top:0}
+}
 /* lignes cliquables */
 .gantt-rowbtn{width:100%;background:none;border:0;font:inherit;color:inherit;cursor:pointer;border-radius:8px;padding:3px 0;transition:background .15s;display:grid;grid-template-columns:184px 1fr;align-items:center;gap:10px;min-height:40px}
 .gantt-rowbtn:hover{background:rgba(255,255,255,.04)}

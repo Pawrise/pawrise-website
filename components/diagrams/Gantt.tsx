@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GANTT, GANTT_PHASES, MILESTONES, MONTHS, YEARS, rangeLabel, nowIndex } from "@/lib/content/pilotage";
+import { GANTT, GANTT_PHASES, MILESTONES, MONTHS, YEARS, rangeLabel, monthDate, nowIndex } from "@/lib/content/pilotage";
 
 const N = MONTHS.length; // 20 mois
 
@@ -102,29 +102,27 @@ export default function Gantt() {
             );
           })}
 
-          {/* jalons */}
-          <div className="gantt-row gantt-miles">
-            <div className="gantt-side">Jalons</div>
-            <div className="gantt-track">
-              {MONTHS.map((_, c) => (
-                <span className="gantt-grid" key={c} style={{ gridColumn: c + 1 }} />
-              ))}
-              {MILESTONES.map((m) => (
-                <span className={`gantt-mile lvl-${m.lvl}`} key={m.idx} style={{ gridColumn: m.idx + 1 }}>
-                  <span className="gantt-diamond" />
-                  <span className="gantt-mlabel">{m.label}</span>
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
+      </div>
+
+      {/* jalons · frise-étapes (lisible desktop & mobile) */}
+      <div className="gantt-steps-wrap">
+        <span className="gantt-steps-title">Jalons</span>
+        <ol className="gantt-steps">
+          {MILESTONES.map((m, i) => (
+            <li className="gstep" key={m.idx}>
+              <span className="gstep-n">{i + 1}</span>
+              <span className="gstep-date">{monthDate(m.idx)}</span>
+              <span className="gstep-name">{m.label}</span>
+            </li>
+          ))}
+        </ol>
       </div>
 
       {/* légende */}
       <div className="gantt-legend">
         <span><i className="gl-derisk" /> Dé-risquage (simulateur / POC)</span>
         <span><i className="gl-build" /> Engagement (développement)</span>
-        <span><i className="gl-diamond" /> Jalon</span>
         <span><i className="gl-crit" /> Chemin critique</span>
         <span className="gl-hint">Cliquez une tâche pour le détail</span>
       </div>
