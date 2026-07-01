@@ -178,7 +178,7 @@ export const RISKS: Risk[] = [
     id: "R10", cat: "Marché", label: "Faible adoption : propriétaires pas prêts à payer", p: 2, i: 4,
   },
   {
-    id: "R11", cat: "Marché", label: "Concurrence déjà positionnée (Whistle, Tractive)", p: 4, i: 2,
+    id: "R11", cat: "Marché", label: "Concurrence déjà positionnée (Tractive, Weenect)", p: 4, i: 2,
   },
   {
     id: "R12", cat: "Humain", label: "Départ ou indisponibilité d'un membre clé", p: 3, i: 4,

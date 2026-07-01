@@ -39,7 +39,7 @@ export default function SectionCards() {
     "assistant-ia": "Pipeline 6 nœuds · 3 garde-fous · RAG",
     backlog: "11 epics · 66 US (52 MVP)",
     pilotage: "WBS · OBS · RACI · Gantt",
-    business: "9,99 €/mois · LTV ≈ 4×",
+    business: "9,90 €/mois · LTV ≈ 4×",
     risques: "AMDEC · Risk Map",
     equipe: "10 personnes · 5 pôles",
   };

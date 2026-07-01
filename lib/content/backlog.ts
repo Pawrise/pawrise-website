@@ -5,8 +5,8 @@ export type Epic = { n: number; title: string; us: number; mvp: boolean; desc: s
 
 export const EPICS: Epic[] = [
   { n: 1, title: "Onboarding, comptes & appairage du collier", us: 7, mvp: true, desc: "Création de compte, appairage BLE, profil animal.", fr: "FR12, FR29, FR30, FR33", accent: "var(--cli)" },
-  { n: 2, title: "Collecte, transmission & stockage fiables", us: 6, mvp: true, desc: "Ingestion capteurs, retry/fallback, séries temporelles.", fr: "FR1–FR10", accent: "var(--edge)" },
-  { n: 3, title: "Suivi bien-être & activité (App)", us: 4, mvp: true, desc: "Score bien-être, activité, sommeil, constantes.", fr: "FR11, FR13, FR19", accent: "var(--cli)" },
+  { n: 2, title: "Collecte, transmission & stockage fiables", us: 6, mvp: true, desc: "Ingestion capteurs, retry/fallback, séries temporelles.", fr: "FR1–FR10, NFR2, NFR8", accent: "var(--edge)" },
+  { n: 3, title: "Suivi bien-être & activité (App)", us: 4, mvp: true, desc: "Score bien-être, activité, sommeil, constantes.", fr: "FR11, FR13, FR19, NFR9", accent: "var(--cli)" },
   { n: 4, title: "Localisation & zones de sécurité (App)", us: 5, mvp: true, desc: "Carte GPS temps réel, geofencing, alertes zone.", fr: "FR20, FR21", accent: "var(--cli)" },
   { n: 5, title: "Détection d'anomalies & alertes santé", us: 5, mvp: true, desc: "Profil normal par animal, seuils adaptatifs, alertes.", fr: "FR14, FR15, FR22", accent: "var(--ai)" },
   { n: 6, title: "Assistant IA conversationnel & escalade", us: 4, mvp: true, desc: "Chat RAG, garde-fous, offramp vétérinaire.", fr: "FR16, FR17, FR23", accent: "var(--ai)" },

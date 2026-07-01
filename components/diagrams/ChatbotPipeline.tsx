@@ -65,8 +65,8 @@ export default function ChatbotPipeline() {
         <text x={xOf(2) + 14} y={Y - 70} className="cbp-lbl" fill="#fda4af">Safe Response (canned) · Escalade vétérinaire</text>
         {/* nœud 1 -> safe */}
         <path d={`M ${xOf(0) + NODE_W / 2} ${Y} V ${Y - 74} H ${xOf(2)}`} fill="none" stroke="#fb7185" strokeWidth={1.4} strokeDasharray="4 4" markerEnd="url(#cbp-arrow-r)" />
-        {/* nœud 6 -> safe */}
-        <path d={`M ${xOf(5) + NODE_W / 2} ${Y} V ${Y - 74} H ${xOf(4) + NODE_W}`} fill="none" stroke="#fb7185" strokeWidth={1.4} strokeDasharray="4 4" markerEnd="url(#cbp-arrow-r)" />
+        {/* nœud 6 -> safe (arrive sur le bord droit de la box Safe Response) */}
+        <path d={`M ${xOf(5) + NODE_W / 2} ${Y} V ${Y - 74} H ${xOf(2) + NODE_W * 2 + GAP}`} fill="none" stroke="#fb7185" strokeWidth={1.4} strokeDasharray="4 4" markerEnd="url(#cbp-arrow-r)" />
 
         {/* Audit log */}
         <rect x={X0} y={310} width={lastRight - X0} height={44} rx={10} fill="rgba(255,255,255,.04)" stroke="var(--line)" />

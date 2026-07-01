@@ -32,7 +32,7 @@ export default function RiskMap() {
       </div>
 
       <div className="rmap-grid-wrap">
-        <div className="rmap-yaxis">Probabilité →</div>
+        <div className="rmap-yaxis">Probabilité ↑</div>
         <div className="rmap-grid">
           {rows.map((p) => (
             <div className="rmap-row" key={p}>
@@ -63,6 +63,7 @@ export default function RiskMap() {
               <span className="rmap-xtick" key={i}>{IMPACT[i]}</span>
             ))}
           </div>
+          <div className="rmap-xtitle">Impact →</div>
         </div>
       </div>
 

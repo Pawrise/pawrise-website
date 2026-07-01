@@ -1,6 +1,6 @@
 // Contenu Équipe · matrice de compétences (extrait) et justification.
 
-export const MEMBERS = ["Yassine", "Elarif", "Ibrahim", "Cyril", "Aaditya", "Hamid", "Nino", "Adam", "Oumar", "Abder."];
+export const MEMBERS = ["Yassine", "Elarif", "Ibrahim", "Cyril", "Aaditya", "Hamid", "Nino", "Adam", "Oumar", "Abderrahmane"];
 
 // Niveaux : 3 expert · 2 intermédiaire · 1 débutant · 0 aucune expérience.
 // Extrait haute-densité de la matrice complète (skills les plus discriminants).
@@ -16,7 +16,7 @@ export const SKILLS: SkillRow[] = [
   { skill: "Docker / Conteneurisation", levels: [3, 3, 2, 0, 1, 2, 0, 2, 1, 1] },
   { skill: "CI/CD", levels: [2, 3, 2, 0, 1, 2, 0, 2, 2, 1] },
   { skill: "Architecture logicielle", levels: [3, 2, 2, 3, 1, 2, 0, 3, 1, 2] },
-  { skill: "UI / UX Design", levels: [0, 2, 0, 0, 1, 2, 3, 3, 0, 1] },
+  { skill: "UI / UX Design", levels: [0, 2, 0, 0, 1, 2, 1, 3, 0, 1] },
   { skill: "Réseau vétérinaire", levels: [0, 3, 0, 0, 0, 0, 2, 0, 0, 0] },
 ];
 
@@ -54,5 +54,5 @@ export const GAPS = [
 export const TEAM_STATS = [
   { k: "10", v: "membres" },
   { k: "5", v: "pôles" },
-  { k: "2 ans", v: "horizon projet" },
+  { k: "20 mois", v: "horizon projet" },
 ];

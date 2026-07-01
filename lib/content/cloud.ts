@@ -80,7 +80,7 @@ export const ANNUAL_COST: AnnualCost[] = [
   { scenario: "Hyperscaler (référence)", quoi: "Azure AKS équivalent (multi-région, SLA entreprise)", cout: "~6 000 à 10 000 €/an" },
 ];
 export const ANNUAL_NOTE =
-  "Ordres de grandeur, hors école, à faible trafic et usage IA modéré (Azure OpenAI cascade + Cohere ≈ 30 à 50 €/mois). Le coût réel est piloté par le trafic et le volume de requêtes IA. Le chiffrage détaillé figure dans la page Budget.";
+  "Ordres de grandeur, hors école. En phase projet (démo, faible trafic), l'IA coûte environ 15 €/mois ; au stade premiers utilisateurs, l'usage IA (Azure OpenAI cascade + Cohere) monte vers 30 à 50 €/mois. Le coût réel est piloté par le trafic et le volume de requêtes IA. Le chiffrage détaillé figure dans la page Budget.";
 
 export const CLOUD_ANTI_OVERENG =
   "Pourquoi pas un hyperscaler tout de suite ? Coût 2 à 3 fois supérieur, lock-in fournisseur et complexité inutile tant qu'on n'a ni multi-région ni SLA entreprise à tenir. On reste sur de l'auto-géré souverain et peu cher, et on bascule vers du managé le jour où la charge et l'équipe le justifient. Construire pour une échelle qu'on n'a pas encore, ce serait du sur-engineering.";

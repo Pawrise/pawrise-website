@@ -108,7 +108,7 @@ export const MODEL_CASCADE: CascadeRow[] = [
 // Coût par conversation (2-3 échanges) et répartition par poste.
 export const COST_PER_CONV = "~0,03 à 0,05 €";
 export const COST_PER_CONV_NOTE =
-  "Calcul à partir des prix publics et d'environ 3 000 tokens cumulés sur les trois nœuds mini, 4 500 tokens d'entrée et 500 de sortie sur le nœud principal, et un reranking. Ce coût valide la cible de la spec (« moins de 0,05 € par conversation ») avec des chiffres réels.";
+  "Calcul à partir des prix publics (affichés en dollars, parité dollar/euro retenue par simplicité) et d'environ 3 000 tokens cumulés sur les trois nœuds mini, 4 500 tokens d'entrée et 500 de sortie sur le nœud principal, et un reranking. Ce coût valide la cible de la spec (« moins de 0,05 € par conversation ») avec des chiffres réels.";
 export const COST_BREAKDOWN = [
   { poste: "Génération (nœud principal)", share: "~85 %" },
   { poste: "Reranking (Cohere)", share: "~10 %" },

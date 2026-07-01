@@ -12,9 +12,11 @@ const LEGEND: { k: Exclude<Raci, "" | "AR">; label: string; def: string }[] = [
 ];
 
 export default function RaciMatrix() {
-  const [col, setCol] = useState<number | null>(null);
+  const [col, setCol] = useState<number | null>(null); // survol (desktop)
+  const [pin, setPin] = useState<number | null>(null); // clic / tactile (mobile)
   const [mode, setMode] = useState<"standard" | "strict">("standard");
   const rows = mode === "standard" ? RACI_ROWS : RACI_ROWS_STRICT;
+  const activeCol = pin ?? col; // la colonne figée prime sur le survol
 
   return (
     <div className="raci">
@@ -34,9 +36,11 @@ export default function RaciMatrix() {
               {RACI_POLES.map((p, i) => (
                 <th
                   key={p}
-                  className={col === i ? "raci-colon" : ""}
+                  className={`raci-poleh${activeCol === i ? " raci-colon" : ""}${pin === i ? " pinned" : ""}`}
                   onMouseEnter={() => setCol(i)}
                   onMouseLeave={() => setCol(null)}
+                  onClick={() => setPin(pin === i ? null : i)}
+                  title="Cliquer pour figer la colonne"
                 >
                   {p}
                 </th>
@@ -50,7 +54,7 @@ export default function RaciMatrix() {
                 {row.cells.map((c, i) => (
                   <td
                     key={i}
-                    className={`raci-cell r-${c || "none"}${col === i ? " raci-colon" : ""}`}
+                    className={`raci-cell r-${c || "none"}${activeCol === i ? " raci-colon" : ""}`}
                     onMouseEnter={() => setCol(i)}
                     onMouseLeave={() => setCol(null)}
                   >

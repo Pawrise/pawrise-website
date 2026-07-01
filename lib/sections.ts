@@ -14,7 +14,7 @@ export const SECTIONS: Section[] = [
     title: "Vision",
     tag: "Le pourquoi",
     desc: "Le problème détecté trop tard, la solution Pawrise et le positionnement non-négociable : orienter, jamais diagnostiquer.",
-    accent: "#00f0aa",
+    accent: "#01aabb",
     blocks: [
       { title: "Le problème", desc: "Les signaux de santé d'un animal passent inaperçus jusqu'à ce que ce soit grave." },
       { title: "La solution Pawrise", desc: "Collier capteurs + IA d'orientation non-diagnostique + réseau vétérinaire." },
@@ -125,7 +125,7 @@ export const SECTIONS: Section[] = [
     accent: "#ff6b8b",
     blocks: [
       { title: "Risk Map", desc: "Matrice probabilité × impact." },
-      { title: "AMDEC", desc: "Modes de défaillance, effets, criticité (S×O×D)." },
+      { title: "AMDEC", desc: "Modes de défaillance, effets, criticité (IPR = G×O×D)." },
       { title: "Kill-risks & mitigations", desc: "Les 3 risques majeurs et comment on les adresse." },
     ],
   },
