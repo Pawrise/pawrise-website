@@ -21,6 +21,8 @@
 #pagebreak()
 #include "parts/03-economie.typ"
 #pagebreak()
+#include "parts/14-backlog.typ"
+#pagebreak()
 #include "parts/04-wbs.typ"
 #pagebreak()
 #include "parts/05-organisation.typ"
@@ -38,8 +40,6 @@
 #include "parts/12-iot.typ"
 #pagebreak()
 #include "parts/13-ia.typ"
-#pagebreak()
-#include "parts/14-backlog.typ"
 #pagebreak()
 #include "parts/09-risques.typ"
 #pagebreak()
