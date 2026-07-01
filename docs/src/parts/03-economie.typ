@@ -74,6 +74,8 @@ Comment chaque poste est chiffré :
 - *Modèle de langage (IA)* : ~0,03 à 0,05 € par conversation ; poste *variable*, ≈ 600 €/an à faible volume, qui croît avec les abonnements qui le financent.
 - *Nom de domaine* : ≈ 12 €/an (TLS gratuit).
 
+#text(size: 8.5pt, fill: mut)[Sources des prix : #link("https://www.hetzner.com/cloud/")[Hetzner Cloud] + #link("https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/")[ajustement du 15/06/2026] (CAX21 10,49 €, CAX31 20,99 €/mois ; volumes 0,057 €/Go) ; IA : #link("https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/")[Azure OpenAI], #link("https://cohere.com/pricing")[Cohere].]
+
 === Développement & tests (à la consommation)
 
 L'essentiel du développement ne coûte rien, et les tests sont payés à l'usage :
@@ -100,8 +102,10 @@ Total développement ≈ *150 €/an*. Un serveur arrêté restant facturé chez
 ]
 #text(size: 8.5pt, fill: mut)[\* Capacité équivalente (~16 vCPU / 32 Go + bases de données, load balancer, sauvegardes et IA), faible trafic. Critères complets (souveraineté, exploitation, lock-in) en partie Cloud.]
 
-=== Ce qui varie avec l'échelle
+*Pourquoi pas le bare metal* : malgré un compute peu cher, il impose l'exploitation matérielle (pannes de disque, redondance physique à acheter en double) et n'offre aucune élasticité, ce qui est incompatible avec nos environnements de test éphémères facturés à la consommation. Le faible gain de coût ne justifie pas cette charge d'exploitation.
 
-Seul le poste IA est réellement variable : il augmente avec le nombre de conversations, donc avec les abonnements qui le financent, ce qui garde ce coût couvert par la marge. Le compute, lui, croît par paliers (ajout de workers) ; au-delà d'un certain volume, on bascule vers un cloud managé européen (voir partie Cloud). L'infrastructure reste ainsi maîtrisée et proportionnée à l'usage.
+*Pourquoi pas l'hyperscaler aujourd'hui* : notre charge de lancement ne le justifie pas. Il coûte 4 à 6× plus, avec un fort lock-in et une souveraineté seulement partielle (Cloud Act US). Y aller avant d'en avoir le besoin serait du sur-engineering. On le garde en réserve pour un éventuel besoin multi-région ou un SLA entreprise.
 
-#text(size: 8.5pt, fill: mut)[Sources des prix : #link("https://www.hetzner.com/cloud/")[Hetzner Cloud] + #link("https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/")[ajustement du 15/06/2026] (CAX21 10,49 €, CAX31 20,99 €/mois ; volumes 0,057 €/Go) ; IA : #link("https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/")[Azure OpenAI], #link("https://cohere.com/pricing")[Cohere].]
+*Retenu* : Hetzner Cloud auto-géré, meilleur compromis coût / souveraineté / élasticité pour notre charge actuelle ; le cloud managé européen prend le relais au moment du passage à l'échelle.
+
+*Ce qui varie avec l'échelle.* Seul le poste IA est réellement variable : il croît avec le nombre de conversations, donc avec les abonnements qui le financent (coût couvert par la marge). Le compute augmente par paliers (ajout de workers) et bascule vers un cloud managé européen au scale (voir partie Cloud), gardant l'infrastructure proportionnée à l'usage.
