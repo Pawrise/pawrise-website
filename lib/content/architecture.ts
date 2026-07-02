@@ -19,7 +19,7 @@ export const ARCHI_DECISIONS: Decision[] = [
     besoin: "Des services backend fiables et performants (ingestion temps réel, API, auth) sur une infra peu coûteuse.",
     alternatives: "Node.js/NestJS, Python/FastAPI, Go/Gin, C#/ASP.NET, Rust/Axum (benchmark backend complet).",
     decision: "Rust (Axum) pour les services métier ; Python réservé au Care Engine (IA).",
-    tradeoff: "Assumé : le benchmark montre un coût de développement environ 2,5× supérieur et seulement deux développeurs Rust dans l'équipe. On le choisit pour la performance, la sûreté mémoire (une classe entière de bugs disparaît), une empreinte serveur minimale et la montée en compétence. Garde-fous : socle monolithe-first, Python assumé pour l'IA, et réintroduction ciblée d'un autre langage si un service devient un point chaud.",
+    tradeoff: "Assumé : le benchmark montre un coût de développement environ 2,5× supérieur et seulement deux développeurs Rust dans l'équipe. On le choisit pour la performance, la sûreté mémoire (une classe entière de bugs disparaît), une empreinte serveur minimale et la montée en compétence. Garde-fous : périmètre Rust ciblé sur les services critiques, Python assumé pour l'IA, workspace Cargo partagé, et réintroduction ciblée d'un autre langage si un service devient un point chaud.",
   },
   {
     titre: "MQTT (EMQX) pour l'entrée IoT",

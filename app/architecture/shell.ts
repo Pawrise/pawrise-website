@@ -58,9 +58,9 @@ export const SHELL = `
       <div class="pcard" style="--ac:var(--svc)"><h3><span class="ic">🩺</span>Vétérinaire</h3><p>Vet Portal web : historique structuré + PDF normalisé.</p></div>
       <div class="pcard" style="--ac:var(--data)"><h3><span class="ic">⚙️</span>Système / Admin</h3><p>Comptes, provisioning colliers, RGPD, observabilité.</p></div>
       <div class="eyebrow">Équipe & méthodo</div>
-      <div class="pcard"><h3>🤝 10 personnes · 5 pôles</h3><div class="members"><span class="mem po">Yassine · PO</span><span class="mem">Nino</span><span class="mem">Cyril</span><span class="mem">Ibrahim</span><span class="mem">Hamid</span><span class="mem">Aaditya</span><span class="mem">Elarif</span><span class="mem">Adam</span><span class="mem">Oumar</span><span class="mem">Abderrahmane</span></div><p style="margin-top:8px">Scrum adapté · monolith-first → macroservices · Jira/Confluence/GitHub/Figma.</p></div>
+      <div class="pcard"><h3>🤝 10 personnes · 5 pôles</h3><div class="members"><span class="mem po">Yassine · PO</span><span class="mem">Nino</span><span class="mem">Cyril</span><span class="mem">Ibrahim</span><span class="mem">Hamid</span><span class="mem">Aaditya</span><span class="mem">Elarif</span><span class="mem">Adam</span><span class="mem">Oumar</span><span class="mem">Abderrahmane</span></div><p style="margin-top:8px">Scrum adapté · services découplés par domaine · Jira/Confluence/GitHub/Figma.</p></div>
       <div class="eyebrow">Par où commencer</div>
-      <div class="pcard"><h3>🚀 Par où commencer</h3><p>Socle <b>monolithe modulaire</b> d'abord (API + Care Engine), puis extraction progressive de macroservices. On démarre par l'ingestion télémétrie → moteur d'orientation, le portail vété avançant en parallèle. Documents de référence : PRD, epics, architecture, 66 stories.</p></div>
+      <div class="pcard"><h3>🚀 Par où commencer</h3><p>Backend en <b>services découplés par domaine</b> (auth, cœur, ingestion, téléconsultation, IA) derrière une passerelle + bus d'événements. On démarre par l'ingestion télémétrie → moteur d'orientation, le portail vété avançant en parallèle. Documents de référence : PRD, epics, architecture, 66 stories.</p></div>
     </div>
   </aside>
 
