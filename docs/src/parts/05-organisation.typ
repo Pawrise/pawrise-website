@@ -71,7 +71,7 @@ Chaque domaine est porté par un ou plusieurs responsables nommés, avec un back
     ("IoT / Hardware", "Cyril, Ibrahim", "Hamid, Elarif (support embarqué)"),
     ("Backend / API", "Hamid, Aaditya, Elarif", "Yassine"),
     ("IA / Data", "Nino, Yassine", "Hamid (pipelines Python)"),
-    ("Mobile / Frontend", "Adam, Elarif", "Hamid, Aaditya"),
+    ("Mobile / Frontend", "Adam, Elarif", "Oumar (Android), Hamid, Aaditya"),
     ("Design / UX", "Adam", "Elarif (intégration front)"),
     ("Market / Business", "Adam, Elarif", "Yassine (PO)"),
     ("Cloud / DevOps", "Oumar, Abderrahmane", "Elarif (CI/CD)"),
@@ -100,7 +100,8 @@ Niveaux : #box(rect(width:8pt,height:8pt,radius:1pt,fill:c3)) expert · #box(rec
   ("Firmware C/C++ embarqué", (1,1,0,3,0,1,0,0,0,0)),
   ("IA · NLP / LLM / RAG", (3,0,0,0,0,0,0,0,0,0)),
   ("React / Next.js", (0,2,2,2,2,2,3,3,2,1)),
-  ("React Native / Expo", (0,2,2,2,0,3,2,0,0,0)),
+  ("Kotlin (Android)", (0,0,0,0,0,0,0,0,3,0)),
+  ("Swift / SwiftUI (iOS)", (2,2,0,0,0,0,0,2,0,0)),
   ("Docker / Conteneurisation", (3,3,2,0,1,2,0,2,1,1)),
   ("CI/CD", (2,3,2,0,1,2,0,2,2,1)),
   ("Architecture logicielle", (3,2,2,3,1,2,0,3,1,2)),
@@ -125,7 +126,7 @@ Niveaux : #box(rect(width:8pt,height:8pt,radius:1pt,fill:c3)) expert · #box(rec
 
 === Lecture de la matrice : forces & points de vigilance
 
-La matrice se lit dans deux sens. *En forces* : plusieurs compétences sont couvertes par au moins deux profils experts (Python, Docker, architecture logicielle, web React/Next) ; combinées aux binômes de pôle et aux backups nominatifs (voir Couverture), elles garantissent qu'aucune brique courante ne dépend d'une seule personne. *En points de vigilance* : quatre compétences critiques ne comptent qu'un seul profil expert. Chacune fait l'objet d'un plan de mitigation explicite.
+La matrice se lit dans deux sens. *En forces* : plusieurs compétences sont couvertes par au moins deux profils experts (Python, Docker, architecture logicielle, web React/Next) ; combinées aux binômes de pôle et aux backups nominatifs (voir Couverture), elles garantissent qu'aucune brique courante ne dépend d'une seule personne. *En points de vigilance* : cinq compétences critiques ne comptent qu'un seul profil expert. Chacune fait l'objet d'un plan de mitigation explicite.
 
 #dtable(
   columns: (auto, auto, 1fr),
@@ -134,11 +135,12 @@ La matrice se lit dans deux sens. *En forces* : plusieurs compétences sont couv
     ("IA · NLP / LLM / RAG (Care Engine)", "Yassine", "Cœur différenciant sur une personne → pipeline LangGraph borné et documenté (ADR), code testé et réappropriable, Nino en appui data."),
     ("Électronique embarquée / firmware", "Cyril", "Le collier dépend d'un expert → simulateur de capteurs en fallback (le reste n'attend pas le matériel), Ibrahim puis Hamid et Elarif en backup embarqué."),
     ("Design / UX", "Adam", "Identité produit sur une personne → Elarif (intermédiaire) prend le relais sur l'intégration front."),
+    ("Mobile natif (Kotlin / Swift)", "Oumar (Android)", "Choix natif assumé et ambitieux → montée en compétence organisée du pôle Mobile : trois profils intermédiaires en Swift (Yassine, Elarif, Adam), Oumar ancre Android ; plusieurs membres ont déjà livré du mobile, dont Yassine (une app complète expédiée en production)."),
     ("Réseau vétérinaire", "Elarif", "Lien terrain sur une personne → Nino (intermédiaire) constitue un second contact vétérinaire."),
   ),
 )
 
-Ces quatre points recoupent volontairement des co-fondateurs ou responsables de pôle : le risque est concentré là où l'engagement est le plus fort. Au-delà de ces personnes, la *montée en compétence* est organisée (Scrum Master tournant, revues de code croisées, documentation d'onboarding) pour diffuser progressivement ces expertises.
+Ces cinq points recoupent volontairement des co-fondateurs ou responsables de pôle : le risque est concentré là où l'engagement est le plus fort. Au-delà de ces personnes, la *montée en compétence* est organisée (Scrum Master tournant, revues de code croisées, documentation d'onboarding) pour diffuser progressivement ces expertises.
 
 == Justification du recrutement
 

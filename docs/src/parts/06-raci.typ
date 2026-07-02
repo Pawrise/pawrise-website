@@ -3,7 +3,7 @@
 
 = Matrice RACI
 
-La RACI attribue, pour chaque activité, un rôle à chaque pôle : *R* responsable (produit le livrable), *A* approbateur (garant, valide), *C* consulté, *I* informé.
+La RACI attribue, pour chaque activité, un rôle à chaque pôle : *R* responsable (produit le livrable), *A* approbateur (garant, valide), *C* consulté, *I* informé. Elle arbitre au niveau des *pôles*, l'échelon de responsabilité ; la responsabilité *individuelle*, tâche par tâche, est portée en aval par la couverture nominative par domaine (partie Organisation) et par l'assignation nominative des tickets dans Jira, où chacun des 10 membres a ses tâches attribuées (partie Planning).
 
 == Règle appliquée
 

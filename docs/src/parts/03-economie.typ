@@ -37,7 +37,7 @@ Le modèle intègre un *pool de rémunération façon Spotify* : une *part fixe*
 
 *Les termes, en clair :*
 - *Marge contributive* : ce qu'il reste de l'abonnement une fois payés les coûts directs d'un client (cloud, API d'IA, pool vétérinaire). Exemple : sur 9,90 €, s'il reste 6,80 €, la marge est de ~69 %.
-- *Churn mensuel* : le pourcentage de clients qui résilient chaque mois. S'il est de 3 %/mois, un client reste en moyenne 1 / 0,03 ≈ 33 mois : c'est la *durée de vie client*.
+- *Churn mensuel* : le pourcentage de clients qui résilient chaque mois. S'il est de 3 %/mois, un client reste en moyenne 1 / 0,03 ≈ 33 mois, arrondis prudemment à ≈ 30 mois dans notre scénario de base : c'est la *durée de vie client*.
 - *LTV (valeur vie client)* : ce qu'un client rapporte au total sur toute sa durée de vie, soit abonnement × nombre de mois × marge. Exemple : 9,90 € × 30 mois × 69 % ≈ 205 €.
 - *CAC (coût d'acquisition)* : ce qu'il faut dépenser (publicité, commercial) pour gagner un client.
 
