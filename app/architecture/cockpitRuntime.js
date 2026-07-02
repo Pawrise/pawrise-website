@@ -191,6 +191,8 @@ const PAW=(function(){
   function exportSVG(){
     const light=document.body.classList.contains('light');
     const plat=document.body.classList.contains('plat');
+    // En vue plateforme, l'observabilité occupe la bande basse : on masque les intégrations externes (comme la vue live, cockpit.css) pour éviter tout chevauchement.
+    const HIDE=plat?{MAPS:1,MAIL:1,STRIPE:1,S3:1,AZ:1}:{};
     const vb=stage.getAttribute('viewBox');const[vx,vy,vw,vh]=vb.split(' ').map(Number);
     const padTop=58, evx=vx, evy=vy-padTop, evw=vw, evh=vh+padTop;
     const T=light
@@ -199,8 +201,8 @@ const PAW=(function(){
     const ecol=light?{sync:'#10b981',event:'#a855f7',ext:'#d97706',ctrl:'#0ea5e9'}:{sync:'#34d399',event:'#c084fc',ext:'#fbbf24',ctrl:'#64d2ff'};
     const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const edge=(f,t,ty,sa,sb,stroke,w)=>{const a=A(N[f],sa),b=A(N[t],sb);return `<path d="${Dp(a,b,sa,sb)}" fill="none" stroke="${stroke||ecol[ty]||ecol.sync}" stroke-width="${w||1.8}" stroke-linecap="round" opacity="0.62"/>`;};
-    let zS='';ZONES.forEach(z=>{zS+=`<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="22" fill="${T.zf}" stroke="${T.zs}"/><text x="${z.x+18}" y="${z.y+26}" font-size="11" font-weight="800" letter-spacing="2" fill="${T.zl}">${esc(z.l.toUpperCase())}</text>`;});
-    let eS='';E.forEach(e=>{eS+=edge(e[0],e[1],e[2],e[3],e[4]);});
+    let zS='';ZONES.forEach(z=>{if(plat&&z.l==='Intégrations externes')return;zS+=`<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="22" fill="${T.zf}" stroke="${T.zs}"/><text x="${z.x+18}" y="${z.y+26}" font-size="11" font-weight="800" letter-spacing="2" fill="${T.zl}">${esc(z.l.toUpperCase())}</text>`;});
+    let eS='';E.forEach(e=>{if(HIDE[e[0]]||HIDE[e[1]])return;eS+=edge(e[0],e[1],e[2],e[3],e[4]);});
     let encS='',pEdgeS='',pLabS='';
     if(plat){
       encS=`<rect x="${ENC.x}" y="${ENC.y}" width="${ENC.w}" height="${ENC.h}" rx="26" fill="${light?'rgba(56,189,248,.06)':'rgba(56,189,248,.045)'}" stroke="${light?'rgba(2,132,199,.5)':'rgba(56,189,248,.42)'}" stroke-width="2" stroke-dasharray="11 9"/>`;
@@ -219,7 +221,7 @@ const PAW=(function(){
       g+=`<text x="${n.x+45}" y="${n.y+25}" font-size="12.5" font-weight="700" fill="${T.ink}">${esc(n.nm)}</text>`;
       if(n.tg)g+=`<text x="${n.x+45}" y="${n.y+39}" font-size="9.6" fill="${T.mut}">${esc(n.tg)}</text>`;
       return g+'</g>';};
-    let nS='';for(const id in N){const n=N[id];if(n.plat&&!plat)continue;nS+=nodeSVG(id);}
+    let nS='';for(const id in N){const n=N[id];if(n.plat&&!plat)continue;if(HIDE[id])continue;nS+=nodeSVG(id);}
     const title=`<text x="${evx+24}" y="${evy+38}" font-size="21" font-weight="900" fill="${T.ink}">Pawrise Care · Architecture${plat?' · Plateforme &amp; Ops':' · Produit'}</text>`;
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${evx} ${evy} ${evw} ${evh}" width="${evw}" height="${evh}"><style>text{font-family:Inter,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}</style><rect x="${evx}" y="${evy}" width="${evw}" height="${evh}" fill="${T.bg}"/>${encS}${zS}${eS}${pEdgeS}${pLabS}${nS}${title}</svg>`;
   }
