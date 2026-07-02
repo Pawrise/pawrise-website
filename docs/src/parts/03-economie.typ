@@ -81,7 +81,7 @@ Coût d'exploitation sur *un an*, en production une fois le produit lancé, dév
 
 #keep[
 #dtable(
-  columns: (1fr, auto, auto),
+  columns: (auto, 1fr, auto),
   headers: ("Poste", "Détail", "Coût annuel"),
   rows: CLOUDBUDGET,
 )
