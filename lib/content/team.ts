@@ -34,7 +34,7 @@ export const APPROACH =
 export type Profile = { who: string; why: string; founder?: boolean };
 export const PROFILES: Profile[] = [
   { who: "Yassine · PO & Responsable IA", founder: true, why: "3 ans chez Smart Tribune sur NLP/LLM/NER en production → maîtrise du Care Engine, cœur différenciant. Profil architecte (Rust, Python, Kafka, K8s)." },
-  { who: "Elarif · Responsable Fullstack", founder: true, why: "Fullstack complet (React/Angular/Vue, Python/Java), CI/CD chez Naval Group (GitLab, SonarQube). En contact direct avec une vétérinaire partenaire → ancrage terrain." },
+  { who: "Elarif · Responsable Fullstack", founder: true, why: "Fullstack complet (React/Angular/Vue, Python/Java), CI/CD chez Naval Group (GitLab, SonarQube). Intervient en transverse (Backend, IoT, CI/CD). En contact direct avec une vétérinaire partenaire → ancrage terrain." },
   { who: "Cyril · Responsable IoT / Hardware", why: "Profil le plus expérimenté en électronique embarquée : STM32/ESP32, firmware C/C++, MQTT. Projets persos alignés (BioLink, Centaurus). A déjà résolu les problèmes du collier." },
   { who: "Ibrahim · Responsable IoT", founder: true, why: "Fullstack évoluant vers l'IoT en alternance (capteurs d'irrigation, LoRaWAN) → jonction firmware collier ↔ backend." },
   { who: "Aaditya · Dev Backend / API", why: "Backend orienté API avec sensibilité métier : transformation des données capteurs en valeur. Rigueur et engagement long terme." },
@@ -42,13 +42,19 @@ export const PROFILES: Profile[] = [
   { who: "Nino · Responsable Data", why: "Data Engineer en alternance (ETL Python) → pipeline de données pour le moteur IA. Connaît une étudiante vétérinaire (validation données)." },
   { who: "Adam · Responsable Design & Market", why: "Double profil dev fullstack + designer/commercial. 3 ans de freelance (acquisition client), maîtrise Figma → du wireframe au code (refonte CapFiEurope v2)." },
   { who: "Oumar · Responsable Cloud & DevOps", why: "Infrastructure et déploiement : pipelines CI/CD, dev mobile Android. Garant du cycle de livraison (test, déploiement, monitoring)." },
-  { who: "Abderrahmane · Cloud & DevOps (renfort)", why: "MSc Pro Cloud Epitech (même socle qu'Oumar, Azure). Backend Django/Node, UML/architecture. Évite le point de défaillance unique sur le pôle le plus exposé à la montée en charge." },
+  { who: "Abderrahmane · Cloud & DevOps (renfort)", why: "MSc Pro Cloud Epitech (même socle qu'Oumar, Azure). Backend Django/Node, UML/architecture. Arrivé plus tard dans l'équipe : l'architecture ayant évolué vers Kubernetes, le GitOps (Argo CD) et une observabilité complète, un binôme est devenu nécessaire pour épauler Oumar, absorber cette charge accrue et éviter le point de défaillance unique sur le pôle le plus exposé à la montée en charge." },
 ];
 
+// Manques de l'équipe étudiante (EIP, sans budget) : mitigations réalistes à
+// notre échelle — monter en compétence, partenaire, ressources gratuites, ou
+// reporter à une phase produit (hors périmètre académique).
 export const GAPS = [
-  { gap: "Capteurs miniaturisés fiables", mit: "R&D matérielle + simulateur de collier en fallback." },
-  { gap: "Base time-series (aucun expert)", mit: "Montée en compétence ciblée + choix d'outils éprouvés." },
-  { gap: "Commercial / acquisition", mit: "Phase post-MVP ; partenariats (assurances, cabinets)." },
+  { gap: "Conception électronique de série (PCB, miniaturisation)", mit: "Hors périmètre académique : validation logicielle sur simulateur ; industrialisation renvoyée à une phase produit." },
+  { gap: "Base de données séries temporelles (aucun expert)", mit: "Montée en compétence sur un outil éprouvé (TimescaleDB), qui reste du PostgreSQL." },
+  { gap: "Sécurité applicative", mit: "Checklists OWASP, revues de code entre pairs, encadrement Epitech ; audit approfondi = phase produit." },
+  { gap: "Expertise vétérinaire médicale", mit: "Partenaire vétérinaire + étudiante vétérinaire pour valider corpus et seuils (aucun diagnostic produit)." },
+  { gap: "Conformité RGPD / AI Act", mit: "Guides et modèles DPIA gratuits de la CNIL, RGPD dès la conception ; PO garant." },
+  { gap: "Commercial / acquisition client", mit: "Hors périmètre académique (post-MVP) ; partenariats (assurances, cabinets)." },
 ];
 
 export const TEAM_STATS = [

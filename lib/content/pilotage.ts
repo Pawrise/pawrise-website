@@ -113,7 +113,7 @@ export const OBS: Pole[] = [
 // au pôle Design/Mobile (binôme avec Adam sur l'app) mais intervient en
 // transverse sur le Backend, la CI/CD, le marché et le lien vétérinaire.
 export const PO_NOTE =
-  "Chaque pôle compte deux personnes, le Product Owner assurant la coordination transverse. Yassine cumule le rôle de Product Owner et de contributeur IA/Data. Elarif est rattaché au pôle Design/Mobile, en binôme avec Adam sur l'application, mais intervient en transverse sur le Backend, la CI/CD, le marché et le lien vétérinaire. Le détail des responsabilités nominatives par domaine, avec backups, est précisé dans la table de couverture ci-dessous.";
+  "Chaque pôle compte deux personnes, le Product Owner assurant la coordination transverse. Yassine cumule le rôle de Product Owner et de contributeur IA/Data. Elarif est rattaché au pôle Design/Mobile, en binôme avec Adam sur l'application, mais intervient en transverse sur le Backend, l'IoT, la CI/CD, le marché et le lien vétérinaire. Le détail des responsabilités nominatives par domaine, avec backups, est précisé dans la table de couverture ci-dessous.";
 
 // Table de couverture nominative : qui est responsable de quoi, et le backup
 // qui assure la continuité. Source : Justification & Compétences (Confluence),
@@ -121,7 +121,7 @@ export const PO_NOTE =
 export type Coverage = { domain: string; leads: string; backup: string };
 export const COVERAGE: Coverage[] = [
   { domain: "Product Ownership", leads: "Yassine", backup: "Elarif (transverse, vision produit)" },
-  { domain: "IoT / Hardware", leads: "Cyril, Ibrahim", backup: "Hamid (support embarqué)" },
+  { domain: "IoT / Hardware", leads: "Cyril, Ibrahim", backup: "Hamid, Elarif (support embarqué)" },
   { domain: "Backend / API", leads: "Hamid, Aaditya, Elarif", backup: "Yassine" },
   { domain: "IA / Data", leads: "Nino, Yassine", backup: "Hamid (pipelines Python)" },
   { domain: "Mobile / Frontend", leads: "Adam, Elarif", backup: "Hamid, Aaditya" },
@@ -240,7 +240,7 @@ export const GANTT: Bar[] = [
     id: "c4", phase: "Conception", label: "POCs (simulateur, RAG)", team: "Nino · Yassine · Cyril", start: 4, end: 6, accent: "var(--edge)",
     detail: {
       contenu: ["Simulateur de capteurs collier", "POC RAG / pipeline LangGraph", "Validation de faisabilité avant la keynote"],
-      livrable: "POCs prêts pour la keynote (juin 2026).",
+      livrable: "POCs prêts pour la keynote (juillet 2026).",
       depend: "Dé-risque l'IoT et l'IA avant le développement.",
     },
   },
@@ -314,7 +314,7 @@ export const GANTT: Bar[] = [
 // `lvl` étage les libellés (0 = sous l'axe, 1 = plus bas) pour éviter le chevauchement
 // des jalons proches (ex. MVP intégré idx 16 / Portail Véto idx 17).
 export const MILESTONES: { idx: number; label: string; lvl: 0 | 1 }[] = [
-  { idx: 6, label: "🎤 Keynote", lvl: 0 },
+  { idx: 7, label: "🎤 Keynote", lvl: 0 },
   { idx: 9, label: "Infra op.", lvl: 1 },
   { idx: 11, label: "Simulateur", lvl: 0 },
   { idx: 13, label: "Backend complet", lvl: 1 },
@@ -453,10 +453,10 @@ export const JIRA = {
 /* ----------------------------------------------------- PLAN QUALITÉ ----- */
 // Conservé pour compat ; résumé des principes de test agile.
 export const QUALITY = [
-  "Tests écrits en parallèle ou avant le code (TDD quand possible).",
-  "Chaque sprint inclut rédaction, exécution et validation des tests.",
-  "La Definition of Done d'une User Story inclut obligatoirement ses tests.",
-  "Les tests automatisés s'exécutent à chaque Pull Request via la CI.",
+  "Tests unitaires et fonctionnels obligatoires ; E2E / smoke sur les flux critiques.",
+  "Couverture visée à 90 % sur le code critique (palier « exemplary » Google), plancher CI bloquant à 80 %, sans course au 100 %.",
+  "La Definition of Done d'une User Story inclut obligatoirement ses tests et sa couverture.",
+  "Les tests automatisés s'exécutent à chaque Pull Request via la CI (merge bloqué si rouge).",
 ];
 
 // Definition of Done : conditions qu'une User Story doit toutes remplir pour
@@ -465,8 +465,9 @@ export const QUALITY = [
 export const DEFINITION_OF_DONE = [
   "Les critères d'acceptation de la User Story (Given/When/Then) sont tous satisfaits.",
   "Le code est relu et approuvé par au moins un pair via une Pull Request.",
-  "Les tests de la story sont écrits et passent (unitaires et, si concernés, intégration).",
-  "La CI est verte : lint et tests automatiques réussis (le merge est bloqué sinon).",
+  "Les tests de la story sont écrits et passent : unitaires et fonctionnels obligatoires (intégration et E2E si flux critique).",
+  "La couverture de code atteint le seuil fixé (mesurée en CI, merge bloqué sinon).",
+  "La CI est verte : format, lint, tests et audit automatiques réussis (le merge est bloqué sinon).",
   "La documentation utile est à jour (README du service, doc d'API, Confluence si besoin).",
   "Aucune régression : un bug corrigé est couvert par un test de non-régression.",
 ];
@@ -480,10 +481,11 @@ export const QUALITY_GOLDEN =
 // conventions, Git workflow, CI/CD et onboarding, adapté à la stack réelle.
 export const TEST_STRATEGY: { couche: string; outils: string; cible: string }[] = [
   { couche: "Firmware collier (Rust no_std)", outils: "tests unitaires embarqués + simulateur de capteurs", cible: "Logique de collecte/encodage validée hors matériel via le simulateur." },
-  { couche: "Services backend (Rust)", outils: "tests unitaires (cargo test) + tests d'intégration API", cible: "Logique métier et endpoints couverts ; tests d'abus obligatoires sur l'auth." },
+  { couche: "Services backend (Rust)", outils: "tests unitaires (cargo nextest) + intégration API sur services réels (testcontainers)", cible: "Logique métier et endpoints couverts ; tests d'abus obligatoires sur l'auth." },
   { couche: "Moteur IA / Care Engine (Python)", outils: "pytest + jeux d'évaluation RAG + garde-fous anti-diagnostic", cible: "Non-régression des réponses et déclenchement systématique de l'escalade en cas de doute." },
   { couche: "App mobile (Kotlin / SwiftUI)", outils: "tests unitaires natifs + tests d'UI critiques", cible: "Parcours d'onboarding, appairage et alertes vérifiés." },
-  { couche: "Bout en bout (E2E)", outils: "scénarios end-to-end en phase d'intégration", cible: "Collier → backend → IA → app/portail validés ensemble (phase 3)." },
+  { couche: "Bout en bout (E2E / smoke)", outils: "scénarios end-to-end sur les flux critiques (phase d'intégration)", cible: "Collier → backend → IA → app/portail validés ensemble." },
+  { couche: "Performance / charge", outils: "tests de charge (k6 / Locust) sur les endpoints critiques", cible: "Temps de réponse p95 et montée en charge validés avant la production (NFR6, NFR7)." },
 ];
 
 export const CODE_CONVENTIONS = [
@@ -507,10 +509,11 @@ export const GIT_WORKFLOW = {
 };
 
 export const CICD = [
-  "À chaque Pull Request : lint + tests automatiques via GitHub Actions (merge bloqué si rouge).",
-  "Build et publication d'images conteneurisées (Docker) versionnées.",
-  "Déploiement GitOps : Helm + Argo CD synchronisent le cluster Kubernetes depuis Git (source de vérité).",
-  "Secrets chiffrés (SOPS + age) injectés dans le cluster ; observabilité OpenTelemetry → Prometheus/Loki/Tempo → Grafana.",
+  "CI centrée Cargo (quasi full-Rust), tout gate bloquant : cargo fmt --check, cargo sort --check, cargo clippy -- -D warnings, cargo machete.",
+  "Tests + couverture : cargo llvm-cov nextest --fail-under-lines 80 (objectif 90 % sur le code critique) ; intégration via testcontainers.",
+  "Sécurité & supply chain : cargo audit (RustSec) à chaque PR, Dependabot hebdomadaire groupé (Cargo, GitHub Actions, mobile).",
+  "Déploiement GitOps : images Docker versionnées, Helm + Argo CD ; environnements develop → staging → production, canal hotfix dédié.",
+  "Secrets chiffrés (SOPS + age) ; observabilité OpenTelemetry → Prometheus/Loki/Tempo → Grafana ; rollback par revert Git.",
 ];
 
 export const ONBOARDING = [
