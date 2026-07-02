@@ -14,7 +14,7 @@ export const CLOUD_PRINCIPLES = [
 export type CloudTech = { name: string; role: string; why: string };
 export const CLOUD_STACK: CloudTech[] = [
   { name: "Terraform", role: "Provisionnement", why: "Décrit et crée toute l'infra Hetzner (nœuds, réseau, volumes, firewall) de façon reproductible. Permet de détruire puis recréer un environnement à la demande." },
-  { name: "Kubernetes", role: "Orchestration", why: "Fait tourner et auto-répare la vingtaine de services (Rust, Care Engine, Kafka, bases, observabilité) : redémarrage automatique, placement, montée en charge horizontale." },
+  { name: "Kubernetes", role: "Orchestration", why: "Fait tourner et auto-répare la vingtaine de conteneurs (services Rust, Care Engine, Kafka, bases, observabilité) : redémarrage automatique, placement, montée en charge horizontale." },
   { name: "Helm", role: "Packaging", why: "Empaquette chaque service en chart versionné et paramétrable (dev / prod), pour des déploiements répétables." },
   { name: "Argo CD", role: "Déploiement GitOps", why: "Déploie automatiquement depuis Git : l'état réel du cluster suit toujours le dépôt, rollback par simple revert de commit." },
   { name: "SOPS + age", role: "Secrets", why: "Chiffre les secrets (clés, mots de passe) directement dans Git : rien en clair, déchiffrement uniquement dans le cluster." },
@@ -43,7 +43,7 @@ export const CLOUD_PHASES: CloudPhase[] = [
     periode: "Dev → keynote → premiers utilisateurs",
     titre: "Hetzner Cloud auto-géré (Terraform)",
     points: [
-      "Cluster Kubernetes provisionné par Terraform : control-plane CAX21 + 2 workers CAX31, environ 40 €/mois pour ~20 vCPU et 40 Go de RAM.",
+      "Cluster Kubernetes provisionné par Terraform : control-plane CAX21 + 2 workers CAX31, environ 52 €/mois (~630 €/an) pour ~20 vCPU et 40 Go provisionnés, dimensionnés pour un besoin de ≈ 16 vCPU / 32 Go.",
       "Lignes ARM (CAX) : le meilleur rapport prix / puissance chez Hetzner depuis juin 2026.",
       "Déploiement GitOps via Argo CD, secrets chiffrés (SOPS + age), PKI interne (step-ca).",
       "Souveraineté UE (Allemagne / Finlande), 20 To de trafic inclus par serveur.",
@@ -69,13 +69,14 @@ export const COST_CONTROL = {
     "Facturation horaire avec un plafond mensuel : un serveur qui n'existe que quelques heures par jour est facturé au prorata.",
     "Environnements de dev éphémères : « terraform destroy » le soir et le week-end, « terraform apply » le matin.",
     "Un cluster de dev actif ~40 h/semaine au lieu de 168 h coûte environ 25 % du plafond, soit près de 70 % d'économie sur le compute de dev.",
-    "Les données sont préservées sur des volumes persistants (~0,05 €/Go/mois) ou des snapshots ; seul le compute est détruit puis recréé.",
+    "Les données sont préservées sur des volumes persistants (~0,057 €/Go/mois) ou des snapshots ; seul le compute est détruit puis recréé.",
   ],
 };
 
 export type AnnualCost = { scenario: string; quoi: string; cout: string };
 export const ANNUAL_COST: AnnualCost[] = [
-  { scenario: "VPS simple (auto-géré)", quoi: "2× Hetzner CAX41 (ARM) + backups + volumes + Load Balancer + domaine + IA", cout: "~1 500 à 1 800 €/an" },
+  { scenario: "Bare metal (serveur dédié)", quoi: "Compute brut le moins cher, mais toute l'ops matérielle à notre charge : réservé à des tests, jamais à la production", cout: "~1 000 à 1 500 €/an" },
+  { scenario: "Hetzner Cloud auto-géré (retenu)", quoi: "1× CAX21 + 2× CAX31 (ARM) + backups + volumes + Load Balancer + domaine + IA", cout: "≈ 1 750 €/an (dont ~150 € de dev)" },
   { scenario: "Cloud managé EU", quoi: "Scaleway / OVH : 3 nœuds + PostgreSQL managé + Object Storage + LB + IA", cout: "~3 000 à 3 700 €/an" },
   { scenario: "Hyperscaler (référence)", quoi: "Azure AKS équivalent (multi-région, SLA entreprise)", cout: "~6 000 à 10 000 €/an" },
 ];
@@ -83,4 +84,4 @@ export const ANNUAL_NOTE =
   "Ordres de grandeur, hors école. En phase projet (démo, faible trafic), l'IA coûte environ 15 €/mois ; au stade premiers utilisateurs, l'usage IA (Azure OpenAI cascade + Cohere) monte vers 30 à 50 €/mois. Le coût réel est piloté par le trafic et le volume de requêtes IA. Le chiffrage détaillé figure dans la page Budget.";
 
 export const CLOUD_ANTI_OVERENG =
-  "Pourquoi pas un hyperscaler tout de suite ? Coût 2 à 3 fois supérieur, lock-in fournisseur et complexité inutile tant qu'on n'a ni multi-région ni SLA entreprise à tenir. On reste sur de l'auto-géré souverain et peu cher, et on bascule vers du managé le jour où la charge et l'équipe le justifient. Construire pour une échelle qu'on n'a pas encore, ce serait du sur-engineering.";
+  "Pourquoi pas un hyperscaler tout de suite ? Coût 4 à 6 fois supérieur, souveraineté seulement partielle (le Cloud Act américain peut s'appliquer même en région UE), lock-in fournisseur et complexité inutile tant qu'on n'a ni multi-région ni SLA entreprise à tenir. On reste sur de l'auto-géré souverain et peu cher, et on bascule vers du managé le jour où la charge et l'équipe le justifient. Construire pour une échelle qu'on n'a pas encore, ce serait du sur-engineering.";

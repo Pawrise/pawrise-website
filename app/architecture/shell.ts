@@ -41,7 +41,7 @@ export const SHELL = `
     <div class="ph"><h2>📖 Présentation du projet</h2><button class="x" data-close>×</button></div>
     <div class="pb">
       <div class="eyebrow">La vision</div>
-      <div class="pcard" style="--ac:var(--acc)"><h3>🐾 Pawrise Care</h3><p>Collier connecté qui suit la santé/bien-être de l'animal en continu, l'explique au propriétaire via une IA · <b>sans jamais diagnostiquer</b> · et transmet au vétérinaire un historique structuré prêt à l'emploi. <b>43 FR · 11 epics · 66 US (dont 52 MVP) · 6 services.</b></p></div>
+      <div class="pcard" style="--ac:var(--acc)"><h3>🐾 Pawrise Care</h3><p>Collier connecté qui suit la santé/bien-être de l'animal en continu, l'explique au propriétaire via une IA · <b>sans jamais diagnostiquer</b> · et transmet au vétérinaire un historique structuré prêt à l'emploi. <b>43 FR · 11 epics · 66 US (dont 52 MVP) · 5 services.</b></p></div>
       <div class="eyebrow">Le pourquoi</div>
       <div class="pcard" style="--ac:var(--cli)"><h3><span class="ic">🙈</span>Propriétaire aveugle</h3><p>Aucune visibilité continue entre deux visites.</p></div>
       <div class="pcard" style="--ac:var(--svc)"><h3><span class="ic">🩺</span>Vétérinaire sans historique</h3><p>Chronologie imprécise, données éparses, communication difficile.</p></div>

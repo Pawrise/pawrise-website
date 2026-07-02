@@ -94,7 +94,10 @@ export default function RaciMatrix() {
       )}
       <p className="raci-note" style={{ marginTop: 8 }}>
         Les 6 pôles recoupent l&apos;organisation (OBS) ci-dessus : Fullstack (backend &amp; portail),
-        IoT (collier), Design/Mobile (app), IA/Data (Care Engine), Cloud/Ops (infra).
+        IoT (collier), Design/Mobile (app), IA/Data (Care Engine), Cloud/Ops (infra). La RACI arbitre
+        au niveau des pôles, l&apos;échelon de responsabilité ; la responsabilité individuelle, tâche par
+        tâche, est portée par l&apos;assignation nominative des tickets Jira (10/10 membres) et par la
+        couverture nominative par domaine.
       </p>
     </div>
   );

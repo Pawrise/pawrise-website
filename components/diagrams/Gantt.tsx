@@ -121,8 +121,8 @@ export default function Gantt() {
 
       {/* légende */}
       <div className="gantt-legend">
-        <span><i className="gl-derisk" /> Dé-risquage (simulateur / POC)</span>
-        <span><i className="gl-build" /> Engagement (développement)</span>
+        <span><i className="gl-derisk" /> Préparation (design / mocks / simulateur / machinerie)</span>
+        <span><i className="gl-build" /> Consolidation / intégration</span>
         <span><i className="gl-crit" /> Chemin critique</span>
         <span className="gl-hint">Cliquez une tâche pour le détail</span>
       </div>

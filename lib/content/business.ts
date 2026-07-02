@@ -155,8 +155,9 @@ export const ECON = {
   hypotheses: [
     "Deux revenus : collier 69 € à l'achat + abonnement 9,90 €/mois (marché : Tractive ~70 € + ~5-13 €/mois, Weenect ~50 € + ~4-13 €/mois).",
     "Marge contributive sur l'abonnement (après cloud, API LLM et pool vété).",
-    "Durée de vie client = 1 / churn mensuel ; LTV = abo × durée de vie × marge.",
+    "Durée de vie client = 1 / churn mensuel ; LTV = abo × durée de vie × marge (base : 9,90 € × 30 mois × 69 % ≈ 205 €).",
     "Collier vendu ~69 €, proche du coût série (BOM ≈ 66 €/u) : quasi neutre à l'échelle, la rentabilité vient de l'abonnement (modèle rasoir & lames).",
+    "Au lancement (faible volume, coût proche du prototype ≈ 131 €), le collier est vendu sous son coût : ~60 € de subvention par unité, un investissement d'acquisition ponctuel absorbé par la LTV (≈ 205 €).",
   ],
   rows: [
     { metric: "Marge contributive (abo)", opt: "78 %", base: "69 %", pess: "35 %" },
@@ -212,7 +213,7 @@ export const BUDGET_NOTE =
 // OpenAI + Cohere (poste variable, croît avec les abonnements).
 export type CloudCost = { poste: string; detail: string; cout: string };
 export const CLOUD_BUDGET: CloudCost[] = [
-  { poste: "Cluster Kubernetes (auto-géré)", detail: "1× CAX21 control-plane + 2× CAX31 workers (ARM Ampere, 8 vCPU / 16 Go)", cout: "≈ 630 €/an" },
+  { poste: "Cluster Kubernetes (auto-géré)", detail: "1× CAX21 control-plane + 2× CAX31 workers (ARM Ampere · 8 vCPU / 16 Go par worker, dimensionné pour un besoin total de ≈ 16 vCPU / 32 Go)", cout: "≈ 630 €/an" },
   { poste: "Sauvegardes & volumes", detail: "volumes bloc ~150 Go (0,057 €/Go) + backups automatiques (+20 %)", cout: "≈ 230 €/an" },
   { poste: "Load balancer + IP publique", detail: "LB11 (répartition de charge, TLS)", cout: "≈ 72 €/an" },
   { poste: "Sauvegardes hors-site", detail: "Storage Box (rétention longue durée)", cout: "≈ 60 €/an" },

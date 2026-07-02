@@ -46,8 +46,20 @@ export const PROFILES: Profile[] = [
   { who: "Abderrahmane · Cloud & DevOps (renfort)", why: "MSc Pro Cloud Epitech (même socle qu'Oumar, Azure). Backend Django/Node, UML/architecture. Arrivé plus tard dans l'équipe : l'architecture ayant évolué vers Kubernetes, le GitOps (Argo CD) et une observabilité complète, un binôme est devenu nécessaire pour épauler Oumar, absorber cette charge accrue et éviter le point de défaillance unique sur le pôle le plus exposé à la montée en charge." },
 ];
 
+// Lecture de la matrice : compétences critiques portées par un seul expert,
+// chacune avec un plan de mitigation explicite (dossier, partie Organisation).
+export const VIGILANCE_INTRO =
+  "La matrice se lit dans deux sens. En forces : plusieurs compétences sont couvertes par au moins deux profils experts (Python, Docker, architecture logicielle, web React/Next), combinées aux binômes de pôle et aux backups nominatifs. En vigilance : cinq compétences critiques ne comptent qu'un seul profil expert ; chacune fait l'objet d'un plan de mitigation explicite.";
+export const VIGILANCE = [
+  { skill: "IA · NLP / LLM / RAG (Care Engine)", expert: "Yassine", mit: "Cœur différenciant sur une personne → pipeline LangGraph borné et documenté (ADR), code testé et réappropriable, Nino en appui data." },
+  { skill: "Électronique embarquée / firmware", expert: "Cyril", mit: "Le collier dépend d'un expert → simulateur de capteurs en fallback (le reste n'attend pas le matériel), Ibrahim puis Hamid et Elarif en backup embarqué." },
+  { skill: "Design / UX", expert: "Adam", mit: "Identité produit sur une personne → Elarif (intermédiaire) prend le relais sur l'intégration front." },
+  { skill: "Mobile natif (Kotlin / Swift)", expert: "Oumar (Android)", mit: "Choix natif assumé et ambitieux → montée en compétence organisée du pôle Mobile : trois profils intermédiaires en Swift (Yassine, Elarif, Adam), Oumar ancre Android ; plusieurs membres ont déjà livré du mobile, dont Yassine (une app complète expédiée en production)." },
+  { skill: "Réseau vétérinaire", expert: "Elarif", mit: "Lien terrain sur une personne → Nino (intermédiaire) constitue un second contact vétérinaire." },
+];
+
 // Manques de l'équipe étudiante (EIP, sans budget) : mitigations réalistes à
-// notre échelle — monter en compétence, partenaire, ressources gratuites, ou
+// notre échelle : monter en compétence, partenaire, ressources gratuites, ou
 // reporter à une phase produit (hors périmètre académique).
 export const GAPS = [
   { gap: "Conception électronique de série (PCB, miniaturisation)", mit: "Hors périmètre académique : validation logicielle sur simulateur ; industrialisation renvoyée à une phase produit." },

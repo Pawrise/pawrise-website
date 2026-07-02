@@ -101,11 +101,11 @@ export type Pole = { name: string; accent: string; members: string[]; scope: str
 export const PO = { name: "Yassine El Gherrabi", role: "Product Owner" };
 
 export const OBS: Pole[] = [
-  { name: "Backend / API", accent: "var(--svc)", members: ["Hamid", "Aaditya"], scope: "API, ingestion, base de données, authentification, Vet Portal" },
-  { name: "IoT / Hardware", accent: "var(--edge)", members: ["Cyril", "Ibrahim"], scope: "Firmware, capteurs, simulateur, collier" },
-  { name: "IA / Data", accent: "var(--ai)", members: ["Nino", "Yassine"], scope: "Care Engine, RAG, POCs, pipeline de données" },
-  { name: "Design / Mobile", accent: "var(--cli)", members: ["Adam", "Elarif"], scope: "UX/UI, app mobile, identité visuelle, étude de marché" },
-  { name: "Cloud / DevOps", accent: "var(--data)", members: ["Oumar", "Abderrahmane"], scope: "Cloud, CI/CD, monitoring, sécurité" },
+  { name: "Fullstack", accent: "var(--svc)", members: ["Hamid", "Aaditya"], scope: "Backend & portail : API, ingestion, base de données, authentification, Vet Portal" },
+  { name: "IoT", accent: "var(--edge)", members: ["Cyril", "Ibrahim"], scope: "Collier : firmware, capteurs, simulateur, prototype matériel" },
+  { name: "Design / Mobile", accent: "var(--cli)", members: ["Adam", "Elarif"], scope: "App : UX/UI, app mobile, identité visuelle, étude de marché" },
+  { name: "IA / Data", accent: "var(--ai)", members: ["Nino", "Yassine"], scope: "Care Engine : RAG, POCs, pipeline de données" },
+  { name: "Cloud / Ops", accent: "var(--data)", members: ["Oumar", "Abderrahmane"], scope: "Infra : cloud, CI/CD, monitoring, sécurité" },
 ];
 
 // Chaque pôle compte deux personnes, le Product Owner assurant la coordination
@@ -124,7 +124,7 @@ export const COVERAGE: Coverage[] = [
   { domain: "IoT / Hardware", leads: "Cyril, Ibrahim", backup: "Hamid, Elarif (support embarqué)" },
   { domain: "Backend / API", leads: "Hamid, Aaditya, Elarif", backup: "Yassine" },
   { domain: "IA / Data", leads: "Nino, Yassine", backup: "Hamid (pipelines Python)" },
-  { domain: "Mobile / Frontend", leads: "Adam, Elarif", backup: "Hamid, Aaditya" },
+  { domain: "Mobile / Frontend", leads: "Adam, Elarif", backup: "Oumar (Android), Hamid, Aaditya" },
   { domain: "Design / UX", leads: "Adam", backup: "Elarif (intégration front)" },
   { domain: "Market / Business", leads: "Adam, Elarif", backup: "Yassine (PO)" },
   { domain: "Cloud / DevOps", leads: "Oumar, Abderrahmane", backup: "Elarif (CI/CD)" },
@@ -244,93 +244,167 @@ export const GANTT: Bar[] = [
       depend: "Dé-risque l'IoT et l'IA avant le développement.",
     },
   },
-  // ---- Phase 2 · Développement ----
+  // ---- Phase 2 · Développement : les 11 epics du WBS (codes E1-E11) ----
+  // Aligné sur le dossier (partie Planning) : mêmes codes, mêmes dates Jira,
+  // segment clair = préparation non bloquante, segment plein = consolidation.
   {
-    id: "d1", phase: "Développement", label: "Infrastructure", team: "Oumar · Abderrahmane", start: 7, end: 9, accent: "var(--data)", critical: true,
+    id: "e11", phase: "Développement", label: "E11 · Plateforme & Ops", team: "Cloud/Ops", start: 7, end: 9, accent: "var(--data)", critical: true,
     detail: {
-      contenu: ["Cluster Kubernetes (Hetzner, Terraform)", "CI/CD GitOps (Argo CD)", "Observabilité (Prometheus / Loki / Tempo / Grafana)"],
-      livrable: "Socle de déploiement opérationnel (sept. 2026).",
-      depend: "Prérequis du déploiement backend : démarre dès juillet.",
+      contenu: ["Cluster Kubernetes (Hetzner, Terraform)", "CI/CD + déploiement GitOps (Argo CD)", "Observabilité OpenTelemetry (Prometheus / Loki / Tempo / Grafana)", "Sécurité de l'infrastructure"],
+      livrable: "Infrastructure opérationnelle (sept. 2026).",
+      depend: "Le socle : tout se déploie dessus. Construite en premier, puis exploitée en continu (déploiements, monitoring, RGPD infra).",
     },
   },
   {
-    id: "d2", phase: "Développement", label: "Backend & API", team: "Hamid · Aaditya · Elarif", start: 7, end: 13, accent: "var(--svc)", critical: true, deps: ["d1"],
-    detail: {
-      contenu: ["API et services métier (Rust)", "Authentification (OIDC), base de données", "Ingestion des données collier"],
-      livrable: "Backend complet et documenté (janv. 2027).",
-      depend: "Se déploie sur l'infrastructure dès qu'elle est prête.",
-    },
-  },
-  {
-    id: "d3", phase: "Développement", label: "Collier IoT", team: "Cyril · Ibrahim", start: 7, end: 16, accent: "var(--edge)",
+    id: "e2", phase: "Développement", label: "E2 · Collecte & stockage", team: "IoT · Backend", start: 7, end: 13, accent: "var(--edge)", critical: true, deps: ["e11"],
     segs: [
-      { label: "Simulateur", start: 7, end: 11, kind: "derisk" },
-      { label: "Hardware", start: 12, end: 16, kind: "build" },
+      { label: "Simulateur", start: 7, end: 10, kind: "derisk" },
+      { label: "Collier réel", start: 11, end: 13, kind: "build" },
     ],
     detail: {
-      contenu: ["Firmware embarqué (C / Zephyr)", "Carte électronique, boîtier IP67", "Transmission MQTT / LTE-M"],
-      livrable: "Simulateur (nov. 2026) puis prototype matériel (avr. 2027).",
-      depend: "On valide tout sur simulateur avant d'engager le hardware coûteux.",
+      contenu: ["Ingestion capteurs, normalisation, déduplication", "Tampon hors-ligne (store-and-forward) + retry", "Stockage en séries temporelles (TimescaleDB)", "Authentification du collier (mTLS)"],
+      livrable: "Chaîne de collecte complète, backend complet (janv. 2027).",
+      depend: "La donnée alimente tout : le simulateur (dès juillet) permet aux features et à l'IA de démarrer sans attendre le collier réel.",
     },
   },
   {
-    id: "d4", phase: "Développement", label: "Moteur IA + Data", team: "Nino · Yassine", start: 7, end: 16, accent: "var(--ai)", critical: true, deps: ["d3"],
+    id: "e1", phase: "Développement", label: "E1 · Onboarding & appairage", team: "Fullstack · Mobile", start: 7, end: 11, accent: "var(--cli)",
     segs: [
-      { label: "POCs", start: 7, end: 11, kind: "derisk" },
-      { label: "Intégration", start: 12, end: 16, kind: "build" },
+      { label: "Design / maquettes", start: 7, end: 8, kind: "derisk" },
+      { label: "Consolidation", start: 9, end: 11, kind: "build" },
     ],
     detail: {
-      contenu: ["Pipeline LangGraph 6 nœuds, garde-fous", "RAG hybride sur corpus vétérinaire", "Intégration au backend et aux données réelles"],
+      contenu: ["Compte sécurisé + authentification", "Profil animal (race, âge, poids)", "Appairage BLE du collier (QR code)", "Gestion multi-animaux"],
+      livrable: "Parcours d'entrée complet (nov. 2026).",
+      depend: "Démarre sur maquettes ; consolide sur l'API d'authentification réelle.",
+    },
+  },
+  {
+    id: "e9", phase: "Développement", label: "E9 · Conformité & RGPD", team: "Cloud/Ops · PO", start: 7, end: 16, accent: "var(--rose)",
+    segs: [
+      { label: "Cadre (DPIA, consentement)", start: 7, end: 9, kind: "derisk" },
+      { label: "Application continue", start: 10, end: 16, kind: "build" },
+    ],
+    detail: {
+      contenu: ["Recueil du consentement", "Anonymisation / masquage PII", "Traçabilité & audit", "Gestion des droits (accès, suppression)"],
+      livrable: "Conformité RGPD appliquée en continu jusqu'au MVP (avr. 2027).",
+      depend: "Cadre posé tôt (privacy by design), appliqué au fil des livraisons de chaque pôle.",
+    },
+  },
+  {
+    id: "e3", phase: "Développement", label: "E3 · Bien-être & activité", team: "Mobile · IA", start: 8, end: 15, accent: "var(--cli)", deps: ["e2"],
+    segs: [
+      { label: "Préparation (données simulées)", start: 8, end: 10, kind: "derisk" },
+      { label: "Consolidation", start: 11, end: 15, kind: "build" },
+    ],
+    detail: {
+      contenu: ["Score de bien-être", "Courbes activité / sommeil", "Constantes (température, rythme)", "Historique consultable"],
+      livrable: "Suivi bien-être complet dans l'app (MVP avr. 2027).",
+      depend: "Démarre sur les données simulées (E2), consolide sur les données réelles.",
+    },
+  },
+  {
+    id: "e4", phase: "Développement", label: "E4 · Localisation & zones", team: "Mobile · Backend", start: 9, end: 16, accent: "var(--cli)", deps: ["e2"],
+    segs: [
+      { label: "Préparation (mocks carte)", start: 9, end: 11, kind: "derisk" },
+      { label: "Consolidation", start: 12, end: 16, kind: "build" },
+    ],
+    detail: {
+      contenu: ["Carte GPS temps réel", "Geofencing (zones de sécurité)", "Alertes de sortie de zone", "Historique des trajets"],
+      livrable: "Localisation et zones dans l'app (MVP avr. 2027).",
+      depend: "Positions simulées (E2) puis réelles ; alertes branchées sur le backend.",
+    },
+  },
+  {
+    id: "e5", phase: "Développement", label: "E5 · Anomalies & alertes", team: "IA/Data", start: 9, end: 16, accent: "var(--ai)", deps: ["e2"],
+    segs: [
+      { label: "Machinerie", start: 9, end: 12, kind: "derisk" },
+      { label: "Calibrage données réelles", start: 13, end: 16, kind: "build" },
+    ],
+    detail: {
+      contenu: ["Profil de comportement normal par animal", "Seuils adaptatifs", "Détection d'anomalies", "Génération d'alertes santé"],
+      livrable: "Détection d'anomalies calibrée (MVP avr. 2027).",
+      depend: "Démarrage à froid : détecter une anomalie exige des mois d'historique par animal. Machinerie dès septembre, calibrage sur données réelles en décembre.",
+    },
+  },
+  {
+    id: "e6", phase: "Développement", label: "E6 · Assistant IA & escalade", team: "IA/Data", start: 9, end: 16, accent: "var(--ai)", critical: true, deps: ["e2"],
+    segs: [
+      { label: "Pipeline & corpus", start: 9, end: 13, kind: "derisk" },
+      { label: "Intégration", start: 14, end: 16, kind: "build" },
+    ],
+    detail: {
+      contenu: ["Chat RAG sur corpus vétérinaire", "Garde-fous non-diagnostiques", "Contextualisation des alertes", "Escalade vers le vétérinaire"],
       livrable: "Care Engine intégré au MVP (avr. 2027).",
-      depend: "S'entraîne sur les données du simulateur, consomme les API backend.",
+      depend: "Part du POC RAG de la conception ; consolide sur les données et alertes réelles (E2, E5).",
     },
   },
   {
-    id: "d5", phase: "Développement", label: "App Mobile", team: "Adam · Elarif", start: 7, end: 17, accent: "var(--cli)", deps: ["d2"],
+    id: "e7", phase: "Développement", label: "E7 · Vet Portal · dossier", team: "Fullstack", start: 11, end: 17, accent: "var(--svc)", critical: true, deps: ["e2", "e6"],
+    segs: [
+      { label: "Échafaudage (mocks)", start: 11, end: 13, kind: "derisk" },
+      { label: "Câblage IA & données", start: 14, end: 17, kind: "build" },
+    ],
     detail: {
-      contenu: ["Auth, dashboard bien-être", "Carte GPS, zones de sécurité", "Chat IA, notifications"],
-      livrable: "App propriétaire complète (mai 2027).",
-      depend: "Branche les API backend au fur et à mesure de leur livraison.",
-    },
-  },
-  {
-    id: "d6", phase: "Développement", label: "Portail Véto", team: "Hamid · Aaditya · Elarif", start: 14, end: 17, accent: "var(--svc)", critical: true, deps: ["d2", "d4"],
-    detail: {
-      contenu: ["Dashboard vétérinaire, timeline patient", "Escalade et handoff structuré", "Rapports / PDF normalisé"],
+      contenu: ["Timeline médicale, vue patient", "Résumé contextualisé + données brutes", "Alertes, notes, suivi longitudinal", "Export PDF / JSON normalisé"],
       livrable: "Portail vétérinaire livré (mai 2027).",
-      depend: "Démarre en février, une fois le moteur IA et le backend assez avancés.",
+      depend: "Le seul epic vraiment dépendant (backend + IA) : échafaudage sur mocks dès novembre, câblage aux vraies sorties IA en février.",
+    },
+  },
+  {
+    id: "e8", phase: "Développement", label: "E8 · Abonnement & support", team: "Fullstack", start: 17, end: 18, accent: "var(--ext)",
+    detail: {
+      contenu: ["Plans & abonnement (Stripe)", "Statuts & renouvellements", "Facturation", "Support / ticketing, FAQ"],
+      livrable: "Abonnement opérationnel (post-MVP).",
+      depend: "Post-MVP : différé par priorité (non requis pour valider le produit), pas par blocage technique.",
+    },
+  },
+  {
+    id: "e10", phase: "Développement", label: "E10 · Téléconsultation & triage", team: "Fullstack · IA", start: 17, end: 19, accent: "var(--svc)",
+    detail: {
+      contenu: ["File de garde vétérinaire", "Handoff IA → vétérinaire", "Orientation non-diagnostique, prise de RDV", "Pool plafonné, routage vers le vétérinaire traitant"],
+      livrable: "Téléconsultation de bout en bout (post-MVP, juil. 2027).",
+      depend: "Post-MVP : s'appuie sur le portail (E7) et l'escalade (E6).",
     },
   },
   // ---- Phase 3 · Intégration ----
   {
-    id: "i1", phase: "Intégration", label: "Intégration & tests E2E", team: "Toute l'équipe", start: 17, end: 19, accent: "var(--rose)", critical: true, deps: ["d5", "d6"],
+    id: "i1", phase: "Intégration", label: "Tests E2E (tous composants)", team: "Toute l'équipe", start: 17, end: 18, accent: "var(--rose)", deps: ["e7"],
     detail: {
-      contenu: ["Tests E2E (tous les composants connectés)", "Bêta interne, tests utilisateurs", "Documentation technique et guide"],
-      livrable: "Produit assemblé, testé et stabilisé (juil. 2027).",
-      depend: "Phase finale : rassemble tous les composants.",
+      contenu: ["Tests E2E des flux critiques (collier → backend → IA → app / portail)", "Tests de charge et de performance (p95)", "Stabilisation"],
+      livrable: "Produit intégré et testé.",
+      depend: "Rassemble tous les composants livrés par les 11 epics.",
+    },
+  },
+  {
+    id: "i2", phase: "Intégration", label: "Bêta interne + documentation", team: "Toute l'équipe", start: 18, end: 19, accent: "var(--rose)", deps: ["i1"],
+    detail: {
+      contenu: ["Bêta interne, tests utilisateurs", "Corrections et finitions", "Documentation technique et guide utilisateur"],
+      livrable: "Produit stabilisé, fin de projet (juil. 2027).",
+      depend: "Suit les tests E2E.",
     },
   },
 ];
 // `lvl` étage les libellés (0 = sous l'axe, 1 = plus bas) pour éviter le chevauchement
 // des jalons proches (ex. MVP intégré idx 16 / Portail Véto idx 17).
 export const MILESTONES: { idx: number; label: string; lvl: 0 | 1 }[] = [
-  { idx: 7, label: "🎤 Keynote", lvl: 0 },
+  { idx: 7, label: "Keynote", lvl: 0 },
   { idx: 9, label: "Infra op.", lvl: 1 },
   { idx: 11, label: "Simulateur", lvl: 0 },
   { idx: 13, label: "Backend complet", lvl: 1 },
   { idx: 16, label: "MVP intégré", lvl: 0 },
   { idx: 17, label: "Portail Véto", lvl: 1 },
-  { idx: 19, label: "🎓 Fin projet", lvl: 0 },
+  { idx: 19, label: "Fin projet", lvl: 0 },
 ];
 
 // Pourquoi on peut paralléliser : peu de dépendances réelles entre composants.
 export const DEP_NOTE =
-  "Le parallélisme n'est pas un pari : les composants sont volontairement peu couplés. Le portail vétérinaire est le seul à vraiment dépendre des autres (il a besoin du moteur IA et du backend), c'est pourquoi il démarre plus tard, en février 2027. Tout le reste avance en parallèle dès juillet 2026, et les briques risquées (collier, IA) sont d'abord dé-risquées par un simulateur et des POCs avant d'engager le coûteux.";
+  "Le parallélisme n'est pas un pari : les 5 pôles avancent en parallèle dès juillet et aucun epic n'attend qu'un autre soit terminé. Chacun démarre par sa part non bloquante (design, maquettes / mocks, simulateur, machinerie) et ne consolide qu'une fois sa dépendance réelle disponible. Le Vet Portal (E7) est le seul epic vraiment dépendant (backend + IA) : échafaudage sur mocks dès novembre 2026, câblage aux vraies sorties IA en février 2027. E8 et E10 sont post-MVP : différés par priorité, pas par blocage technique.";
 export const DEPENDENCIES: { from: string; to: string; why: string }[] = [
-  { from: "Infrastructure", to: "Backend", why: "le backend se déploie sur l'infra" },
-  { from: "Simulateur collier", to: "Moteur IA", why: "l'IA s'entraîne et se teste sur des données simulées" },
-  { from: "Backend (API)", to: "App Mobile", why: "l'app consomme les API au fil de l'eau" },
-  { from: "Moteur IA + Backend", to: "Portail Véto", why: "alertes et rapports viennent de l'IA et des données" },
+  { from: "E11 Plateforme (socle)", to: "Tous les epics", why: "tout se déploie sur l'infrastructure, construite en premier puis exploitée en continu" },
+  { from: "E2 Collecte (simulateur)", to: "E3, E4, E5, E6", why: "la donnée alimente tout : features et IA démarrent sur données simulées, sans attendre le collier" },
+  { from: "Baseline de données", to: "E5 Anomalies", why: "détecter une anomalie exige plusieurs mois d'historique par animal (démarrage à froid)" },
+  { from: "E6 IA + E2 données", to: "E7 Vet Portal", why: "le portail affiche les résumés et alertes issus de l'IA" },
 ];
 export const PLANNING_RISKS: { risque: string; impact: string; mitigation: string }[] = [
   { risque: "Retard de la keynote", impact: "Bloque le démarrage de la phase de développement", mitigation: "Prioriser les livrables réellement évalués" },
@@ -413,7 +487,7 @@ export const PHASES: Phase[] = [
   },
   {
     nom: "Phase 2 · Développement",
-    periode: "Juil 2026 → Avr 2027",
+    periode: "Juil 2026 → Mai 2027",
     objectif: "Développer tous les composants en parallèle.",
     lignes: [
       { quoi: "Infrastructure : Cloud, CI/CD, monitoring", qui: "Oumar, Abderrahmane", quand: "Juil → Sept 2026" },
@@ -444,6 +518,7 @@ export const JIRA = {
   stats: [
     { k: "170+", v: "tickets (epics, tâches, sous-tâches, user stories)" },
     { k: "23", v: "epics Jira (12 cadrage & documentation · 11 produit)" },
+    { k: "66", v: "user stories produit, chacune avec critères d'acceptation Given/When/Then" },
     { k: "10 / 10", v: "membres avec tickets assignés" },
     { k: "4", v: "statuts de flux (à faire → en cours → revue → terminé)" },
   ],

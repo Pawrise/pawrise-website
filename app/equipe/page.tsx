@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import OrgChart from "@/components/diagrams/OrgChart";
 import PageHeader from "@/components/PageHeader";
 import CompetencyHeatmap from "@/components/diagrams/CompetencyHeatmap";
-import { APPROACH, PROFILES, GAPS, TEAM_STATS } from "@/lib/content/team";
+import { APPROACH, PROFILES, GAPS, TEAM_STATS, VIGILANCE, VIGILANCE_INTRO } from "@/lib/content/team";
 
 export const metadata: Metadata = {
   title: "Équipe · Pawrise Care",
@@ -34,6 +34,21 @@ export default function EquipePage() {
             <p>Extrait des compétences les plus discriminantes (matrice complète sur Confluence).</p>
           </div>
           <div className="glass ps-body"><CompetencyHeatmap /></div>
+        </section>
+
+        <section className="panel-sect">
+          <div className="ps-head">
+            <h2>Points de vigilance & mitigation</h2>
+            <p>{VIGILANCE_INTRO}</p>
+          </div>
+          <div className="ps-grid2">
+            {VIGILANCE.map((v) => (
+              <div className="glass ps-body gap" key={v.skill}>
+                <b>{v.skill} · seul expert : {v.expert}</b>
+                <span>{v.mit}</span>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="panel-sect">

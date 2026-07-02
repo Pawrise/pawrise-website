@@ -22,6 +22,13 @@ export const ARCHI_DECISIONS: Decision[] = [
     tradeoff: "Assumé : le benchmark montre un coût de développement environ 2,5× supérieur et seulement deux développeurs Rust dans l'équipe. On le choisit pour la performance, la sûreté mémoire (une classe entière de bugs disparaît), une empreinte serveur minimale et la montée en compétence. Garde-fous : périmètre Rust ciblé sur les services critiques, Python assumé pour l'IA, workspace Cargo partagé, et réintroduction ciblée d'un autre langage si un service devient un point chaud.",
   },
   {
+    titre: "Découpage en services",
+    besoin: "Faire évoluer et monter en charge chaque partie du système séparément, sans créer une constellation ingérable.",
+    alternatives: "Monolithe unique, microservices fins.",
+    decision: "Un ensemble restreint de services dont les frontières suivent quatre critères : domaine métier (bounded context), runtime (Rust / Python), profil de charge et frontière de sécurité. Concrètement : OIDC isolé (sécurité), Core API (cœur transactionnel), Ingestion (flux MQTT haute fréquence), Téléconsult/Pool (avec état, WebSocket), Care Engine (runtime Python, cloisonné).",
+    tradeoff: "Montée en charge et durcissement ciblés par service ; surcoût d'exploitation absorbé par Kubernetes, le GitOps et l'observabilité. On ne fragmente pas au-delà : un nouveau service ne naît que lorsqu'un des quatre critères le justifie, jamais par principe.",
+  },
+  {
     titre: "MQTT (EMQX) pour l'entrée IoT",
     besoin: "Recevoir la télémétrie de colliers sur batterie et réseau cellulaire instable.",
     alternatives: "HTTP/REST, CoAP, passerelle maison.",
@@ -58,7 +65,7 @@ export const ARCHI_DECISIONS: Decision[] = [
   },
   {
     titre: "Kubernetes auto-géré + GitOps",
-    besoin: "Faire tourner une vingtaine de services, scaler et déployer de façon reproductible, à coût maîtrisé et souverain.",
+    besoin: "Faire tourner les services et toutes leurs dépendances (bases, Kafka, broker MQTT, observabilité), scaler et déployer de façon reproductible, à coût maîtrisé et souverain.",
     alternatives: "PaaS, Kubernetes managé d'emblée, simple docker-compose.",
     decision: "Cluster Kubernetes auto-géré (Terraform) sur Hetzner, déploiement GitOps via Argo CD.",
     tradeoff: "Le plus économique et souverain, mais le plus exigeant en opérations (sauvegarde etcd, mises à jour). Mitigé par l'Infrastructure as Code et un passage au managé EU au scale. Détail sur la page Cloud.",

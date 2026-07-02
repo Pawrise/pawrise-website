@@ -13,12 +13,12 @@ export const CHATBOT_INTRO = {
 // Les 6 nœuds du pipeline (cœur du fonctionnement).
 export type Node = { n: number; name: string; role: string; model?: string };
 export const PIPELINE: Node[] = [
-  { n: 1, name: "Circuit Breaker", role: "Classifie l'intention (abus, jailbreak, hors-scope, demande de diagnostic, clean). Si non-clean → branche dédiée, sans RAG ni LLM principal.", model: "LLM mini" },
-  { n: 2, name: "Query Understanding", role: "Reformule la question en termes vétérinaires canoniques et déclenche un tool call télémétrie si besoin.", model: "LLM mini" },
+  { n: 1, name: "Circuit Breaker", role: "Classifie l'intention (abus, jailbreak, hors-scope, demande de diagnostic, clean). Si non-clean → branche dédiée, sans RAG ni LLM principal.", model: "LLM nano" },
+  { n: 2, name: "Query Understanding", role: "Reformule la question en termes vétérinaires canoniques et déclenche un tool call télémétrie si besoin.", model: "LLM nano" },
   { n: 3, name: "Retrieval", role: "Recherche hybride BM25 (mots-clés) + dense (sémantique), fusion par Reciprocal Rank Fusion. Top-20.", model: "RAG" },
   { n: 4, name: "Relevance Filter", role: "Reranker dédié (Cohere Rerank 3.5 multilingue) : top-20 → top-5 chunks les plus pertinents (~100 ms).", model: "Reranker" },
-  { n: 5, name: "Customization", role: "LLM principal sous contrainte : génère la réponse + citations + signal d'escalade, tools bornés.", model: "LLM principal" },
-  { n: 6, name: "Post-LLM Guardrail", role: "Détecte le langage « diagnostic », vérifie l'ancrage (chaque claim médical = une source) et force l'escalade selon les règles métier.", model: "LLM mini" },
+  { n: 5, name: "Génération", role: "LLM principal sous contrainte : génère la réponse + citations + signal d'escalade, tools bornés.", model: "LLM principal" },
+  { n: 6, name: "Post-LLM Guardrail", role: "Détecte le langage « diagnostic », vérifie l'ancrage (chaque claim médical = une source) et force l'escalade selon les règles métier.", model: "LLM nano" },
 ];
 
 // Garde-fous en 3 couches (défense en profondeur).
@@ -78,45 +78,44 @@ export const FLOWS: Flow[] = [
 // Décisions d'architecture clés (ADR condensés).
 export const ADRS = [
   { id: "ADR-001", t: "Pipeline LangGraph borné (pas d'agent autonome)", d: "6 nœuds déterministes, chaque étape testable. La responsabilité juridique est portée par le pipeline ; un agent libre serait indéfendable face au Code rural." },
-  { id: "ADR-002", t: "Azure OpenAI Europe + cascade", d: "Data residency EU stricte, pas d'entraînement sur les données. Cascade mini/principal pour contenir le coût. Interface LLMProvider abstraite (bascule possible)." },
+  { id: "ADR-002", t: "Azure OpenAI Europe + cascade", d: "Data residency EU stricte, pas d'entraînement sur les données. Cascade nano/principal pour contenir le coût. Interface LLMProvider abstraite (bascule possible)." },
   { id: "ADR-003", t: "Reranker dédié (pas de filtre LLM)", d: "Cohere Rerank 3.5 multilingue pour passer de top-20 à top-5. Latence ~10× meilleure qu'un filtre LLM (~100 ms vs 1,5-3 s), meilleure pertinence et pas de « rationalisation ». Interface RelevanceFilter pour bascule." },
   { id: "ADR-004", t: "Mémoire long-terme = backend Pawrise", d: "Pas de stockage d'état dans le chatbot : il interroge le Core API par tool calls (profil, télémétrie, alertes, historique). Source de vérité unique, pas de duplication. Contrainte : tools p95 < 200 ms, fallback gracieux." },
   { id: "ADR-005", t: "Sortie JSON structurée (pas de markdown nu)", d: "Chaque réponse est un JSON (texte, citations, signal d'escalade, actions suggérées, métadonnées). Le front affiche les actions sans parser du markdown fragile : découplage front/back propre." },
   { id: "ADR-006", t: "RGPD progressif (MVP léger, V1 complet)", d: "MVP : masquage regex des PII avant envoi au LLM, jamais d'identifiants ni de GPS bruts (le LLM ne voit que « Rex, golden 5 ans, activité -30 % »). V1 : Microsoft Presidio + dictionnaire vétérinaire. Baseline Azure EU + DPA." },
   { id: "ADR-007", t: "Garde-fous 3 couches", d: "Défense en profondeur : l'échec d'une couche n'expose pas le système. Non négociable vu le Code rural." },
   { id: "ADR-008", t: "Retrieval hybride (BM25 + dense)", d: "BM25 capte les termes techniques exacts (Lyme, dysplasie), dense capte la similarité conversationnelle. Fusion RRF." },
-  { id: "ADR-009", t: "Query Understanding avant le RAG", d: "Un nœud reformule la question en termes vétérinaires canoniques et déclenche un tool télémétrie si besoin, avant la recherche. Coût : un appel LLM mini (~100 ms) ; gain : meilleur recall@5." },
+  { id: "ADR-009", t: "Query Understanding avant le RAG", d: "Un nœud reformule la question en termes vétérinaires canoniques et déclenche un tool télémétrie si besoin, avant la recherche. Coût : un appel LLM nano (~100 ms) ; gain : meilleur recall@5." },
   { id: "ADR-010", t: "Audit trail append-only", d: "Log immuable de chaque conversation (input, prompts, retrieval, output, décisions guardrail). Rétention 5 ans, base de la défense juridique et de l'eval." },
 ];
 
 // Budget modèles · cascade « un modèle par nœud ». Prix publics 2026 (par 1M de
-// tokens sauf reranking). Azure applique +10 % sur les endpoints data-residency UE
-// pour les modèles sortis après mars 2026.
+// tokens sauf reranking), consultés le 2 juillet 2026 ; parité dollar/euro retenue.
 export const COST_INTRO =
   "Chaque nœud du pipeline utilise le modèle le moins cher qui fait le travail : les classifications et reformulations passent par un petit modèle, seul le nœud de génération mobilise le gros modèle. C'est la cascade : elle concentre le coût là où il crée de la valeur.";
 
 export type CascadeRow = { node: string; model: string; price: string };
 export const MODEL_CASCADE: CascadeRow[] = [
-  { node: "1 · Circuit Breaker", model: "mini · GPT-5-nano", price: "0,05 $ / 0,40 $" },
-  { node: "2 · Query Understanding", model: "mini · GPT-5-nano", price: "0,05 $ / 0,40 $" },
-  { node: "3 · Retrieval", model: "embeddings text-embedding-3-large + BM25", price: "0,13 $ / 0" },
+  { node: "1 · Circuit Breaker", model: "nano · GPT-5.4-nano", price: "0,20 $ / 1,25 $" },
+  { node: "2 · Query Understanding", model: "nano · GPT-5.4-nano", price: "0,20 $ / 1,25 $" },
+  { node: "3 · Retrieval (embeddings)", model: "text-embedding-3-large + BM25", price: "0,13 $ (entrée seule)" },
   { node: "4 · Relevance Filter", model: "Cohere Rerank 3.5 multilingue", price: "2 $ / 1 000 recherches" },
-  { node: "5 · Customization (génération)", model: "principal · GPT-5 (ou GPT-4.1)", price: "~1,25 à 2,50 $ / ~10 $" },
-  { node: "6 · Post-Guardrail", model: "mini · GPT-5-nano", price: "0,05 $ / 0,40 $" },
+  { node: "5 · Génération", model: "principal · GPT-5.4", price: "2,50 $ / 15 $" },
+  { node: "6 · Post-Guardrail", model: "nano · GPT-5.4-nano", price: "0,20 $ / 1,25 $" },
 ];
 
 // Coût par conversation (2-3 échanges) et répartition par poste.
 export const COST_PER_CONV = "~0,03 à 0,05 €";
 export const COST_PER_CONV_NOTE =
-  "Calcul à partir des prix publics (affichés en dollars, parité dollar/euro retenue par simplicité) et d'environ 3 000 tokens cumulés sur les trois nœuds mini, 4 500 tokens d'entrée et 500 de sortie sur le nœud principal, et un reranking. Ce coût valide la cible de la spec (« moins de 0,05 € par conversation ») avec des chiffres réels.";
+  "Calcul à partir des prix publics (affichés en dollars, parité dollar/euro retenue par simplicité) et d'environ 3 000 tokens cumulés sur les trois nœuds nano, 4 500 tokens d'entrée et 500 de sortie sur le nœud principal, et un reranking. Ce coût valide la cible de la spec (« moins de 0,05 € par conversation ») avec des chiffres réels.";
 export const COST_BREAKDOWN = [
-  { poste: "Génération (nœud principal)", share: "~85 %" },
-  { poste: "Reranking (Cohere)", share: "~10 %" },
-  { poste: "3 nœuds mini (classification, reformulation, garde-fou)", share: "~2 %" },
-  { poste: "Embeddings", share: "< 0,5 %" },
+  { poste: "Génération (nœud principal)", share: "~88 %" },
+  { poste: "Reranking (Cohere)", share: "~8 %" },
+  { poste: "3 nœuds nano (classification, reformulation, garde-fou)", share: "~3 %" },
+  { poste: "Embeddings", share: "< 1 %" },
 ];
 export const COST_CASCADE_SAVING =
-  "La cascade économise environ 30 à 35 % par rapport à un pipeline qui ferait tout passer par le gros modèle.";
+  "La cascade économise environ 20 % par rapport à un pipeline qui ferait tout passer par le gros modèle ; et le small-talk, qui saute le RAG, coûte environ 5 fois moins qu'une réponse santé.";
 
 export type CostTier = { stade: string; volume: string; cout: string };
 export const COST_MONTHLY: CostTier[] = [

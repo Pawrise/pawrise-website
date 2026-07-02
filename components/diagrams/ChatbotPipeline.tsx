@@ -2,12 +2,12 @@
 // Recrée la logique de la spec Confluence au thème du site (SVG inline).
 
 const NODES = [
-  { n: 1, name: "Circuit Breaker", tag: "LLM mini", color: "#2dd4bf" },
-  { n: 2, name: "Query Understanding", tag: "LLM mini", color: "#2dd4bf" },
+  { n: 1, name: "Circuit Breaker", tag: "LLM nano", color: "#2dd4bf" },
+  { n: 2, name: "Query Understanding", tag: "LLM nano", color: "#2dd4bf" },
   { n: 3, name: "Retrieval", tag: "BM25 + dense", color: "#22d3ee" },
   { n: 4, name: "Relevance Filter", tag: "Reranker", color: "#a78bfa" },
-  { n: 5, name: "Customization", tag: "LLM principal", color: "#fb923c" },
-  { n: 6, name: "Post-LLM Guardrail", tag: "LLM mini", color: "#2dd4bf" },
+  { n: 5, name: "Génération", tag: "LLM principal", color: "#fb923c" },
+  { n: 6, name: "Post-LLM Guardrail", tag: "LLM nano", color: "#2dd4bf" },
 ];
 
 const NODE_W = 184;
