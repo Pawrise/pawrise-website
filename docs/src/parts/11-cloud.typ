@@ -54,7 +54,7 @@ Rust et l'absence de LLM local (déporté sur Azure) gardent l'empreinte basse. 
 )
 ]
 
-#text(size: 8.5pt, fill: mut)[\* Ordres de grandeur, faible trafic et usage IA modéré. Prix serveurs : tarifs publics Hetzner juin 2026 (Cloud CAX et dédiés AX).]
+#text(size: 8.5pt, fill: mut)[\* Ordres de grandeur, faible trafic et usage IA modéré : *coût d'infrastructure seul*, à capacité équivalente. Prix serveurs : tarifs publics Hetzner juin 2026 (Cloud CAX et dédiés AX). Tout compris (environnements de dev éphémères), l'option retenue revient à ≈ 1 750 €/an, chiffrée en partie Économie.]
 
 Le *bare metal* est le moins cher en compute brut mais impose l'exploitation matérielle (remplacement de disque, redondance physique à acheter en double) et n'offre aucune élasticité : incompatible avec des environnements de dev éphémères. L'*hyperscaler* est confortable mais 4 à 6× plus cher, avec un fort lock-in et une souveraineté seulement partielle (voir ci-dessous). Le *cloud managé européen* est la bonne cible au scale. Pour la phase actuelle, *Hetzner Cloud auto-géré* offre le meilleur compromis coût / souveraineté / flexibilité.
 
@@ -79,7 +79,7 @@ Les données de santé animale, rattachées à un propriétaire identifié, sont
   headers: ("Techno", "Rôle", "Pourquoi"),
   rows: (
     ("Terraform", "Provisionnement", "Décrit et crée toute l'infra Hetzner de façon reproductible ; détruire/recréer un environnement à la demande."),
-    ("Kubernetes", "Orchestration", "Fait tourner et auto-répare la vingtaine de services ; redémarrage, placement, montée en charge."),
+    ("Kubernetes", "Orchestration", "Fait tourner et auto-répare l'ensemble des conteneurs (services métier, bases, bus, observabilité) ; redémarrage, placement, montée en charge."),
     ("Helm", "Packaging", "Chaque service en chart versionné et paramétrable (dev/prod)."),
     ("Argo CD", "Déploiement GitOps", "Déploie depuis Git ; l'état du cluster suit le dépôt, rollback par revert."),
     ("SOPS + age", "Secrets", "Secrets chiffrés dans Git, déchiffrés uniquement dans le cluster."),
@@ -102,8 +102,8 @@ En complément de la vue logique (partie Architecture), ce schéma (exporté du 
   #align(center)[#text(size: 8pt, fill: mut)[
     #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + lctrl)) contrôle / déploiement · #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + levent)) télémétrie · #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + lsync)) synchrone. Enceinte pointillée = cluster Kubernetes ; socle = hôte Hetzner.
   ]]
-  #v(6pt)
-  #image("/figures/architecture-plateforme.svg", width: 100%)
+  #v(5pt)
+  #align(center, image("/figures/architecture-plateforme.svg", width: 87%))
 ]
 
 == Maîtrise des coûts en développement

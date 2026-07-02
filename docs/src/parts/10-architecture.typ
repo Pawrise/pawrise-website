@@ -36,6 +36,18 @@ L'architecture suit *quatre principes directeurs*, chacun assumé et justifié p
 - *IA · Care Engine (Python)* : un pipeline *LangGraph borné* qui consomme le *RAG* (pgvector) et le LLM (*Azure OpenAI UE* + reranker Cohere). Il *ne peut pas écrire* dans les données métier : il produit une orientation et, si besoin, *escalade* vers le vétérinaire via une interface contrôlée.
 - *Données* : une seule famille *PostgreSQL* : transactionnel (PostgreSQL), séries temporelles de télémétrie (*TimescaleDB*) et embeddings du corpus (*pgvector*), plus *Redis* pour le cache et les sessions. Un seul moteur à opérer, sauvegarder et sécuriser.
 
+=== Frontières des services
+
+Le découpage ne suit pas l'organigramme mais *quatre critères* : *domaine métier* (bounded context), *runtime*, *profil de charge* et *frontière de sécurité*. Chaque service existe parce qu'au moins un de ces critères le sépare nettement des autres :
+
+- *Auth · OIDC* : frontière de *sécurité* isolée (émission de jetons, RBAC, consentement RGPD) : un périmètre sensible que l'on durcit et audite séparément.
+- *Core API* : le *cœur transactionnel* (comptes, animaux, abonnements) et les *règles de santé*, regroupés car ils partagent la même source de vérité et le même cycle de vie.
+- *Ingestion* : *profil de charge* radicalement différent (flux MQTT haute fréquence, temps réel) : isolée pour monter en charge sans jamais impacter le transactionnel.
+- *Téléconsultation / Pool* : service *avec état* (WebSocket, sessions de chat, file d'attente) : un profil de scalabilité distinct du reste.
+- *Care Engine* : *runtime* imposé (Python / LangGraph, écosystème IA) : il ne peut pas vivre dans les services Rust, et son cloisonnement porte la règle « IA en cage ».
+
+À l'inverse, on *ne fragmente pas au-delà* : tant que des données partagent le même cycle transactionnel, elles restent dans Core API. Un nouveau service ne naît que lorsqu'un des quatre critères le justifie, jamais par principe.
+
 #keybox(title: "L'IA en cage · règle d'or")[
   Le Care Engine n'a *aucun accès en écriture* au métier et suit un pipeline déterministe : il explique, oriente et escalade, *jamais il ne diagnostique* (Code rural, art. L243-1). Cette contrainte est portée par l'architecture elle-même, pas seulement par le modèle, ce qui la rend juridiquement défendable (ADR-001).
 ]
