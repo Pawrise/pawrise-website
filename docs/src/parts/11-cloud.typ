@@ -89,6 +89,23 @@ Les données de santé animale, rattachées à un propriétaire identifié, sont
   ),
 )
 
+== Vue plateforme : topologie de déploiement
+
+Ce schéma (exporté du cockpit interactif) situe chaque brique d'infrastructure autour du cluster : la chaîne *CI/CD externe* (GitHub Actions → Helm → Argo CD → cluster), l'*enceinte Kubernetes* auto-gérée, la *PKI interne* (step-ca) qui authentifie colliers et services, l'*observabilité in-cluster* (OpenTelemetry → Prometheus / Loki / Tempo / Grafana) et l'*hôte Hetzner* qui porte l'ensemble.
+
+#let lsync = rgb("#10b981")
+#let levent = rgb("#a855f7")
+#let lctrl = rgb("#0ea5e9")
+
+#page(flipped: true)[
+  #v(3pt)
+  #align(center)[#text(size: 8pt, fill: mut)[
+    #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + lctrl)) contrôle / déploiement · #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + levent)) télémétrie · #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + lsync)) synchrone. Enceinte pointillée = cluster Kubernetes ; socle = hôte Hetzner.
+  ]]
+  #v(6pt)
+  #image("/figures/architecture-plateforme.svg", width: 100%)
+]
+
 == Maîtrise des coûts en développement
 
 Un serveur arrêté reste facturé chez Hetzner : « éteindre » n'économise rien. Le bon mécanisme s'appuie sur l'IaC :

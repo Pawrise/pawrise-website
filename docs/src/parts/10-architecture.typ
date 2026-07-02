@@ -1,44 +1,44 @@
-#import "../lib.typ": dtable, keybox, brand, accent, accent2, lime, mut, hair
-#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+#import "../lib.typ": dtable, keybox, keep, brand, accent, accent2, lime, mut, hair
 
 = Architecture technique
 
-== Vue d'ensemble (simplifiée)
+== Vue d'ensemble
 
-Le système s'organise en trois zones : clients et accès, services métier (Rust) autour d'un bus d'événements, et données. L'IA (Care Engine) est isolée et bornée. Schéma des flux principaux :
+L'architecture suit *quatre principes directeurs*, chacun assumé et justifié plus bas :
 
-#align(center, box(inset: 6pt, {
-  set text(size: 7.5pt)
-  diagram(
-    spacing: (14mm, 9mm),
-    node-corner-radius: 3pt,
-    node-stroke: 0.6pt + hair,
-    node((0, 0), [Collier], fill: rgb("#eaf6f7")),
-    node((0, 2), [App Mobile\ Vet Portal], fill: rgb("#eef7ef")),
-    node((1, 0), [Broker MQTT], fill: rgb("#eaf6f7")),
-    node((1, 2), [KrakenD\ (gateway)], fill: rgb("#eef7ef")),
-    node((2, 0), [Ingestion], fill: rgb("#fdf1e7")),
-    node((2, 1), [Core API], fill: rgb("#fdf1e7")),
-    node((2, 2), [Care Engine\ (IA)], fill: rgb("#f0edfb")),
-    node((3, 0), [TimescaleDB], fill: rgb("#eaf6fb")),
-    node((3, 1), [PostgreSQL], fill: rgb("#eaf6fb")),
-    node((3, 2), [pgvector], fill: rgb("#eaf6fb")),
-    node((3, 3), [Azure OpenAI\ (UE)], fill: rgb("#fdf7e6")),
-    edge((0, 0), (1, 0), "-|>", [MQTT]),
-    edge((1, 0), (2, 0), "-|>"),
-    edge((2, 0), (3, 0), "-|>"),
-    edge((2, 0), (2, 1), "-|>", [Kafka]),
-    edge((0, 2), (1, 2), "-|>"),
-    edge((1, 2), (2, 1), "-|>"),
-    edge((1, 2), (2, 2), "-|>"),
-    edge((2, 1), (3, 1), "-|>"),
-    edge((2, 2), (3, 2), "-|>", [RAG]),
-    edge((2, 2), (3, 3), "-|>"),
-    edge((2, 2), (2, 1), "-|>", [tools]),
-  )
-}))
++ *Monolithe modulaire d'abord, macroservices ensuite* : un socle unique (API + Care Engine) pour la vélocité d'une équipe de 10, découpé en services indépendants seulement aux points chauds réels.
++ *Architecture événementielle* : les services communiquent via un bus (Kafka) pour se découpler et ne perdre aucun événement (ingestion, projections, alertes, audit, file de téléconsultation).
++ *IA en cage* : le Care Engine est un pipeline borné qui explique et oriente, sans jamais diagnostiquer ni écrire directement dans les données métier.
++ *Souveraineté et coût maîtrisé* : Rust économe, une seule famille de bases (PostgreSQL), hébergement UE auto-géré.
 
-#text(size: 8pt, fill: mut)[Version interactive complète (toutes les briques, flux et parcours) sur pawrise-care.com.]
+#let lsync = rgb("#10b981")
+#let levent = rgb("#a855f7")
+#let lctrl = rgb("#0ea5e9")
+#let lext = rgb("#d97706")
+
+#page(flipped: true)[
+  #v(3pt)
+  #align(center)[#text(size: 8pt, fill: mut)[
+    Flux : #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + lsync)) synchrone (aller-retour) · #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + levent)) événement (sens unique) · #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + lctrl)) contrôle · #box(baseline: 1pt, line(length: 14pt, stroke: 1.4pt + lext)) externe.
+  ]]
+  #v(6pt)
+  #image("/figures/architecture-overview.svg", width: 100%)
+  #v(6pt)
+  #align(center)[#text(size: 7.5pt, fill: mut)[*Plateforme & Ops (transverse)* : Kubernetes auto-géré (Hetzner, Terraform) · GitOps (Argo CD) · observabilité OpenTelemetry → Prometheus / Loki / Tempo / Grafana · secrets chiffrés (SOPS). Détail en partie Cloud & infrastructure. Diagramme exporté du cockpit interactif : version complète et navigable sur #link("https://pawrise-care.com")[pawrise-care.com].]]
+]
+
+=== Lecture par zone
+
+- *Clients & accès* : une *app mobile native* (bien-être, localisation, alertes, chat IA, appairage BLE), un *Vet Portal web* (historique structuré + PDF normalisé) et une console *Admin*. Tout le trafic applicatif passe par *KrakenD*, une passerelle unique : un seul point d'entrée à sécuriser, qui centralise authentification, limitation de débit et routage.
+- *Entrée IoT* : le *collier* parle en *MQTT sur TLS* (certificat par appareil) à un broker *EMQX*, séparé de la passerelle HTTP. MQTT est le standard IoT : pub/sub léger, QoS et mode hors-ligne gratuits, adaptés à une batterie et un réseau cellulaire instable.
+- *Services métier (Rust)* : *OIDC* (identité et droits owner / vétérinaire), *Core API* (comptes, animaux, alertes), *Ingestion* (normalisation de la télémétrie), *véto & abonnement*. Ils forment d'abord un *monolithe modulaire* : on n'extrait un macroservice que lorsqu'un besoin réel (charge, équipe) le justifie.
+- *Bus d'événements (Kafka)* : la colonne vertébrale. Les services *publient* des événements ; les consommateurs (projections, Care Engine, audit, file de téléconsultation) s'y *abonnent*. Résultat : services découplés et *aucun événement perdu*.
+- *IA · Care Engine (Python)* : un pipeline *LangGraph borné* qui consomme le *RAG* (pgvector) et le LLM (*Azure OpenAI UE* + reranker Cohere). Il *ne peut pas écrire* dans les données métier : il produit une orientation et, si besoin, *escalade* vers le vétérinaire via une interface contrôlée.
+- *Données* : une seule famille *PostgreSQL* : transactionnel (PostgreSQL), séries temporelles de télémétrie (*TimescaleDB*) et embeddings du corpus (*pgvector*), plus *Redis* pour le cache et les sessions. Un seul moteur à opérer, sauvegarder et sécuriser.
+
+#keybox(title: "L'IA en cage · règle d'or")[
+  Le Care Engine n'a *aucun accès en écriture* au métier et suit un pipeline déterministe : il explique, oriente et escalade, *jamais il ne diagnostique* (Code rural, art. L243-1). Cette contrainte est portée par l'architecture elle-même, pas seulement par le modèle, ce qui la rend juridiquement défendable (ADR-001).
+]
 
 == Choix techniques justifiés
 
