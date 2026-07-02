@@ -1,4 +1,4 @@
-// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
+// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.
 #let RACI_POLES = (
   ("Pilotage (PO)"),
   ("Fullstack"),
@@ -8,7 +8,7 @@
   ("Cloud/Ops"),
 )
 
-// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
+// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.
 #let RACI_STD = (
   ("Cadrage & spécifications", "A/R", "C", "C", "C", "C", "C"),
   ("API & ingestion données", "C", "A/R", "C", "I", "C", "C"),
@@ -21,7 +21,7 @@
   ("Tests & qualité", "A", "R", "R", "R", "R", "R"),
 )
 
-// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
+// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.
 #let RACI_STRICT = (
   ("Cadrage & spécifications", "A", "R", "I", "I", "C", "I"),
   ("API & ingestion données", "A", "R", "I", "I", "I", "C"),

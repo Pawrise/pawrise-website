@@ -1,4 +1,4 @@
-// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
+// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.
 #let BACKLOG = (
   ("E1", "Onboarding, comptes & appairage du collier", "7", "MVP", "FR12, FR29, FR30, FR33"),
   ("E2", "Collecte, transmission & stockage fiables", "6", "MVP", "FR1–FR10, NFR2, NFR8"),

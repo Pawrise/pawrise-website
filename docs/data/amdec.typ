@@ -1,4 +1,4 @@
-// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
+// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.
 #let AMDEC = (
   ("H03", "Capteur température / FC", "Mesures erronées (faux positifs physiologiques)", "Cyril Porez (IoT) + Véto partenaire", "7", "7", "6", "294", "Critique"),
   ("I01", "Analyse comportementale", "Faux négatif : anomalie non détectée", "Nino Litim + Adam Lamouri (Data/IA)", "9", "5", "6", "270", "Critique"),

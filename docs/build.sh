@@ -29,8 +29,8 @@ titre() {
     09-risques) echo "Gestion des risques" ;;
     10-architecture) echo "Architecture technique" ;;
     11-cloud) echo "Cloud & infrastructure" ;;
-    12-iot) echo "IoT — collier connecté" ;;
-    13-ia) echo "IA — Care Engine" ;;
+    12-iot) echo "IoT · collier connecté" ;;
+    13-ia) echo "IA · Care Engine" ;;
     99-annexes) echo "Annexes" ;;
     *) echo "$1" ;;
   esac
@@ -40,9 +40,9 @@ for f in docs/src/parts/*.typ; do
   name="$(basename "$f" .typ)"
   title="$(titre "$name")"
   tmp="docs/src/_standalone.typ"
-  printf '#import "lib.typ": conf\n#show: conf.with(doc-title: "%s — Pawrise Care")\n#include "parts/%s.typ"\n' "$title" "$name" > "$tmp"
+  printf '#import "lib.typ": conf\n#show: conf.with(doc-title: "%s · Pawrise Care")\n#include "parts/%s.typ"\n' "$title" "$name" > "$tmp"
   typst compile --root docs "$tmp" "docs/out/parts/${name}.pdf"
   rm -f "$tmp"
 done
 
-echo "OK — PDF dans docs/out/"
+echo "OK : PDF dans docs/out/"

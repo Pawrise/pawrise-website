@@ -1,4 +1,4 @@
-// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
+// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.
 #let BOM = (
   ("nRF9160-SICA · MCU + modem LTE-M/NB-IoT (SiP)", "12 €", "10 €"),
   ("u-blox ZOE-M8Q · GNSS multi-constellation", "14 €", "10 €"),

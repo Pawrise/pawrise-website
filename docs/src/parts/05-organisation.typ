@@ -1,61 +1,17 @@
 #import "../lib.typ": dtable, keybox, keep, brand, lime, mut, hair, zebra, faint
-#import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
+#import "../diagrams/obs-def.typ": obs-diagram
 
 = Organisation & compétences
 
 == OBS · organigramme des responsabilités
 
-Dix personnes réparties en cinq pôles de deux, sous le pilotage du Product Owner (Yassine El Gherrabi, qui cumule pilotage produit et contribution IA/Data). L'organigramme (OBS) ci-dessous relie le pilotage à chaque pôle et à ses membres ; le périmètre détaillé de chaque pôle suit.
+Dix personnes réparties en cinq pôles de deux, sous le pilotage du Product Owner (Yassine El Gherrabi, qui cumule pilotage produit et contribution IA/Data). L'organigramme (OBS) ci-après (page suivante, en paysage) relie le pilotage à chaque pôle et détaille, pour chacun, les *référents*, le *périmètre*, les *livrables attendus* et le *backup* qui assure la continuité. Elarif, rattaché au pôle Design/Mobile (binôme avec Adam sur l'application), intervient en *transverse* sur le Backend, l'IoT, la CI/CD, le marché et le lien vétérinaire.
 
-#let dcol = (svc: rgb("#eef7ee"), edge: rgb("#e7f6f4"), ai: rgb("#f0edfb"), cli: rgb("#eaf1fb"), data: rgb("#ecebf6"))
-#let pcell(t, m) = box(width: 2.3cm)[
-  #set align(center)
-  #text(fill: brand, weight: 800, size: 7.3pt)[#t]\
-  #text(size: 6.4pt, fill: mut)[#m]
-]
-
-#align(center, box(inset: 4pt, {
-  set text(size: 8pt)
-  diagram(
-    spacing: (6mm, 1.4cm),
-    node-corner-radius: 3pt,
-    node-stroke: 0.7pt + hair,
-    node-inset: 5pt,
-    node((0, 0), box(width: 4.6cm)[
-      #set align(center)
-      #text(fill: white, weight: 800, size: 8.5pt)[Product Owner]\
-      #text(fill: white, size: 7pt)[Yassine El Gherrabi · pilotage transverse]
-    ], fill: brand),
-    node((-2, 1), pcell("Backend / API", "Hamid · Aaditya"), fill: dcol.svc),
-    node((-1, 1), pcell("IoT / Hardware", "Cyril · Ibrahim"), fill: dcol.edge),
-    node((0, 1), pcell("IA / Data", "Nino · Yassine"), fill: dcol.ai),
-    node((1, 1), pcell("Design / Mobile", "Adam · Elarif"), fill: dcol.cli),
-    node((2, 1), pcell("Cloud / DevOps", "Oumar · Abderrahmane"), fill: dcol.data),
-    edge((0, 0), (-2, 1), "-"),
-    edge((0, 0), (-1, 1), "-"),
-    edge((0, 0), (0, 1), "-"),
-    edge((0, 0), (1, 1), "-"),
-    edge((0, 0), (2, 1), "-"),
-  )
-}))
-
-#text(size: 8pt, fill: mut)[Elarif est rattaché au pôle Design/Mobile (binôme avec Adam sur l'application) mais intervient en transverse sur le Backend, l'IoT, la CI/CD, le marché et le lien vétérinaire.]
-
-=== Périmètre par pôle
-
-#let poles = (
-  ("Backend / API", "Hamid · Aaditya", "API, ingestion, base de données, authentification, Vet Portal"),
-  ("IoT / Hardware", "Cyril · Ibrahim", "Firmware, capteurs, simulateur, collier"),
-  ("IA / Data", "Nino · Yassine", "Care Engine, RAG, POCs, pipeline de données"),
-  ("Design / Mobile", "Adam · Elarif", "UX/UI, app mobile, identité visuelle, étude de marché"),
-  ("Cloud / DevOps", "Oumar · Abderrahmane", "Cloud, CI/CD, monitoring, sécurité"),
-)
-#keep[
-#dtable(
-  columns: (auto, auto, 1fr),
-  headers: ("Pôle", "Membres", "Périmètre"),
-  rows: poles,
-)
+#page(flipped: true)[
+  #align(center)[#text(fill: brand, weight: 800, size: 12pt)[OBS · organigramme des responsabilités]]
+  #align(center)[#text(size: 8pt, fill: mut)[Coordination (Product Owner) → 5 pôles de 2 personnes : référents, périmètre, livrables attendus, backup.]]
+  #v(8pt)
+  #obs-diagram()
 ]
 
 == Couverture nominative

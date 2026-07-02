@@ -1,4 +1,4 @@
-// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
+// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.
 #let RISKMAP = (
   ("R01", "Technique", "Capteur FC non fiable sur l'animal", "4", "5", "20", "Critique"),
   ("R02", "Technique", "Bus factor : Cyril seul sur le hardware IoT (firmware)", "4", "5", "20", "Critique"),

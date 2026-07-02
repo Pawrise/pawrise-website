@@ -102,7 +102,7 @@ Chaque nœud utilise le plus petit modèle qui fait le travail ; seul le nœud d
   rows: (
     ("1 · Circuit Breaker", "nano · GPT-5.4-nano", "0,20 $ / 1,25 $"),
     ("2 · Query Understanding", "nano · GPT-5.4-nano", "0,20 $ / 1,25 $"),
-    ("3 · Retrieval (embeddings)", "text-embedding-3-large + BM25", "0,13 $ / — (entrée seule)"),
+    ("3 · Retrieval (embeddings)", "text-embedding-3-large + BM25", "0,13 $ (entrée seule)"),
     ("4 · Relevance Filter", "Cohere Rerank 3.5 multilingue", "2,00 $ / 1 000 recherches"),
     ("5 · Génération", "principal · GPT-5.4", "2,50 $ / 15 $"),
     ("6 · Post-Guardrail", "nano · GPT-5.4-nano", "0,20 $ / 1,25 $"),
@@ -119,13 +119,13 @@ Chaque nœud utilise le plus petit modèle qui fait le travail ; seul le nœud d
 === À quoi ressemblent ces tokens ?
 
 #keep[
-Pour rendre le coût tangible : le pavé ci-dessous fait *≈ 2 000 tokens* (~1 500 mots). Une conversation santé en traite *~4×* — surtout du contexte vétérinaire récupéré par le RAG, pas la réponse — soit *~8 000 tokens pour 0,03 à 0,05 €*. Autrement dit, l'essentiel de la facture, c'est le contexte qu'on donne au modèle, pas ce qu'il écrit.
+Pour rendre le coût tangible : le pavé ci-dessous fait *≈ 2 000 tokens* (~1 500 mots). Une conversation santé en traite *~4×* (surtout du contexte vétérinaire récupéré par le RAG, pas la réponse), soit *~8 000 tokens pour 0,03 à 0,05 €*. Autrement dit, l'essentiel de la facture, c'est le contexte qu'on donne au modèle, pas ce qu'il écrit.
 
 #block(inset: 7pt, radius: 4pt, stroke: 0.5pt + hair, fill: limebg, width: 100%)[
   #text(size: 5pt, fill: mut)[#lorem(1500)]
 ]
 
-#align(center, text(size: 7.5pt, fill: mut)[☝ ≈ 2 000 tokens. Une conversation santé complète ≈ 4 × ce pavé.])
+#align(center, text(size: 7.5pt, fill: mut)[Le pavé ci-dessus : ≈ 2 000 tokens. Une conversation santé complète ≈ 4 × ce pavé.])
 ]
 
 == Décisions d'architecture (ADR)

@@ -1,4 +1,4 @@
-// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
+// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.
 #let ECON = (
   ("Marge contributive (abo)", "78 %", "69 %", "35 %"),
   ("Durée de vie (churn)", "≈ 48 mois", "≈ 30 mois", "≈ 12 mois"),

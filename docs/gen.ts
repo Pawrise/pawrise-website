@@ -10,7 +10,7 @@ const OUT = new URL("./data/", import.meta.url);
 const s = (v: unknown) => `"${String(v).replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
 const row = (cells: unknown[]) => `  (${cells.map(s).join(", ")}),`;
 const emit = (name: string, header: string, rows: string[]) =>
-  `// Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.\n#let ${name} = (\n${rows.join("\n")}\n)\n${header}`;
+  `// Généré depuis lib/content : NE PAS ÉDITER À LA MAIN.\n#let ${name} = (\n${rows.join("\n")}\n)\n${header}`;
 
 const lvlFr: Record<string, string> = { crit: "Critique", high: "Élevé", mod: "Modéré", low: "Faible" };
 

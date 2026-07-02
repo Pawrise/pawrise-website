@@ -45,22 +45,37 @@ Chaque epic (niveau 1) se décline en *user stories* (66 au total, liste complè
   ]
 ]
 
-// ---- Arbre WBS : racine (niveau 0) → épine → 4 troncs → cartes (niveau 1) --
-#let tstroke = 0.8pt + rgb("#a9abc6")
+// ---- Arbre WBS : racine (niveau 0), barre de distribution, 11 epics --------
 #let CARDH = 3.7cm
-#let LGAP = 8pt      // espace vertical entre cartes d'un même tronc
-#let INDENT = 9pt    // retrait des cartes par rapport au tronc
+#let wst = 1pt + rgb("#5b57b0")          // trait des connecteurs
+#let WCOL = (100% - 40pt) / 11           // largeur d'une colonne (10 gouttières de 4pt)
 
-// Carte rattachée au tronc de sa colonne par une attache horizontale
-#let leaf(c) = box(width: 100%, height: CARDH)[
-  #place(left + horizon, line(length: INDENT, stroke: tstroke))
-  #pad(left: INDENT)[#c]
+// Nœud compact de l'arbre (niveau 1)
+#let mini(n, title, us, mvp, dom) = box(
+  width: 100%, height: 1.3cm, radius: 3pt, clip: true,
+  fill: dcolor(dom), stroke: 0.6pt + hair, inset: (x: 3pt, y: 3pt),
+)[
+  #set align(center)
+  #set par(leading: 0.45em, justify: false)
+  #text(fill: brand, weight: 900, size: 7.5pt)[#n]
+  #linebreak()
+  #text(size: 5.4pt, weight: 700, fill: brand)[#title]
+  #linebreak()
+  #text(size: 5pt, fill: mut)[#us US · #mvp]
 ]
-// Colonne : tronc vertical descendant jusqu'à l'attache de la dernière carte reliée
-#let branch(cards, linked: 2) = box(width: 100%)[
-  #place(top + left, line(angle: 90deg, length: linked * (CARDH + LGAP) + 0.5 * CARDH, stroke: tstroke))
-  #stack(spacing: LGAP, ..cards)
-]
+#let EPICS = (
+  ("1", "Onboarding & appairage", "7", "MVP", "cli"),
+  ("2", "Collecte & stockage", "6", "MVP", "edge"),
+  ("3", "Bien-être & activité", "4", "MVP", "cli"),
+  ("4", "Localisation & zones", "5", "MVP", "cli"),
+  ("5", "Anomalies & alertes", "5", "MVP", "ai"),
+  ("6", "Assistant IA & escalade", "4", "MVP", "ai"),
+  ("7", "Vet Portal · dossier", "7", "MVP", "svc"),
+  ("8", "Abonnement & support", "7", "post", "ext"),
+  ("9", "Conformité & RGPD", "5", "MVP", "rose"),
+  ("10", "Téléconsultation & triage", "7", "post", "svc"),
+  ("11", "Plateforme & Ops", "9", "MVP", "data"),
+)
 
 #let c1 = card("1", "Onboarding & appairage", "7", "MVP", "cli",
   ("Compte sécurisé + authentification", "Profil animal (race, âge, poids)", "Appairage BLE du collier (QR code)", "Gestion multi-animaux"), "FR12, FR29, FR30, FR33")
@@ -97,31 +112,26 @@ Chaque epic (niveau 1) se décline en *user stories* (66 au total, liste complè
 #page(flipped: true)[
   #align(center)[#text(fill: brand, weight: 800, size: 12pt)[WBS · décomposition hiérarchique orientée livrables]]
   #align(center)[#text(size: 8pt, fill: mut)[Niveau 0 : Pawrise Care (périmètre total) → Niveau 1 : 11 epics livrables (1 à 11) → Niveau 2 : fonctions (1.1, 1.2…). En italique : exigences (FR/NFR) couvertes.]]
-  #v(6pt)
+  #v(3pt)
+  // Arbre : racine (niveau 0), barre de distribution, 11 epics (niveau 1)
   #stack(
     spacing: 0pt,
-    // Racine · niveau 0
-    align(center, box(fill: brand, radius: 4pt, inset: (x: 14pt, y: 7pt))[
+    align(center, box(fill: brand, radius: 4pt, inset: (x: 16pt, y: 5.5pt))[
       #text(fill: white, weight: 900, size: 9.5pt)[0 · Pawrise Care]
       #h(8pt)
       #text(fill: white, size: 7pt)[périmètre total · 11 epics · 66 US]
     ]),
-    // Connecteurs : descente depuis la racine, épine horizontale, 4 troncs
-    box(width: 100%, height: 20pt)[
-      #place(top + center, line(angle: 90deg, length: 8pt, stroke: tstroke))
-      #place(top + left, dy: 8pt, line(length: 75% + 4.5pt, stroke: tstroke))
-      #for i in range(4) {
-        place(top + left, dx: i * (25% + 1.5pt), dy: 8pt, line(angle: 90deg, length: 12pt, stroke: tstroke))
-      }
-    ],
-    // Niveau 1 : 11 epics répartis sur 4 branches (+ encart de lecture, non relié)
-    grid(
-      columns: (1fr,) * 4,
-      column-gutter: 6pt,
-      branch((leaf(c1), leaf(c5), leaf(c9)), linked: 2),
-      branch((leaf(c2), leaf(c6), leaf(c10)), linked: 2),
-      branch((leaf(c3), leaf(c7), leaf(c11)), linked: 2),
-      branch((leaf(c4), leaf(c8), pad(left: INDENT, clecture)), linked: 1),
-    ),
+    align(center, line(angle: 90deg, length: 6pt, stroke: wst)),
+    box(width: 100%, height: 0pt)[#place(top + left, dx: WCOL / 2, line(length: 100% - WCOL, stroke: wst))],
+    grid(columns: (1fr,) * 11, column-gutter: 4pt, ..range(11).map(_ => align(center, line(angle: 90deg, length: 6pt, stroke: wst)))),
+    grid(columns: (1fr,) * 11, column-gutter: 4pt, ..EPICS.map(e => mini(..e))),
+  )
+  #v(5pt)
+  #align(center, text(size: 7.5pt, fill: mut)[Niveau 2 · détail des livrables : fonctions attendues et exigences couvertes, par epic])
+  #v(2pt)
+  #grid(
+    columns: (1fr,) * 4,
+    gutter: 6pt,
+    c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, clecture,
   )
 ]
