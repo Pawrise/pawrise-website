@@ -442,8 +442,8 @@ export const JIRA = {
   intro:
     "Le projet est piloté sur un board Jira (projet SCRUM) adopté par les 10 membres : backlog, sprints, estimation en story points et assignation nominative des tâches. Confluence héberge la documentation, GitHub le code et les PR.",
   stats: [
-    { k: "100+", v: "tickets (epics, tâches, sous-tâches)" },
-    { k: "19", v: "epics Jira (suivi, ≥ 11 epics produit)" },
+    { k: "170+", v: "tickets (epics, tâches, sous-tâches, user stories)" },
+    { k: "23", v: "epics Jira (12 cadrage & documentation · 11 produit)" },
     { k: "10 / 10", v: "membres avec tickets assignés" },
     { k: "4", v: "statuts de flux (à faire → en cours → revue → terminé)" },
   ],
