@@ -1,8 +1,9 @@
 // Généré depuis lib/content — NE PAS ÉDITER À LA MAIN.
 #let AMDEC = (
-  ("H03", "Capteur température / FC", "Mesures erronées (faux positifs physiologiques)", "Nino Litim (IA) + Véto partenaire", "7", "7", "6", "294", "Critique"),
+  ("H03", "Capteur température / FC", "Mesures erronées (faux positifs physiologiques)", "Cyril Porez (IoT) + Véto partenaire", "7", "7", "6", "294", "Critique"),
   ("I01", "Analyse comportementale", "Faux négatif : anomalie non détectée", "Nino Litim + Adam Lamouri (Data/IA)", "9", "5", "6", "270", "Critique"),
   ("I03", "Chat RAG vétérinaire", "Réponse médicalement incorrecte du LLM", "Yassine El Gherrabi (LLM/RAG) + Véto partenaire", "9", "5", "5", "225", "Critique"),
+  ("T04", "Authentification (OIDC maison)", "Faille dans l'OIDC maison : accès non autorisé aux données", "Yassine El Gherrabi (Backend/Auth) + revue de sécurité", "9", "4", "6", "216", "Critique"),
   ("E01", "Déclenchement automatique", "Escalade non déclenchée pour un cas urgent", "Yassine El Gherrabi (PO/Backend) + Véto partenaire", "10", "4", "5", "200", "Critique"),
   ("I02", "Analyse comportementale", "Faux positif : alerte infondée", "Nino Litim + Adam Lamouri (Data/IA)", "5", "7", "5", "175", "Critique"),
   ("H01", "Batterie", "Décharge rapide / autonomie insuffisante", "Cyril Porez (IoT)", "7", "6", "4", "168", "Critique"),

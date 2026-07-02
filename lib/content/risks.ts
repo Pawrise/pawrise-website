@@ -27,7 +27,7 @@ export const AMDEC: Amdec[] = [
     dom: "Collier", code: "H03", sous: "Capteur température / FC", mode: "Mesures erronées (faux positifs physiologiques)",
     cause: "Capteur mal positionné, fourrure épaisse, mouvement pendant la mesure.",
     effet: "Alerte de fièvre ou de tachycardie infondée : anxiété du propriétaire, sursollicitation vétérinaire.",
-    g: 7, o: 7, d: 6, resp: "Nino Litim (IA) + Véto partenaire",
+    g: 7, o: 7, d: 6, resp: "Cyril Porez (IoT) + Véto partenaire",
     action: "Plages normales validées avec le vétérinaire, moyenne glissante (5 mesures) avant alerte, disclaimer médical.",
   },
   {
@@ -59,8 +59,15 @@ export const AMDEC: Amdec[] = [
     action: "Fréquence GPS adaptative (plus rapide hors zone), reconnexion auto avec back-off exponentiel.",
   },
   {
+    dom: "Transmission", code: "T04", sous: "Authentification (OIDC maison)", mode: "Faille dans l'OIDC maison : accès non autorisé aux données",
+    cause: "Authentification développée en interne, moins éprouvée qu'une solution managée : erreur de validation JWT, de rotation des clés (JWKS) ou de périmètre des scopes.",
+    effet: "Accès non autorisé à des données de santé (RGPD) : fuite de données, atteinte à la réputation, sanction.",
+    g: 9, o: 4, d: 6, resp: "Yassine El Gherrabi (Backend/Auth) + revue de sécurité",
+    action: "Crates éprouvées (oauth2/openidconnect/jsonwebtoken/argon2), PKCE + rotation JWKS, tests d'abus obligatoires, revue de sécurité et audit externe avant la mise en production.",
+  },
+  {
     dom: "Moteur IA", code: "I01", sous: "Analyse comportementale", mode: "Faux négatif : anomalie non détectée",
-    cause: "Seuils trop permissifs, données d'entraînement insuffisantes, animal au comportement atypique.",
+    cause: "Seuils trop permissifs, historique par animal insuffisant, animal au comportement atypique.",
     effet: "Problème de santé réel non signalé : retard de soin, aggravation de l'état de l'animal.",
     g: 9, o: 5, d: 6, resp: "Nino Litim + Adam Lamouri (Data/IA)",
     action: "Seuils calibrés avec le vétérinaire, baseline individuelle par animal, apprentissage de 2 semaines à l'onboarding.",
@@ -144,8 +151,8 @@ export const RISKS: Risk[] = [
     resp: "Cyril Porez (IoT)",
   },
   {
-    id: "R03", cat: "Technique", label: "Données d'entraînement insuffisantes : modèle IA peu fiable", p: 3, i: 4,
-    mitig: "Baseline individuelle par animal, apprentissage de 2 semaines à l'onboarding, enrichissement progressif du dataset (cohérent avec l'AMDEC I01).",
+    id: "R03", cat: "Technique", label: "Données comportementales insuffisantes pour l'IA prédictive (feature post-MVP)", p: 3, i: 3,
+    mitig: "L'IA prédictive est hors périmètre MVP (la détection MVP repose sur des règles + une baseline par animal). Le MVP est conçu pour accumuler un historique propre et consenti (qualité capteur, annotations) afin de rendre l'entraînement possible plus tard.",
     resp: "Nino Litim + Adam Lamouri (Data/IA)",
   },
   {
