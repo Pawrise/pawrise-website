@@ -91,7 +91,7 @@ Les données de santé animale, rattachées à un propriétaire identifié, sont
 
 == Vue plateforme : topologie de déploiement
 
-Ce schéma (exporté du cockpit interactif) situe chaque brique d'infrastructure autour du cluster : la chaîne *CI/CD externe* (GitHub Actions → Helm → Argo CD → cluster), l'*enceinte Kubernetes* auto-gérée, la *PKI interne* (step-ca) qui authentifie colliers et services, l'*observabilité in-cluster* (OpenTelemetry → Prometheus / Loki / Tempo / Grafana) et l'*hôte Hetzner* qui porte l'ensemble.
+En complément de la vue logique (partie Architecture), ce schéma (exporté du cockpit interactif) situe chaque brique d'infrastructure autour du cluster : la chaîne *CI/CD externe* (GitHub Actions → Helm → Argo CD → cluster), l'*enceinte Kubernetes* auto-gérée, la *PKI interne* (step-ca) qui authentifie colliers et services, l'*observabilité in-cluster* (OpenTelemetry → Prometheus / Loki / Tempo / Grafana) et l'*hôte Hetzner* qui porte l'ensemble.
 
 #let lsync = rgb("#10b981")
 #let levent = rgb("#a855f7")
