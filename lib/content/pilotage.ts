@@ -268,7 +268,7 @@ export const GANTT: Bar[] = [
       { label: "Hardware", start: 12, end: 16, kind: "build" },
     ],
     detail: {
-      contenu: ["Firmware embarqué (Rust)", "Carte électronique, boîtier IP67", "Transmission MQTT / LTE-M"],
+      contenu: ["Firmware embarqué (C / Zephyr)", "Carte électronique, boîtier IP67", "Transmission MQTT / LTE-M"],
       livrable: "Simulateur (nov. 2026) puis prototype matériel (avr. 2027).",
       depend: "On valide tout sur simulateur avant d'engager le hardware coûteux.",
     },
@@ -480,7 +480,7 @@ export const QUALITY_GOLDEN =
 // Plan qualité détaillé (critère team_practices). Stratégie de tests par couche,
 // conventions, Git workflow, CI/CD et onboarding, adapté à la stack réelle.
 export const TEST_STRATEGY: { couche: string; outils: string; cible: string }[] = [
-  { couche: "Firmware collier (Rust no_std)", outils: "tests unitaires embarqués + simulateur de capteurs", cible: "Logique de collecte/encodage validée hors matériel via le simulateur." },
+  { couche: "Firmware collier (C / Zephyr)", outils: "tests unitaires (Zephyr) + analyse statique (Clang-Tidy, Cppcheck, MISRA C) + simulateur de capteurs", cible: "Logique de collecte/encodage validée hors matériel ; sûreté mémoire par MISRA C + allocation statique." },
   { couche: "Services backend (Rust)", outils: "tests unitaires (cargo nextest) + intégration API sur services réels (testcontainers)", cible: "Logique métier et endpoints couverts ; tests d'abus obligatoires sur l'auth." },
   { couche: "Moteur IA / Care Engine (Python)", outils: "pytest + jeux d'évaluation RAG + garde-fous anti-diagnostic", cible: "Non-régression des réponses et déclenchement systématique de l'escalade en cas de doute." },
   { couche: "App mobile (Kotlin / SwiftUI)", outils: "tests unitaires natifs + tests d'UI critiques", cible: "Parcours d'onboarding, appairage et alertes vérifiés." },

@@ -1,10 +1,10 @@
 // Contenu IoT · le collier connecté (synthèse du document d'architecture IoT + BOM).
 // Aligné sur l'architecture du site : SiP nRF9160 (MCU + modem, sans AT commands),
-// transport MQTT (EMQX), firmware Rust embarqué, backend = stack du site
+// transport MQTT (EMQX), firmware C/Zephyr embarqué, backend = stack du site
 // (Hetzner + observabilité Grafana), PKI step-ca.
 
 export const IOT_INTRO =
-  "Le collier est le cœur produit : capteurs embarqués, connectivité cellulaire basse consommation et firmware Rust sur un SiP nRF9160 (MCU + modem intégrés, sans AT commands), pensés pour tenir sur batterie, fonctionner en zone blanche et transmettre en sécurité. Voici ce qu'on embarque et pourquoi.";
+  "Le collier est le cœur produit : capteurs embarqués, connectivité cellulaire basse consommation et firmware C (Zephyr RTOS) sur un SiP nRF9160 (MCU + modem intégrés, sans AT commands), pensés pour tenir sur batterie, fonctionner en zone blanche et transmettre en sécurité. Voici ce qu'on embarque et pourquoi.";
 
 // Les défis à résoudre (problématique).
 export const IOT_CHALLENGES = [
@@ -18,7 +18,7 @@ export const IOT_CHALLENGES = [
 // Choix du microcontrôleur : nRF9160 (SiP) et suppression des AT commands.
 export const IOT_MCU = {
   titre: "Choix du MCU : nRF9160 (SiP), plus d'AT commands",
-  d: "Le nRF9160 est un SiP qui intègre le microcontrôleur (ARM Cortex-M33) et le modem LTE-M/NB-IoT dans la même puce. L'alternative (MCU + modem externe : ESP32-S3 + BG95, ou LilyGO T-SIM7080G) oblige le firmware à piloter le modem par AT commands (protocole textuel des années 1980 : chaînes à construire, réponses fragiles à parser, timeouts empiriques, 250+ pages de doc). Avec le nRF9160, la connectivité passe par la bibliothèque modem Nordic, exposée à notre firmware Rust via la crate nrf-modem : plus d'AT commands. Son TrustZone sert de secure element pour la clé privée.",
+  d: "Le nRF9160 est un SiP qui intègre le microcontrôleur (ARM Cortex-M33) et le modem LTE-M/NB-IoT dans la même puce. L'alternative (MCU + modem externe : ESP32-S3 + BG95, ou LilyGO T-SIM7080G) oblige le firmware à piloter le modem par AT commands (protocole textuel des années 1980 : chaînes à construire, réponses fragiles à parser, timeouts empiriques, 250+ pages de doc). Avec le nRF9160, la connectivité passe par la LTE Link Control library du nRF Connect SDK (lte_lc_connect(), en C sur Zephyr) : plus d'AT commands. Son TrustZone sert de secure element pour la clé privée.",
 };
 
 // Architecture en 3 zones.
@@ -31,7 +31,7 @@ export const IOT_ZONES = [
 // Composants embarqués retenus.
 export type IotPart = { composant: string; choix: string; role: string };
 export const IOT_COMPONENTS: IotPart[] = [
-  { composant: "MCU + modem (SiP)", choix: "nRF9160-SICA", role: "Exécute le firmware Rust et la machine à états. Le SiP intègre le modem LTE-M/NB-IoT : connectivité via la bibliothèque modem Nordic (crate nrf-modem), sans AT commands. TrustZone = secure element pour la clé privée." },
+  { composant: "MCU + modem (SiP)", choix: "nRF9160-SICA", role: "Exécute le firmware C/Zephyr et la machine à états. Le SiP intègre le modem LTE-M/NB-IoT : connectivité via la LTE Link Control library du nRF Connect SDK, sans AT commands. TrustZone = secure element pour la clé privée." },
   { composant: "GNSS dédié", choix: "u-blox ZOE-M8Q", role: "Localisation multi-constellation (GPS/GLONASS/Galileo/BeiDou), plus précise que le GNSS intégré seul ; A-GPS pour accélérer le premier fix." },
   { composant: "Centrale inertielle (IMU)", choix: "LSM6DSOX (ST)", role: "Accéléromètre + gyroscope avec Machine Learning Core embarqué : activité, immobilité, chocs (I²C)." },
   { composant: "Température", choix: "TMP117 (TI)", role: "Mesure de la température corporelle, précision ±0,1°C (I²C)." },

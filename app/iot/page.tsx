@@ -166,7 +166,7 @@ export default function IotPage() {
         <section className="panel-sect">
           <div className="ps-head">
             <h2>Logique embarquée : machine à états</h2>
-            <p>Le firmware Rust adapte ses acquisitions et sa transmission selon l&apos;état de l&apos;animal et du réseau.</p>
+            <p>Le firmware C/Zephyr adapte ses acquisitions et sa transmission selon l&apos;état de l&apos;animal et du réseau.</p>
           </div>
           <div className="prof-grid">
             {IOT_STATES.map((s) => (

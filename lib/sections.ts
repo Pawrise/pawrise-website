@@ -52,7 +52,7 @@ export const SECTIONS: Section[] = [
     slug: "iot",
     title: "IoT & Collier",
     tag: "Le hardware",
-    desc: "Le collier connecté : composants embarqués, capteurs justifiés, réseau LTE-M / MQTT, sécurité mTLS et logique firmware Rust.",
+    desc: "Le collier connecté : composants embarqués, capteurs justifiés, réseau LTE-M / MQTT, sécurité mTLS et firmware C / Zephyr.",
     accent: "#5eead4",
     blocks: [
       { title: "Composants embarqués", desc: "MCU, modem LTE-M, GPS, capteurs, batterie : ce qu'on met dans le collier." },

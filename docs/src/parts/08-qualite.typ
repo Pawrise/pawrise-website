@@ -28,7 +28,7 @@ Deux niveaux sont *obligatoires* pour chaque story (inscrits dans la Definition 
   columns: (auto, 1fr, 1fr),
   headers: ("Couche", "Outils", "Cible"),
   rows: (
-    ("Firmware collier (Rust no_std)", "Tests unitaires embarqués + simulateur de capteurs", "Logique de collecte/encodage validée hors matériel via le simulateur."),
+    ("Firmware collier (C / Zephyr)", "Tests unitaires (Zephyr) + analyse statique (Clang-Tidy, Cppcheck, MISRA C) + simulateur de capteurs", "Logique de collecte/encodage validée hors matériel ; sûreté mémoire par MISRA C + allocation statique."),
     ("Services backend (Rust)", "Tests unitaires (cargo nextest) + tests d'intégration API sur services réels (testcontainers)", "Logique métier et endpoints couverts ; tests d'abus obligatoires sur l'authentification."),
     ("Moteur IA / Care Engine (Python)", "pytest + jeux d'évaluation RAG + garde-fous anti-diagnostic", "Non-régression des réponses et escalade systématique en cas de doute."),
     ("App mobile (Kotlin / SwiftUI)", "Tests unitaires natifs + tests d'UI critiques", "Onboarding, appairage et alertes vérifiés."),
