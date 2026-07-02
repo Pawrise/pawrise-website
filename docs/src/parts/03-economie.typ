@@ -7,11 +7,33 @@
 
 == Modèle économique
 
-Le hardware est vendu proche de son coût ; la rentabilité vient de l'*abonnement récurrent*.
+Le modèle repose sur *deux revenus*, comme chez les concurrents : la *vente du collier* (paiement unique) et un *abonnement récurrent* qui porte la rentabilité. C'est un modèle « rasoir et lames » : le matériel est vendu *proche de son coût*, la marge vient de l'abonnement.
+
+*Ce que nous coûte le collier* : *≈ 66 €/u en série (1000 pièces)*, *≈ 131 € en prototype unitaire* (BOM détaillé plus bas et en partie IoT). Le coût chute avec le volume (achats groupés, PCBA en série).
+
+*Ce que font les concurrents* : collier à l'achat + abonnement obligatoire (le traceur ne fonctionne pas sans la connectivité cellulaire de l'abonnement).
+
+#dtable(
+  columns: (auto, auto, 1fr),
+  headers: ("Acteur", "Collier (achat)", "Abonnement"),
+  align-cells: left,
+  rows: (
+    ("Tractive (DOG 6)", "≈ 70 €", "≈ 5 à 13 €/mois (5 € en engagement 2 ans, 13 € au mois)"),
+    ("Weenect", "≈ 50 €", "≈ 4 à 13 €/mois (4,16 € en 3 ans, 12,99 € au mois)"),
+    ([*Pawrise (nous)*], [*69 €*], [*9,90 €/mois*]),
+  ),
+)
+
+#text(size: 8.5pt, fill: mut)[Tarifs éditeurs consultés en juillet 2026 (#link("https://tractive.com/en/c/plans")[Tractive], #link("https://www.weenect.com/fr/fr/collier-gps-chien/")[Weenect]) ; parité dollar/euro retenue.]
+
+*Notre prix, décidé et justifié :*
+- *Collier : 69 €.* Aligné sur le haut de la fourchette matériel (Tractive DOG 6 ≈ 70 €) et *proche de notre coût série* (≈ 66 €) : quasi neutre à l'échelle. Plus cher que Weenect (≈ 50 €), justifié par un *matériel plus riche* (cellulaire LTE-M autonome, GNSS dédié, capteurs santé IMU / température / fréquence cardiaque), pas un simple traceur GPS.
+- *Abonnement : 9,90 €/mois.* *Compétitif* face au tarif *au mois* des concurrents (≈ 13 €) et *premium* face à leurs offres *prépayées* (≈ 4 à 7 €), justifié par la valeur ajoutée : interprétation par l'IA et relais vétérinaire.
+- *Au lancement*, le faible volume garde le coût proche du prototype (≈ 131 €) : le collier vendu 69 € est alors *sous son coût* (≈ 60 € de subvention par unité), un *investissement d'acquisition* financé par la valeur vie client jusqu'à ce que la série ramène le coût vers ≈ 66 €.
 
 Le modèle intègre un *pool de rémunération façon Spotify* : une *part fixe* de chaque abonnement alimente une cagnotte qui rémunère les vétérinaires, répartie au prorata de leur activité. Conséquence : le coût vétérinaire total ne peut jamais dépasser ce pourcentage du chiffre d'affaires, quel que soit le nombre de sollicitations. Il est donc plafonné « par construction » (mathématiquement), ce qui protège la marge : la dépense vétérinaire grandit avec les revenus, jamais plus vite. Des garde-fous (filtrage IA avant escalade, usage équitable) évitent l'abus.
 
-*D'où vient le prix ?* On part pour l'instant sur *9,90 €/mois*, à faire évoluer au besoin. On se positionne volontairement dans le haut du marché (les concurrents facturent ~5 à 13 €/mois) : notre valeur ajoutée (interprétation par l'IA et relais vétérinaire) justifie cet alignement par le haut.
+À l'échelle, le collier est *quasi neutre* (69 € vendu vs ≈ 66 € de coût) : les *unit economics* ci-dessous reposent donc sur l'*abonnement*. La subvention matérielle du lancement est un coût d'acquisition ponctuel, absorbé par la valeur vie client (≈ 205 €).
 
 *Les termes, en clair :*
 - *Marge contributive* : ce qu'il reste de l'abonnement une fois payés les coûts directs d'un client (cloud, API d'IA, pool vétérinaire). Exemple : sur 9,90 €, s'il reste 6,80 €, la marge est de ~69 %.

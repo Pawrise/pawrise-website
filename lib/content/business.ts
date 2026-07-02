@@ -153,10 +153,10 @@ export const ECON = {
   // l'ABONNEMENT (le hardware est vendu ~au coût). Trois scénarios pilotés par
   // le churn (durée de vie) et le CAC.
   hypotheses: [
-    "Abonnement : 9,90 €/mois (ordre de grandeur du marché : Tractive, Weenect).",
+    "Deux revenus : collier 69 € à l'achat + abonnement 9,90 €/mois (marché : Tractive ~70 € + ~5-13 €/mois, Weenect ~50 € + ~4-13 €/mois).",
     "Marge contributive sur l'abonnement (après cloud, API LLM et pool vété).",
     "Durée de vie client = 1 / churn mensuel ; LTV = abo × durée de vie × marge.",
-    "Le collier est vendu proche de son coût de série (BOM ≈ 66 €/u) : la rentabilité vient de l'abonnement récurrent.",
+    "Collier vendu ~69 €, proche du coût série (BOM ≈ 66 €/u) : quasi neutre à l'échelle, la rentabilité vient de l'abonnement (modèle rasoir & lames).",
   ],
   rows: [
     { metric: "Marge contributive (abo)", opt: "78 %", base: "69 %", pess: "35 %" },
