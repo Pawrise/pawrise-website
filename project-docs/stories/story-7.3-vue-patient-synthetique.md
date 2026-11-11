@@ -4,7 +4,7 @@ Status: drafted
 <!-- AC figées depuis epics.md. Tasks/Subtasks + Dev Notes à compléter après l'architecture. -->
 
 > **Épic 7 — Vet Portal — consultation vétérinaire augmentée**
-> Périmètre : —
+> Périmètre : MVP
 > Sources : `_bmad-output/planning-artifacts/epics.md` · `_bmad-output/planning-artifacts/PRD.md`
 
 ## Story

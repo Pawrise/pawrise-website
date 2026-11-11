@@ -46,13 +46,23 @@ Généré par sharding de `epics.md` (66 stories). Statut : `drafted` (AC figée
 - **6.4** [—] Préparation d'un résumé pour consultation — `story-6.4-preparation-d-un-resume-pour-consultation.md`
 
 ## Epic 7 — Vet Portal — consultation vétérinaire augmentée
-- **7.1** [—] Onboarding du vétérinaire partenaire — `story-7.1-onboarding-du-veterinaire-partenaire.md`
-- **7.2** [—] Accès patient autorisé — `story-7.2-acces-patient-autorise.md`
-- **7.3** [—] Vue patient synthétique — `story-7.3-vue-patient-synthetique.md`
-- **7.4** [—] Historique chronologique structuré — `story-7.4-historique-chronologique-structure.md`
-- **7.5** [—] Résumé contextualisé et accès aux données brutes — `story-7.5-resume-contextualise-et-acces-aux-donnees-brutes.md`
-- **7.6** [—] Alertes, rapport et notes professionnelles — `story-7.6-alertes-rapport-et-notes-professionnelles.md`
-- **7.7** [—] Rapport PDF normalisé et suivi dans le temps — `story-7.7-rapport-pdf-normalise-et-suivi-dans-le-temps.md`
+_MVP : 7.1 à 7.10 (+ 10.3 côté véto) · Post-MVP : 7.11 à 7.15_
+
+- **7.1** [MVP] Onboarding du vétérinaire partenaire — `story-7.1-onboarding-du-veterinaire-partenaire.md`
+- **7.2** [MVP] Accès patient autorisé — `story-7.2-acces-patient-autorise.md`
+- **7.3** [MVP] Vue patient synthétique — `story-7.3-vue-patient-synthetique.md`
+- **7.4** [MVP] Historique chronologique structuré — `story-7.4-historique-chronologique-structure.md`
+- **7.5** [MVP] Résumé contextualisé et accès aux données brutes — `story-7.5-resume-contextualise-et-acces-aux-donnees-brutes.md`
+- **7.6** [MVP] Alertes, rapport et notes professionnelles — `story-7.6-alertes-rapport-et-notes-professionnelles.md`
+- **7.7** [MVP] Rapport PDF normalisé et suivi dans le temps — `story-7.7-rapport-pdf-normalise-et-suivi-dans-le-temps.md`
+- **7.8** [MVP] Gérer mon profil et ma disponibilité — `story-7.8-gerer-mon-profil-et-ma-disponibilite.md`
+- **7.9** [MVP] Liste de mes patients — `story-7.9-liste-de-mes-patients.md`
+- **7.10** [MVP] Échanger avec le propriétaire et clôturer — `story-7.10-echanger-avec-le-proprietaire-et-cloturer.md`
+- **7.11** [Post-MVP] Agenda et créneaux du vétérinaire — `story-7.11-agenda-et-creneaux-du-veterinaire.md`
+- **7.12** [Post-MVP] Prise de rendez-vous — `story-7.12-prise-de-rendez-vous.md`
+- **7.13** [Post-MVP] Accès partagé au sein d'une clinique — `story-7.13-acces-partage-au-sein-d-une-clinique.md`
+- **7.14** [Post-MVP] Comptes de l'équipe du cabinet — `story-7.14-comptes-de-l-equipe-du-cabinet.md`
+- **7.15** [Post-MVP] Dossiers patients hors Pawrise — `story-7.15-dossiers-patients-hors-pawrise.md`
 
 ## Epic 8 — Abonnement, facturation & support
 - **8.1** [—] Souscription d'un abonnement — `story-8.1-souscription-d-un-abonnement.md`
